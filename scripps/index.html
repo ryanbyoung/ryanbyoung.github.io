@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="shortcut icon" sizes="196x196" href="icon.png">
 <title>Scripps</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -15,7 +15,7 @@ body {
 </head>
 <body>
 <h1>Scripps</h1>
-<p>Water temp: <span id="water-temp"></span></p>
+<p>Water temp: <span id="water-temp">NA</span></p>
 <script>
     window.onload = function() {
         function parseRSS(url, callback) {
@@ -30,7 +30,7 @@ body {
         parseRSS("http://www.ndbc.noaa.gov/data/latest_obs/ljac1.rss", function( data ) {
             var wholeData = data.entries[0].content;
             var waterTempNum = wholeData.search("Water Temperature:") + 28;
-            var waterTemp = wholeData.substr(waterTempNum,2);
+            var waterTemp = wholeData.substr(waterTempNum,4);
             $('#water-temp').text(waterTemp);
         });
     }
