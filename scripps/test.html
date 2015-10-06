@@ -18,16 +18,7 @@ body {
 <p>Water temp: <span id="water-temp">NA</span></p>
 <script>
     window.onload = function() {
-        function parseRSS(url, callback) {
-            $.ajax({
-                url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
-                dataType: 'json',
-                success: function(data) {
-                    callback(data.responseData.feed);
-                }
-            });
-        }
-        parseRSS("http://tidesandcurrents.noaa.gov/api/datagetter?product=water_temperature&application=NOS.COOPS.TAC.PHYSOCEAN&date=latest&station=9410230&time_zone=GMT&units=english&interval=6&format=json", function( data ) {
+        $.getJSON("http://tidesandcurrents.noaa.gov/api/datagetter?product=water_temperature&application=NOS.COOPS.TAC.PHYSOCEAN&date=latest&station=9410230&time_zone=GMT&units=english&interval=6&format=json", function( data ) {
           var items = [];
           $.each( data, function( key, val ) {
             items.push( "<li id='" + key + "'>" + val + "</li>" );
