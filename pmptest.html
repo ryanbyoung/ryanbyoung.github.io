@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>PMP Quiz</title>
+    <style>
+      #answers, #end, #next, #question, #results, #submit-button {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <h1>PMP Quiz</h1>
+    <p id="question"> </p>
+    <div id="answers">
+      <input type="radio" name="answer" id="answer-a" onclick="clickAnswer()">
+      <label for="answer-a" id="answer-a-label"> </label>
+      <br>
+      <input type="radio" name="answer" id="answer-b" onclick="clickAnswer()">
+      <label for="answer-b" id="answer-b-label"> </label>
+      <br>
+      <input type="radio" name="answer" id="answer-c" onclick="clickAnswer()">
+      <label for="answer-c" id="answer-c-label"> </label>
+      <br>
+      <input type="radio" name="answer" id="answer-d" onclick="clickAnswer()">
+      <label for="answer-d" id="answer-d-label"> </label>
+    </div>
+    <p id="submit-button">
+      <button id="submit">
+        Submit
+      </button>
+    </p>
+    <div id="results">
+      <p id="feedback"> </p>
+      <p id="score"> </p>
+    </div>
+    <div id="next">
+      <p>
+        <button id="next-button">
+          Next question
+        </button>
+      </p>
+    </div>
+    <div id="end">
+      <p>
+        Thanks for playing!
+      </p>
+      <p>
+        <button onclick="window.location.reload(false);">
+          Play again
+        </button>
+      </p>
+    </div>
+    <script>
+      var quiz = [{
+        "question" : "How many processes are there?",
+        "answerA" : "5",
+        "answerB" : "10",
+        "answerC" : "47",
+        "answerD" : "none",
+        "correctAnswer" : "c",
+        "location" : "Rita - page"
+      }, {
+        "question" : "Question 2: What type of board do surfers on the world championship tour ride?",
+        "answerA" : "a: Boogie board",
+        "answerB" : "b: Longboard",
+        "answerC" : "c: Shortboard",
+        "answerD" : "d: Stand-up paddleboard",
+        "correctAnswer" : "c",
+        "location" : "Rita - page"
+      }, {
+        "question" : "Question 3: Where is the only world championship tour spot in the continental United States?",
+        "answerA" : "a: New York",
+        "answerB" : "b: New Jersey",
+        "answerC" : "c: Florida",
+        "answerD" : "d: California",
+        "correctAnswer" : "d",
+        "location" : "Rita - page"
+      }, {
+        "question" : "Question 4: How many men are on the world championship tour?",
+        "answerA" : "a: Eight",
+        "answerB" : "b: Twelve",
+        "answerC" : "c: Twenty",
+        "answerD" : "d: Thirty-two",
+        "correctAnswer" : "d",
+        "location" : "Rita - page"
+      }, {
+        "question" : "Question 5: How many shark attacks have occurred during surf contests?",
+        "answerA" : "a: None",
+        "answerB" : "b: Two",
+        "answerC" : "c: Five",
+        "answerD" : "d: Ten",
+        "correctAnswer" : "a",
+        "location" : "Rita - page"
+      }];
+      var right = 0;
+      var total = quiz.length - 1;
+      var wrong = 0;
+
+      function showQuestion(currentQuestion) {
+        document.getElementById("question").innerHTML = quiz[currentQuestion].question;
+        document.getElementById("question").style.display = 'block';
+        showAnswers(currentQuestion);
+      }
+
+      function showAnswers(currentQuestion) {
+        document.getElementById("answer-a").setAttribute("value", "a");
+        document.getElementById("answer-a-label").innerHTML = quiz[currentQuestion].answerA;
+        document.getElementById("answer-b").setAttribute("value", "b");
+        document.getElementById("answer-b-label").innerHTML = quiz[currentQuestion].answerB;
+        document.getElementById("answer-c").setAttribute("value", "c");
+        document.getElementById("answer-c-label").innerHTML = quiz[currentQuestion].answerC;
+        document.getElementById("answer-d").setAttribute("value", "d");
+        document.getElementById("answer-d-label").innerHTML = quiz[currentQuestion].answerD;
+        var radio = document.getElementsByName("answer");
+        var len = radio.length;
+        for (var i = 0; i < len; i++) {
+          radio[i].disabled = false;
+        }
+        document.getElementById("answers").style.display = 'block';
+        document.getElementById("submit").setAttribute("onclick", "submit(" + currentQuestion + ");");
+        document.getElementById("submit").disabled = false;
+      }
+
+      function clickAnswer() {
+        document.getElementById("submit-button").style.display = 'block';
+      }
+
+      function submit(currentQuestion) {
+        var choice = document.querySelector('input[name = "answer"]:checked');
+        document.getElementById("submit").disabled = "true";
+        if (choice.value == quiz[currentQuestion].correctAnswer) {
+          document.getElementById("feedback").innerHTML = "Correct!";
+          right += 1;
+        } else {
+          document.getElementById("feedback").innerHTML = "Sorry, " + choice.value + " is incorrect.";
+          wrong += 1;
+        }
+        document.getElementById("score").innerHTML = "You have gotten " + right + " correct " + " and " + wrong + " wrong.";
+        choice.checked = false;
+        var radio = document.getElementsByName("answer");
+        var len = radio.length;
+        for (var i = 0; i < len; i++) {
+          radio[i].disabled = true;
+        }
+        document.getElementById("results").style.display = "block";
+        if (currentQuestion < total) {
+          currentQuestion += 1;
+          document.getElementById("next-button").setAttribute("onclick", "next(" + currentQuestion + ");");
+          document.getElementById("next").style.display = "block";
+        } else {
+          document.getElementById("end").style.display = "block";
+        }
+      }
+
+      function next(currentQuestion) {
+        document.getElementById("question").style.display = "none";
+        document.getElementById("answers").style.display = "none";
+        document.getElementById("submit-button").style.display = "none";
+        document.getElementById("results").style.display = "none";
+        document.getElementById("next").style.display = "none";
+        showQuestion(currentQuestion);
+      }
+
+      quiz = quiz.sort(function() { return 0.5 - Math.random() });
+      showQuestion(0);
+    </script>
+  </body>
+</html>
