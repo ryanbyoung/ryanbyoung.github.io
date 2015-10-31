@@ -55,29 +55,29 @@
     </div>
     <script>
       var quiz = [{
-        "question" : "How many processes are there?",
-        "answerA" : "5",
-        "answerB" : "10",
-        "answerC" : "47",
-        "answerD" : "none",
+        "question" : "Producing a project plan may BEST be described as:",
+        "answerA" : "Creating a network logic diagram that identifies the critcal path.",
+        "answerB" : "Using a software tool to track schedule, cost, and resources.",
+        "answerC" : "Creating a document that guides project plan execution.",
+        "answerD" : "Creating a plan that contains the entire product scope.",
         "correctAnswer" : "c",
-        "location" : "Rita - page"
+        "location" : "Crowe - 80"
       }, {
-        "question" : "Question 2: What type of board do surfers on the world championship tour ride?",
-        "answerA" : "a: Boogie board",
-        "answerB" : "b: Longboard",
-        "answerC" : "c: Shortboard",
-        "answerD" : "d: Stand-up paddleboard",
-        "correctAnswer" : "c",
-        "location" : "Rita - page"
+        "question" : "Project management plan updates are NOT an output of:",
+        "answerA" : "Perform Integrated Change Control",
+        "answerB" : "Develop Project Management Plan",
+        "answerC" : "Direct and Manage Project Work",
+        "answerD" : "Monitor and Control Project Work",
+        "correctAnswer" : "b",
+        "location" : "Crowe - 80"
       }, {
-        "question" : "Question 3: Where is the only world championship tour spot in the continental United States?",
-        "answerA" : "a: New York",
-        "answerB" : "b: New Jersey",
-        "answerC" : "c: Florida",
-        "answerD" : "d: California",
-        "correctAnswer" : "d",
-        "location" : "Rita - page"
+        "question" : "You are meeting with a new project manager who has taken over a project that is in the middle of executing. The previous project manager has left the company and the new project manager is upset the change requests are streaming in from numerous sources including his boss, the customer, and various stakeholders. The project manager is not even aware of how to process all of these incoming change requests. Where would you refer him?",
+        "answerA" : "Project scope statement",
+        "answerB" : "Project managment plan",
+        "answerC" : "The previous project manager",
+        "answerD" : "Project charter",
+        "correctAnswer" : "b",
+        "location" : "Crowe - 80"
       }, {
         "question" : "Question 4: How many men are on the world championship tour?",
         "answerA" : "a: Eight",
@@ -107,13 +107,13 @@
 
       function showAnswers(currentQuestion) {
         document.getElementById("answer-a").setAttribute("value", "a");
-        document.getElementById("answer-a-label").innerHTML = quiz[currentQuestion].answerA;
+        document.getElementById("answer-a-label").innerHTML = "a: " + quiz[currentQuestion].answerA;
         document.getElementById("answer-b").setAttribute("value", "b");
-        document.getElementById("answer-b-label").innerHTML = quiz[currentQuestion].answerB;
+        document.getElementById("answer-b-label").innerHTML = "b: " + quiz[currentQuestion].answerB;
         document.getElementById("answer-c").setAttribute("value", "c");
-        document.getElementById("answer-c-label").innerHTML = quiz[currentQuestion].answerC;
+        document.getElementById("answer-c-label").innerHTML = "c: " + quiz[currentQuestion].answerC;
         document.getElementById("answer-d").setAttribute("value", "d");
-        document.getElementById("answer-d-label").innerHTML = quiz[currentQuestion].answerD;
+        document.getElementById("answer-d-label").innerHTML = "d: " + quiz[currentQuestion].answerD;
         var radio = document.getElementsByName("answer");
         var len = radio.length;
         for (var i = 0; i < len; i++) {
