@@ -4006,7 +4006,7 @@
           document.getElementById("feedback").innerHTML = "Sorry, " + choice.value + " is incorrect. " + quiz[currentQuestion].correctAnswer + " is the correct answer. Please go here for more information: " + quiz[currentQuestion].location;
           wrong += 1;
         }
-        document.getElementById("score").innerHTML = "You have gotten " + right + " correct " + " and " + wrong + " wrong.";
+        document.getElementById("score").innerHTML = "You have gotten " + right + " correct " + " and " + wrong + " wrong out of " + total + " questions.";
         choice.checked = false;
         var radio = document.getElementsByName("answer");
         var len = radio.length;
