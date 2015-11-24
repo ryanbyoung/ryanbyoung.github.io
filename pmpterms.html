@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PMP Terms</title>
+    <title>Terms</title>
     <style>
       body {
         font-size: 20px;
@@ -16,7 +16,7 @@
 
   <body>
 
-    <h1>PMP Terms</h1>
+    <h1>Terms <span id="term-number"></span> of <span id="total"></span></h1>
     <p id="definition"> </p>
     <p id="submit-button">
       <button id="submit">
@@ -2168,36 +2168,15 @@
           }];
 
       var total = terms.length - 1;
+      document.getElementById("total").innerHTML = total;
 
       function showDefinition(currentTerm) {
+        document.getElementById("term-number").innerHTML = currentTerm + 1;
         document.getElementById("definition").innerHTML = terms[currentTerm].definition;
         document.getElementById("definition").style.display = 'block';
         document.getElementById("submit-button").setAttribute("onclick", "showTerm(" + currentTerm + ");");
         document.getElementById("submit-button").style.display = 'block';
       }
-
-      /*function showAnswers(currentQuestion) {
-        document.getElementById("answer-a").setAttribute("value", "a");
-        document.getElementById("answer-a-label").innerHTML = "a: " + quiz[currentQuestion].answerA;
-        document.getElementById("answer-b").setAttribute("value", "b");
-        document.getElementById("answer-b-label").innerHTML = "b: " + quiz[currentQuestion].answerB;
-        document.getElementById("answer-c").setAttribute("value", "c");
-        document.getElementById("answer-c-label").innerHTML = "c: " + quiz[currentQuestion].answerC;
-        document.getElementById("answer-d").setAttribute("value", "d");
-        document.getElementById("answer-d-label").innerHTML = "d: " + quiz[currentQuestion].answerD;
-        var radio = document.getElementsByName("answer");
-        var len = radio.length;
-        for (var i = 0; i < len; i++) {
-          radio[i].disabled = false;
-        }
-        document.getElementById("answers").style.display = 'block';
-        document.getElementById("submit").setAttribute("onclick", "submit(" + currentQuestion + ");");
-        document.getElementById("submit").disabled = false;
-      }*/
-
-      /*function clickAnswer() {
-        document.getElementById("submit-button").style.display = 'block';
-      }*/
 
       function showTerm(currentTerm) {
         document.getElementById("submit").disabled = "true";
