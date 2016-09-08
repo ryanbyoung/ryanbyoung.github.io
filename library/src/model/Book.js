@@ -56,8 +56,7 @@ Book.saveAll = function () {
 Book.create = function (slots) {
   var book = new Book( slots);
   Book.instances[slots.isbn] = book;
-  document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " added!";
-  console.log("Book " + slots.isbn + " created!");
+  document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " added";
 };
 //  Update an existing book row
 Book.update = function (slots) {
@@ -65,15 +64,15 @@ Book.update = function (slots) {
   var year = parseInt( slots.year);
   if (book.title !== slots.title) { book.title = slots.title;}
   if (book.year !== slots.year) { book.year = year;}
-  console.log("Book " + slots.isbn + " modified!");
+  document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " updated";
 };
 //  Delete a book row from persistent storage
 Book.destroy = function (isbn) {
   if (Book.instances[isbn]) {
-    console.log("Book " + isbn + " deleted");
+    document.getElementById("confirm").innerHTML = "Book " + isbn + " deleted";
     delete Book.instances[isbn];
   } else {
-    console.log("There is no book with ISBN " + isbn + " in the database!");
+    document.getElementById("confirm").innerHTML = "There is no book with ISBN " + isbn + " in the library";
   }
 };
 //  Create and save test data
