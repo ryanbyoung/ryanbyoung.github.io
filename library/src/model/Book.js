@@ -56,6 +56,7 @@ Book.saveAll = function () {
 Book.create = function (slots) {
   var book = new Book( slots);
   Book.instances[slots.isbn] = book;
+  document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " added!";
   console.log("Book " + slots.isbn + " created!");
 };
 //  Update an existing book row
