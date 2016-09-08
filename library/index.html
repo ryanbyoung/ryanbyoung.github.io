@@ -1,1 +1,24 @@
-testing
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" vocab="http://schema.org/" typeof="WebApplication">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SDUIS Library</title>
+    <meta property="browserRequirements" content="requires HTML5 support" />
+    <meta property="storageRequirements" content="Local Storage of browser" />
+    <meta property="countriesSupported" content="en" />
+    <meta property="applicationCategory" content="Data management" />
+    <script>'use strict';</script>
+    <script src="src/model/Book.js"></script>
+  </head>
+  <body>
+    <h1>SDUIS Library</h1>
+    <menu>
+      <li><a href="listBooks.html"><button type="button">List all books</button></a></li>
+      <li><a href="createBook.html"><button type="button">Add a new book</button></a></li>
+      <li><a href="updateBook.html"><button type="button">Update a book</button></a></li>
+      <li><a href="deleteBook.html"><button type="button">Delete a book</button></a></li>
+      <li><button type="button" onclick="Book.clearData()">Clear database</button></li>
+      <li><button type="button" onclick="Book.createTestData()">Create test data</button></li>
+    </menu>
+</body>
+</html>
