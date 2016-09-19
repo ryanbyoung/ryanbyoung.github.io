@@ -1,6 +1,3 @@
-/***********************************************
-***  Methods for the use case "delete book"  ***
-************************************************/
 pl.view.deleteBook = {
   setupUserInterface: function () {
     var deleteButton = document.forms['Book'].commit;
@@ -16,7 +13,7 @@ pl.view.deleteBook = {
       optionEl = document.createElement("option");
       optionEl.text = book.title;
       optionEl.value = book.isbn;
-      selectEl.add( optionEl, null);
+      selectEl.add(optionEl, null);
     }
     deleteButton.addEventListener("click", 
         pl.view.deleteBook.handleDeleteButtonClickEvent);
