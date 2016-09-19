@@ -48,20 +48,20 @@ Book.saveAll = function () {
 Book.create = function (slots) {
   var book = new Book(slots);
   Book.instances[slots.isbn] = book;
-  document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " added";
+  document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " added.";
 };
 //  Update an existing book row
-Book.update = function (slots) {
+/*Book.update = function (slots) {
   var book = Book.instances[slots.isbn];
   var year = parseInt(slots.year);
   if (book.title !== slots.title) { book.title = slots.title; }
   if (book.year !== slots.year) { book.year = year; }
-  document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " updated";
-};
+  document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " updated.";
+};*/
 //  Delete a book row from storage
 Book.destroy = function (isbn) {
   if (Book.instances[isbn]) {
-    document.getElementById("confirm").innerHTML = "Book " + isbn + " deleted";
+    document.getElementById("confirm").innerHTML = "Book " + isbn + " deleted.";
     delete Book.instances[isbn];
   } else {
     document.getElementById("confirm").innerHTML = "There is no book with ISBN " + isbn + " in the library.";
