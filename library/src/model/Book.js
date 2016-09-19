@@ -1,4 +1,4 @@
-function Book( slots) {
+function Book(slots) {
   this.isbn = slots.isbn;
   this.title = slots.title;
   this.year = slots.year;
@@ -8,7 +8,7 @@ Book.instances = {};
 
 // Convert row to object
 Book.convertRow2Obj = function (bookRow) {
-  var book = new Book( bookRow);
+  var book = new Book(bookRow);
   return book;
 };
 // Load the book table from Local Storage
@@ -22,21 +22,21 @@ Book.loadAll = function () {
     alert("Error when reading from Local Storage\n" + e);
   }
   if (booksString) {
-    books = JSON.parse( booksString);
-    keys = Object.keys( books);
-    console.log( keys.length +" books loaded.");
+    books = JSON.parse(booksString);
+    keys = Object.keys(books);
+    document.getElementById("confirm").innerHTML = keys.length + " books loaded.";
     for (i=0; i < keys.length; i++) {
       key = keys[i];
-      Book.instances[key] = Book.convertRow2Obj( books[key]);
+      Book.instances[key] = Book.convertRow2Obj(books[key]);
     }
   }
 };
 //  Save all book objects to Local Storage
 Book.saveAll = function () {
   var booksString="", error=false,
-      nmrOfBooks = Object.keys( Book.instances).length;  
+      nmrOfBooks = Object.keys(Book.instances).length;  
   try {
-    booksString = JSON.stringify( Book.instances);
+    booksString = JSON.stringify(Book.instances);
     localStorage.setItem("books", booksString);
   } catch (e) {
     alert("Error when writing to Local Storage\n" + e);
@@ -46,7 +46,7 @@ Book.saveAll = function () {
 };
 //  Create a new book row
 Book.create = function (slots) {
-  var book = new Book( slots);
+  var book = new Book(slots);
   Book.instances[slots.isbn] = book;
   document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " added";
 };
@@ -54,8 +54,8 @@ Book.create = function (slots) {
 Book.update = function (slots) {
   var book = Book.instances[slots.isbn];
   var year = parseInt( slots.year);
-  if (book.title !== slots.title) { book.title = slots.title;}
-  if (book.year !== slots.year) { book.year = year;}
+  if (book.title !== slots.title) { book.title = slots.title; }
+  if (book.year !== slots.year) { book.year = year; }
   document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " updated";
 };
 //  Delete a book row from storage
