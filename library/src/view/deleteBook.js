@@ -5,7 +5,7 @@ pl.view.deleteBook = {
     var key="", keys=[], book=null, optionEl=null, i=0;
     // load all book objects
     Book.loadAll();
-    keys = Object.keys( Book.instances);
+    keys = Object.keys(Book.instances);
     // populate the selection list with books
     for (i=0; i < keys.length; i++) {
       key = keys[i];
@@ -26,9 +26,9 @@ pl.view.deleteBook = {
     var selectEl = document.forms['Book'].selectBook;
     var isbn = selectEl.value;
     if (isbn) {
-      Book.destroy( isbn);
+      Book.destroy(isbn);
       // remove deleted book from select options
-      selectEl.remove( selectEl.selectedIndex);
+      selectEl.remove(selectEl.selectedIndex);
     }
   }
 };
