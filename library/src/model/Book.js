@@ -81,5 +81,6 @@ Book.clearData = function () {
   if (confirm("Do you really want to delete all book data?")) {
     Book.instances = {};
     localStorage.setItem("books", "{}");
+    document.getElementById("confirm").innerHTML = "All books removed from library."
   }
 };
