@@ -1,8 +1,4 @@
-/**
- * @fileOverview  Contains various view functions for the use case listBooks
- * @author Gerd Wagner
- */
- pl.view.listBooks = {
+pl.view.listBooks = {
   setupUserInterface: function () {
     var tableBodyEl = document.querySelector("table#books>tbody");
     var keys=[], key="", row={}, i=0;
