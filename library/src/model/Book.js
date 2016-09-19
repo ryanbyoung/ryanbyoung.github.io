@@ -1,19 +1,11 @@
-/***********************************************
-***  Constructor with attribute definitions  ***
-************************************************/
 function Book( slots) {
   this.isbn = slots.isbn;
   this.title = slots.title;
   this.year = slots.year;
 };
-/***********************************************
-***  Class-level ("static") properties  ********
-************************************************/
-Book.instances = {};  // initially an empty associative array
 
-/***********************************************
-***  Class-level ("static") methods  ***********
-************************************************/
+Book.instances = {};
+
 // Convert row to object
 Book.convertRow2Obj = function (bookRow) {
   var book = new Book( bookRow);
@@ -50,7 +42,7 @@ Book.saveAll = function () {
     alert("Error when writing to Local Storage\n" + e);
     error = true;
   }
-  if (!error) console.log( nmrOfBooks + " books saved.");
+  if (!error) document.getElementById("confirm").innerHTML = nmrOfBooks + " books saved.";
 };
 //  Create a new book row
 Book.create = function (slots) {
@@ -66,7 +58,7 @@ Book.update = function (slots) {
   if (book.year !== slots.year) { book.year = year;}
   document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " updated";
 };
-//  Delete a book row from persistent storage
+//  Delete a book row from storage
 Book.destroy = function (isbn) {
   if (Book.instances[isbn]) {
     document.getElementById("confirm").innerHTML = "Book " + isbn + " deleted";
@@ -77,9 +69,11 @@ Book.destroy = function (isbn) {
 };
 //  Create and save test data
 Book.createTestData = function () {
-  Book.instances["006251587X"] = new Book({isbn:"006251587X", title:"Weaving the Web", year:2000});
-  Book.instances["0465026567"] = new Book({isbn:"0465026567", title:"Gödel, Escher, Bach", year:1999});
-  Book.instances["0465030793"] = new Book({isbn:"0465030793", title:"I Am A Strange Loop", year:2008});
+  Book.instances["0465026567"] = new Book({isbn:"1-4919-4946-5", title:"Learning PHP, MySQL, JavaScript, CSS & HTML5", year:2014});
+  Book.instances["006251587X"] = new Book({isbn:"0-0625-1587-X", title:"Weaving the Web", year:2000});
+  Book.instances["0465030793"] = new Book({isbn:"0-3219-6551-5", title:"Don't Make Me Think", year:2014});
+  Book.instances["0465030793"] = new Book({isbn:"0-1342-9125-5", title:"PHP for the Web", year:2016});
+  Book.instances["0465030793"] = new Book({isbn:"0-5965-1774-2", title:"JavaScript: The Good Parts", year:2008});
   Book.saveAll();
 };
 //  Clear data
