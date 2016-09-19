@@ -60,6 +60,7 @@ Book.update = function (slots) {
 };
 //  Delete a book row from storage
 Book.destroy = function (isbn) {
+  alert(Book.instances);
   if (Book.instances[isbn]) {
     document.getElementById("confirm").innerHTML = "Book " + isbn + " deleted";
     delete Book.instances[isbn];
