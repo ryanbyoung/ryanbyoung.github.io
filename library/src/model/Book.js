@@ -53,7 +53,7 @@ Book.create = function (slots) {
 //  Update an existing book row
 Book.update = function (slots) {
   var book = Book.instances[slots.isbn];
-  var year = parseInt( slots.year);
+  var year = parseInt(slots.year);
   if (book.title !== slots.title) { book.title = slots.title; }
   if (book.year !== slots.year) { book.year = year; }
   document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " updated";
