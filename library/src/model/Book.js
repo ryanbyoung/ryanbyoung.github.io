@@ -65,7 +65,7 @@ Book.destroy = function (isbn) {
     document.getElementById("confirm").innerHTML = "Book " + isbn + " deleted";
     delete Book.instances[isbn];
   } else {
-    document.getElementById("confirm").innerHTML = "There is no book with ISBN " + isbn + " in the library";
+    document.getElementById("confirm").innerHTML = "There is no book with ISBN " + isbn + " in the library.";
   }
 };
 //  Create and save test data
