@@ -69,11 +69,11 @@ Book.destroy = function (isbn) {
 };
 //  Create and save test data
 Book.createTestData = function () {
-  Book.instances["0465026567"] = new Book({isbn:"1491949465", title:"Learning PHP, MySQL, JavaScript, CSS & HTML5", year:2014});
-  Book.instances["006251587X"] = new Book({isbn:"006251587X", title:"Weaving the Web", year:2000});
-  Book.instances["0465030793"] = new Book({isbn:"0321965515", title:"Don't Make Me Think", year:2014});
-  Book.instances["0134291255"] = new Book({isbn:"0134291255", title:"PHP for the Web", year:2016});
-  Book.instances["0596517742"] = new Book({isbn:"0596517742", title:"JavaScript: The Good Parts", year:2008});
+  Book.instances["1491949465"] = new Book({isbn:"1-4919-4946-5", title:"Learning PHP, MySQL, JavaScript, CSS & HTML5", year:2014});
+  Book.instances["006251587X"] = new Book({isbn:"0-0625-1587-X", title:"Weaving the Web", year:2000});
+  Book.instances["0321965515"] = new Book({isbn:"0-3219-6551-5", title:"Don't Make Me Think", year:2014});
+  Book.instances["0134291255"] = new Book({isbn:"0-1342-9125-5", title:"PHP for the Web", year:2016});
+  Book.instances["0596517742"] = new Book({isbn:"0-5965-1774-2", title:"JavaScript: The Good Parts", year:2008});
   Book.saveAll();
 };
 //  Clear data
