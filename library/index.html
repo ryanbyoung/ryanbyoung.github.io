@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" vocab="http://schema.org/" typeof="WebApplication">
   <head>
     <meta charset="UTF-8" />
-    <title>SDUIS Library</title>
+    <title>The Public Library</title>
     <meta property="browserRequirements" content="requires HTML5 support" />
     <meta property="storageRequirements" content="Local Storage of browser" />
     <meta property="countriesSupported" content="en" />
@@ -11,12 +11,12 @@
     <script src="src/model/Book.js"></script>
   </head>
   <body>
-    <h1>SDUIS Library</h1>
+    <h1>The Public Library</h1>
+    <p>Welcome! If this is your first visit: <button type="button" onclick="Book.createTestData()">Add books to the library</button></p>
+    <p id="confirm"></p>
     <p><a href="listBooks.html"><button type="button">Show all books</button></a></p>
-    <p><a href="createBook.html"><button type="button">Add a book</button></a></p>
+    <p><a href="createBook.html"><button type="button">Add a new book</button></a></p>
     <p><a href="deleteBook.html"><button type="button">Delete a book</button></a></p>
     <p><button type="button" onclick="Book.clearData()">Remove all books</button></p>
-    <p>Welcome! If this is your first visit: <button type="button" onclick="Book.createTestData()">Create test data</button></p>
-    <p id="confirm"></p>
 </body>
 </html>
