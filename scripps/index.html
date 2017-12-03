@@ -29,7 +29,7 @@ body {
         }
         parseRSS("http://www.ndbc.noaa.gov/data/latest_obs/ljac1.rss", function( data ) {
             var wholeData = data.entries[0].content;
-            var waterTempNum = wholeData.search("Water Temperature:") + 28;
+            var waterTempNum = wholeData.search("Water Temperature:");
             var waterTemp = wholeData.substr(waterTempNum,4);
             $('#water-temp').text(waterTemp);
         });
