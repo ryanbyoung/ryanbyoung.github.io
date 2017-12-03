@@ -22,6 +22,7 @@ body {
       $.jQRSS('http://www.ndbc.noaa.gov/data/latest_obs/ljac1.rss',
         { },
         function (feed, entries) {
+          document.write(feed);
           $('body').append(entries);
         });
       /*function parseRSS(url, callback) {
