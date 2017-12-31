@@ -14,7 +14,7 @@
       font-family: Roboto, serif;
     }
     .hero {
-      padding-bottom: 0;
+      padding-bottom: 1rem;
       padding-top: 70px;
     }
     .ctas {
@@ -22,7 +22,7 @@
       padding-top: 0;
     }
     .ctas .col-sm-3 {
-      padding-top: 2rem;
+      padding-top: 1rem;
     }
     svg {
       fill: currentColor;
@@ -31,16 +31,12 @@
       margin-right: 20px;
       text-decoration: none;
     }
-    @media (min-width: 768px) {
-      .hero {
-        background-image: url(images/pizza.png);
+    @media (max-width: 575px) and (min-width: 0px) {
+      .ctas .container {
+        width: 250px;
       }
     }
     @media (min-width: 576px) {
-      .hero {
-        padding-bottom: 3rem;
-        padding-top: 100px;
-      }
       .ctas {
         background-color: #fafafa;
         color: #444444;
@@ -49,6 +45,21 @@
       }
       .ctas .col-sm-3 {
         padding-top: 3rem;
+      }
+    }
+    @media (max-width: 768px) and (min-width: 576px) {
+      .hero{
+      padding-bottom: 70px;
+      padding-top: 100px;}
+    }
+    @media (min-width: 768px) {
+      .hero {
+        background-image: url(images/pizza.png);
+        padding-bottom: 150px;
+        padding-top: 150px;
+      }
+      .ctas .container {
+        width: 720px;
       }
     }
   </style>
@@ -145,7 +156,7 @@
           <h2>Our most popular items</h2>
         </div>
       </div>
-      <div class="row text-center justify-content-center mt-3">
+      <div class="row text-center justify-content-center pt-3">
         <div class="col-6 col-sm-3">
           <img alt="Large Pizza" class="img-fluid" src="images/large-pizza.png">
           <h3>Large Pizza</h3>
@@ -162,7 +173,7 @@
           <img alt="Italian Hoagie" class="img-fluid" src="images/hoagie.png">
           <h3>Italian Hoagie</h3>
         </div>
-        <p class="text-h3 mt-3"><a href="menu.html">See the full menu &gt;</a></p>
+        <p class="text-h3 pt-4"><a href="menu.html">See the full menu &gt;</a></p>
       </div>
     </div>
   </section>
@@ -175,15 +186,15 @@
         </div>
       </div>
       <div class="row text-center justify-content-center pt-3">
-        <div class="col-12 col-md-4 col-lg-3 m-md-auto">
+        <div class="col-12 col-sm-4 m-sm-auto">
           <h3>Monday &ndash; Friday</h3>
           <p>11am &ndash; 10pm</p>
         </div>
-        <div class="col-12 col-md-4 col-lg-3 m-md-auto pt-3 pt-md-0">
+        <div class="col-12 col-sm-4 m-sm-auto pt-3 pt-sm-0">
           <h3>Saturday</h3>
           <p>11am &ndash; 10pm</p>
         </div>
-        <div class="col-12 col-md-4 col-lg-3 m-md-auto pt-3 pt-md-0">
+        <div class="col-12 col-sm-4 m-sm-auto pt-3 pt-sm-0">
           <h3>Sunday</h3>
           <p>12pm &ndash; 8pm</p>
         </div>
