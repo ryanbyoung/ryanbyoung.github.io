@@ -15,7 +15,7 @@ $(document).ready(function () {
         var items = Object.values(categories[c]);
         for(var p=0; p<items.length; p++) {
           var properties = Object.values(items[p]);
-          document.getElementById("menu").innerHTML += "<p>" + properties[0] + " " + properties[1] + " " + properties[2] + "</p>";
+          document.getElementById("menu").innerHTML += "<p>" + properties[0] + "<br>" + properties[1] + "<br>" + properties[2] + "</p>";
         }
       }
     }            
