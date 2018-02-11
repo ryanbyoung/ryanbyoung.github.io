@@ -7,7 +7,7 @@
 $(document).ready(function () {
   $.getJSON('https://script.google.com/macros/s/AKfycbw2oEDExddVcdPqAoxLOIQx4YQ_B0-tLCc_zqcTvkcTMoE_7y0/exec', function(data) {
     for(var i=0; i<data.length; i++) {
-      if (i==0) document.getElementById("menu").innerHTML = "";
+      if (i==0) document.getElementById("menu").innerHTML = "<h1>Menu</h1>";
       var categoryName = Object.keys(data[i]);
       var categories = Object.values(data[i]);
       document.getElementById("menu").innerHTML += "<h2>" + categoryName + "</h2>";
