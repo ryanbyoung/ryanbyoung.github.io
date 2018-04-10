@@ -18,35 +18,14 @@ body {
 <h1>Scripps</h1>
 <p>Water temp: <span id="water-temp">NA</span></p>
 <script>
-    window.onload = function() {
-      $.jQRSS('http://www.ndbc.noaa.gov/data/latest_obs/ljac1.rss',
-        { },
-        function( data ) {
-            var wholeData = data.content;
-            document.write(wholeData);
-            var waterTempNum = wholeData.search("Water Temperature:");
-            var waterTemp = wholeData.substr(waterTempNum,4);
-            $('#water-temp').text(waterTemp);
-        });
-        /*function (feed, entries) {
-          document.write(feed);
-          $('body').append(entries);
-        });*/
-      /*function parseRSS(url, callback) {
-            $.ajax({
-                url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
-                dataType: 'json',
-                success: function(data) {
-                    callback(data.responseData.feed);
-                }
-            });
-        }
-        parseRSS("http://www.ndbc.noaa.gov/data/latest_obs/ljac1.rss", function( data ) {
-            var wholeData = data.entries[0].content;
-            var waterTempNum = wholeData.search("Water Temperature:");
-            var waterTemp = wholeData.substr(waterTempNum,4);
-            $('#water-temp').text(waterTemp);
-        });*/
+    var requestURL = 'https://tidesandcurrents.noaa.gov/api/datagetter?product=water_temperature&application=water_temperature&date=latest&station=46254&time_zone=GMT&units=english&format=json';
+    var request = new XMLHttpRequest();
+    request.open('GET', requestURL);
+    request.responseType = 'json';
+    request.send();
+    request.onload = function() {
+        var waterTemp = request.response;
+        document.getElementById("water-temp").innerHTML = waterTemp.data[0].v;
     }
 </script>
 </body>
