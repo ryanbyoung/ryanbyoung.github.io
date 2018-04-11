@@ -20,11 +20,10 @@ body {
 <script>
     var requestURL = 'http://www.ndbc.noaa.gov/data/realtime2/46254.txt';
     var request = new XMLHttpRequest();
-    request.open('GET', requestURL);
-    request.responseType = 'txt';
+    request.open('GET', requestURL, false);
     request.send();
     request.onload = function() {
-        var waterTemp = request.response;
+        var waterTemp = request.responseText;
         console.log(waterTemp);
     }
 </script>
