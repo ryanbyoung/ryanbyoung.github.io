@@ -18,14 +18,14 @@ body {
 <h1>Scripps</h1>
 <p>Water temp: <span id="water-temp">NA</span></p>
 <script>
-    var requestURL = 'https://tidesandcurrents.noaa.gov/api/datagetter?product=water_temperature&application=water_temperature&date=latest&station=46254&time_zone=GMT&units=english&format=json';
+    var requestURL = 'http://www.ndbc.noaa.gov/data/realtime2/46254.txt';
     var request = new XMLHttpRequest();
     request.open('GET', requestURL);
-    request.responseType = 'json';
+    request.responseType = 'txt';
     request.send();
     request.onload = function() {
         var waterTemp = request.response;
-        document.getElementById("water-temp").innerHTML = waterTemp.data[0].v;
+        console.log waterTemp;
     }
 </script>
 </body>
