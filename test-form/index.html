@@ -48,7 +48,7 @@ $('#submit-form').on('click', function(e) {
     dataType: "json",
     data: $form.serializeObject()
   }).success(
-    alert($form.serializeObject())
+    console.log($form.serializeObject())
   );
 })
 
