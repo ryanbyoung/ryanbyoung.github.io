@@ -42,14 +42,25 @@ var $form = $('form#test-form'),
 
 $('#submit-form').on('click', function(e) {
   e.preventDefault();
-  var jqxhr = $.ajax({
+          var jqxhr = $.post(url, $form.serializeObject(), function(data) {
+            console.log("Success! Data: " + data.statusText);
+        })
+            .fail(function(data) {
+                console.warn("Error! Data: " + data.statusText);
+                // HACK - check if browser is Safari - and redirect even if fail b/c we know the form submits.
+                if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
+                    //alert("Browser is Safari -- we get an error, but the form still submits -- continue.");
+                    $(location).attr('href',redirectUrl);                
+                }
+            });
+  /*  var jqxhr = $.ajax({
     url: url,
     method: "GET",
     dataType: "json",
     data: $form.serializeObject()
   }).success(
     console.log($form.serializeObject())
-  );
+  );*/
 })
 
 </script>
