@@ -23,7 +23,7 @@
   <div>
     <button type="submit"id="submit-form">Submit</button>
   </div>
-
+<label id="successmessage">
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
@@ -48,7 +48,10 @@ $('#submit-form').on('click', function(e) {
     dataType: "json",
     data: $form.serializeObject()
   }).success(
-    console.log($form.serializeObject())
+    function(data) {
+                successmessage = 'Data was succesfully captured';
+                $("label#successmessage").text(successmessage);
+            }
   );
 })
 
