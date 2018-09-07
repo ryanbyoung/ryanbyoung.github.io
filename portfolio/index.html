@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <meta name="description" content="I'm a web project manager with nine years of corporate experience and a master's degree in information systems. I have managed everything from a full website redesign to multiple-page enrollment forms.">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>Ryan Young</title>
+    <style>
+
+      /* Setup */
+      figcaption, figure, footer, header, nav {
+        display: block;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Page Elements */
+      body {
+        font: 100% Georgia, "Times New Roman", Times, serif;
+      }
+      #logo {
+        float: left;
+        font: bold 2em Georgia, "Times New Roman", Times, serif;
+        margin: 0 0 1em 0;
+      }
+      #nav-toggle, .burger-menu, .close-menu {
+        display: none;
+      }
+      main {
+        margin: 2em auto;
+        max-width: 66em;
+        width: 90%;
+      }
+      h1 {
+        clear: left;
+        font-size: 1.5em;
+        margin-bottom: 0.83em;
+      }
+      h2 {
+        clear: both;
+        font-size: 1.17em;
+        margin: 1em 0 1em 0;
+      }
+      div + h2 {
+        padding-top: 0.33em;
+      }
+      h3 {
+        font-size: 1.05em;
+        margin: 1.33em 0 1em 0;
+      }
+      div > h3 {
+        margin-top: 0.33em;
+      }
+      p {
+        font-size: 1.05em;
+        line-height: 1.5em;
+        margin-bottom: 1em;
+      }
+      ul, ol {
+        font-size: 1.05em;
+        margin-left: 1.75em;
+        margin-bottom: 1em;
+      }
+      li {
+        line-height: 1.5em;
+        margin-bottom: 0.5em;
+      }
+      ul.social {
+        margin-left: 0;
+      }
+      .social li {
+        display: inline;
+        list-style-type: none;
+      }
+      hr {
+        border: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        clear: both;
+        height: 0;
+        margin: 2em 0 2em 0;
+      }
+      footer {
+        clear: both;
+        margin: 2em auto;
+        max-width: 66em;
+        padding-top: 1em;
+        width: 90%;
+      }
+
+      /* Links */
+      a {
+        color: #9B1518;
+        text-decoration: none;
+      }
+      a:hover, a:focus {
+        color: #e01e23;
+        transition: color 1s ease-out;
+      }
+      header a#logo {
+        color: #333;
+      }
+      header span a:hover, header span a:focus {
+        color: #9B1518;
+      }
+      .on {
+        color: #C0C0C0;
+      }
+      a.button {
+        background-color: #9B1518;
+        border-radius: 0.25em;
+        color: #FFF;
+        display: inline-block;
+        font-weight: normal;
+        padding: 0.33em 0.66em 0.33em 0.66em;
+        text-decoration: none;
+      }
+      a.button:hover, a.button:focus {
+        background-color: #AF4346;
+        color: #FFF;
+        transition: background-color 1s ease-out;
+      }
+
+      /* Images and Icons */
+      img {
+        width: 100%;
+        max-width: 32em;
+        height: auto;
+      }
+      img#profile {
+        clear: both;
+        display: block;
+        margin: 1em auto;
+        width: auto;
+      }
+      .icon {
+        background-color: #E0E0E0;
+        border-radius: 0.25em;
+        display: inline-block;
+        fill: #333;
+        height: 1.5em;
+        padding: 0.5em;
+        width: 1.5em;
+      }
+      .icon:hover, icon.focus {
+        fill: white;
+        transition: background-color 0.75s ease-out;
+      }
+      .icon-linkedin:hover, .icon-linkedin:focus {
+        background-color: #0073B2;
+      }
+      .icon-facebook:hover, .icon-facebook:focus {
+        background-color: #3B6798;
+      }
+      .icon-twitter:hover, .icon-twitter:focus {
+        background-color: #00B9F4;
+      }
+      .icon-google-plus:hover, .icon-google-plus:focus {
+        background-color: #DD4B39;
+      }
+      .icon-github:hover, .icon-github:focus {
+        background-color: #171516;
+      }
+      .icon-mail:hover, .icon-mail:focus {
+        background-color: #333;
+      }
+      figure {
+        -webkit-column-break-inside: avoid;
+        break-inside: avoid;
+        border: 1px solid #E0E0E0;
+        float: none;
+        margin: 0 0 1em 0;
+        max-width: 32em;
+        padding: 0.33em;
+      }
+      figcaption {
+        -webkit-column-break-before: avoid;
+        break-before: avoid;
+        font-size: 0.83em;
+        font-style: italic;
+        padding: 0.33em;
+        text-align: center;
+      }
+
+      /* Small screen */
+      @media only screen {
+
+        /* Header */
+        #logo {
+          font: bold 1.5em Verdana, Arial, Helvetica, sans-serif;
+          margin: 0;
+          text-transform: uppercase;
+        }
+        header {
+          background-color: white;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          padding: 1em;
+          position: fixed;
+          top: 0;
+          width: 93.33%;
+        }
+
+        /* Navigation */
+        .burger-menu {
+          cursor: pointer;
+          display: inline-block;
+          float: right;
+        }
+        nav {
+          clear: right;
+          font: bold 1.2em/1.5em Verdana, Arial, Helvetica, sans-serif;
+          opacity: 0;
+          padding-top: 1em;
+          position: absolute;
+          text-align: right;
+          text-transform: uppercase;
+          visibility: hidden;
+        }
+        nav ul {
+          margin-bottom: 0;
+        }
+        nav ul li {
+          list-style-type: none;
+        }
+        #nav-toggle:checked ~ nav {
+          opacity: 1;
+          position: static;
+          transition: opacity 1s, visibility 1s;
+          -webkit-transition: opacity 1s, visibility 1s;
+          visibility: visible;
+        }
+        #nav-toggle:checked ~ .close-menu {
+          cursor: pointer;
+          display: inline-block;
+          float: right;
+        }
+        #nav-toggle:checked ~ .burger-menu {
+          display: none;
+        }
+
+        /* Main Content */
+        main {
+          margin-top: 5em;
+        }
+
+      }
+
+      /* Medium Screen */
+      @media only screen and (min-width: 32em) {
+
+        body {
+          margin-top: 0;
+        }
+
+        /* Header */
+        #logo {
+          display: block;
+          font: bold 2em Georgia, "Times New Roman", Times, serif;
+          margin: 0 0 1em 0;
+          text-transform: none;
+        }
+        header {
+          border-bottom: none;
+          padding: 0;
+          position: static;
+          margin: 2em auto;
+          max-width: 66em;
+          width: 90%;
+        }
+        header + h1 {
+          padding-top: 1em;
+        }
+
+        /* Navigation */
+        nav {
+          clear: left;
+          display: block;
+          font: bold 1.2em/1.5em Verdana, Arial, Helvetica, sans-serif;
+          margin-bottom: 2em; /* For FF */
+          opacity: 1;
+          padding-top: 0;
+          padding-bottom: 1.5em;
+          position: static;
+          text-transform: uppercase;
+          visibility: visible;
+        }
+        nav ul {
+          margin: 0 auto;
+          width: 100%;
+        }
+        nav ul li {
+          display: block;
+          float: left;
+          margin-right: 2em;
+          position: relative;
+        }
+        nav ul li:last-child {
+          margin-right: 0;
+        }
+        nav ul li a {
+          color: #333;
+          font-weight: bold;
+          display: block;
+          white-space: nowrap;
+        }
+        nav ul li a:hover, nav ul li a:focus {
+          color: #9B1518;
+        }
+        nav ul ul {
+          background-color: #FFF;
+          border: solid 1px #C0C0C0;
+          padding-left: 1em;
+          position: absolute;
+        }
+        nav li ul li:first-child {
+          padding-top: 0.5em;
+        }
+        .burger-menu, .close-menu {
+          display: none;
+        }
+
+        /* Main Content */
+        main {
+          margin-top: 0;
+        }
+        img#profile {
+          float: right;
+          margin: 0 2% 1em 1em;
+          width: 35%;
+        }
+
+      }
+
+      /* Large Screen */
+      @media only screen and (min-width: 44em) {
+        figure {
+          float: right;
+          width: 40%;
+          margin: 0 0 1em 1em;
+        }
+        img#profile {
+          margin: 0 9% 0 10%;
+          width: 25%;
+        }
+        .three-column div {
+          margin-bottom: 0;
+        }
+      }
+
+      /* Xtra Large Screen */
+      @media only screen and (min-width: 55em) {
+        img#profile {
+          width: 15%
+        }
+        .left-column {
+          clear: both;
+          float: left;
+          padding-right: 1.25em;
+          width: 46.9%;
+        }
+        .right-column {
+          float: left;
+          padding-left: 1.25em;
+          width: 46.9%;
+        }
+        .three-column {
+          margin: 2em 0;
+        }
+        .three-column div {
+          background-color: #E0E0E0;
+          border-radius: 0.5em;
+          float: left;
+          margin: 0 1% 2em 1%;
+          padding: 2%;
+          width: 28%;
+          display: inline;
+        }
+        .three-column div:first-child {
+          margin: 0 1% 2em 0;
+        }
+        .three-column div:last-child {
+          margin: 0 0 2em 1%;
+        }
+        .three-column h2 {
+          margin-top: 0.33em;
+          text-align: center;
+        }
+        .three-column p {
+          text-align: center;
+        }
+      }
+
+      /* Print */
+      @media print {
+        a.button, figure, footer, nav, img#profile, li.share, #social {
+          display: none;
+        }
+        h1, h2 {
+          page-break-after: avoid;
+        }
+        ul, ol {
+          page-break-before: avoid;
+        }
+        @page {
+          margin: 2cm;
+        }
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+    <header id="header">
+      <a href="/" id="logo">Ryan Young</a>
+      <input type="checkbox" id="nav-toggle">
+      <label for="nav-toggle" class="burger-menu">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 16 16">
+        <path fill="#000000" d="M1 3h14v3h-14zM1 7h14v3h-14zM1 11h14v3h-14z"></path>
+        </svg>
+      </label>
+      <label for="nav-toggle" class="close-menu">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 16 16">
+          <path fill="#000000" d="M15.854 12.854c-0-0-0-0-0-0l-4.854-4.854 4.854-4.854c0-0 0-0 0-0 0.052-0.052 0.090-0.113 0.114-0.178 0.066-0.178 0.028-0.386-0.114-0.529l-2.293-2.293c-0.143-0.143-0.351-0.181-0.529-0.114-0.065 0.024-0.126 0.062-0.178 0.114 0 0-0 0-0 0l-4.854 4.854-4.854-4.854c-0-0-0-0-0-0-0.052-0.052-0.113-0.090-0.178-0.114-0.178-0.066-0.386-0.029-0.529 0.114l-2.293 2.293c-0.143 0.143-0.181 0.351-0.114 0.529 0.024 0.065 0.062 0.126 0.114 0.178 0 0 0 0 0 0l4.854 4.854-4.854 4.854c-0 0-0 0-0 0-0.052 0.052-0.090 0.113-0.114 0.178-0.066 0.178-0.029 0.386 0.114 0.529l2.293 2.293c0.143 0.143 0.351 0.181 0.529 0.114 0.065-0.024 0.126-0.062 0.178-0.114 0-0 0-0 0-0l4.854-4.854 4.854 4.854c0 0 0 0 0 0 0.052 0.052 0.113 0.090 0.178 0.114 0.178 0.066 0.386 0.029 0.529-0.114l2.293-2.293c0.143-0.143 0.181-0.351 0.114-0.529-0.024-0.065-0.062-0.126-0.114-0.178z"></path>
+      </svg>
+    </label>
+      <nav id="nav">
+        <ul>
+          <li>
+            <a href="./" class="on">Home</a>
+          </li>
+          <li>
+            <a href="./resume/">Resume</a>
+          </li>
+          <li>
+            <a href="./projects/">Projects</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Homepage -->
+    <main>
+    <img src="profile.jpg" id="profile">
+    <h1>About</h1>
+    <p>
+      I’m a digital project manager with ten years of corporate and agency web development experience. I have a strong knowledge of content management systems and eCommerce. I also hold a master’s degree in information systems.
+    </p>
+    <p>
+      <a class="button" href="./resume/">View my resume</a>
+    </p>
+    <div class="three-column">
+      <div>
+        <h2>Qualifications</h2>
+        <ul>
+          <li>
+            Outstanding verbal and written communications.
+          </li>
+          <li>
+            Strong blend of business acumen and technical knowledge.
+          </li>
+          <li>
+            Extreme attention to detail and results oriented.
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2>Experience</h2>
+        <ul>
+          <li>
+            Communicate with internal and international external clients.
+          </li>
+          <li>
+            Proficient in Adobe creative suite and Microsoft Office.
+          </li>
+          <li>
+            Can hand-code HTML, CSS, and JavaScript.
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2>Recent Projects</h2>
+        <ul>
+          <li>
+            <a href="./projects/">EIZO Redesign</a>
+          </li>
+          <li>
+            <a href="./projects/">Fan Diego Redesign</a>
+          </li>
+          <li>
+            <a href="./projects/">Cuker Redesign</a>
+          </li>
+        </ul>
+        <p>
+          <a class="button" href="./projects/">View all projects</a>
+        </p>
+      </div>
+    </div>
+    <div id="social">
+    <h2>Connect</h2>
+    <ul class="social">
+      <li>
+        <a href="#">
+          <svg class="icon icon-linkedin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M384 384h177.106v90.782h2.532c24.64-44.194 84.958-90.782 174.842-90.782 186.946 0 221.52 116.376 221.52 267.734v308.266h-184.61v-273.278c0-65.184-1.334-149.026-96.028-149.026-96.148 0-110.82 70.986-110.82 144.292v278.012h-184.542v-576z"></path>
+            <path d="M64 384h192v576h-192v-576z"></path>
+            <path d="M256 224c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-facebook" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M672 192c-88.366 0-160 71.634-160 160v96h-128v128h128v448h128v-448h144l32-128h-176v-96c0-17.672 14.326-32 32-32h160v-128h-160z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 32 32">
+            <path d="M32 6.076c-1.177 0.522-2.443 0.875-3.771 1.034 1.355-0.813 2.396-2.099 2.887-3.632-1.269 0.752-2.674 1.299-4.169 1.593-1.198-1.276-2.904-2.073-4.792-2.073-3.626 0-6.565 2.939-6.565 6.565 0 0.515 0.058 1.016 0.17 1.496-5.456-0.274-10.294-2.888-13.532-6.86-0.565 0.97-0.889 2.097-0.889 3.301 0 2.278 1.159 4.287 2.921 5.465-1.076-0.034-2.088-0.329-2.974-0.821-0.001 0.027-0.001 0.055-0.001 0.083 0 3.181 2.263 5.834 5.266 6.437-0.551 0.15-1.131 0.23-1.73 0.23-0.423 0-0.834-0.041-1.235-0.118 0.835 2.608 3.26 4.506 6.133 4.559-2.247 1.761-5.078 2.81-8.154 2.81-0.53 0-1.052-0.031-1.566-0.092 2.905 1.863 6.356 2.95 10.064 2.95 12.076 0 18.679-10.004 18.679-18.68 0-0.285-0.006-0.568-0.019-0.849 1.283-0.926 2.396-2.082 3.276-3.398z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-google-plus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M559.066 64c0 0-200.956 0-267.94 0-120.12 0-233.17 91.006-233.17 196.422 0 107.726 81.882 194.666 204.088 194.666 8.498 0 16.756-0.17 24.842-0.752-7.93 15.186-13.602 32.288-13.602 50.042 0 29.938 16.104 54.21 36.468 74.024-15.386 0-30.242 0.448-46.452 0.448-148.782-0.002-263.3 94.758-263.3 193.020 0 96.778 125.542 157.314 274.334 157.314 169.624 0 263.306-96.244 263.306-193.028 0-77.6-22.896-124.072-93.686-174.134-24.216-17.144-70.53-58.836-70.53-83.344 0-28.72 8.196-42.868 51.428-76.646 44.312-34.624 75.672-83.302 75.672-139.916 0-67.406-30.020-133.098-86.372-154.772h84.954l59.96-43.344zM465.48 719.458c2.126 8.972 3.284 18.206 3.284 27.628 0 78.2-50.392 139.31-194.974 139.31-102.842 0-177.116-65.104-177.116-143.3 0-76.642 92.126-140.444 194.964-139.332 24 0.254 46.368 4.116 66.67 10.69 55.826 38.826 95.876 60.762 107.172 105.004zM300.818 427.776c-69.038-2.064-134.636-77.226-146.552-167.86-11.916-90.666 34.37-160.042 103.388-157.99 69.010 2.074 134.638 74.814 146.558 165.458 11.906 90.66-34.39 162.458-103.394 160.392zM832 256v-192h-64v192h-192v64h192v192h64v-192h192v-64z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-github" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M512.008 12.642c-282.738 0-512.008 229.218-512.008 511.998 0 226.214 146.704 418.132 350.136 485.836 25.586 4.738 34.992-11.11 34.992-24.632 0-12.204-0.48-52.542-0.696-95.324-142.448 30.976-172.504-60.41-172.504-60.41-23.282-59.176-56.848-74.916-56.848-74.916-46.452-31.778 3.51-31.124 3.51-31.124 51.4 3.61 78.476 52.766 78.476 52.766 45.672 78.27 119.776 55.64 149.004 42.558 4.588-33.086 17.852-55.68 32.506-68.464-113.73-12.942-233.276-56.85-233.276-253.032 0-55.898 20.004-101.574 52.76-137.428-5.316-12.9-22.854-64.972 4.952-135.5 0 0 43.006-13.752 140.84 52.49 40.836-11.348 84.636-17.036 128.154-17.234 43.502 0.198 87.336 5.886 128.256 17.234 97.734-66.244 140.656-52.49 140.656-52.49 27.872 70.528 10.35 122.6 5.036 135.5 32.82 35.856 52.694 81.532 52.694 137.428 0 196.654-119.778 239.95-233.79 252.624 18.364 15.89 34.724 47.046 34.724 94.812 0 68.508-0.596 123.644-0.596 140.508 0 13.628 9.222 29.594 35.172 24.566 203.322-67.776 349.842-259.626 349.842-485.768 0-282.78-229.234-511.998-511.992-511.998z"></path>
+          </svg>
+        </a>
+      </li>
+    </ul>
+    </div>
+    <!--End Homepage -->
+
+    <!-- Resume Page -->
+    <h1>Resume</h1>
+    <div id="social">
+    <h2>Share</h2>
+    <ul class="social">
+      <li>
+        <a href="#">
+          <svg class="icon icon-linkedin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M384 384h177.106v90.782h2.532c24.64-44.194 84.958-90.782 174.842-90.782 186.946 0 221.52 116.376 221.52 267.734v308.266h-184.61v-273.278c0-65.184-1.334-149.026-96.028-149.026-96.148 0-110.82 70.986-110.82 144.292v278.012h-184.542v-576z"></path>
+            <path d="M64 384h192v576h-192v-576z"></path>
+            <path d="M256 224c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-facebook" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M672 192c-88.366 0-160 71.634-160 160v96h-128v128h128v448h128v-448h144l32-128h-176v-96c0-17.672 14.326-32 32-32h160v-128h-160z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 32 32">
+            <path d="M32 6.076c-1.177 0.522-2.443 0.875-3.771 1.034 1.355-0.813 2.396-2.099 2.887-3.632-1.269 0.752-2.674 1.299-4.169 1.593-1.198-1.276-2.904-2.073-4.792-2.073-3.626 0-6.565 2.939-6.565 6.565 0 0.515 0.058 1.016 0.17 1.496-5.456-0.274-10.294-2.888-13.532-6.86-0.565 0.97-0.889 2.097-0.889 3.301 0 2.278 1.159 4.287 2.921 5.465-1.076-0.034-2.088-0.329-2.974-0.821-0.001 0.027-0.001 0.055-0.001 0.083 0 3.181 2.263 5.834 5.266 6.437-0.551 0.15-1.131 0.23-1.73 0.23-0.423 0-0.834-0.041-1.235-0.118 0.835 2.608 3.26 4.506 6.133 4.559-2.247 1.761-5.078 2.81-8.154 2.81-0.53 0-1.052-0.031-1.566-0.092 2.905 1.863 6.356 2.95 10.064 2.95 12.076 0 18.679-10.004 18.679-18.68 0-0.285-0.006-0.568-0.019-0.849 1.283-0.926 2.396-2.082 3.276-3.398z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-google-plus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M559.066 64c0 0-200.956 0-267.94 0-120.12 0-233.17 91.006-233.17 196.422 0 107.726 81.882 194.666 204.088 194.666 8.498 0 16.756-0.17 24.842-0.752-7.93 15.186-13.602 32.288-13.602 50.042 0 29.938 16.104 54.21 36.468 74.024-15.386 0-30.242 0.448-46.452 0.448-148.782-0.002-263.3 94.758-263.3 193.020 0 96.778 125.542 157.314 274.334 157.314 169.624 0 263.306-96.244 263.306-193.028 0-77.6-22.896-124.072-93.686-174.134-24.216-17.144-70.53-58.836-70.53-83.344 0-28.72 8.196-42.868 51.428-76.646 44.312-34.624 75.672-83.302 75.672-139.916 0-67.406-30.020-133.098-86.372-154.772h84.954l59.96-43.344zM465.48 719.458c2.126 8.972 3.284 18.206 3.284 27.628 0 78.2-50.392 139.31-194.974 139.31-102.842 0-177.116-65.104-177.116-143.3 0-76.642 92.126-140.444 194.964-139.332 24 0.254 46.368 4.116 66.67 10.69 55.826 38.826 95.876 60.762 107.172 105.004zM300.818 427.776c-69.038-2.064-134.636-77.226-146.552-167.86-11.916-90.666 34.37-160.042 103.388-157.99 69.010 2.074 134.638 74.814 146.558 165.458 11.906 90.66-34.39 162.458-103.394 160.392zM832 256v-192h-64v192h-192v64h192v192h64v-192h192v-64z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-mail" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M896 160h-768c-70.688 0-128 57.344-128 128v416c0 70.688 57.312 128 128 128h768c70.688 0 128-57.312 128-128v-416c0-70.656-57.312-128-128-128zM64 328l223.968 168-223.968 168v-336zM960 704c0 35.328-28.736 64-64 64h-768c-35.296 0-64-28.672-64-64l250.624-188 139.776 104.864c17.056 12.736 37.312 19.2 57.6 19.2 20.256 0 40.512-6.432 57.568-19.2l139.808-104.864 250.624 188zM960 664l-224-168 224-168v336zM550.368 595.264c-11.168 8.384-24.416 12.8-38.368 12.8s-27.232-4.448-38.4-12.8l-409.6-307.264c0-35.296 28.704-64 64-64h768c35.264 0 64 28.704 64 64l-409.632 307.264z"></path>
+          </svg>
+        </a>
+      </li>
+    </ul>
+    </div>
+    <div class="left-column">
+      <h2>Professional Summary</h2>
+      <p>
+        A born problem-solver with nine years of web project management experience and a master’s degree in information systems. Has led cross-functional teams through the process of a website redesign and online applications with a perfect balance of communication and technical know-how. A proven go-to-guy who can handle difficult clients and navigate the corporate ladder.
+      </p>
+    </div>
+    <div class="right-column">
+      <h2>Technical Skills</h2>
+      <ul>
+        <li>
+          <strong>Advanced:</strong> Adobe Dreamweaver; CSS; Google Drive; HTML; Interwoven TeamSite (CMS); Microsoft Communicator, Excel, Outlook, PowerPoint, Project, SharePoint, Visio, Word; OmniPlan; XHTML; XML
+        </li>
+        <li>
+          <strong>Intermediate:</strong> Adobe Acrobat, Photoshop, Fireworks; Google Analytics; JavaScript; jQuery; JSON; SEO; Wordpress
+        </li>
+        <li>
+          <strong>Basic:</strong> Adobe Illustrator; Lotus Notes; PHP; SQL; WebTrends
+        </li>
+      </ul>
+    </div>
+    <h2>Employment History</h2>
+    <div class="left-column">
+      <h3>Senior Project Manager</h3>
+      <p>
+        <em>Cuker Agency
+        <br>
+        Solana Beach, CA
+        <br>
+        April 2014 – Present</em>
+      </p>
+      <ul>
+        <li>
+          Promoted to senior position within three months of hire.
+        </li>
+        <li>
+          Manage business requirements and technical specifications to define scope and control iterative digital projects.
+        </li>
+        <li>
+          Estabish and manage client interaction and expectations.
+        </li>
+        <li>
+          Track and manage team hours along with project budgets and expenses.
+        </li>
+        <li>
+          Facilitate team and client meetings.
+        </li>
+      </ul>
+    </div>
+    <div class="right-column">
+      <h3>Project Manager</h3>
+      <p>
+        <em>The Vanguard Group, Inc.
+        <br>
+        Malvern, PA
+        <br>
+        August 2012 – August 2013</em>
+      </p>
+      <ul>
+        <li>
+          Updated and maintained <a href="https://advisors.vanguard.com/VGApp/iip/site/advisor/home">Financial Advisors</a>, sales conference, and internal sales websites.
+        </li>
+        <li>
+          Processed content maintenance requests by utilizing content management system (Interwoven TeamSite) to make website changes and manage online production workflow.
+        </li>
+        <li>
+          Responsible for extensive content changes during a major elevation with many moving parts.
+        </li>
+        <li>
+          Hand-coded HTML, CSS, and JavaScript.
+        </li>
+        <li>
+          Edited and created images with Photoshop and Fireworks.
+        </li>
+        <li>
+          Supported a business team that had varying levels of web knowledge.
+        </li>
+      </ul>
+    </div>
+    <div class="left-column">
+      <h3>Senior Project Manager</h3>
+      <p>
+        <em>Independence Blue Cross
+        <br>
+        Philadelphia, PA
+        <br>
+        September 2006 – August 2012</em>
+      </p>
+      <ul>
+        <li>
+          Developed, redesigned, and updated ten websites for the Independence Blue Cross (IBC) Family of Companies and its affiliates, including but not limited to <a href="http://www.ibx.com/">their flagship</a>, <a href="http://www.ibxmedicare.com/">medicare</a>, and <a href="http://www.good2bme.org/">youth-focused</a> websites.
+        </li>
+        <li>
+          Managed projects by planning meetings, tracking job progress, and striving to exceed customer expectations.
+        </li>
+        <li>
+          Communicated across several lines of business including Marketing, Human Resources, Government Programs, Public Relations, Health and Wellness, Legal, Provider Communications, and Facilities.
+        </li>
+        <li>
+          Saved the Internet Communications department 100 hours and $30,000 per year by implementing a project that gave outside departments control over sections of websites.
+        </li>
+        <li>
+          Worked closely with a cross-functional team of account managers, business analysts, cyber-security officers, designers, lawyers, writers, and web developers/engineers while keeping upper management in the loop.
+        </li>
+        <li>
+          Hand-coded HTML, CSS, and XML; wrote scripts in JavaScript and jQuery; edited JavaScript applications; and implemented jQuery plug-ins.
+        </li>
+      </ul>
+    </div>
+    <div class="right-column">
+      <h3>Web Content Editor</h3>
+      <p>
+        <em>The Sports Network
+        <br>
+        Hatboro, PA
+        <br>
+        May 2004 – August 2006</em>
+      </p>
+      <ul>
+        <li>
+          Hand-coded HTML and CSS documents on a daily basis to update and refine <a href="http://www.sportsnetwork.com/">company’s website</a>.
+        </li>
+        <li>
+          Designed and developed major golf tournament website packages that were marketed to over 400 of the company’s clients.
+        </li>
+        <li>
+          Designed the web layout of golf course reviews written by the Director of Operations.
+        </li>
+        <li>
+          Used Photoshop to crop, edit, and enhance professional photographs collected from Getty Images.
+        </li>
+        <li>
+          Responsible for the placement and organization of advertising banners that displayed throughout the website.
+        </li>
+        <li>
+          Wrote time-sensitive headlines for the homepage and sport specific pages of the website on a daily basis that often had to correlate to an event specific photograph.
+        </li>
+      </ul>
+    </div>
+    <h2>Education</h2>
+    <h3>Master of Science, Information Systems</h3>
+    <p>
+      September 2007 – March 2010
+      <br>
+      Drexel University
+      <br>
+      Philadelphia, PA
+    </p>
+    <h3>Associate of Science, Computer Information Science</h3>
+    <p>
+      October 2001 – December 2004
+      <br>
+      Coleman University
+      <br>
+      San Diego, CA
+    </p>
+    <h3>Bachelor of Arts, Communication/English</h3>
+    <p>
+      September 1991 – May 1995
+      <br>
+      LaSalle University
+      <br>
+      Philadelphia, PA
+    </p>
+    <!-- End resume page -->
+
+    <!-- Projects page -->
+    <h1>Projects</h1>
+    <a name="good2bme"></a>
+    <h2>Good2BMe</h2>
+    <figure>
+      <img src="screen-shot.jpg" alt="Good2BMe screen shot">
+      <figcaption>
+        Good2BMe screen shot
+      </figcaption>
+    </figure>
+    <ul>
+      <li>
+        Managed the development of <a href="http://www.good2bme.org/">Good2BMe</a>, a website focusing on health education and promoting childhood immunization at Independence Blue Cross (IBC).
+      </li>
+      <li>
+        Was a member of the team that conceptualized the idea.
+      </li>
+      <li>
+        Created the <a href="../pdfs/work/projects/good2bme/project-plan.pdf" target="_pp">project plan</a> and <a href="../pdfs/work/projects/good2bme/site-map.pdf" target="_sm">site map</a>.
+      </li>
+      <li>
+        Worked closely with a cross-functional team of business analysts, cyber-security officers, designers, lawyers, writers, and web developers/engineers while keeping upper management in the loop.
+      </li>
+      <li>
+        Developed all of the written content in Flash and wrote documentation detailing the process.
+      </li>
+      <li>
+        Worked closely with IS on a variety of issues that included proxies, caching, and server load.
+      </li>
+      <li>
+        Tested site on different browsers and operating systems.
+      </li>
+    </ul>
+    <div id="social">
+    <h3>Share</h3>
+    <ul class="social">
+      <li>
+        <a href="#">
+          <svg class="icon icon-linkedin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M384 384h177.106v90.782h2.532c24.64-44.194 84.958-90.782 174.842-90.782 186.946 0 221.52 116.376 221.52 267.734v308.266h-184.61v-273.278c0-65.184-1.334-149.026-96.028-149.026-96.148 0-110.82 70.986-110.82 144.292v278.012h-184.542v-576z"></path>
+            <path d="M64 384h192v576h-192v-576z"></path>
+            <path d="M256 224c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-facebook" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M672 192c-88.366 0-160 71.634-160 160v96h-128v128h128v448h128v-448h144l32-128h-176v-96c0-17.672 14.326-32 32-32h160v-128h-160z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 32 32">
+            <path d="M32 6.076c-1.177 0.522-2.443 0.875-3.771 1.034 1.355-0.813 2.396-2.099 2.887-3.632-1.269 0.752-2.674 1.299-4.169 1.593-1.198-1.276-2.904-2.073-4.792-2.073-3.626 0-6.565 2.939-6.565 6.565 0 0.515 0.058 1.016 0.17 1.496-5.456-0.274-10.294-2.888-13.532-6.86-0.565 0.97-0.889 2.097-0.889 3.301 0 2.278 1.159 4.287 2.921 5.465-1.076-0.034-2.088-0.329-2.974-0.821-0.001 0.027-0.001 0.055-0.001 0.083 0 3.181 2.263 5.834 5.266 6.437-0.551 0.15-1.131 0.23-1.73 0.23-0.423 0-0.834-0.041-1.235-0.118 0.835 2.608 3.26 4.506 6.133 4.559-2.247 1.761-5.078 2.81-8.154 2.81-0.53 0-1.052-0.031-1.566-0.092 2.905 1.863 6.356 2.95 10.064 2.95 12.076 0 18.679-10.004 18.679-18.68 0-0.285-0.006-0.568-0.019-0.849 1.283-0.926 2.396-2.082 3.276-3.398z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-google-plus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M559.066 64c0 0-200.956 0-267.94 0-120.12 0-233.17 91.006-233.17 196.422 0 107.726 81.882 194.666 204.088 194.666 8.498 0 16.756-0.17 24.842-0.752-7.93 15.186-13.602 32.288-13.602 50.042 0 29.938 16.104 54.21 36.468 74.024-15.386 0-30.242 0.448-46.452 0.448-148.782-0.002-263.3 94.758-263.3 193.020 0 96.778 125.542 157.314 274.334 157.314 169.624 0 263.306-96.244 263.306-193.028 0-77.6-22.896-124.072-93.686-174.134-24.216-17.144-70.53-58.836-70.53-83.344 0-28.72 8.196-42.868 51.428-76.646 44.312-34.624 75.672-83.302 75.672-139.916 0-67.406-30.020-133.098-86.372-154.772h84.954l59.96-43.344zM465.48 719.458c2.126 8.972 3.284 18.206 3.284 27.628 0 78.2-50.392 139.31-194.974 139.31-102.842 0-177.116-65.104-177.116-143.3 0-76.642 92.126-140.444 194.964-139.332 24 0.254 46.368 4.116 66.67 10.69 55.826 38.826 95.876 60.762 107.172 105.004zM300.818 427.776c-69.038-2.064-134.636-77.226-146.552-167.86-11.916-90.666 34.37-160.042 103.388-157.99 69.010 2.074 134.638 74.814 146.558 165.458 11.906 90.66-34.39 162.458-103.394 160.392zM832 256v-192h-64v192h-192v64h192v192h64v-192h192v-64z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-mail" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M896 160h-768c-70.688 0-128 57.344-128 128v416c0 70.688 57.312 128 128 128h768c70.688 0 128-57.312 128-128v-416c0-70.656-57.312-128-128-128zM64 328l223.968 168-223.968 168v-336zM960 704c0 35.328-28.736 64-64 64h-768c-35.296 0-64-28.672-64-64l250.624-188 139.776 104.864c17.056 12.736 37.312 19.2 57.6 19.2 20.256 0 40.512-6.432 57.568-19.2l139.808-104.864 250.624 188zM960 664l-224-168 224-168v336zM550.368 595.264c-11.168 8.384-24.416 12.8-38.368 12.8s-27.232-4.448-38.4-12.8l-409.6-307.264c0-35.296 28.704-64 64-64h768c35.264 0 64 28.704 64 64l-409.632 307.264z"></path>
+          </svg>
+        </a>
+      </li>
+    </ul>
+    </div>
+    <hr>
+    <a name="ccc"></a>
+    <h2>Clear Claim Connection</h2>
+    <figure>
+      <img src="./images/work/ccc/screen-shot.jpg" alt="Clear Claim Connection screen shot">
+      <figcaption>
+        Clear Claim Connection screen shot
+      </figcaption>
+    </figure>
+    <ul>
+      <li>
+        Managed a project to provide access to <a href="http://www.ibx.com/providers/claims_and_billing/clear_claim_connection.html">Clear Claim Connection</a>, a web-based code auditing reference tool, on IBC’s website.
+      </li>
+      <li>
+        Acted as primary liaison between the business line and IS department.
+      </li>
+      <li>
+        Created wireframes and developed HTML and CSS for <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/login.jsp">login</a>, <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/forgot_password.jsp">forgot password</a>, <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/change_password.jsp">change password</a>, and <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/change_email.jsp">change email address</a> applications.
+      </li>
+      <li>
+        Tested applications after IS department developed them in Java.
+      </li>
+      <li>
+        Created <a href="https://ecom.tam.ibx.com/ibx/htdocs/email_forms/providers/ccc_contact_form.html">contact form</a> to provide users a line of communication.
+      </li>
+    </ul>
+    <div id="social">
+    <h3>Share</h3>
+    <ul class="social">
+      <li>
+        <a href="#">
+          <svg class="icon icon-linkedin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M384 384h177.106v90.782h2.532c24.64-44.194 84.958-90.782 174.842-90.782 186.946 0 221.52 116.376 221.52 267.734v308.266h-184.61v-273.278c0-65.184-1.334-149.026-96.028-149.026-96.148 0-110.82 70.986-110.82 144.292v278.012h-184.542v-576z"></path>
+            <path d="M64 384h192v576h-192v-576z"></path>
+            <path d="M256 224c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-facebook" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M672 192c-88.366 0-160 71.634-160 160v96h-128v128h128v448h128v-448h144l32-128h-176v-96c0-17.672 14.326-32 32-32h160v-128h-160z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 32 32">
+            <path d="M32 6.076c-1.177 0.522-2.443 0.875-3.771 1.034 1.355-0.813 2.396-2.099 2.887-3.632-1.269 0.752-2.674 1.299-4.169 1.593-1.198-1.276-2.904-2.073-4.792-2.073-3.626 0-6.565 2.939-6.565 6.565 0 0.515 0.058 1.016 0.17 1.496-5.456-0.274-10.294-2.888-13.532-6.86-0.565 0.97-0.889 2.097-0.889 3.301 0 2.278 1.159 4.287 2.921 5.465-1.076-0.034-2.088-0.329-2.974-0.821-0.001 0.027-0.001 0.055-0.001 0.083 0 3.181 2.263 5.834 5.266 6.437-0.551 0.15-1.131 0.23-1.73 0.23-0.423 0-0.834-0.041-1.235-0.118 0.835 2.608 3.26 4.506 6.133 4.559-2.247 1.761-5.078 2.81-8.154 2.81-0.53 0-1.052-0.031-1.566-0.092 2.905 1.863 6.356 2.95 10.064 2.95 12.076 0 18.679-10.004 18.679-18.68 0-0.285-0.006-0.568-0.019-0.849 1.283-0.926 2.396-2.082 3.276-3.398z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-google-plus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M559.066 64c0 0-200.956 0-267.94 0-120.12 0-233.17 91.006-233.17 196.422 0 107.726 81.882 194.666 204.088 194.666 8.498 0 16.756-0.17 24.842-0.752-7.93 15.186-13.602 32.288-13.602 50.042 0 29.938 16.104 54.21 36.468 74.024-15.386 0-30.242 0.448-46.452 0.448-148.782-0.002-263.3 94.758-263.3 193.020 0 96.778 125.542 157.314 274.334 157.314 169.624 0 263.306-96.244 263.306-193.028 0-77.6-22.896-124.072-93.686-174.134-24.216-17.144-70.53-58.836-70.53-83.344 0-28.72 8.196-42.868 51.428-76.646 44.312-34.624 75.672-83.302 75.672-139.916 0-67.406-30.020-133.098-86.372-154.772h84.954l59.96-43.344zM465.48 719.458c2.126 8.972 3.284 18.206 3.284 27.628 0 78.2-50.392 139.31-194.974 139.31-102.842 0-177.116-65.104-177.116-143.3 0-76.642 92.126-140.444 194.964-139.332 24 0.254 46.368 4.116 66.67 10.69 55.826 38.826 95.876 60.762 107.172 105.004zM300.818 427.776c-69.038-2.064-134.636-77.226-146.552-167.86-11.916-90.666 34.37-160.042 103.388-157.99 69.010 2.074 134.638 74.814 146.558 165.458 11.906 90.66-34.39 162.458-103.394 160.392zM832 256v-192h-64v192h-192v64h192v192h64v-192h192v-64z"></path>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <svg class="icon icon-mail" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 1024 1024">
+            <path d="M896 160h-768c-70.688 0-128 57.344-128 128v416c0 70.688 57.312 128 128 128h768c70.688 0 128-57.312 128-128v-416c0-70.656-57.312-128-128-128zM64 328l223.968 168-223.968 168v-336zM960 704c0 35.328-28.736 64-64 64h-768c-35.296 0-64-28.672-64-64l250.624-188 139.776 104.864c17.056 12.736 37.312 19.2 57.6 19.2 20.256 0 40.512-6.432 57.568-19.2l139.808-104.864 250.624 188zM960 664l-224-168 224-168v336zM550.368 595.264c-11.168 8.384-24.416 12.8-38.368 12.8s-27.232-4.448-38.4-12.8l-409.6-307.264c0-35.296 28.704-64 64-64h768c35.264 0 64 28.704 64 64l-409.632 307.264z"></path>
+          </svg>
+        </a>
+      </li>
+    </ul>
+    </div>
+    </main>
+    <footer>
+      <p>
+        &copy; 2018 Ryan Young
+      </p>
+    </footer>
+    <!-- End projects page -->
+
+  </body>
+</html>
