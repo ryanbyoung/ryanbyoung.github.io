@@ -27,9 +27,6 @@
         font: bold 2em Georgia, "Times New Roman", Times, serif;
         margin: 0 0 1em 0;
       }
-      #nav-toggle, .burger-menu, .close-menu {
-        display: none;
-      }
       main {
         margin: 2em auto;
         max-width: 66em;
@@ -42,26 +39,26 @@
       }
       h2 {
         clear: both;
-        font-size: 1.17em;
+        font-size: 1.2em;
         margin: 1em 0 1em 0;
       }
       div + h2 {
         padding-top: 0.33em;
       }
       h3 {
-        font-size: 1.05em;
+        font-size: 1.1em;
         margin: 1.33em 0 1em 0;
       }
       div > h3 {
         margin-top: 0.33em;
       }
       p {
-        font-size: 1.05em;
+        font-size: 1.07em;
         line-height: 1.5em;
         margin-bottom: 1em;
       }
       ul, ol {
-        font-size: 1.05em;
+        font-size: 1.07em;
         margin-left: 1.75em;
         margin-bottom: 1em;
       }
@@ -126,6 +123,9 @@
       }
 
       /* Images and Icons */
+      #nav-toggle, .burger-menu, .close-menu {
+        display: none;
+      }
       img {
         width: 100%;
         max-width: 32em;
@@ -135,7 +135,7 @@
         clear: both;
         display: block;
         margin: 1em auto;
-        width: auto;
+        width: 45%;
       }
       .icon {
         background-color: #E0E0E0;
@@ -201,7 +201,7 @@
           padding: 1em;
           position: fixed;
           top: 0;
-          width: 93.33%;
+          width: 90%;
         }
 
         /* Navigation */
@@ -209,6 +209,10 @@
           cursor: pointer;
           display: inline-block;
           float: right;
+        }
+        .close-menu {
+          float: right;
+          padding-top: 3px;
         }
         nav {
           clear: right;
@@ -236,7 +240,6 @@
         #nav-toggle:checked ~ .close-menu {
           cursor: pointer;
           display: inline-block;
-          float: right;
         }
         #nav-toggle:checked ~ .burger-menu {
           display: none;
@@ -419,12 +422,12 @@
       <a href="/" id="logo">Ryan Young</a>
       <input type="checkbox" id="nav-toggle">
       <label for="nav-toggle" class="burger-menu">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 16 16">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="27" viewBox="0 0 16 16">
         <path fill="#000000" d="M1 3h14v3h-14zM1 7h14v3h-14zM1 11h14v3h-14z"></path>
         </svg>
       </label>
       <label for="nav-toggle" class="close-menu">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 16 16">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="23" height="23" viewBox="0 0 16 16">
           <path fill="#000000" d="M15.854 12.854c-0-0-0-0-0-0l-4.854-4.854 4.854-4.854c0-0 0-0 0-0 0.052-0.052 0.090-0.113 0.114-0.178 0.066-0.178 0.028-0.386-0.114-0.529l-2.293-2.293c-0.143-0.143-0.351-0.181-0.529-0.114-0.065 0.024-0.126 0.062-0.178 0.114 0 0-0 0-0 0l-4.854 4.854-4.854-4.854c-0-0-0-0-0-0-0.052-0.052-0.113-0.090-0.178-0.114-0.178-0.066-0.386-0.029-0.529 0.114l-2.293 2.293c-0.143 0.143-0.181 0.351-0.114 0.529 0.024 0.065 0.062 0.126 0.114 0.178 0 0 0 0 0 0l4.854 4.854-4.854 4.854c-0 0-0 0-0 0-0.052 0.052-0.090 0.113-0.114 0.178-0.066 0.178-0.029 0.386 0.114 0.529l2.293 2.293c0.143 0.143 0.351 0.181 0.529 0.114 0.065-0.024 0.126-0.062 0.178-0.114 0-0 0-0 0-0l4.854-4.854 4.854 4.854c0 0 0 0 0 0 0.052 0.052 0.113 0.090 0.178 0.114 0.178 0.066 0.386 0.029 0.529-0.114l2.293-2.293c0.143-0.143 0.181-0.351 0.114-0.529-0.024-0.065-0.062-0.126-0.114-0.178z"></path>
       </svg>
     </label>
