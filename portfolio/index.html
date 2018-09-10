@@ -23,6 +23,7 @@
         font: 100% Georgia, "Times New Roman", Times, serif;
       }
       #logo {
+        display: inline;
         float: left;
         font: bold 2em Georgia, "Times New Roman", Times, serif;
         margin: 0 0 1em 0;
@@ -332,22 +333,23 @@
         }
         img#profile {
           float: right;
-          margin: 0 2% 1em 1em;
-          width: 35%;
+          margin: 0 0 1em 2em;
+          width: 20%;
         }
 
       }
 
       /* Large Screen */
       @media only screen and (min-width: 44em) {
+        img#profile {
+          float: right;
+          margin-bottom: 0;
+          width: 18%;
+        }
         figure {
           float: right;
           width: 40%;
           margin: 0 0 1em 1em;
-        }
-        img#profile {
-          margin: 0 9% 0 10%;
-          width: 25%;
         }
         .three-column div {
           margin-bottom: 0;
@@ -357,7 +359,8 @@
       /* Xtra Large Screen */
       @media only screen and (min-width: 55em) {
         img#profile {
-          width: 15%
+          margin: 0 9%;
+          width: 15%;
         }
         .left-column {
           clear: both;
@@ -397,6 +400,13 @@
         }
       }
 
+      @media only screen and (min-width: 63em) {
+        img#profile {
+          margin: 0 11%;
+          width: 12%;
+        }
+      }
+
       /* Print */
       @media print {
         a.button, figure, footer, nav, img#profile, li.share, #social {
@@ -419,7 +429,7 @@
 
   <body>
     <header id="header">
-      <a href="/" id="logo">Ryan Young</a>
+      <h1 id="logo">Ryan Young</h1>
       <input type="checkbox" id="nav-toggle">
       <label for="nav-toggle" class="burger-menu">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="27" height="27" viewBox="0 0 16 16">
@@ -429,8 +439,8 @@
       <label for="nav-toggle" class="close-menu">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="23" height="23" viewBox="0 0 16 16">
           <path fill="#000000" d="M15.854 12.854c-0-0-0-0-0-0l-4.854-4.854 4.854-4.854c0-0 0-0 0-0 0.052-0.052 0.090-0.113 0.114-0.178 0.066-0.178 0.028-0.386-0.114-0.529l-2.293-2.293c-0.143-0.143-0.351-0.181-0.529-0.114-0.065 0.024-0.126 0.062-0.178 0.114 0 0-0 0-0 0l-4.854 4.854-4.854-4.854c-0-0-0-0-0-0-0.052-0.052-0.113-0.090-0.178-0.114-0.178-0.066-0.386-0.029-0.529 0.114l-2.293 2.293c-0.143 0.143-0.181 0.351-0.114 0.529 0.024 0.065 0.062 0.126 0.114 0.178 0 0 0 0 0 0l4.854 4.854-4.854 4.854c-0 0-0 0-0 0-0.052 0.052-0.090 0.113-0.114 0.178-0.066 0.178-0.029 0.386 0.114 0.529l2.293 2.293c0.143 0.143 0.351 0.181 0.529 0.114 0.065-0.024 0.126-0.062 0.178-0.114 0-0 0-0 0-0l4.854-4.854 4.854 4.854c0 0 0 0 0 0 0.052 0.052 0.113 0.090 0.178 0.114 0.178 0.066 0.386 0.029 0.529-0.114l2.293-2.293c0.143-0.143 0.181-0.351 0.114-0.529-0.024-0.065-0.062-0.126-0.114-0.178z"></path>
-      </svg>
-    </label>
+        </svg>
+      </label>
       <nav id="nav">
         <ul>
           <li>
