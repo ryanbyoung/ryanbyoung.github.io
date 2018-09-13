@@ -37,23 +37,17 @@
       }
       h1 {
         clear: left;
-        font-size: 1.5em;
-        margin-bottom: 0.83em;
+        font-size: 1.7em;
+        margin-bottom: 0.8em;
       }
       h2 {
         clear: both;
-        font-size: 1.2em;
-        margin: 1em 0 1em 0;
-      }
-      div + h2 {
-        padding-top: 0.33em;
+        font-size: 1.4em;
+        margin: 1em 0 0.9em 0;
       }
       h3 {
-        font-size: 1.1em;
+        font-size: 1.2em;
         margin: 1.33em 0 1em 0;
-      }
-      div > h3 {
-        margin-top: 0.33em;
       }
       p {
         font-size: 1.1em;
@@ -66,8 +60,8 @@
         margin-bottom: 1em;
       }
       li {
-        line-height: 1.5em;
-        margin-bottom: 0.5em;
+        line-height: 1.4em;
+        margin-bottom: 0.25em;
       }
       ul.social {
         margin-left: 0;
@@ -414,6 +408,9 @@
 
       /* Print */
       @media print {
+        header, main {
+          width: 100%;
+        }
         a.button, figure, footer, nav, img#profile, li.share, #social {
           display: none;
         }
@@ -424,7 +421,10 @@
           page-break-before: avoid;
         }
         @page {
-          margin: 2cm;
+          margin: 1cm;
+        }
+        p {
+          clear: left;
         }
       }
 
@@ -615,13 +615,13 @@
       <h2>Technical Skills</h2>
       <ul>
         <li>
-          <strong>Advanced:</strong> Adobe Dreamweaver; CSS; Google Drive; HTML; Interwoven TeamSite (CMS); Microsoft Communicator, Excel, Outlook, PowerPoint, Project, SharePoint, Visio, Word; OmniPlan; XHTML; XML
+          <strong>Advanced:</strong> CSS; Google Drive; HTML; Microsoft Excel, Outlook, PowerPoint, Project, SharePoint, Visio, Word; XML
         </li>
         <li>
           <strong>Intermediate:</strong> Adobe Acrobat, Photoshop, Fireworks; Google Analytics; JavaScript; jQuery; JSON; SEO; Wordpress
         </li>
         <li>
-          <strong>Basic:</strong> Adobe Illustrator; Lotus Notes; PHP; SQL; WebTrends
+          <strong>Basic:</strong> Adobe Illustrator; PHP; SQL
         </li>
       </ul>
     </div>
