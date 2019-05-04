@@ -63,7 +63,6 @@
           float: left;
           font: bold 1.5em Verdana, Arial, Helvetica, sans-serif;
           margin: 0;
-          padding: 0.5em 0 0.5em 0.9em;
           text-transform: uppercase
         }
         header {
@@ -72,6 +71,11 @@
           position: fixed;
           top: 0;
           width: 100%
+        }
+        #header {
+          margin: 0.5em auto;
+          overflow: hidden;
+          width: 90%
         }
         h1 {
           clear: left
@@ -82,7 +86,6 @@
         }
         .burger-menu, .close-menu {
           float: right;
-          padding: 0.75em 1.5em 0.5em 0;
           -webkit-tap-highlight-color: #FFF
         }
         .burger-menu {
@@ -131,7 +134,7 @@
 
         /* Main Content */
         main {
-          margin: 4.5em auto 2em;
+          margin: 4em auto 2em;
           max-width: 66em;
           width: 90%
         }
@@ -446,7 +449,8 @@
   </head>
 
   <body>
-    <header id="header">
+    <header>
+      <div id="header">
       <span id="logo">Ryan Young</span>
       <input type="checkbox" id="nav-toggle">
       <label for="nav-toggle" class="burger-menu">
@@ -459,7 +463,7 @@
           <path d="M15.854 12.854c-0-0-0-0-0-0l-4.854-4.854 4.854-4.854c0-0 0-0 0-0 0.052-0.052 0.090-0.113 0.114-0.178 0.066-0.178 0.028-0.386-0.114-0.529l-2.293-2.293c-0.143-0.143-0.351-0.181-0.529-0.114-0.065 0.024-0.126 0.062-0.178 0.114 0 0-0 0-0 0l-4.854 4.854-4.854-4.854c-0-0-0-0-0-0-0.052-0.052-0.113-0.090-0.178-0.114-0.178-0.066-0.386-0.029-0.529 0.114l-2.293 2.293c-0.143 0.143-0.181 0.351-0.114 0.529 0.024 0.065 0.062 0.126 0.114 0.178 0 0 0 0 0 0l4.854 4.854-4.854 4.854c-0 0-0 0-0 0-0.052 0.052-0.090 0.113-0.114 0.178-0.066 0.178-0.029 0.386 0.114 0.529l2.293 2.293c0.143 0.143 0.351 0.181 0.529 0.114 0.065-0.024 0.126-0.062 0.178-0.114 0-0 0-0 0-0l4.854-4.854 4.854 4.854c0 0 0 0 0 0 0.052 0.052 0.113 0.090 0.178 0.114 0.178 0.066 0.386 0.029 0.529-0.114l2.293-2.293c0.143-0.143 0.181-0.351 0.114-0.529-0.024-0.065-0.062-0.126-0.114-0.178z"></path>
         </svg>
       </label>
-      <nav id="nav">
+      <nav>
         <ul>
           <li>
             <a href="index.html">Home</a>
@@ -472,6 +476,7 @@
           </li>
         </ul>
       </nav>
+    </div>
     </header>
 
     <main>
