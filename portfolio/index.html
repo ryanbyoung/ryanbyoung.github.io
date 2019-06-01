@@ -28,10 +28,6 @@
         font-size: 1.3em;
         margin: 1em 0 0.9em 0
       }
-      h3 {
-        font-size: 1.2em;
-        margin: 1.33em 0 1em 0
-      }
       p {
         font-size: 1.1em;
         line-height: 1.5em;
@@ -77,9 +73,6 @@
           margin: 0.1em auto;
           overflow: hidden;
           width: 90%
-        }
-        h1 {
-          clear: left
         }
         .burger-menu, .close-menu {
           float: right;
@@ -141,30 +134,6 @@
         }
         p {
           clear: both
-        }
-        hr {
-          border: 0;
-          border-top: 1px solid #E0E0E0;
-          clear: both;
-          height: 0;
-          margin: 2em 0
-        }
-        figure {
-          break-inside: avoid;
-          border: 1px solid #E0E0E0;
-          float: none;
-          margin: 0 0 1em 0;
-          max-width: 32em;
-          padding: 0.33em;
-          -webkit-column-break-inside: avoid
-        }
-        figcaption {
-          break-before: avoid;
-          font-size: 0.83em;
-          font-style: italic;
-          padding: 0.33em;
-          text-align: center;
-          -webkit-column-break-before: avoid
         }
         footer {
           clear: both;
@@ -238,11 +207,6 @@
 
       /* Medium Large Screens */
       @media only screen and (min-width: 44em) {
-        figure {
-          float: right;
-          width: 40%;
-          margin: 0 0 1em 1em
-        }
         .three-column div {
           margin-bottom: 0
         }
@@ -331,20 +295,6 @@
         div > h2, div > h3 {
           margin-top: 0.33em
         }
-        div + h2, a + h2 {
-          padding-top: 0.33em
-        }
-        .left-column {
-          clear: both;
-          float: left;
-          padding-right: 1.25em;
-          width: 46.9%
-        }
-        .right-column {
-          float: left;
-          padding-left: 1.25em;
-          width: 46.9%
-        }
         .three-column {
           overflow: hidden
         }
@@ -394,26 +344,14 @@
           fill: #FFF;
           transition: background-color 0.75s ease-out
         }
-        .icon-facebook:hover {
-          background-color: #3B6798
-        }
         .icon-github:hover {
           background-color: #171516
         }
         .icon-linkedin:hover {
           background-color: #0073B2
         }
-        .icon-mail:hover, .icon-print:hover {
-          background-color: #333
-        }
-        .icon-pdf:hover {
-          background-color: red
-        }
         .icon-twitter:hover {
           background-color: #00B9F4
-        }
-        .icon-word:hover {
-          background-color: #2C5A9C
         }
 
       }
@@ -431,7 +369,7 @@
           color: #000;
           text-decoration: none
         }
-        a.button, #connect, figure, footer, hr, #profile, nav, .share {
+        a.button, #connect, footer, #profile, nav {
           display: none
         }
         h2 {

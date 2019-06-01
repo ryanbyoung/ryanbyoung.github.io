@@ -25,10 +25,14 @@
         margin-bottom: 0.8em
       }
       h2 {
+        font-size: 1.5em;
+        margin-bottom: 0.8em
+      }
+      h3 {
         font-size: 1.3em;
         margin: 1em 0 0.9em 0
       }
-      h3 {
+      h4 {
         font-size: 1.2em;
         margin: 1.33em 0 1em 0
       }
@@ -45,10 +49,6 @@
       li {
         line-height: 1.4em;
         margin-bottom: 0.25em
-      }
-      span {
-        font-size: 1.7em;
-        margin-bottom: 0.8em
       }
 
       /* Small screens */
@@ -82,12 +82,8 @@
           overflow: hidden;
           width: 90%
         }
-        h1 {
+        h2 {
           clear: left
-        }
-        span {
-          font-size: 1.7em;
-          margin-bottom: 0.8em
         }
         .burger-menu, .close-menu {
           float: right;
@@ -136,15 +132,7 @@
           max-width: 66em;
           width: 90%
         }
-        .one-column {
-          margin: 0 auto;
-          max-width: 36em;
-          text-align: center
-        }
-        .three-column, #connect {
-          margin-top: 3em
-        }
-        h2 {
+        h3 {
           clear: both
         }
         p {
@@ -193,15 +181,6 @@
         .on {
           color: #C0C0C0
         }
-        a.button {
-          background-color: #007BFF;
-          border-radius: 0.25em;
-          color: #FFF;
-          display: inline-block;
-          font-family: sans-serif;
-          padding: 0.33em 0.66em 0.33em 0.66em;
-          text-decoration: none
-        }
 
         /* Images and Icons */
         img {
@@ -237,25 +216,12 @@
 
       }
 
-      /* Medium Screens */
-      @media only screen and (min-width: 32em) {
-        #profile {
-          width: 23%
-        }
-      }
-
       /* Medium Large Screens */
       @media only screen and (min-width: 44em) {
         figure {
           float: right;
           width: 40%;
           margin: 0 0 1em 1em
-        }
-        .three-column div {
-          margin-bottom: 0
-        }
-        #profile {
-          width: 22%
         }
       }
 
@@ -336,49 +302,11 @@
       /* Extra Large Screens */
       @media only screen and (min-width: 55em) {
 
-        div > h2, div > h3 {
+        div > h3, div > h4 {
           margin-top: 0.33em
         }
-        div + h2, a + h2 {
+        div + h3, a + h3 {
           padding-top: 0.33em
-        }
-        .left-column {
-          clear: both;
-          float: left;
-          padding-right: 1.25em;
-          width: 46.9%
-        }
-        .right-column {
-          float: left;
-          padding-left: 1.25em;
-          width: 46.9%
-        }
-        .three-column {
-          margin: 2em 0
-        }
-        .three-column div {
-          background-color: #F0F0F0;
-          border-radius: 0.5em;
-          float: left;
-          margin: 0 1% 2em 1%;
-          padding: 2%;
-          width: 28%
-        }
-        .three-column div:first-child {
-          margin: 0 1% 2em 0
-        }
-        .three-column div:last-child {
-          margin: 0 0 2em 1%
-        }
-        .three-column h2 {
-          margin-top: 0.33em;
-          text-align: center
-        }
-        .three-column p {
-          text-align: center
-        }
-        #connect {
-          margin-top: 1em
         }
 
       }
@@ -389,11 +317,6 @@
         a:hover {
           color: navy;
           transition: color 1s ease-out
-        }
-        a.button:hover {
-          background-color: #0669D9;
-          color: #FFF;
-          transition: background-color 1s ease-out
         }
         nav ul li a:hover {
           color: blue
@@ -414,14 +337,8 @@
         .icon-mail:hover, .icon-print:hover {
           background-color: #333
         }
-        .icon-pdf:hover {
-          background-color: red
-        }
         .icon-twitter:hover {
           background-color: #00B9F4
-        }
-        .icon-word:hover {
-          background-color: #2C5A9C
         }
 
       }
@@ -439,10 +356,10 @@
           color: #000;
           text-decoration: none
         }
-        a.button, #connect, figure, footer, hr, #profile, nav, .share, span {
+        figure, footer, hr, nav, .share {
           display: none
         }
-        h2 {
+        h3 {
           page-break-after: avoid
         }
         ul, ol {
@@ -460,7 +377,7 @@
   <body>
     <header>
       <div id="header">
-      <span id="logo">Ryan Young</span>
+      <h1 id="logo">Ryan Young</h1>
       <input type="checkbox" id="nav-toggle">
       <label for="nav-toggle" class="burger-menu">
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" viewBox="0 0 64 64">
@@ -496,9 +413,9 @@
     </header>
 
     <main>
-    <h1>Projects</h1>
+    <h2>Projects</h2>
     <a name="good2bme"></a>
-    <h2>Good2BMe</h2>
+    <h3>Good2BMe</h3>
     <figure>
       <img src="screen-shot.jpg" alt="Good2BMe screen shot">
       <figcaption>
@@ -529,7 +446,7 @@
       </li>
     </ul>
     <div class="share">
-    <h3>Share</h3>
+    <h4>Share</h4>
     <ul class="icons">
       <li>
         <a href="#">
@@ -565,7 +482,7 @@
     </div>
     <hr>
     <a name="ccc"></a>
-    <h2>Clear Claim Connection</h2>
+    <h3>Clear Claim Connection</h3>
     <figure>
       <img src="screen-shot.jpg" alt="Clear Claim Connection screen shot">
       <figcaption>
@@ -590,7 +507,7 @@
       </li>
     </ul>
     <div class="share">
-    <h3>Share</h3>
+    <h4>Share</h4>
     <ul class="icons">
       <li>
         <a href="index.html">
