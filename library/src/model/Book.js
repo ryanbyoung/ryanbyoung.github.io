@@ -78,7 +78,7 @@ Book.createTestData = function () {
 };
 //  Clear data
 Book.clearData = function () {
-  if (confirm("Do you really want to delete all book data?")) {
+  if (confirm("Are you sure you want to remove all books from The Library?")) {
     Book.instances = {};
     localStorage.setItem("books", "{}");
     document.getElementById("confirm").innerHTML = "All books have been removed from The Library."
