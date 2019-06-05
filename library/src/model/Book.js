@@ -24,7 +24,7 @@ Book.loadAll = function () {
   if (booksString) {
     books = JSON.parse(booksString);
     keys = Object.keys(books);
-    document.getElementById("confirm").innerHTML = keys.length + " books have been added.";
+    document.getElementById("confirm").innerHTML = "There are " + keys.length + " books in The Library.";
     for (i=0; i < keys.length; i++) {
       key = keys[i];
       Book.instances[key] = Book.convertRow2Obj(books[key]);
@@ -42,13 +42,13 @@ Book.saveAll = function () {
     alert("Error when writing to Local Storage\n" + e);
     error = true;
   }
-  if (!error) document.getElementById("confirm").innerHTML = nmrOfBooks + " books have been saved.";
+  if (!error) document.getElementById("confirm").innerHTML = nmrOfBooks + " books have been added to The Library.";
 };
 //  Create a new book row
 Book.create = function (slots) {
   var book = new Book(slots);
   Book.instances[slots.isbn] = book;
-  document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " was added.";
+  document.getElementById("confirm").innerHTML = "The book with the ISBN " + slots.isbn + " was added to The Library.";
 };
 //  Update an existing book row
 /*Book.update = function (slots) {
@@ -64,7 +64,7 @@ Book.destroy = function (isbn) {
     document.getElementById("confirm").innerHTML = "Book " + isbn + " was deleted.";
     delete Book.instances[isbn];
   } else {
-    document.getElementById("confirm").innerHTML = "Sorry, there is no book with the ISBN " + isbn + " in the library.";
+    document.getElementById("confirm").innerHTML = "Sorry, there is no book with the ISBN " + isbn + " in The Library.";
   }
 };
 //  Create and save test data
@@ -81,6 +81,6 @@ Book.clearData = function () {
   if (confirm("Do you really want to delete all book data?")) {
     Book.instances = {};
     localStorage.setItem("books", "{}");
-    document.getElementById("confirm").innerHTML = "All books have been removed from library."
+    document.getElementById("confirm").innerHTML = "All books have been removed from The Library."
   }
 };
