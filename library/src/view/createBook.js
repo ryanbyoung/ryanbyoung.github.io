@@ -12,11 +12,14 @@ pl.view.createBook = {
   },
   // save user input data
   handleSaveButtonClickEvent: function () {
+    if (formEl.isbn.value == "") { document.forms.isbn.focus() }
+    else {
     var formEl = document.forms['Book'];
     var slots = { isbn: formEl.isbn.value, 
         title: formEl.title.value, 
         year: formEl.year.value};
-    Book.create( slots);
+    Book.create(slots);
     formEl.reset();
+    }
   }
 };
