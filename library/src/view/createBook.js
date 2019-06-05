@@ -12,9 +12,9 @@ pl.view.createBook = {
   },
   // save user input data
   handleSaveButtonClickEvent: function () {
-    if (formEl.isbn.value == "") { console.log('here') }
-    else {
     var formEl = document.forms['Book'];
+    if (formEl.isbn.value == "") { formEl.isbn.value.focus() }
+    else {
     var slots = { isbn: formEl.isbn.value, 
         title: formEl.title.value, 
         year: formEl.year.value};
