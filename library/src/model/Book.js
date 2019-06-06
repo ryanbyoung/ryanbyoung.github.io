@@ -59,12 +59,12 @@ Book.create = function (slots) {
   document.getElementById("confirm").innerHTML = "Book " + slots.isbn + " updated.";
 };*/
 //  Delete a book row from storage
-Book.destroy = function (isbn) {
+Book.destroy = function (isbn, title) {
   if (Book.instances[isbn]) {
-    document.getElementById("confirm").innerHTML = "Book " + isbn + " was deleted.";
+    document.getElementById("confirm").innerHTML = title + " was removed from The Library.";
     delete Book.instances[isbn];
   } else {
-    document.getElementById("confirm").innerHTML = "Sorry, there is no book with the ISBN " + isbn + " in The Library.";
+    document.getElementById("confirm").innerHTML = "Sorry, that book doesn't exist in The Library.";
   }
 };
 //  Create and save test data
