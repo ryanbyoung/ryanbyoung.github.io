@@ -25,8 +25,9 @@ pl.view.deleteBook = {
   handleDeleteButtonClickEvent: function () {
     var selectEl = document.forms['Book'].selectBook;
     var isbn = selectEl.value;
+    var title = selectEl.text;
     if (isbn) {
-      Book.destroy(isbn);
+      Book.destroy(isbn, title);
       // remove deleted book from select options
       selectEl.remove(selectEl.selectedIndex);
     }
