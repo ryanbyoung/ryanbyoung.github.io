@@ -15,10 +15,9 @@ pl.view.deleteBook = {
       optionEl.value = book.isbn;
       selectEl.add(optionEl, null);
     }
-    deleteButton.addEventListener("click", 
-        pl.view.deleteBook.handleDeleteButtonClickEvent);
-    document.addEventListener("unload", function () {
-        Book.saveAll(); 
+    deleteButton.addEventListener("click", function () {
+      pl.view.deleteBook.handleDeleteButtonClickEvent;
+      Book.saveAll(); 
     });
   },
   // Event handler for deleting a book
