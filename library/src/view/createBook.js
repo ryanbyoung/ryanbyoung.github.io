@@ -25,7 +25,8 @@ pl.view.createBook = {
     }
     else {
       formEl.isbn.focus();
-      document.getElementByID("required").innerText = "ISBN is required";
+      var required = document.getElementByID("required");
+      required.innerText = "ISBN is required";
     }
   }
 };
