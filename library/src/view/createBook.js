@@ -13,6 +13,7 @@ pl.view.createBook = {
   // save user input data
   handleSaveButtonClickEvent: function () {
     var formEl = document.forms['Book'];
+    var required = document.getElementByID("required");
     if (formEl.isbn.value != "") {
       var slots = { 
         isbn: formEl.isbn.value, 
@@ -21,11 +22,10 @@ pl.view.createBook = {
       };
       Book.create(slots);
       formEl.reset();
-      document.getElementByID("required").innerText = "";
+      required.innerText = "";
     }
     else {
       formEl.isbn.focus();
-      var required = document.getElementByID("required");
       required.innerText = "ISBN is required";
     }
   }
