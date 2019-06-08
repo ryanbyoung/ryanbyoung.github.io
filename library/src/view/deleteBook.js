@@ -16,7 +16,7 @@ pl.view.deleteBook = {
       selectEl.add(optionEl, null);
     }
     deleteButton.addEventListener("click", function () {
-      pl.view.deleteBook.handleDeleteButtonClickEvent;
+      handleDeleteButtonClickEvent;
       Book.saveAll(); 
     });
   },
