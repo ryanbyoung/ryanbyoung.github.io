@@ -18,7 +18,7 @@ pl.view.createBook = {
         title: formEl.title.value, 
         year: formEl.year.value};
     Book.create(slots);
-    formEl.reset();
+    //formEl.reset();
     }
   }
 };
