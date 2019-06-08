@@ -21,8 +21,7 @@ pl.view.deleteBook = {
         Book.saveAll(); 
     }); */
     deleteButton.addEventListener("click", 
-        pl.view.deleteBook.handleDeleteButtonClickEvent);
-    deleteButton.addEventListener("click", Book.saveAll());
+        pl.view.deleteBook.handleDeleteButtonClickEvent), Book.saveAll());
   },
   // Event handler for deleting a book
   handleDeleteButtonClickEvent: function () {
