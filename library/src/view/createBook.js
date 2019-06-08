@@ -13,7 +13,7 @@ pl.view.createBook = {
   // save user input data
   handleSaveButtonClickEvent: function () {
     var formEl = document.forms['Book'];
-    var required = document.getElementByID("required");
+    var required = document.getElementById("required");
     if (formEl.isbn.value != "") {
       var slots = { 
         isbn: formEl.isbn.value, 
