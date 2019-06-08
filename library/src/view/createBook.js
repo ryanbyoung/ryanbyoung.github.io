@@ -4,9 +4,8 @@ pl.view.createBook = {
     // load all book objects
     Book.loadAll();
     // Set an event handler for the save/submit button
-    saveButton.addEventListener("click", 
-        pl.view.createBook.handleSaveButtonClickEvent);
-    document.addEventListener("unload", function () {
+    saveButton.addEventListener("click", function () {
+        pl.view.createBook.handleSaveButtonClickEvent;
         Book.saveAll(); 
     });
   },
