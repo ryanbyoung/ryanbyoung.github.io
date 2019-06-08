@@ -15,13 +15,11 @@ pl.view.deleteBook = {
       optionEl.value = book.isbn;
       selectEl.add(optionEl, null);
     }
-    /* deleteButton.addEventListener("click", 
+    deleteButton.addEventListener("click", 
         pl.view.deleteBook.handleDeleteButtonClickEvent);
     window.addEventListener("beforeunload", function () {
         Book.saveAll(); 
-    }); */
-    deleteButton.addEventListener("click", 
-        pl.view.deleteBook.handleDeleteButtonClickEvent), Book.saveAll());
+    });
   },
   // Event handler for deleting a book
   handleDeleteButtonClickEvent: function () {
