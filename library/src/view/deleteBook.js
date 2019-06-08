@@ -17,7 +17,7 @@ pl.view.deleteBook = {
     }
     deleteButton.addEventListener("click", 
         pl.view.deleteBook.handleDeleteButtonClickEvent);
-    window.addEventListener("unload", function () {
+    document.addEventListener("unload", function () {
         Book.saveAll(); 
     });
   },
