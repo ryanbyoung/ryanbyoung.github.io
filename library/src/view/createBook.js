@@ -14,11 +14,17 @@ pl.view.createBook = {
   handleSaveButtonClickEvent: function () {
     var formEl = document.forms['Book'];
     if (formEl.isbn.value != "") {
-    var slots = { isbn: formEl.isbn.value, 
-        title: formEl.title.value, 
-        year: formEl.year.value};
-    Book.create(slots);
-    //formEl.reset();
+        var slots = { 
+            isbn: formEl.isbn.value, 
+            title: formEl.title.value, 
+            year: formEl.year.value
+        };
+        Book.create(slots);
+        formEl.reset();
+        document.getElementByID("required").innerText = "";
     }
+    else {
+        formEl.isbn.focus();
+        document.getElementByID("required").innerText = "ISBN is required";
   }
 };
