@@ -3,6 +3,7 @@ pl.view.deleteBook = {
     var deleteButton = document.forms['Book'].commit;
     var selectEl = document.forms['Book'].selectBook;
     var key="", keys=[], book=null, optionEl=null, i=0;
+    var link = document.getElementById("link");
     // load all book objects
     Book.loadAll();
     keys = Object.keys(Book.instances);
@@ -17,7 +18,7 @@ pl.view.deleteBook = {
     }
     deleteButton.addEventListener("click", 
         pl.view.deleteBook.handleDeleteButtonClickEvent);
-    window.addEventListener("beforeunload", function () {
+    link.addEventListener("click", function () {
         Book.saveAll(); 
     });
   },
