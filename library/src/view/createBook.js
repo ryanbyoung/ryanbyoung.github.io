@@ -1,12 +1,13 @@
 pl.view.createBook = {
   setupUserInterface: function () {
     var saveButton = document.forms['Book'].commit;
+    var link = document.getElementById("link");
     // load all book objects
     Book.loadAll();
     // Set an event handler for the save/submit button
     saveButton.addEventListener("click", 
       pl.view.createBook.handleSaveButtonClickEvent);
-    saveButton.addEventListener("click", function () {
+    link.addEventListener("click", function () {
       Book.saveAll(); 
     });
   },
