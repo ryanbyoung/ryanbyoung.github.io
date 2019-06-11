@@ -549,5 +549,15 @@
       </p>
     </footer>
 
+    <script>
+      function resetNav() {
+        var toggle = document.getElementById('nav-toggle');
+        toggle.checked = false;
+      }
+      var navLinks = document.querySelectorAll('nav a');
+      navLinks[0].addEventListener("click", resetNav, false);
+      navLinks[2].addEventListener("click", resetNav, false);
+    </script>
+    
   </body>
 </html>
