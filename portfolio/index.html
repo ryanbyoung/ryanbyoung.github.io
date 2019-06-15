@@ -329,7 +329,7 @@
       @media (hover:hover) {
 
         a:hover {
-          color: navy;
+          color: #0669D9;
           transition: color 1s ease-out
         }
         a.button:hover {
@@ -338,11 +338,11 @@
           transition: background-color 1s ease-out
         }
         nav ul li a:hover {
-          color: blue
+          color: #007BFF
         }
         .icon:hover {
           fill: #FFF;
-          transition: background-color 0.75s ease-out
+          transition: background-color 1s ease-out
         }
         .icon-github:hover {
           background-color: #171516
@@ -401,7 +401,7 @@
           </g>
         </svg>
       </label>
-      <label for="nav-toggle" class="close-menu">
+      <label for="nav-toggle" class="close-menu"> <!-- changed this -->
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37px" height="37px" viewBox="0 0 64 64">
           <g>
         	  <polygon points="44.237,16.351 31.99,28.69 19.651,16.443 18.243,17.863 30.582,30.109 18.335,42.449 19.755,43.858 32.002,31.519
@@ -517,16 +517,6 @@
         &copy; 2019 Ryan Young
       </p>
     </footer>
-
-    <script>
-      function resetNav() {
-        var toggle = document.getElementById('nav-toggle');
-        toggle.checked = false;
-      }
-      var navLinks = document.querySelectorAll('nav a');
-      navLinks[1].addEventListener("click", resetNav, false);
-      navLinks[2].addEventListener("click", resetNav, false);
-    </script>
 
   </body>
 </html>

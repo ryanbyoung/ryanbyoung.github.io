@@ -315,15 +315,15 @@
       @media (hover:hover) {
 
         a:hover {
-          color: navy;
+          color: #0669D9;
           transition: color 1s ease-out
         }
         nav ul li a:hover {
-          color: blue
+          color: #007BFF
         }
         .icon:hover {
           fill: #FFF;
-          transition: background-color 0.75s ease-out
+          transition: background-color 1s ease-out
         }
         .icon-facebook:hover {
           background-color: #3B6798
@@ -549,15 +549,5 @@
       </p>
     </footer>
 
-    <script>
-      function resetNav() {
-        var toggle = document.getElementById('nav-toggle');
-        toggle.checked = false;
-      }
-      var navLinks = document.querySelectorAll('nav a');
-      navLinks[0].addEventListener("click", resetNav, false);
-      navLinks[1].addEventListener("click", resetNav, false);
-    </script>
-    
   </body>
 </html>
