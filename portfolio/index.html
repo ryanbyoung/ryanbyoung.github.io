@@ -441,7 +441,7 @@
           <button id="toggle" aria-controls="menu" aria-expanded="false">Menu</button> <!---->
           <ul id="menu"> <!---->
             <li>
-              <a href="index.html">Home</a>
+              Home
             </li>
             <li>
               <a href="resume.html">Resume</a>
@@ -554,6 +554,14 @@
     <script>
       var toggle = document.querySelector('#toggle');
       var menu = document.querySelector('#menu');
+      var navLinks = document.querySelectorAll('nav a');
+
+      function resetNav() {
+	      menu.classList.remove('active');
+	    }
+
+      navLinks[0].addEventListener("click", resetNav, false);
+      navLinks[1].addEventListener("click", resetNav, false);
 
       toggle.addEventListener('click', function(){
         if (menu.classList.contains('active')) {
