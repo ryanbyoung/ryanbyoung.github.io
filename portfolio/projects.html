@@ -17,9 +17,6 @@
       body {
         font: 100% Georgia, "Times New Roman", Times, serif
       }
-      #nav-toggle, .burger-menu, .close-menu {
-        display: none
-      }
       h1 {
         font-size: 1.5em;
         margin-bottom: 0.8em
@@ -63,15 +60,8 @@
         }
 
         /* Header and Nav */
-        #logo {
-          float: left;
-          font-size: 1.5em;
-          font-weight: bold;
-          margin: 0;
-          padding: 0.4em 0
-        }
         header {
-          background-color: #f7f7f7;
+          background-color: #F7F7F7;
           border-bottom: 1px solid white;
           position: fixed;
           top: 0;
@@ -82,48 +72,43 @@
           overflow: hidden;
           width: 90%
         }
-        h2 {
-          clear: left
-        }
-        .burger-menu, .close-menu {
-          float: right;
-          padding-top: 0.4em;
-          -webkit-tap-highlight-color: transparent
-        }
-        .burger-menu {
-          cursor: pointer;
-          display: inline-block
-        }
-        #nav-toggle:checked ~ nav {
-          opacity: 1;
-          position: static;
-          visibility: visible
-        }
-        #nav-toggle:checked ~ .close-menu {
-          cursor: pointer;
-          display: inline-block
-        }
-        #nav-toggle:checked ~ .burger-menu {
-          display: none
+        #logo {
+          float: left;
+          font-size: 1.5em;
+          font-weight: bold;
+          margin: 0;
+          padding: 0.4em 0
         }
         nav {
-          clear: right;
-          opacity: 0;
-          padding: 0.5em 0;
-          position: absolute;
-          text-align: center;
-          text-transform: uppercase;
-          visibility: hidden
+          padding-top: 0.6em
+        }
+        #toggle {
+          background: transparent;
+          border: 2px solid #333;
+          border-radius: 5px;
+          cursor: pointer;
+          display: block;
+          float: right;
+          font: 1em sans-serif;
+          padding: 0.2em
+        }
+        #toggle:focus {
+          background: #333;
+          color: #FFF;
         }
         nav ul {
-          margin: 0
+          clear: both;
+          display: none;
+          margin-right: 3em;
+          text-align: right
+        }
+        .active {
+          display: block
         }
         nav ul li {
-          font: 1em Verdana, sans-serif;
-          list-style-type: none
-        }
-        nav ul li a {
-          color: #333
+          font: 16px sans-serif;
+          list-style-type: none;
+          margin: 1em 0
         }
 
         /* Main Content */
@@ -175,7 +160,15 @@
           color: blue;
           text-decoration-skip: ink
         }
-        header a {
+        #logo a {
+          color: #333;
+          text-decoration: none
+        }
+        nav ul li a {
+          color: #333;
+          border: 2px solid #333;
+          border-radius: 5px;
+          padding: 0.15em;
           text-decoration: none
         }
 
@@ -210,6 +203,10 @@
           text-decoration: none;
           -webkit-tap-highlight-color: transparent
         }
+        .for-screen-readers {
+          display: none;
+          text-decoration: underline
+        }
 
       }
 
@@ -232,13 +229,6 @@
         }
 
         /* Header and Nav */
-        #logo {
-          display: block;
-          font-size: 2em;
-          margin: 0 0 1em 0;
-          padding: 0;
-          text-transform: none
-        }
         header {
           background-color: white;
           border-bottom: none;
@@ -256,18 +246,23 @@
         header + h1 {
           padding-top: 1em
         }
-        .burger-menu, .close-menu {
+        #logo {
+          display: block;
+          font-size: 2em;
+          margin: 0 0 1em 0;
+          padding: 0;
+          text-transform: none
+        }
+        #toggle {
           display: none
         }
         nav {
           float: right;
-          opacity: 1;
           padding: 0.5em 0 1.5em;
-          position: static;
-          text-transform: uppercase;
-          visibility: visible
+          text-transform: uppercase
         }
         nav ul {
+          display: inline;
           margin: 0 auto;
           width: 100%
         }
@@ -275,24 +270,23 @@
           display: block;
           font: 1.2em Verdana, sans-serif;
           float: left;
-          margin-right: 2em;
+          margin: 0 2em 0 0;
           position: relative
         }
         nav ul li:last-child {
           margin-right: 0
         }
+
+        /* Main Content */
+        h2 {
+          clear: left
+        }
+
+        /* Links */
         nav ul li a {
-          display: block;
+          border: none;
+          padding: 0;
           white-space: nowrap
-        }
-        nav ul ul {
-          background-color: #FFF;
-          border: solid 1px #C0C0C0;
-          padding-left: 1em;
-          position: absolute
-        }
-        nav li ul li:first-child {
-          padding-top: 0.5em
         }
 
       }
@@ -312,6 +306,10 @@
       /* Hover */
       @media (hover:hover) {
 
+        #toggle:hover {
+          background: #333;
+          color: #FFF
+        }
         .icon:hover {
           fill: #FFF;
           transition: background-color 1s ease-out
@@ -368,35 +366,17 @@
   <body>
     <header>
       <div id="header">
-      <h1 id="logo">Ryan Young</h1>
-      <input type="checkbox" id="nav-toggle">
-      <label for="nav-toggle" class="burger-menu">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" viewBox="0 0 64 64">
-          <g>
-            <rect x="24" y="20" width="40" height="2"/>
-            <rect x="24" y="32" width="40" height="2"/>
-            <rect x="24" y="44" width="40" height="2"/>
-          </g>
-        </svg>
-      </label>
-      <label for="nav-toggle" class="close-menu">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="37px" height="37px" viewBox="0 0 55 55">
-          <g>
-        	  <polygon points="44.237,16.351 31.99,28.69 19.651,16.443 18.243,17.863 30.582,30.109 18.335,42.449 19.755,43.858 32.002,31.519
-        		44.341,43.766 45.749,42.346 33.41,30.1 45.657,17.76"/>
-          </g>
-        </svg>
-      </label>
-      <nav>
-        <ul>
+      <h1 id="logo">
+        <a href="index.html">Ryan Young</a>
+      </h1>
+      <nav role="navigation">
+        <button id="toggle" aria-controls="menu" aria-expanded="false">Menu</button>
+        <ul id="menu">
           <li>
             <a href="index.html">Home</a>
           </li>
           <li>
             <a href="resume.html">Resume</a>
-          </li>
-          <li>
-            <a href="projects.html" class="on">Projects</a>
           </li>
         </ul>
       </nav>
@@ -404,134 +384,103 @@
     </header>
 
     <main>
-    <h2>Projects</h2>
-    <a name="good2bme"></a>
-    <h3>Good2BMe</h3>
-    <figure>
-      <img src="screen-shot.jpg" alt="Good2BMe screen shot">
-      <figcaption>
-        Good2BMe screen shot
-      </figcaption>
-    </figure>
-    <ul>
-      <li>
-        Managed the development of <a href="http://www.good2bme.org/">Good2BMe</a>, a website focusing on health education and promoting childhood immunization at Independence Blue Cross (IBC).
-      </li>
-      <li>
-        Was a member of the team that conceptualized the idea.
-      </li>
-      <li>
-        Created the <a href="../pdfs/work/projects/good2bme/project-plan.pdf" target="_pp">project plan</a> and <a href="../pdfs/work/projects/good2bme/site-map.pdf" target="_sm">site map</a>.
-      </li>
-      <li>
-        Worked closely with a cross-functional team of business analysts, cyber-security officers, designers, lawyers, writers, and web developers/engineers while keeping upper management in the loop.
-      </li>
-      <li>
-        Developed all of the written content in Flash and wrote documentation detailing the process.
-      </li>
-      <li>
-        Worked closely with IS on a variety of issues that included proxies, caching, and server load.
-      </li>
-      <li>
-        Tested site on different browsers and operating systems.
-      </li>
-    </ul>
-    <div class="share">
-    <h4>Share</h4>
-    <ul class="icons">
-      <li>
-        <a href="#">
-          <svg class="icon icon-linkedin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 1024 1024">
-            <path d="M384 384h177.106v90.782h2.532c24.64-44.194 84.958-90.782 174.842-90.782 186.946 0 221.52 116.376 221.52 267.734v308.266h-184.61v-273.278c0-65.184-1.334-149.026-96.028-149.026-96.148 0-110.82 70.986-110.82 144.292v278.012h-184.542v-576z"></path>
-            <path d="M64 384h192v576h-192v-576z"></path>
-            <path d="M256 224c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z"></path>
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <svg class="icon icon-facebook" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 16 16">
-            <path d="M9.5 3h2.5v-3h-2.5c-1.93 0-3.5 1.57-3.5 3.5v1.5h-2v3h2v8h3v-8h2.5l0.5-3h-3v-1.5c0-0.271 0.229-0.5 0.5-0.5z"></path>
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <svg class="icon icon-twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 32 32">
-            <path d="M32 6.076c-1.177 0.522-2.443 0.875-3.771 1.034 1.355-0.813 2.396-2.099 2.887-3.632-1.269 0.752-2.674 1.299-4.169 1.593-1.198-1.276-2.904-2.073-4.792-2.073-3.626 0-6.565 2.939-6.565 6.565 0 0.515 0.058 1.016 0.17 1.496-5.456-0.274-10.294-2.888-13.532-6.86-0.565 0.97-0.889 2.097-0.889 3.301 0 2.278 1.159 4.287 2.921 5.465-1.076-0.034-2.088-0.329-2.974-0.821-0.001 0.027-0.001 0.055-0.001 0.083 0 3.181 2.263 5.834 5.266 6.437-0.551 0.15-1.131 0.23-1.73 0.23-0.423 0-0.834-0.041-1.235-0.118 0.835 2.608 3.26 4.506 6.133 4.559-2.247 1.761-5.078 2.81-8.154 2.81-0.53 0-1.052-0.031-1.566-0.092 2.905 1.863 6.356 2.95 10.064 2.95 12.076 0 18.679-10.004 18.679-18.68 0-0.285-0.006-0.568-0.019-0.849 1.283-0.926 2.396-2.082 3.276-3.398z"></path>
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <svg class="icon icon-mail" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 1024 1024">
-            <path d="M896 160h-768c-70.688 0-128 57.344-128 128v416c0 70.688 57.312 128 128 128h768c70.688 0 128-57.312 128-128v-416c0-70.656-57.312-128-128-128zM64 328l223.968 168-223.968 168v-336zM960 704c0 35.328-28.736 64-64 64h-768c-35.296 0-64-28.672-64-64l250.624-188 139.776 104.864c17.056 12.736 37.312 19.2 57.6 19.2 20.256 0 40.512-6.432 57.568-19.2l139.808-104.864 250.624 188zM960 664l-224-168 224-168v336zM550.368 595.264c-11.168 8.384-24.416 12.8-38.368 12.8s-27.232-4.448-38.4-12.8l-409.6-307.264c0-35.296 28.704-64 64-64h768c35.264 0 64 28.704 64 64l-409.632 307.264z"></path>
-          </svg>
-        </a>
-      </li>
-    </ul>
-    </div>
-    <hr>
-    <a name="ccc"></a>
-    <h3>Clear Claim Connection</h3>
-    <figure>
-      <img src="screen-shot.jpg" alt="Clear Claim Connection screen shot">
-      <figcaption>
-        Clear Claim Connection screen shot
-      </figcaption>
-    </figure>
-    <ul>
-      <li>
-        Managed a project to provide access to <a href="http://www.ibx.com/providers/claims_and_billing/clear_claim_connection.html">Clear Claim Connection</a>, a web-based code auditing reference tool, on IBC’s website.
-      </li>
-      <li>
-        Acted as primary liaison between the business line and IS department.
-      </li>
-      <li>
-        Created wireframes and developed HTML and CSS for <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/login.jsp">login</a>, <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/forgot_password.jsp">forgot password</a>, <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/change_password.jsp">change password</a>, and <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/change_email.jsp">change email address</a> applications.
-      </li>
-      <li>
-        Tested applications after IS department developed them in Java.
-      </li>
-      <li>
-        Created <a href="https://ecom.tam.ibx.com/ibx/htdocs/email_forms/providers/ccc_contact_form.html">contact form</a> to provide users a line of communication.
-      </li>
-    </ul>
-    <div class="share">
-    <h4>Share</h4>
-    <ul class="icons">
-      <li>
-        <a href="index.html">
-          <svg class="icon icon-linkedin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 1024 1024">
-            <path d="M384 384h177.106v90.782h2.532c24.64-44.194 84.958-90.782 174.842-90.782 186.946 0 221.52 116.376 221.52 267.734v308.266h-184.61v-273.278c0-65.184-1.334-149.026-96.028-149.026-96.148 0-110.82 70.986-110.82 144.292v278.012h-184.542v-576z"></path>
-            <path d="M64 384h192v576h-192v-576z"></path>
-            <path d="M256 224c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z"></path>
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <svg class="icon icon-facebook" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 16 16">
-            <path d="M9.5 3h2.5v-3h-2.5c-1.93 0-3.5 1.57-3.5 3.5v1.5h-2v3h2v8h3v-8h2.5l0.5-3h-3v-1.5c0-0.271 0.229-0.5 0.5-0.5z"></path>
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <svg class="icon icon-twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 32 32">
-            <path d="M32 6.076c-1.177 0.522-2.443 0.875-3.771 1.034 1.355-0.813 2.396-2.099 2.887-3.632-1.269 0.752-2.674 1.299-4.169 1.593-1.198-1.276-2.904-2.073-4.792-2.073-3.626 0-6.565 2.939-6.565 6.565 0 0.515 0.058 1.016 0.17 1.496-5.456-0.274-10.294-2.888-13.532-6.86-0.565 0.97-0.889 2.097-0.889 3.301 0 2.278 1.159 4.287 2.921 5.465-1.076-0.034-2.088-0.329-2.974-0.821-0.001 0.027-0.001 0.055-0.001 0.083 0 3.181 2.263 5.834 5.266 6.437-0.551 0.15-1.131 0.23-1.73 0.23-0.423 0-0.834-0.041-1.235-0.118 0.835 2.608 3.26 4.506 6.133 4.559-2.247 1.761-5.078 2.81-8.154 2.81-0.53 0-1.052-0.031-1.566-0.092 2.905 1.863 6.356 2.95 10.064 2.95 12.076 0 18.679-10.004 18.679-18.68 0-0.285-0.006-0.568-0.019-0.849 1.283-0.926 2.396-2.082 3.276-3.398z"></path>
-          </svg>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <svg class="icon icon-mail" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 1024 1024">
-            <path d="M896 160h-768c-70.688 0-128 57.344-128 128v416c0 70.688 57.312 128 128 128h768c70.688 0 128-57.312 128-128v-416c0-70.656-57.312-128-128-128zM64 328l223.968 168-223.968 168v-336zM960 704c0 35.328-28.736 64-64 64h-768c-35.296 0-64-28.672-64-64l250.624-188 139.776 104.864c17.056 12.736 37.312 19.2 57.6 19.2 20.256 0 40.512-6.432 57.568-19.2l139.808-104.864 250.624 188zM960 664l-224-168 224-168v336zM550.368 595.264c-11.168 8.384-24.416 12.8-38.368 12.8s-27.232-4.448-38.4-12.8l-409.6-307.264c0-35.296 28.704-64 64-64h768c35.264 0 64 28.704 64 64l-409.632 307.264z"></path>
-          </svg>
-        </a>
-      </li>
-    </ul>
-    </div>
+      <h2>Projects</h2>
+      <a name="good2bme"></a>
+      <h3>Good2BMe</h3>
+      <figure>
+        <img src="screen-shot.jpg" alt="Good2BMe screen shot">
+        <figcaption>
+          Good2BMe screen shot
+        </figcaption>
+      </figure>
+      <ul>
+        <li>
+          Managed the development of <a href="http://www.good2bme.org/">Good2BMe</a>, a website focusing on health education and promoting childhood immunization at Independence Blue Cross (IBC).
+        </li>
+        <li>
+          Was a member of the team that conceptualized the idea.
+        </li>
+        <li>
+          Created the <a href="../pdfs/work/projects/good2bme/project-plan.pdf" target="_pp">project plan</a> and <a href="../pdfs/work/projects/good2bme/site-map.pdf" target="_sm">site map</a>.
+        </li>
+        <li>
+          Worked closely with a cross-functional team of business analysts, cyber-security officers, designers, lawyers, writers, and web developers/engineers while keeping upper management in the loop.
+        </li>
+        <li>
+          Developed all of the written content in Flash and wrote documentation detailing the process.
+        </li>
+        <li>
+          Worked closely with IS on a variety of issues that included proxies, caching, and server load.
+        </li>
+        <li>
+          Tested site on different browsers and operating systems.
+        </li>
+      </ul>
+      <div class="share">
+        <h4>Share</h4>
+        <ul class="icons">
+          <li>
+            <a href="#">
+              <svg class="icon icon-linkedin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 1024 1024">
+                <path d="M384 384h177.106v90.782h2.532c24.64-44.194 84.958-90.782 174.842-90.782 186.946 0 221.52 116.376 221.52 267.734v308.266h-184.61v-273.278c0-65.184-1.334-149.026-96.028-149.026-96.148 0-110.82 70.986-110.82 144.292v278.012h-184.542v-576z"></path>
+                <path d="M64 384h192v576h-192v-576z"></path>
+                <path d="M256 224c0 53.019-42.981 96-96 96s-96-42.981-96-96c0-53.019 42.981-96 96-96s96 42.981 96 96z"></path>
+              </svg>
+              <span class="for-screen-readers">LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg class="icon icon-facebook" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 16 16">
+                <path d="M9.5 3h2.5v-3h-2.5c-1.93 0-3.5 1.57-3.5 3.5v1.5h-2v3h2v8h3v-8h2.5l0.5-3h-3v-1.5c0-0.271 0.229-0.5 0.5-0.5z"></path>
+              </svg>
+              <span class="for-screen-readers">Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg class="icon icon-twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 32 32">
+                <path d="M32 6.076c-1.177 0.522-2.443 0.875-3.771 1.034 1.355-0.813 2.396-2.099 2.887-3.632-1.269 0.752-2.674 1.299-4.169 1.593-1.198-1.276-2.904-2.073-4.792-2.073-3.626 0-6.565 2.939-6.565 6.565 0 0.515 0.058 1.016 0.17 1.496-5.456-0.274-10.294-2.888-13.532-6.86-0.565 0.97-0.889 2.097-0.889 3.301 0 2.278 1.159 4.287 2.921 5.465-1.076-0.034-2.088-0.329-2.974-0.821-0.001 0.027-0.001 0.055-0.001 0.083 0 3.181 2.263 5.834 5.266 6.437-0.551 0.15-1.131 0.23-1.73 0.23-0.423 0-0.834-0.041-1.235-0.118 0.835 2.608 3.26 4.506 6.133 4.559-2.247 1.761-5.078 2.81-8.154 2.81-0.53 0-1.052-0.031-1.566-0.092 2.905 1.863 6.356 2.95 10.064 2.95 12.076 0 18.679-10.004 18.679-18.68 0-0.285-0.006-0.568-0.019-0.849 1.283-0.926 2.396-2.082 3.276-3.398z"></path>
+              </svg>
+              <span class="for-screen-readers">Twitter</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg class="icon icon-mail" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="25" height="25" viewBox="0 0 1024 1024">
+                <path d="M896 160h-768c-70.688 0-128 57.344-128 128v416c0 70.688 57.312 128 128 128h768c70.688 0 128-57.312 128-128v-416c0-70.656-57.312-128-128-128zM64 328l223.968 168-223.968 168v-336zM960 704c0 35.328-28.736 64-64 64h-768c-35.296 0-64-28.672-64-64l250.624-188 139.776 104.864c17.056 12.736 37.312 19.2 57.6 19.2 20.256 0 40.512-6.432 57.568-19.2l139.808-104.864 250.624 188zM960 664l-224-168 224-168v336zM550.368 595.264c-11.168 8.384-24.416 12.8-38.368 12.8s-27.232-4.448-38.4-12.8l-409.6-307.264c0-35.296 28.704-64 64-64h768c35.264 0 64 28.704 64 64l-409.632 307.264z"></path>
+              </svg>
+              <span class="for-screen-readers">Email</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <hr>
+      <a name="ccc"></a>
+      <h3>Clear Claim Connection</h3>
+      <figure>
+        <img src="screen-shot.jpg" alt="Clear Claim Connection screen shot">
+        <figcaption>
+          Clear Claim Connection screen shot
+        </figcaption>
+      </figure>
+      <ul>
+        <li>
+          Managed a project to provide access to <a href="http://www.ibx.com/providers/claims_and_billing/clear_claim_connection.html">Clear Claim Connection</a>, a web-based code auditing reference tool, on IBC’s website.
+        </li>
+        <li>
+          Acted as primary liaison between the business line and IS department.
+        </li>
+        <li>
+          Created wireframes and developed HTML and CSS for <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/login.jsp">login</a>, <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/forgot_password.jsp">forgot password</a>, <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/change_password.jsp">change password</a>, and <a href="https://ecom.tam.ibx.com/ibx2/jsps/clearclaim_connection/change_email.jsp">change email address</a> applications.
+        </li>
+        <li>
+          Tested applications after IS department developed them in Java.
+        </li>
+        <li>
+          Created <a href="https://ecom.tam.ibx.com/ibx/htdocs/email_forms/providers/ccc_contact_form.html">contact form</a> to provide users a line of communication.
+        </li>
+      </ul>
     </main>
 
     <footer>
@@ -539,6 +488,49 @@
         &copy; 2019 Ryan Young
       </p>
     </footer>
+
+    <script>
+      var toggle = document.querySelector('#toggle');
+      var menu = document.querySelector('#menu');
+      var navLinks = document.querySelectorAll('nav a');
+
+      function resetNav() {
+	      menu.classList.remove('active');
+	    }
+
+      navLinks[0].addEventListener("click", resetNav, false);
+      navLinks[1].addEventListener("click", resetNav, false);
+
+      toggle.addEventListener('click', function(){
+        if (menu.classList.contains('active')) {
+          menu.classList.remove('active');
+          this.setAttribute('aria-expanded', 'false');
+        } else {
+          menu.classList.add('active');
+          this.setAttribute('aria-expanded', 'true');
+          this.focus();
+        }
+      });
+    </script>
+    <noscript>
+      <style>
+        #toggle {
+          display: none
+        }
+        #menu {
+          display: block;
+          margin-right: 0
+        }
+        main {
+          margin-top: 9em
+        }
+        @media only screen and (min-width: 50em) {
+          main {
+            margin-top: 0
+          }
+        }
+      </style>
+    </noscript>
 
   </body>
 </html>
