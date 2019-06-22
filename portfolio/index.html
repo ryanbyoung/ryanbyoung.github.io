@@ -75,22 +75,6 @@
           padding: 0.4em 0
         }
 
-        /*add*/
-        #toggle {
-          background: transparent;
-          border: 2px solid #333;
-          border-radius: 5px;
-          cursor: pointer;
-          display: block;
-          float: right;
-          font-family: sans-serif;
-          font-size: 1em;
-          padding: 0.2em
-        }
-        #toggle:focus {
-          background: #333;
-          color: #FFF;
-        }
         /*.burger-menu, .close-menu {
           float: right;
           padding-top: 0.4em;
@@ -115,14 +99,30 @@
 
         /*edit*/
         nav {
-          padding: 0.5em 0;
-          text-align: center;
-          text-transform: uppercase
+          padding: 0.5em 0
         }
+
+        /*add*/
+        #toggle {
+          background: transparent;
+          border: 2px solid #333;
+          border-radius: 5px;
+          cursor: pointer;
+          display: block;
+          float: right;
+          font: 1em sans-serif;
+          padding: 0.2em
+        }
+        #toggle:focus {
+          background: #333;
+          color: #FFF;
+        }
+
         nav ul {
           /*add*/ clear: both;
           /*add*/ display: none;
-          margin: 0
+          /*edit*/ margin-right: 3em;
+          /*add*/ text-align: right
         }
         /*add*/
         .active {
@@ -130,11 +130,15 @@
         }
 
         nav ul li {
-          font: 1em Verdana, sans-serif;
-          list-style-type: none
+          /*edit*/ font: 1em sans-serif;
+          list-style-type: none;
+          margin: 1em 0
         }
         nav ul li a {
-          color: #333
+          color: #333;
+          border: 2px solid #333;
+          border-radius: 5px;
+          padding: 0.2em
         }
 
         /* Main Content */
@@ -298,18 +302,19 @@
           display: block;
           font: 1.2em Verdana, sans-serif;
           float: left;
-          margin-right: 2em;
+          margin: 0 2em 0 0;
           position: relative
         }
         nav ul li:last-child {
           margin-right: 0
         }
-
-        /* remove
+        /*edit*/
         nav ul li a {
-          display: block;
+          border: none;
+          padding: 0;
           white-space: nowrap
         }
+        /* remove
         nav ul ul {
           background-color: #FFF;
           border: solid 1px #C0C0C0;
