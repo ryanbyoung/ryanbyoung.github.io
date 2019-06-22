@@ -99,7 +99,7 @@
 
         /*edit*/
         nav {
-          padding: 0.5em 0
+          padding-top: 0.5em
         }
 
         /*add*/
@@ -130,15 +130,15 @@
         }
 
         nav ul li {
-          /*edit*/ font: 1em sans-serif;
           list-style-type: none;
-          margin: 1em 0
+          margin: 0.5em 0
         }
         nav ul li a {
+/*edit*/ font: 16px sans-serif;
           color: #333;
           border: 2px solid #333;
           border-radius: 5px;
-          padding: 0.2em
+          padding: 0.15em
         }
 
         /* Main Content */
@@ -572,6 +572,7 @@
         } else {
           menu.classList.add('active');
           this.setAttribute('aria-expanded', 'true');
+          this.focus;
         }
       });
     </script>
