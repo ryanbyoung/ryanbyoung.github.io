@@ -1,1 +1,56 @@
-d
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dane</title>
+    <style>
+      .embed-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        max-width: 100%
+      }
+      .embed-container iframe, .embed-container object, .embed-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Div to make player responsive -->
+    <div class="embed-container">
+      <!-- The iframe (and player) will replace the player div -->
+      <div id="player"></div>
+    </div>
+    <h1>Dane Reynolds</h1>
+    <p>Welcome to the Dane Reynolds channel. I hope you enjoy it.</p>
+
+    <script>
+      // This code loads the iframe Player API code asynchronously
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      tag.id = "player";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      // This function creates an iframe player after the API code downloads
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          events: {
+            'onReady': onPlayerReady
+          }
+        });
+      }
+      // This function loads the playlist and sets the player to loop it
+      function onPlayerReady(event) {
+        player.loadPlaylist({list:"PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx"});
+        player.setLoop(true);
+      }
+    </script>
+
+  </body>
+</html>
