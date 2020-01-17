@@ -43,9 +43,10 @@
           }
         });
       }
-      // This function loads the playlist and sets the player to loop it
+      // This function loads the playlist, and then sets the playlist to shuffle and loop
       function onPlayerReady(event) {
         player.loadPlaylist({list:"PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx"});
+        player.setShuffle(shufflePlaylist:true);
         player.setLoop(true);
       }
     </script>
