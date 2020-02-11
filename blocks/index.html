@@ -83,27 +83,7 @@
           padding: 0.3rem;
           text-decoration: none
         }
-
-        /* Top Button if neeed */
-        #top {
-          background-color: #333;
-          border: 1px solid #333;
-          border-radius: 5px;
-          bottom: 2rem;
-          color: white;
-          cursor: pointer;
-          display: none;
-          font-size: 1.6rem;
-          padding: .5rem;
-          position: fixed;
-          right: 20px;
-          z-index: 99
-        }
-        #top:hover {
-          background-color: #555;
-          border-color: #555
-        }
-
+	#top { display: none }
       }
 
       /* 400px to 520px */
@@ -192,7 +172,7 @@
 
     <!-- MAIN CONTENT (for testing scroll TO TOP) -->
     <main style="font-size: 16px; margin: 1rem; clear: both">
-      <button id="top" title="Go to top"><a href="#" style="text-decoration: none">Top^</a></button>
+      <a id="top" href="#">Top^</a>
       Content <a href="#one">More</a></p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><div id="one">1 More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p>
     </main>
 
@@ -244,13 +224,13 @@
 
     <!-- JAVASCRIPT FOR SCROLL TO Top button if needed -->
     <script>
-      var topButton = document.getElementById("top");
+      var top = document.getElementById("top");
       window.onscroll = function() { onScroll() };
       function onScroll() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-          topButton.style.display = "block";
+          top.style.display = "block";
         } else {
-          topButton.style.display = "none";
+          top.style.display = "none";
         }
       }
     </script>
