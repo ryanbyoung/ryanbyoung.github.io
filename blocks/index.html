@@ -83,7 +83,7 @@
           padding: 0.3rem;
           text-decoration: none
         }
-	#top {
+	#toTop {
           bottom: 2rem;
           display: none;
           font-size: 1.6rem;
@@ -180,7 +180,7 @@
 
     <!-- MAIN CONTENT (for testing scroll TO TOP) -->
     <main style="font-size: 16px; margin: 1rem; clear: both">
-      <a id="top" href="#">Top^</a>
+      <span id="toTop"><a href="#">Top^</a></span>
       Content <a href="#one">More</a></p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><div id="one">1 More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p>
     </main>
 
@@ -232,13 +232,13 @@
 
     <!-- JAVASCRIPT FOR SCROLL TO Top button if needed -->
     <script>
-      var top = document.getElementById("top");
+      var toTop = document.getElementById("toTop");
       window.onscroll = function() { onScroll() };
       function onScroll() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-          top.style.display = "block";
+          toTop.style.display = "block";
         } else {
-          top.style.display = "none";
+          toTop.style.display = "none";
         }
       }
     </script>
