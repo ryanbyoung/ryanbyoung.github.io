@@ -202,7 +202,8 @@
       var menu = document.querySelector("#menu");
       var navLinks = document.querySelectorAll("nav a");
       function resetNav() {
-	      menu.classList.remove("active","margin");
+	      menu.classList.remove("active");
+        toggle.classList.remove("margin");
 	    }
       navLinks[0].addEventListener("click", resetNav, false);
       navLinks[1].addEventListener("click", resetNav, false);
