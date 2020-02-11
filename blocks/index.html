@@ -44,12 +44,12 @@
         }
         #toggle {
           background: transparent;
-          border: 1px solid #333;
+          border: 2px solid #333;
           border-radius: 5px;
           cursor: pointer;
           display: block;
           float: right;
-          font-size: 1.2rem;
+          font-size: 1.6rem;
           padding: .3rem
         }
         #toggle:focus {
@@ -70,16 +70,16 @@
         }
         nav ul li {
           list-style-type: none;
-          margin: 1.6rem 0
+          margin: 2rem 0
         }
         nav ul li:last-child {
           margin-bottom: 0.5rem
         }
         nav ul li a {
-          border: 1px solid #333;
+          border: 2px solid #333;
           border-radius: 5px;
           color: #333;
-          font-size: 1.2rem;
+          font-size: 1.6rem;
           padding: 0.3rem;
           text-decoration: none
         }
@@ -112,23 +112,8 @@
           font-size: 2.4rem;
           padding-top: 0
         }
-        #toggle {
-          border-width: 2px;
-          font-size: 1.6rem;
-          padding: .3rem
-        }
         .margin {
           margin-bottom: 1.75rem
-        }
-        nav ul li {
-          margin: 2rem 0
-        }
-        nav ul li:last-child {
-          margin-bottom: 0.5rem
-        }
-        nav ul li a {
-          border-width: 2px;
-          font-size: 1.6rem
         }
       }
 
@@ -210,7 +195,7 @@
 
     <!-- MAIN CONTENT (for testing scroll TO TOP) -->
     <main style="font-size: 16px; margin: 1rem; clear: both">
-      <button onclick="topFunction()" id="top" title="Go to top">Top^</button>
+      <button id="top" title="Go to top">Top^</button>
       Content <a href="#one">More</a></p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><div id="one">1 More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p><p>More</p>
     </main>
 
@@ -270,9 +255,8 @@
           topButton.style.display = "none";
         }
       }
-      function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+      topButton.addEventListener("click", function(){
+        window.scrollTo(0, 0);
       }
     </script>
     <!-- END JS -->
