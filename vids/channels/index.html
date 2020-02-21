@@ -126,7 +126,7 @@
             </td>
           </tr>
           <tr class="all">
-            <td class="favorite" id="kelly">🖤</td>
+            <td class="favorite" id="kelly">&#9825;</td>
             <td class="channel">
               <a href="channel/kelly.html">2</a>
             </td>
@@ -135,7 +135,7 @@
             </td>
           </tr>
           <tr class="all">
-            <td class="favorite" id="craig">&#129293;</td>
+            <td class="favorite" id="craig">&#9825;</td>
             <td class="channel">
               <a href="channel/craig.html">3</a>
             </td>
@@ -234,13 +234,13 @@
       }
       //Favorite script
       function favClick() {
-        if(this.innerText == '🤍') {
+        if(this.innerHTML == '&#9825;') {
           this.innerText = '❤️';
           this.parentElement.classList.remove('all');
           this.parentElement.classList.add('favorites');
           populateStorage();
         } else {
-          this.innerText = '🤍';
+          this.innerHTML = '&#9825;';
           this.parentElement.classList.remove('favorites');
           this.parentElement.classList.add('all');
           populateStorage();
