@@ -1,27 +1,291 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <title>Channels</title>
     <style>
+      body {
+        font-size: 20px;
+        margin: 0
+      }
+      main {
+        margin: 0 auto;
+        max-width: 700px;
+        padding-bottom: 50px
+      }
+      h1, p { text-align: center }
+      #search {
+        border: solid #000 1px;
+        font-family: serif;
+        font-size: 20px;
+        padding: 6px;
+        width: 175px
+      }
+      #search::placeholder {
+        font-family: serif;
+        font-size: 20px
+      }
+      ul {
+        text-align: center
+      }
+      #filter ul {
+        list-style: none;
+        padding-left: 0;
+      }
+      #filter li {
+        display: inline-block
+      }
+      #filter li:first-child {
+        margin-right: 20px
+      }
+      input[type="radio"] {
+        display: none
+      }
+      #filter label {
+        cursor: pointer
+      }
+      input[type="radio"]:checked + label {
+        text-decoration: underline
+      }
       table {
         border-collapse: collapse;
-        border-spacing: 0px
+        border-spacing: 0px;
+        margin: 0 auto
       }
-      table, th, td {
-        padding: 5px;
-        border: 1px solid black
+      td {
+        border: 1px solid black;
+        padding: 5px 12px
       }
+      td { cursor: pointer }
+      td a { text-decoration: none }
+      .channel {
+        text-align: center;
+      }
+      nav {
+        background-color: #000;
+        bottom: 0;
+        color: white;
+        position: fixed;
+        width: 100%
+      }
+      nav ul {
+        font-size: 0; /* no space between li */
+        margin: 0 auto;
+        max-width: 700px;
+        padding: 0
+      }
+      nav li {
+        border-right: 1px solid #fff;
+        display: inline-block;
+        font-size: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 10px 0;
+        width: 40%
+      }
+      nav li:last-child { border: 0 }
+      nav a {
+        color: #fff;
+        display: inline-block;
+        width: 100%
+      }
+      nav a:hover { color: red }
+      .hide { display: none }
     </style>
   </head>
   <body>
-    <h1>Channels</h1>
-    <table>
-      <tr>
-        <td><a href="dane/">1</a></td>
-        <td>
-          <a href="dane/">Dane Reynolds</a>
-        </td>
-      </tr>
-    </table>
+    <main>
+      <h1>Channels</h1>
+      <p>
+        <label for="search">Search:</label>
+        <input aria-label="Search channels" id="search" name="search" placeholder="Dane, Kelly, etc." type="search">
+      </p>
+      <div id="filter">
+        <ul>
+          <li>
+            <input type="radio" id="all" name="filter" value="all" checked>
+            <label for="all">All Channels</label>
+          </li>
+          <li>
+            <input type="radio" id="favorites" name="filter" value="favorites">
+            <label for="favorites">Favorite Channels</label>
+          </li>
+        </ul>
+      </div>
+      <table>
+        <tbody>
+          <tr class="all">
+            <td class="favorite" id="dane">🤍</td>
+            <td class="channel">
+              <a href="channel/dane.html">1</a>
+            </td>
+            <td class="search-item">
+              <a href="channel/dane.html">Dane Reynolds</a>
+            </td>
+          </tr>
+          <tr class="all">
+            <td class="favorite" id="kelly">🤍</td>
+            <td class="channel">
+              <a href="channel/kelly.html">2</a>
+            </td>
+            <td class="search-item">
+              <a href="channel/kelly.html">Kelly Slater</a>
+            </td>
+          </tr>
+          <tr class="all">
+            <td class="favorite" id="craig">🤍</td>
+            <td class="channel">
+              <a href="channel/craig.html">3</a>
+            </td>
+            <td class="search-item">
+              <a href="channel/craig.html">Craig Anderson</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p id="query" style="display:none">No channels exist that match your query.</p>
+    </main>
+    <nav>
+      <ul>
+        <li>Channels</li>
+        <li>
+          <a href="movies.html">Movies</a>
+        </li>
+      </ul>
+    </nav>
+    <script>
+      //Todo refactor js, combine variables and everything into one big script
+      //On click td
+      var channel = document.querySelectorAll('.channel');
+      var si = document.querySelectorAll('.search-item');
+      for (u = 0; u<si.length; u++) {
+        channel[u].onclick = linkClick;
+        si[u].onclick = linkClick;
+      }
+      function linkClick() {
+        location.href = this.querySelector('a').href;
+      }
+      //Search
+      const searchField = document.querySelector('#search');
+      searchField.addEventListener('keyup', search);
+      searchField.addEventListener('search', search);
+      function search() {
+        var input, value, tr, td, a, x, linkValue;
+        input = document.getElementById('search');
+        value = input.value.toUpperCase();
+        if (selectElement.value == 'favorites') { tr = document.getElementsByClassName('favorites'); }
+        else { tr = document.getElementsByTagName('tr'); }
+        td = document.getElementsByClassName('search-item');
+        var flag = 0;
+        for (x = 0; x < tr.length; x++) {
+          a = td[x].getElementsByTagName('a')[0];
+          linkValue = a.innerText;
+          if (linkValue.toUpperCase().indexOf(value) > -1) {
+            table.classList.remove('hide');
+            tr[x].classList.remove('hide');
+            document.getElementById('query').style.display='none';
+          }
+          else {
+            tr[x].classList.add('hide');
+            flag++;
+            if (flag == tr.length) {
+              table.classList.add('hide');
+              document.getElementById('query').style.display='';
+            }
+          }
+        }
+      }
+      //Select script
+      //Todo change **** way down below, look into checked attribute on input radio and changing it
+      var main, table, all;
+      main = document.querySelector('main');
+      table = document.querySelector('table');
+      var fav = document.querySelectorAll('.favorite');
+      for (y = 0; y<fav.length; y++) {
+        fav[y].onclick = favClick;
+      }
+      var selectElement = document.querySelectorAll('input[name=filter]');
+      for (e = 0; e<selectElement.length; e++){
+        selectElement[e].onclick = radioClick;
+      }
+      function radioClick() {
+        if (this.value == 'favorites') {
+          all = document.querySelectorAll('.all');
+          for (z = 0; z<all.length; z++) {
+            all[z].classList.add('hide');
+          }
+          if (all.length == 3) { // **** change this number to the number of total rows
+            table.classList.add('hide');
+            let p = document.createElement('p');
+            p.innerText = 'No favorite channels have been selected.';
+            main.appendChild(p);
+          }
+        }
+        else {
+          main.lastChild.remove();
+          table.classList.remove('hide');
+          tr = document.getElementsByTagName('tr');
+          for (w = 0; w<tr.length; w++) {
+            tr[w].classList.remove('hide');
+          }
+        }
+      }
+      //Favorite script
+      function favClick() {
+        if(this.innerText == '🤍') {
+          this.innerText = '❤️';
+          this.parentElement.classList.remove('all');
+          this.parentElement.classList.add('favorites');
+          populateStorage();
+        } else {
+          this.innerText = '🤍';
+          this.parentElement.classList.remove('favorites');
+          this.parentElement.classList.add('all');
+          populateStorage();
+        }
+      }
+      var fav = document.querySelectorAll('.favorite');
+      for (y = 0; y<fav.length; y++) {
+        fav[y].onclick = favClick;
+      }
+      //Save favorites to web storage
+      //Todo save state of filter so when you come back to page it displays right filter selected
+      if (localStorage.length == 0) {
+        populateStorage();
+      } else {
+        setStyles();
+      }
+      function populateStorage() {
+        var fav = document.querySelectorAll('.favorite');
+        for (g = 0; g<fav.length; g++) {
+          localStorage.setItem(fav[g].id, fav[g].innerText);
+          localStorage.setItem(fav[g].id+'row', fav[g].parentElement.classList);
+        }
+        setStyles();
+      }
+      function setStyles() {
+        var fav = document.querySelectorAll('.favorite');
+        var hearts = [];
+        var rows = [];
+        for (h = 0; h<fav.length; h++) {
+          hearts[h] = localStorage.getItem(fav[h].id);
+          rows[h] = localStorage.getItem(fav[h].id+'row');
+          fav[h].innerText = hearts[h];
+          fav[h].parentElement.classList = rows[h];
+        }
+      }
+
+    </script>
+    <!-- No javascript, don't show search, filter, or favorites column in channels table -->
+    <noscript>
+      <style>
+        label, #search, #filter {
+          display: none
+        }
+        .favorite { display: none }
+        td { cursor:default }
+      </style>
+    </noscript>
   </body>
 </html>
