@@ -16,12 +16,14 @@
       }
       h1, p { text-align: center }
       #search {
+        -webkit-appearance: none;
+        -webkit-border-radius:0; 
         border: solid #000 1px;
+        border-radius:0;
         font-family: serif;
         font-size: 20px;
         padding: 6px;
-        width: 175px;
-       -webkit-appearance: none
+        width: 175px
       }
       #search::placeholder {
         font-family: serif;
@@ -55,13 +57,15 @@
         border-spacing: 0px;
         margin: 0 auto
       }
+      tr { height: 30px }
       td {
         border: 1px solid black;
-        padding: 5px 12px
+        padding: 5px 12px;
+        width: 30px
       }
       td { cursor: pointer }
       td a { text-decoration: none }
-      .channel {
+      .favorite, .channel {
         text-align: center;
       }
       nav {
