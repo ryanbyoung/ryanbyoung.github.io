@@ -14,10 +14,12 @@
         max-width: 700px;
         padding: 0 10px 70px
       }
-      h1, p { text-align: center }
+      h1, p {
+        text-align: center
+      }
       #search {
         -webkit-appearance: none;
-        -webkit-border-radius:0; 
+        -webkit-border-radius:0;
         border: solid #000 1px;
         border-radius:0;
         font-family: serif;
@@ -31,12 +33,12 @@
       }
       input[type="search"]::-webkit-search-cancel-button {
         -webkit-appearance: none;
-        height: 14px;
-        width: 14px;
-        display: block;
         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAn0lEQVR42u3UMQrDMBBEUZ9WfQqDmm22EaTyjRMHAlM5K+Y7lb0wnUZPIKHlnutOa+25Z4D++MRBX98MD1V/trSppLKHqj9TTBWKcoUqffbUcbBBEhTjBOV4ja4l4OIAZThEOV6jHO8ARXD+gPPvKMABinGOrnu6gTNUawrcQKNCAQ7QeTxORzle3+sDfjJpPCqhJh7GixZq4rHcc9l5A9qZ+WeBhgEuAAAAAElFTkSuQmCC);
         background-repeat: no-repeat;
         background-size: 14px;
+        display: block;
+        height: 14px;
+        width: 14px
       }
       ul {
         text-align: center
@@ -52,9 +54,18 @@
       #filter li:first-child {
         margin-right: 20px
       }
+      /*
       input[type="radio"] {
-        display: none
+        border: 0;
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
       }
+      */
       #filter label {
         cursor: pointer
       }
@@ -71,8 +82,12 @@
         height: 36px;
         padding: 5px 12px
       }
-      td { cursor: pointer }
-      td a { text-decoration: none }
+      td {
+        cursor: pointer
+      }
+      td a {
+        text-decoration: none
+      }
       .favorite, .channel {
         text-align: center;
         width: 30px
@@ -88,7 +103,7 @@
         width: 100%
       }
       nav ul {
-        font-size: 0; /* no space between li */
+        font-size: 0; /* no space between nav items */
         margin: 0 auto;
         max-width: 700px;
         padding: 0
@@ -102,31 +117,24 @@
         padding: 10px 0;
         width: 45%
       }
-      nav li:last-child { border: 0 }
+      nav li:last-child {
+        border: 0
+      }
       nav a {
         color: #fff;
         display: inline-block;
         width: 100%
       }
-      nav a:hover { color: red }
-      .hide { display: none }
+      nav a:hover {
+        color: red
+      }
+      .hide {
+        display: none
+      }
     </style>
   </head>
   <body>
     <main>
-      <!-- todo: finish accessibility - make hearts buttons - change radios to buttons or maybe use multi select like one below -->
-      <!--
-      <style>
-      select:focus { outline: 0 }
-      option:focus,
-      option:active,
-      option:checked { 
-        background: red linear-gradient(0deg, red 0%, red 100%) 
-      }
-      <select name="pets" size=2 style="width:100px; height:20px; background: none; border: 0">
-        <option value="dog" style="display: inline;">Dog</option> <option value="cat" style="display:inline">Cat</option>
-      </select>
-      -->
       <h1>Channels</h1>
       <p>
         <label for="search">Search:</label>
@@ -135,11 +143,12 @@
       <div id="filter">
         <ul>
           <li>
-            <input aria-label="Filter all channels" aria-expanded="true" aria-pressed="true" type="radio" id="all" name="filter" value="all" checked>
+            <!-- Check to see if aria stuff needed below. -->
+            <input id="all" name="filter" type="radio" value="all">
             <label for="all">All Channels</label>
           </li>
           <li>
-            <input aria-label="Filter favorite channels" aria-pressed="false" type="radio" id="favorites" name="filter" value="favorites">
+            <input id="favorites" name="filter" type="radio" value="favorites">
             <label for="favorites">Favorite Channels</label>
           </li>
         </ul>
@@ -147,7 +156,7 @@
       <table>
         <tbody>
           <tr class="all">
-            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="dane" role="button">♡</td>
+            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="dane" role="button" tabindex="0">♡</td>
             <td class="channel">
               <a href="channel/dane.html">1</a>
             </td>
@@ -156,7 +165,7 @@
             </td>
           </tr>
           <tr class="all">
-            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="kelly" role="button">♡</td>
+            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="kelly" role="button" tabindex="0">♡</td>
             <td class="channel">
               <a href="channel/kelly.html">2</a>
             </td>
@@ -165,7 +174,7 @@
             </td>
           </tr>
           <tr class="all">
-            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="craig" role="button">♡</td>
+            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="craig" role="button" tabindex="0">♡</td>
             <td class="channel">
               <a href="channel/craig.html">3</a>
             </td>
@@ -175,7 +184,8 @@
           </tr>
         </tbody>
       </table>
-      <p id="query" style="display:none">No channels exist that match your query.</p>
+      <p class="hide" id="empty-query">No channels exist that match your query.</p>
+      <p class="hide" id="empty-filter">No favorite channels have been selected.</p>
     </main>
     <nav>
       <ul>
@@ -186,135 +196,256 @@
       </ul>
     </nav>
     <script>
-      //Todo refactor js, combine variables and everything into one big script
-      //On click td
-      var channel = document.querySelectorAll('.channel');
-      var si = document.querySelectorAll('.search-item');
-      for (u = 0; u<si.length; u++) {
-        channel[u].onclick = linkClick;
-        si[u].onclick = linkClick;
+      //TODO
+      //Save search so when you leave page and come back search works
+      //Refactor js, combine variables, js styling, better if statements
+      //Shorten if statements for toggling like this: properties['Value'] = (IsItMuted === true) ? 'On' : 'Off';
+      //Rmove radio buttons
+
+      // Variables
+      const CHANNELNAMES = document.querySelectorAll('.search-item');
+      const CHANNELNUMBERS = document.querySelectorAll('.channel');
+      const EMPTYFILTER = document.getElementById('empty-filter');
+      const FAVORITES = document.querySelectorAll('.favorite');
+      const MAIN = document.querySelector('main');
+      const SEARCH = document.querySelector('#search');
+      const TABLE = document.querySelector('table');
+      var filters = document.querySelectorAll('input[name=filter]');
+
+      function init() {
+
+        // Initiate local storage
+        if (localStorage.length == 0) {
+          populateStorage();
+          populateFilterStorage();
+        } else {
+          setStyles();
+          setFilterStyles();
+        }
+
+        // Add event listeners - search, cell interactions, and filter click
+        SEARCH.addEventListener('keyup', search);
+        SEARCH.addEventListener('search', search);
+        for (a = 0; a < CHANNELNAMES.length; a++) {
+          FAVORITES[a].addEventListener('click', toggleButtonClickHandler);
+          FAVORITES[a].addEventListener('keydown', toggleButtonKeydownHandler);
+          FAVORITES[a].addEventListener('keyup', toggleButtonKeyupHandler);
+          CHANNELNUMBERS[a].addEventListener('click', tdClick);
+          CHANNELNAMES[a].addEventListener('click', tdClick);
+        }
+        for (b = 0; b < filters.length; b++){
+          filters[b].addEventListener('click', filterClick);
+        }
+
       }
-      function linkClick() {
-        location.href = this.querySelector('a').href;
+
+      /**
+       * Filter click
+       */
+      // When you add to app, change **** line down below
+      // to a variable for the number of all channels
+      function filterClick() {
+        if (this.value == 'favorites') {
+          populateFilterStorage();
+          filters[0].removeAttribute('checked');
+          // TODO Put in a separate function, code repeated below ~~
+          filters[1].setAttribute('checked', '');
+          var allOnlyRows = document.querySelectorAll('.all');
+          for (i = 0; i < allOnlyRows.length; i++) {
+            allOnlyRows[i].classList.add('hide');
+          }
+          if (allOnlyRows.length == 3) { // **** change this number to the number of total rows
+            TABLE.classList.add('hide');
+            EMPTYFILTER.removeAttribute('class');
+          }
+        }
+        else {
+          populateFilterStorage();
+          filters[0].setAttribute('checked', '');
+          filters[1].removeAttribute('checked');
+          EMPTYFILTER.classList.add('hide');
+          TABLE.removeAttribute('class');
+          tr = document.getElementsByTagName('tr');
+          for (j = 0; j < tr.length; j++) {
+            tr[j].classList.remove('hide');
+          }
+        }
       }
-      //Search
-      const searchField = document.querySelector('#search');
-      searchField.addEventListener('keyup', search);
-      searchField.addEventListener('search', search);
+
+      /**
+       * Populate Storage
+       */
+      function populateStorage() {
+        for (i = 0; i < FAVORITES.length; i++) {
+          localStorage.setItem(FAVORITES[i].id, FAVORITES[i].innerText);
+          localStorage.setItem(FAVORITES[i].id+'Pressed', FAVORITES[i].getAttribute('aria-pressed'));
+          localStorage.setItem(FAVORITES[i].id+'Filter', FAVORITES[i].parentElement.classList);
+        }
+        setStyles();
+      }
+
+      /**
+       * Populate Filter Storage
+       */
+      function populateFilterStorage() {
+        if (filters[0].checked == false && filters[1].checked == false){
+          filters[0].setAttribute('checked', '');
+        }
+        for (j = 0; j < filters.length; j++){
+          if (filters[j].checked) {
+            localStorage.setItem('filterChecked', filters[j].value);
+          }
+        }
+        setFilterStyles();
+      }
+
+      /**
+       * Set Styles
+       */
+      function setStyles() {
+        var channelIcons = [];
+        var rowFilters = [];
+        var arias = [];
+        for (k = 0; k < FAVORITES.length; k++) {
+          channelIcons[k] = localStorage.getItem(FAVORITES[k].id);
+          rowFilters[k] = localStorage.getItem(FAVORITES[k].id+'Filter');
+          arias[k] = localStorage.getItem(FAVORITES[k].id+'Pressed');
+          FAVORITES[k].innerText = channelIcons[k];
+          FAVORITES[k].parentElement.classList = rowFilters[k];
+          FAVORITES[k].setAttribute('aria-pressed', arias[k]);
+        }
+      }
+
+      /**
+       * Set Filter Styles
+       */
+      function setFilterStyles() {
+        var filterChecked;
+        filterChecked = localStorage.getItem('filterChecked');
+        if (filterChecked == 'all') {
+          filters[0].checked = true;
+        }
+        else {
+          filters[1].checked = true;
+          // TODO Put in a separate function repeated above ~~
+          filters[1].setAttribute('checked', '');
+          var allOnlyRows = document.querySelectorAll('.all');
+          for (i = 0; i < allOnlyRows.length; i++) {
+            allOnlyRows[i].classList.add('hide');
+          }
+          if (allOnlyRows.length == 3) { // **** change this number to the number of total rows
+            TABLE.classList.add('hide');
+            EMPTYFILTER.removeAttribute('class');
+          }
+        }
+      }
+
+      /**
+       * Search
+       */
       function search() {
-        var input, value, tr, td, a, x, linkValue;
-        input = document.getElementById('search');
-        value = input.value.toUpperCase();
-        if (selectElement.value == 'favorites') { tr = document.getElementsByClassName('favorites'); }
-        else { tr = document.getElementsByTagName('tr'); }
-        td = document.getElementsByClassName('search-item');
+        var channelLink, cName, emptyQuery, searchValue, tr, x;
+        searchValue = SEARCH.value.toUpperCase();
+        emptyQuery = document.getElementById('empty-query');
+        if (filters.value == 'favorites') {
+          tr = document.getElementsByClassName('favorites');
+        }
+        else {
+          tr = document.getElementsByTagName('tr');
+        }
         var flag = 0;
         for (x = 0; x < tr.length; x++) {
-          a = td[x].getElementsByTagName('a')[0];
-          linkValue = a.innerText;
-          if (linkValue.toUpperCase().indexOf(value) > -1) {
-            table.classList.remove('hide');
+          channelLink = CHANNELNAMES[x].getElementsByTagName('a')[0];
+          cName = channelLink.innerText;
+          if (cName.toUpperCase().indexOf(searchValue) > -1) {
+            TABLE.classList.remove('hide');
             tr[x].classList.remove('hide');
-            document.getElementById('query').style.display='none';
+            emptyQuery.classList.add('hide');
           }
           else {
             tr[x].classList.add('hide');
             flag++;
             if (flag == tr.length) {
-              table.classList.add('hide');
-              document.getElementById('query').style.display='';
+              TABLE.classList.add('hide');
+              emptyQuery.removeAttribute('class');
             }
           }
         }
       }
-      //Select script
-      //Todo change **** way down below, look into checked attribute on input radio and changing it
-      var main, table, all;
-      main = document.querySelector('main');
-      table = document.querySelector('table');
-      var fav = document.querySelectorAll('.favorite');
-      for (y = 0; y<fav.length; y++) {
-        fav[y].onclick = favClick;
+
+      /**
+       * Allows whole table cell to be clicked or touched and goes to the link
+       */
+      function tdClick() {
+        location.href = this.querySelector('a').href;
       }
-      var selectElement = document.querySelectorAll('input[name=filter]');
-      for (e = 0; e<selectElement.length; e++){
-        selectElement[e].onclick = radioClick;
-      }
-      function radioClick() {
-        if (this.value == 'favorites') {
-          all = document.querySelectorAll('.all');
-          for (z = 0; z<all.length; z++) {
-            all[z].classList.add('hide');
-          }
-          if (all.length == 3) { // **** change this number to the number of total rows
-            table.classList.add('hide');
-            let p = document.createElement('p');
-            p.innerText = 'No favorite channels have been selected.';
-            main.appendChild(p);
-          }
-        }
-        else {
-          main.lastChild.remove();
-          table.classList.remove('hide');
-          tr = document.getElementsByTagName('tr');
-          for (w = 0; w<tr.length; w++) {
-            tr[w].classList.remove('hide');
-          }
-        }
-      }
-      //Favorite script
-      function favClick() {
-        if(this.innerText == '♡') {
-          this.innerText = '❤️';
-          this.parentElement.classList.remove('all');
-          this.parentElement.classList.add('favorites');
-          populateStorage();
-        } else {
-          this.innerText = '♡';
-          this.parentElement.classList.remove('favorites');
-          this.parentElement.classList.add('all');
-          populateStorage();
-        }
-      }
-      var fav = document.querySelectorAll('.favorite');
-      for (y = 0; y<fav.length; y++) {
-        fav[y].onclick = favClick;
-      }
-      //Save favorites to web storage
-      //Todo save state of filter so when you come back to page it displays right filter selected
-      if (localStorage.length == 0) {
-        populateStorage();
-      } else {
-        setStyles();
-      }
-      function populateStorage() {
-        var fav = document.querySelectorAll('.favorite');
-        for (g = 0; g<fav.length; g++) {
-          localStorage.setItem(fav[g].id, fav[g].innerText);
-          localStorage.setItem(fav[g].id+'row', fav[g].parentElement.classList);
-        }
-        setStyles();
-      }
-      function setStyles() {
-        var fav = document.querySelectorAll('.favorite');
-        var hearts = [];
-        var rows = [];
-        for (h = 0; h<fav.length; h++) {
-          hearts[h] = localStorage.getItem(fav[h].id);
-          rows[h] = localStorage.getItem(fav[h].id+'row');
-          fav[h].innerText = hearts[h];
-          fav[h].parentElement.classList = rows[h];
+
+      /**
+       * Toggles the toggle button's state if it's actually a button element or has
+       * the 'role' attribute set to 'button'.
+       *
+       * @param {MouseEvent} event
+       */
+      function toggleButtonClickHandler (event) {
+        if (event.currentTarget.getAttribute('role') === 'button') {
+          toggleButtonState(event.currentTarget);
         }
       }
 
+      /**
+       * Toggles the toggle button's state with the enter key.
+       *
+       * @param {KeyboardEvent} event
+       */
+      function toggleButtonKeydownHandler (event) {
+        if (event.keyCode === 32) {
+          event.preventDefault();
+        }
+        else if (event.keyCode === 13) {
+          event.preventDefault();
+          toggleButtonState(event.currentTarget);
+        }
+      }
+
+      /**
+       * Toggles the toggle button's state with space key.
+       *
+       * @param {KeyboardEvent} event
+       */
+      function toggleButtonKeyupHandler (event) {
+        if (event.keyCode === 32) {
+          event.preventDefault();
+          toggleButtonState(event.currentTarget);
+        }
+      }
+
+      /**
+       * Toggles the toggle button's state between *pressed* and *not pressed*.
+       *
+       * @param {HTMLElement} button
+       */
+      function toggleButtonState (button) {
+        var isAriaPressed = button.getAttribute('aria-pressed') === 'true';
+
+        button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
+
+        button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
+        button.parentElement.classList = (isAriaPressed === true) ? 'all' : 'favorites';
+        populateStorage();
+      }
+
+      window.onload = init();
+
     </script>
-    <!-- No javascript, don't show search, filter, or favorites column in channels table -->
+    <!-- When javascript is turned off -->
     <noscript>
       <style>
+        /* Don't show search, filter, or favorites column in channels table */
         label, #search, #filter {
           display: none
         }
         .favorite { display: none }
+        /* Remove pointer cursor on table cells */
         td { cursor:default }
       </style>
     </noscript>
