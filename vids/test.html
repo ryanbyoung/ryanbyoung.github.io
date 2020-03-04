@@ -57,7 +57,9 @@
                 event.target.setShuffle({'shufflePlaylist' : true});
               }, 1000);
               player.setLoop(true);
-              player.playVideo();
+            },
+            'onStart': function (event) {
+              event.target.playVideo();
             }
           }
         });
