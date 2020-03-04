@@ -47,8 +47,8 @@
           playerVars: {
             listType:'playlist',
             list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
-            index: vidNum,
-            autoplay: 1,
+            index:vidNum,
+            autoplay:1
           },
           // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
           events: {
@@ -57,6 +57,7 @@
                 event.target.setShuffle({'shufflePlaylist' : true});
               }, 1000);
               player.setLoop(true);
+              player.playVideo();
             }
           }
         });
@@ -78,7 +79,7 @@
 
     <!-- Responsive iframe player for just single video with privacy mode on (won't track user until they play video, that's the nocookie in youtube link) -->
     <div class="embed-container">
-      <iframe src="https://www.youtube-nocookie.com/embed/7aFMid3EKP8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://www.youtube-nocookie.com/embed/7aFMid3EKP8&origin=https://ryanbyoung.github.io/vids/test.html" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <!-- End of single video player -->
   </body>
