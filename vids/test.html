@@ -21,60 +21,6 @@
   </head>
   <body>
 
-    <!-- Start original dynamically built responsive player -->
-    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-    <div class="embed-container">
-      <div id="player1"></div>
-    </div>
-
-    <script>
-      // 2. This code loads the iframe Player API code asynchronously.
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      tag.id = "player1";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      // 3. This function creates an iframe player
-      //    after the API code downloads.
-      var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player1', {
-          //remove height and width for responsive output
-          //height: '390',
-          //width: '640',
-          //if you want to remove controls, uncomment the next line
-          //playerVars: { 'controls': 0 },
-          events: {
-            'onReady': onPlayerReady
-            //if you want to create a "live feed" noted below, uncomment the neext line
-            //'onStateChange': onPlayerStateChange
-          }
-        });
-      }
-      function onPlayerReady(event) {
-        player.loadPlaylist({list:"PLMxOsrgGH8n49WElPVU1isa7ifuUkZFMf"});
-        player.setLoop(true);
-      }
-
-      //to create a "live feed" with dynamically built playlist from videos (need to fix the change video, it closes then opens)
-      //would also need to comment out onPlayerReady function above
-      /*
-      var vids = ['4eegr0W_C5c', '4eegr0W_C5c', 'Jia70E4FH2E', 'gz5sqsRJksE', 'sCcLY7KVnrE'];
-      var INDEX = 1;
-      function onPlayerReady(event) {
-        player.loadVideoById(vids[0]);
-      }
-      function onPlayerStateChange(event) {
-        if (event.data === 0) {
-          player.loadVideoById(vids[INDEX]);
-          INDEX++;
-        }
-      }
-      */
-
-    </script>
-
-    <hr>
 
     <!-- Start new and improved playlist player - random functionality -->
 
