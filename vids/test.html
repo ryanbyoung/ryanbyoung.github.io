@@ -54,7 +54,6 @@
           // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
           events: {
             'onReady': function (event) {
-              player.cuePlaylist('PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx');
               setTimeout(function() {
                 event.target.setShuffle({'shufflePlaylist' : true});
               }, 1000);
@@ -64,7 +63,7 @@
         });
       }
     </script>
-    <a href="javascript:player.playVideo();">play</a>
+    <p style="font-size:24px"><a href="javascript:player.playVideo();">play</a></p>
     <!-- End new and improved playlist player -->
     
     <hr>
