@@ -81,7 +81,7 @@
     <!-- Div to make player responsive -->
     <div class="embed-container">
       <!-- The iframe (and player) will replace the player div -->
-      <div id="player"></div>
+      <div id="player2"></div>
     </div>
     <h1>Dane Reynold</h1>
     <p>Welcome to the Dane Reynolds channel. I hope you enjoy it.</p>
@@ -89,8 +89,8 @@
       // This code loads the iframe Player API code asynchronously
       var tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
-      tag.id = "player";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
+      tag.id = "player2";
+      var secondScriptTag = document.getElementsByTagName('script')[1];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
       // This function creates an iframe player after the API code downloads
       var player;
