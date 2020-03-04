@@ -75,6 +75,50 @@
     </script>
 
     <hr>
+
+    <!-- Start new and improved playlist player - random functionality -->
+
+    <!-- Div to make player responsive -->
+    <div class="embed-container">
+      <!-- The iframe (and player) will replace the player div -->
+      <div id="player2"></div>
+    </div>
+    <h1>Dane Reynold</h1>
+    <p>Welcome to the Dane Reynolds channel. I hope you enjoy it.</p>
+    <script>
+      // This code loads the iframe Player API code asynchronously
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      tag.id = "player2";
+      var secondScriptTag = document.getElementsByTagName('script')[1];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      // This function creates an iframe player after the API code downloads
+      var player;
+      function onYouTubeIframeAPIReady() {
+        // Random number decides which video will play first in the playlist
+        var vidNum = Math.floor((Math.random() * 5) + 1);
+        player = new YT.Player('player', {
+          playerVars: {
+            listType:'playlist',
+            list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
+            index: vidNum,
+            autoplay: 1,
+          },
+          // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
+          events: {
+            'onReady': function (event) {
+              setTimeout(function() {
+                event.target.setShuffle({'shufflePlaylist' : true});
+              }, 1000);
+              player.setLoop(true);
+            }
+          }
+        });
+      }
+    </script>
+
+    <!-- End new and improved playlist player -->
+    
     <hr>
 
     <!-- Just an iframe player with a playlist -->
