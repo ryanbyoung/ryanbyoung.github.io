@@ -27,7 +27,7 @@
     <div class="embed-container">
       <!-- The iframe (and player) will replace the player div -->
       <iframe id="player"
-        src="https://www.youtube.com/embed/videoseries?list=PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx?index=4"
+        src="https://www.youtube.com/embed/videoseries?list=PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx?enablejsapi=1"
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen="">
@@ -36,14 +36,14 @@
     <h1>Dane Reynolds Channel</h1>
     <p>Welcome to the Dane Reynolds channel. I hope you enjoy it.</p>
     <script>
-      /* This code loads the iframe Player API code asynchronously
+      // This code loads the iframe Player API code asynchronously
       var tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
-      tag.id = "player";
+      tag.id = "ytapi";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      */
-      /* This function creates an iframe player after the API code downloads
+
+      // This function creates an iframe player after the API code downloads
       var player;
       function onYouTubeIframeAPIReady() {
         // Random number decides which video will play first in the playlist
