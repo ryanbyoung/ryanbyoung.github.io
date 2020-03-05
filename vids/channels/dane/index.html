@@ -49,9 +49,6 @@
         // Random number decides which video will play first in the playlist
         var vidNum = Math.floor((Math.random() * 27) + 1);
         player = new YT.Player('player', {
-          playerVars: {
-            index:vidNum
-          },
           // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
           events: {
             'onReady': function (event) {
