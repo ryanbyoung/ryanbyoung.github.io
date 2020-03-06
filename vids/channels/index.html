@@ -188,22 +188,8 @@
 
 
     <style>
-      .embed-container {
-        position: relative;
-        padding-bottom: 56.25%;
-        height: 0;
-        overflow: hidden;
-        max-width: 100%
-      }
-      .embed-container iframe, .embed-container object, .embed-container embed {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%
-      }
       main, nav {
-  z-index: 3;
+  z-index: -1000;
   position: relative; 
       }
 #overlay {
@@ -216,15 +202,13 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  z-index: -500; /* Specify a stack order in case you're using a different order for other elements */
   /* cursor: pointer; Add a pointer on hover */
 }
 </style>
 <div id="overlay">
-    <div class="embed-container">
       <!-- The iframe (and player) will replace the player div -->
       <div id="player"></div>
-    </div>
 </div>
 
     <script>
@@ -245,6 +229,7 @@
             listType:'playlist',
             list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
             index:vidNum,
+            width:300,
             autoplay:1
           },
           // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
