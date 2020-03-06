@@ -221,7 +221,7 @@
   /* cursor: pointer; Add a pointer on hover */
 }
 </style>
-<div id="overlay" onclick="off()">
+<div id="overlay">
   <div class="embed-container">
       <!-- The iframe (and player) will replace the player div -->
       <div id="player"></div>
@@ -315,7 +315,9 @@
 
 
       const TEST = document.getElementById('test');
+      const OVERLAY = document.getElementById('overlay');
       TEST.addEventListener('click', test);
+      OVERLAY.addEventListener('click', off);
 
    
       } // end init
@@ -326,6 +328,7 @@
         player.playVideo();
       }
       function off() {
+        player.stopVideo();
         document.getElementById("overlay").style.display = "none";
       }
 
