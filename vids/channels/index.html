@@ -195,7 +195,7 @@
         overflow: hidden;
         margin: 0 auto;
         max-width: 300px;
-        top: 35%
+        top: 25%
       }
       .embed-container iframe, .embed-container object, .embed-container embed {
         position: absolute;
@@ -243,14 +243,21 @@
         // Random number decides which video will play first in the playlist
         var vidNum = Math.floor((Math.random() * 26) + 1);
         player = new YT.Player('player', {
+          /*
           playerVars: {
             listType:'playlist',
             list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
             index:vidNum
           },
+          */
           // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
           events: {
             'onReady': function (event) {
+              player.cuePlaylist(
+                listType:'playlist',
+                list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
+                index:vidNum   
+              );
               setTimeout(function() {
                 event.target.setShuffle({'shufflePlaylist' : true});
               }, 1000);
