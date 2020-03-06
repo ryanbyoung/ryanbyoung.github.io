@@ -229,6 +229,37 @@
 
     <script>
 
+      
+      // This code loads the iframe Player API code asynchronously
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      // This function creates an iframe player after the API code downloads
+      var player;
+      function onYouTubeIframeAPIReady() {
+        // Random number decides which video will play first in the playlist
+        var vidNum = Math.floor((Math.random() * 26) + 1);
+        player = new YT.Player('player', {
+          playerVars: {
+            listType:'playlist',
+            list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
+            index:vidNum,
+            autoplay:1
+          },
+          // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
+          events: {
+            'onReady': function (event) {
+              setTimeout(function() {
+                event.target.setShuffle({'shufflePlaylist' : true});
+              }, 1000);
+              player.setLoop(true);
+            }
+          }
+        });
+      }
+      
+      
       // Variables for counters and determining empty fields
       var a, b, c, d, e, f, g, h;
       const EMPTY = '';
@@ -285,36 +316,8 @@
 
       const TEST = document.getElementById('test');
       TEST.addEventListener('click', test);
-      // This code loads the iframe Player API code asynchronously
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      // This function creates an iframe player after the API code downloads
-      var player;
-      function onYouTubeIframeAPIReady() {
-        // Random number decides which video will play first in the playlist
-        var vidNum = Math.floor((Math.random() * 26) + 1);
-        player = new YT.Player('player', {
-          playerVars: {
-            listType:'playlist',
-            list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
-            index:vidNum,
-            autoplay:1
-          },
-          // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
-          events: {
-            'onReady': function (event) {
-              setTimeout(function() {
-                event.target.setShuffle({'shufflePlaylist' : true});
-              }, 1000);
-              player.setLoop(true);
-            }
-          }
-        });
-      }
 
-        
+   
       } // end init
 
 
