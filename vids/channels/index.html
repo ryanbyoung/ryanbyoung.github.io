@@ -156,7 +156,6 @@
         top: 10px
       }
       .embed-container {
-        clear: both;
         height: 0;
         margin: 0 auto;
         max-width: 700px;
@@ -165,13 +164,18 @@
         position: relative;
         top: 25%
       }
+      @media screen and (min-width: 500px) {
+        .embed-container {
+          overflow: visible;
+          padding-bottom: 0
+      }
       @media screen and (max-width: 500px) {
         .embed-container iframe, .embed-container object, .embed-container embed {
           height: 100%;
           left: 0;
           position: absolute;
           top: 0;
-          width: 95%
+          width: 92%
         }
       }
 
