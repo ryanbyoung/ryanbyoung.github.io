@@ -134,7 +134,7 @@
         z-index: 1
       }
       #overlay {
-        background-color: rgba(0,0,0,0.8);
+        background-color: rgba(0,0,0,0.9);
         bottom: 0;
         display: none;
         height: 100%;
@@ -149,13 +149,15 @@
       #close {
         background-color: white;
         color: black;
+        font-size: 20px;
         height: 30px;
         position: absolute;
         right: 30px;
         top: 10px;
-        width: 50px
+        width: 70px
       }
       .embed-container {
+        clear: both;
         height: 0;
         margin: 0 auto;
         max-width: 700px;
@@ -164,15 +166,15 @@
         position: relative;
         top: 25%
       }
-      /*
-      .embed-container iframe, .embed-container object, .embed-container embed {
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%
+      @media screen and (max-width: 500px) {
+        .embed-container iframe, .embed-container object, .embed-container embed {
+          height: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 100%
+        }
       }
-      */
 
 
     </style>
@@ -236,7 +238,7 @@
 
 
     <div id="overlay">
-      <button id="close">Close</button>
+      <button id="close">Close Overlay</button>
       <div class="embed-container">
         <div id="player"></div>
       </div>
