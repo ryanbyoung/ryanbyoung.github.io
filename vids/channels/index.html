@@ -134,7 +134,7 @@
         z-index: 1
       }
       #overlay {
-        background-color: rgba(0,0,0,0.5);
+        background-color: rgba(0,0,0,0.8);
         bottom: 0;
         display: none;
         height: 100%;
@@ -145,6 +145,15 @@
         top: 0;
         width: 100%;
         z-index: 2
+      }
+      #close {
+        background-color: white;
+        color: black;
+        height: 30px;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        width: 50px
       }
       .embed-container {
         height: 0;
@@ -225,7 +234,7 @@
 
 
     <div id="overlay">
-      <button id="close" style="top: 10px; right: 100px">Close</button>
+      <button id="close">Close</button>
       <div class="embed-container">
         <div id="player"></div>
       </div>
