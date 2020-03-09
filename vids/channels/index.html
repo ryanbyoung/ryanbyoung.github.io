@@ -346,6 +346,7 @@
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
 
         if (document.location.hash == '#dchannel') { open(); }
+        window.onpopstate() = console.log(event);
 
       } // end init
 
