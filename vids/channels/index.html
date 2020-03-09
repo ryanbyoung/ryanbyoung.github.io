@@ -138,7 +138,6 @@
       #overlay {
         background-color: rgba(0,0,0,0.9);
         bottom: 0;
-        display: none;
         height: 100%;
         left: 0;
         padding: 10px;
@@ -198,7 +197,8 @@
           <tr class="all">
             <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="dane" role="button" tabindex="0">♡</td>
             <td class="channel">
-              <button id="test">1</button>
+              <a href="#overlay">Dane</a>
+              <!--<button id="test">1</button>-->
             </td>
             <td class="search-item">
               <a href="dane/index.html">Dane Reynolds</a>
@@ -237,8 +237,8 @@
     </nav>
 
 
-    <div id="overlay">
-      <button id="close">Close Overlay</button>
+    <div id="overlay" class="hide">
+      <button id="close">Close Channel</button>
       <div class="embed-container">
         <div id="player"></div>
       </div>
@@ -338,22 +338,22 @@
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
 
 
-      const TEST = document.getElementById('test');
+      const OVERLAY = document.getElementById('overlay');
       const CLOSE = document.getElementById('close');
-      TEST.addEventListener('click', test);
+      OVERLAY.addEventListener('click', overlay);
       CLOSE.addEventListener('click', close);
 
    
       } // end init
 
 
-      function test() {
-        document.getElementById("overlay").style.display = "block";
+      function overlay() {
+        OVERLAY.classList.remove('hide');
         player.playVideo();
       }
       function close() {
         player.pauseVideo();
-        document.getElementById("overlay").style.display = "none";
+        document.classList.add('hide');
       }
 
 
