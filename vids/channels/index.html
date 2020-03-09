@@ -346,7 +346,6 @@
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
 
         if (document.location.hash == '#dchannel') { open(); }
-        window.onpopstate() = function(event) {console.log(event)};
 
       } // end init
 
@@ -641,6 +640,7 @@
       }
 
       window.onload = init();
+      window.onpopstate() = function(event) {console.log(event)};
 
     </script>
     <!-- When javascript is turned off -->
