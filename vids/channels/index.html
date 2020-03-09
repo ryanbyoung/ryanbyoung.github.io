@@ -345,11 +345,12 @@
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
 
+        if (document.location.hash == 'dchannel') { open(); }
+
       } // end init
 
 
       function open(event) {
-        //OVERLAY.classList.remove('hide');
         document.title = 'Dane Reynolds Channel';
         OVERLAY.removeAttribute('class');
         player.playVideo();
@@ -357,7 +358,8 @@
       function close() {
         player.pauseVideo();
         OVERLAY.classList.add('hide');
-        history.pushState('', 'Channels', window.location.pathname);
+        document.title = 'Channels';
+        history.pushState('', document.title, window.location.pathname);
       }
 
 
