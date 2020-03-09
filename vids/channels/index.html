@@ -351,15 +351,16 @@
 
 
       function open(event) {
+        console.log(event);
         document.title = 'Dane Reynolds Channel';
         OVERLAY.removeAttribute('class');
-        player.playVideo();
+        //player.playVideo();
       }
       function close() {
         player.pauseVideo();
         OVERLAY.classList.add('hide');
         document.title = 'Channels';
-        history.pushState('', document.title, window.location.pathname);
+        history.pushState('', '', window.location.pathname);
       }
 
 
