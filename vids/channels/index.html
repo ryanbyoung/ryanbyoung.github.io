@@ -352,10 +352,9 @@
 
       function open(event) {
         if (event==undefined) { console.log('this works for loading or reloading') };
-        event.preventDefault();
         document.title = 'Dane Reynolds Channel';
         OVERLAY.removeAttribute('class');
-        //player.playVideo();
+        player.playVideo();
       }
       function close() {
         player.pauseVideo();
