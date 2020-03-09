@@ -346,13 +346,13 @@
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
 
         if (document.location.hash == '#dchannel') { open(); }
-        window.onpopstate() = console.log(event);
+        window.onpopstate() = function(event) {console.log(event)};
 
       } // end init
 
 
       function open(event) {
-        console.log(event);
+        if (event==undefined) { console.log('yes undefined') };
         document.title = 'Dane Reynolds Channel';
         OVERLAY.removeAttribute('class');
         //player.playVideo();
