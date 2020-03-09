@@ -344,11 +344,11 @@
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
 
-        if (window.location.hash == 'overlay') { console.log('yo') }
       } // end init
 
 
-      function overlay() {
+      function overlay(event) {
+        event.preventDefault();
         OVERLAY.classList.remove('hide');
         player.playVideo();
       }
