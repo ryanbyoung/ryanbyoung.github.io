@@ -197,7 +197,7 @@
           <tr class="all">
             <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="dane" role="button" tabindex="0">♡</td>
             <td class="channel">
-              <a href="#overlay">Dane</a>
+              <a href="#dchannel">Dane</a>
               <!--<button id="test">1</button>-->
             </td>
             <td class="search-item">
@@ -301,9 +301,9 @@
       var filters = document.querySelectorAll('input[name=filter]');
 
 
-      const OVERLAY = document.getElementById('overlay');
+      const D = document.getElementById('dchannel');
       const CLOSE = document.getElementById('close');
-      OVERLAY.addEventListener('click', overlay);
+      D.addEventListener('click', open);
       CLOSE.addEventListener('click', close);
 
 
@@ -347,8 +347,8 @@
       } // end init
 
 
-      function overlay(event) {
-        event.preventDefault();
+      function open(event) {
+        //event.preventDefault();
         OVERLAY.classList.remove('hide');
         player.playVideo();
       }
