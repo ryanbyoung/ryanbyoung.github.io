@@ -300,6 +300,13 @@
       const TABLE = document.querySelector('table');
       var filters = document.querySelectorAll('input[name=filter]');
 
+
+      const OVERLAY = document.getElementById('overlay');
+      const CLOSE = document.getElementById('close');
+      OVERLAY.addEventListener('click', overlay);
+      CLOSE.addEventListener('click', close);
+
+
       function init() {
 
         // Initiate and populate local storage if there isn't any
@@ -337,13 +344,6 @@
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
 
-
-      const OVERLAY = document.getElementById('overlay');
-      const CLOSE = document.getElementById('close');
-      OVERLAY.addEventListener('click', overlay);
-      CLOSE.addEventListener('click', close);
-
-   
       } // end init
 
 
@@ -353,7 +353,7 @@
       }
       function close() {
         player.pauseVideo();
-        document.classList.add('hide');
+        OVERLAY.classList.add('hide');
       }
 
 
