@@ -349,13 +349,14 @@
 
 
       function open(event) {
-        //event.preventDefault();
-        OVERLAY.classList.remove('hide');
+        //OVERLAY.classList.remove('hide');
+        OVERLAY.removeAttribute('class');
         player.playVideo();
       }
       function close() {
         player.pauseVideo();
         OVERLAY.classList.add('hide');
+        window.location.hash='';
       }
 
 
