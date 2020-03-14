@@ -304,7 +304,13 @@
       const D = document.getElementById('dchannel');
       const OVERLAY = document.getElementById('overlay');
       const CLOSE = document.getElementById('close');
-      D.addEventListener('click', open);
+      D.addEventListener('click', function(e){
+        if (e==undefined) { console.log('this works for loading or reloading') };
+        OVERLAY.removeAttribute('class');
+        player.playVideo();
+        document.title = 'Dane';
+        e.stopPropagation();
+      }, false);
       CLOSE.addEventListener('click', close);
 
 
@@ -350,19 +356,10 @@
       } // end init
 
 
-      function open(event) {
-        if (event==undefined) { console.log('this works for loading or reloading') };
-        document.title = 'Dane';
-        OVERLAY.removeAttribute('class');
-        player.playVideo();
-      }
       function close() {
         player.pauseVideo();
         OVERLAY.classList.add('hide');
         window.history.pushState(null, null, window.location.pathname);
-      }
-      window.onpopstate = () => {
-        close();
       }
 
 
