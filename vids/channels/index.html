@@ -375,17 +375,10 @@
       } // end init
 
 
-      function open(event) {
-        if (event==undefined) { console.log('this works for loading or reloading') };
-        document.title = 'Dane Reynolds Channel';
-        OVERLAY.removeAttribute('class');
-        player.playVideo();
-      }
       function close() {
         player.pauseVideo();
         OVERLAY.classList.add('hide');
-        document.title = 'Channels';
-        history.pushState('dbchannel', '', window.location.pathname);
+        document.title = TITLE;
       }
 
 
