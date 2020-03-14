@@ -317,6 +317,7 @@
         e.stopPropagation();
       }, false);
       window.addEventListener('popstate', function(e){
+        console.log('pop running');
         var ch = e.state;
         if (ch == null) {
           player.pauseVideo();
@@ -367,7 +368,7 @@
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
 
-        if (document.location.hash == '#dchannel') { open(); }
+        //if (document.location.hash == '#dchannel') { open(); }
 
       } // end init
 
@@ -376,12 +377,12 @@
         player.pauseVideo();
         OVERLAY.classList.add('hide');
         var pathArray = window.location.pathname.split('/');
-        var path = window.location.protocol + "//" + window.location.host;
+        var fullURL = window.location.protocol + "//" + window.location.host;
         for (i = 0; i < 3; i++) {
-          path += pathArray[i];
-          path += "/";
+          fullURL += pathArray[i];
+          fullURL += "/";
         }
-        history.pushState('', '', path);
+        history.pushState(null, null, fullURL);
         document.title = TITLE;
       }
 
@@ -662,7 +663,6 @@
       }
 
       window.onload = init();
-      //window.onpopstate = function(event) {console.log(event)};
 
     </script>
     <!-- When javascript is turned off -->
