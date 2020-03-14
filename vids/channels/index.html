@@ -306,8 +306,8 @@
       const D = document.getElementById('dane');
       CLOSE.addEventListener('click', close);
       D.addEventListener('click', function(e){
-        console.log(e.target, e.currentTarget);
-        if(e.target == e.currentTarget){
+        //console.log(e.target, e.currentTarget);
+        //if(e.target == e.currentTarget){
           e.preventDefault();
           var data = e.target.getAttribute('id'),
             url = data + '/';
@@ -315,7 +315,7 @@
           OVERLAY.removeAttribute('class');
           player.playVideo();
           document.title = 'Dane Reynolds Channel';
-        }
+        //}
         e.stopPropagation();
       }, false);
 
