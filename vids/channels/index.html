@@ -377,7 +377,7 @@
         OVERLAY.classList.add('hide');
         document.title = TITLE;
         var pathArray = window.location.pathname.split('/');
-        var path = "";
+        var path = window.location.protocol + "//" + window.location.host;
         for (i = 0; i < 3; i++) {
           path += "/";
           path += pathArray[i];
