@@ -317,7 +317,6 @@
         e.stopPropagation();
       }, false);
       window.addEventListener('popstate', function(e){
-        console.log('pop running');
         var ch = e.state;
         if (ch == null) {
           player.pauseVideo();
