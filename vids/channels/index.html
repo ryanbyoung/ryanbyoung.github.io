@@ -307,7 +307,7 @@
       CLOSE.addEventListener('click', close);
       D.addEventListener('click', function(e){
         console.log(e.target, e.currentTarget);
-        if(e.target != e.currentTarget){
+        if(e.target == e.currentTarget){
           e.preventDefault();
           var data = e.target.getAttribute('id'),
             url = data + '/';
