@@ -304,13 +304,7 @@
       const D = document.getElementById('dchannel');
       const OVERLAY = document.getElementById('overlay');
       const CLOSE = document.getElementById('close');
-      D.addEventListener('click', function(e){
-        if (e==undefined) { console.log('this works for loading or reloading') };
-        OVERLAY.removeAttribute('class');
-        player.playVideo();
-        document.title = 'Dane';
-        e.stopPropagation();
-      }, false);
+      D.addEventListener('click', open);
       CLOSE.addEventListener('click', close);
 
 
@@ -356,10 +350,17 @@
       } // end init
 
 
+      function open(event) {
+        if (event==undefined) { console.log('this works for loading or reloading') };
+        document.title = 'Dane Reynolds Channel';
+        OVERLAY.removeAttribute('class');
+        player.playVideo();
+      }
       function close() {
         player.pauseVideo();
         OVERLAY.classList.add('hide');
-        window.history.pushState(null, null, window.location.pathname);
+        document.title = 'Channels';
+        history.pushState('dbchannel', '', window.location.pathname);
       }
 
 
@@ -639,7 +640,7 @@
       }
 
       window.onload = init();
-      window.onpopstate = OVERLAY.classList.add('hide');
+      window.onpopstate = function(event) {console.log(event)};
 
     </script>
     <!-- When javascript is turned off -->
