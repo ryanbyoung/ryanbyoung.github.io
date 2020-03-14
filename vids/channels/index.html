@@ -197,7 +197,7 @@
           <tr class="all">
             <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="dane" role="button" tabindex="0">♡</td>
             <td class="channel">
-              <a href="#dchannel" id="dchannel">Dane</a>
+              <a href="dane/" data-name="dane">Dane</a>
               <!--<button id="test">1</button>-->
             </td>
             <td class="search-item">
@@ -301,11 +301,21 @@
       var filters = document.querySelectorAll('input[name=filter]');
 
 
-      const D = document.getElementById('dchannel');
       const OVERLAY = document.getElementById('overlay');
       const CLOSE = document.getElementById('close');
-      D.addEventListener('click', open);
       CLOSE.addEventListener('click', close);
+      CHANNELNUMBERS.addEventListener('click', function(e){
+        if(e.target != e.currentTarget){
+          e.preventDefault();
+          var data = e.target.getAttribute('data-name'),
+            url = data + "/";
+          history.pushState(data, null, url);
+          OVERLAY.removeAttribute('class');
+          player.playVideo();
+          document.title = 'Dane Reynolds Channel';
+        }
+        e.stopPropagation();
+      }, false);
 
 
       function init() {
@@ -334,7 +344,7 @@
           FAVORITES[a].addEventListener('click', toggleButtonClickHandler);
           FAVORITES[a].addEventListener('keydown', toggleButtonKeydownHandler);
           FAVORITES[a].addEventListener('keyup', toggleButtonKeyupHandler);
-          CHANNELNUMBERS[a].addEventListener('click', tdClick);
+          //CHANNELNUMBERS[a].addEventListener('click', tdClick);
           CHANNELNAMES[a].addEventListener('click', tdClick);
         }
         for (b = 0; b < filters.length; b++){
