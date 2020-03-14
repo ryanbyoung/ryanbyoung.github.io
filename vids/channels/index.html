@@ -379,6 +379,7 @@
         player.pauseVideo();
         OVERLAY.classList.add('hide');
         document.title = TITLE;
+        history.pushState('', '', window.location.pathname);
       }
 
 
