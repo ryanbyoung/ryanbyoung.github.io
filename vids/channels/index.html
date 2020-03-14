@@ -377,8 +377,12 @@
         OVERLAY.classList.add('hide');
         document.title = TITLE;
         var pathArray = window.location.pathname.split('/');
-        //var thirdLevel = pathArray[3];
-        history.pushState('', '', pathArray[2]);
+        var path = "";
+        for (i = 0; i < 3; i++) {
+          path += "/";
+          path += pathArray[i];
+        }
+        history.pushState('', '', path);
       }
 
 
