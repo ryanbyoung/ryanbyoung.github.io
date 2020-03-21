@@ -306,6 +306,7 @@
       const D = document.getElementById('dane');
       CLOSE.addEventListener('click', close);
       const TITLE = 'Channels';
+      /*
       D.addEventListener('click', function(e){
         e.preventDefault();
         var data = e.target.getAttribute('id'),
@@ -316,6 +317,18 @@
         document.title = 'Dane Reynolds Channel';
         e.stopPropagation();
       }, false);
+      */
+      D.addEventListener('click', daneClick(e), false);
+      function daneClick(e) {
+        e.preventDefault();
+        var data = e.target.getAttribute('id'),
+          url = data + '/';
+        history.pushState(data, null, url);
+        OVERLAY.removeAttribute('class');
+        player.playVideo();
+        document.title = 'Dane Reynolds Channel';
+        e.stopPropagation();
+      }
       window.addEventListener('popstate', function(e){
         var ch = e.state;
         if (ch == null) {
