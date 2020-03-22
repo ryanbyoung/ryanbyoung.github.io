@@ -322,7 +322,6 @@
         e.stopPropagation();
       }
       window.addEventListener('popstate', function(e){
-        console.log('popstate');
         var ch = e.state;
         if (ch == null) {
           player.pauseVideo();
@@ -372,8 +371,6 @@
         ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler);
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
-
-        //if (document.location.hash == '#dchannel') { open(); }
 
       } // end init
 
