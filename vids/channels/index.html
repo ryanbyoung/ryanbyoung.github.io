@@ -136,14 +136,12 @@
         padding-bottom: 56.25%;
         position: relative
       }
-      @media screen and (max-width: 500px) {
-        .embed-container iframe {
-          height: 100%;
-          left: 0;
-          position: absolute;
-          top: 0;
-          width: 100%%
-        }
+      .embed-container iframe {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%%
       }
       #overlay {
         background-color: rgba(0,0,0,0.9);
@@ -164,10 +162,7 @@
         background-color: white;
         color: black;
         font: 16px serif;
-        height: 30px;
-        position: absolute;
-        right: 30px;
-        top: 10px
+        height: 30px
       }
     </style>
   </head>
@@ -232,10 +227,10 @@
 
     <div id="overlay" class="hide">
       <div style="max-width: 700px; margin: 0 auto">
-        <button id="close">Close Channel</button>
         <div class="embed-container">
           <div id="player"></div>
         </div>
+        <button id="close">Close Channel</button>
       </div>
     </div>
 
