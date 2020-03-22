@@ -59,6 +59,13 @@
           }
         });
       }
+      window.onload = function {
+        if (history.state == 'dane') {
+          window.onpopstate = function(event) {
+            window.history.go(-1)
+          }
+        }
+      }
     </script>
   </body>
 </html>
