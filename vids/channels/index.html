@@ -322,6 +322,7 @@
         e.stopPropagation();
       }
       window.addEventListener('popstate', function(e){
+        console.log('popstate');
         var ch = e.state;
         if (ch == null) {
           player.pauseVideo();
