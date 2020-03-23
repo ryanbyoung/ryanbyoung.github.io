@@ -59,13 +59,14 @@
           }
         });
       }
-      window.onload = function() {
+      // To fix bug where a user would refresh the overlay and not be able to use the back button in the browser
+      //window.onload = function() {
         if (history.state == 'dane') {
           window.onpopstate = function(event) {
             window.history.go();
           }
         }
-      };
+      //};
     </script>
   </body>
 </html>
