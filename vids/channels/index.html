@@ -311,11 +311,11 @@
       D.addEventListener('click', daneClick, false);
       function daneClick(e) {
         e.preventDefault();
+        player.playVideo();
         var data = e.target.getAttribute('id'),
           url = data + '/';
         history.pushState(data, null, url);
         OVERLAY.removeAttribute('class');
-        player.playVideo();
         document.title = 'Dane Reynolds Channel';
         e.stopPropagation();
       }
