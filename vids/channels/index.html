@@ -244,6 +244,7 @@
       var player;
       function onYouTubeIframeAPIReady() {
         // Random number decides which video will play first in the playlist
+        console.log('YT IframeAPIReady');
         var vidNum = Math.floor((Math.random() * 26) + 1);
         player = new YT.Player('player', {
           /*
@@ -258,6 +259,7 @@
           width: '100%',
           events: {
             'onReady': function (event) {
+              console.log('YT PlayerOnReady');
               player.cuePlaylist({
                 listType:'playlist',
                 list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
@@ -274,6 +276,7 @@
       
       
       // Variables for counters and determining empty fields
+      console.log('Variables start creating');
       var a, b, c, d, e, f, g, h;
       const EMPTY = '';
 
@@ -336,6 +339,7 @@
 
         // Initiate and populate local storage if there isn't any
         // Otherwise set up page with saved components
+        console.log('init fired');
         if (localStorage.length === 0) {
           populateChannelStorage();
           populateFilterStorage();
