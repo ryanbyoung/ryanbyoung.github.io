@@ -270,11 +270,12 @@
               }, 1000);
               player.setLoop(true);
               //local storage
+              console.log(JSON.stringify(player.getPlaylist()));
               localStorage.setItem('ytPlaylist', JSON.stringify(player.getPlaylist()));
-              localStorage.setItem('ytPlaylistIndex', player.getPlaylistIndex());
-              var obj = player.getVideoData();
-              localStorage.setItem('ytVideoID', obj[Object.keys(obj)[0]]);
-              localStorage.setItem('ytTime', player.getCurrentTime());
+              //localStorage.setItem('ytPlaylistIndex', player.getPlaylistIndex());
+              //var obj = player.getVideoData();
+              //localStorage.setItem('ytVideoID', obj[Object.keys(obj)[0]]);
+              //localStorage.setItem('ytTime', player.getCurrentTime());
             }
           }
         });
