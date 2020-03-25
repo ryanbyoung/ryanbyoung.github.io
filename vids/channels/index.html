@@ -269,6 +269,8 @@
                 event.target.setShuffle({'shufflePlaylist' : true});
               }, 1000);
               player.setLoop(true);
+              //local storage
+              localStorage.setItem('playlist', player.getPlaylist());
             }
           }
         });
