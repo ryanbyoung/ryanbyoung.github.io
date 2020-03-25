@@ -273,13 +273,6 @@
           }
         });
       }
-      //local storage
-      console.log(player);
-      //localStorage.setItem('ytPlaylist', JSON.stringify(player.getPlaylist()));
-      //localStorage.setItem('ytPlaylistIndex', player.getPlaylistIndex());
-      //var obj = player.getVideoData();
-      //localStorage.setItem('ytVideoID', obj[Object.keys(obj)[0]]);
-      //localStorage.setItem('ytTime', player.getCurrentTime());
       
       
       // Variables for counters and determining empty fields
@@ -347,6 +340,13 @@
         // Initiate and populate local storage if there isn't any
         // Otherwise set up page with saved components
         console.log('init fired');
+      //local storage
+      console.log(player);
+      //localStorage.setItem('ytPlaylist', JSON.stringify(player.getPlaylist()));
+      //localStorage.setItem('ytPlaylistIndex', player.getPlaylistIndex());
+      //var obj = player.getVideoData();
+      //localStorage.setItem('ytVideoID', obj[Object.keys(obj)[0]]);
+      //localStorage.setItem('ytTime', player.getCurrentTime());
         if (localStorage.length === 0) {
           populateChannelStorage();
           populateFilterStorage();
