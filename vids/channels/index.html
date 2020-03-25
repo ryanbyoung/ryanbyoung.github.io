@@ -273,7 +273,8 @@
               localStorage.setItem('playlist', JSON.stringify(player.getPlaylist()));
               localStorage.setItem('playlistIndex', player.getPlaylistIndex());
               var obj = player.getVideoData();
-              localStorage.setItem('videoID', obj[Object.keys(obj)[0]];
+              localStorage.setItem('videoID', obj[Object.keys(obj)[0]]);
+              localStorage.setItem('time', player.getCurrentTime());
             }
           }
         });
