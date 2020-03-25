@@ -270,7 +270,10 @@
               }, 1000);
               player.setLoop(true);
               //local storage
-              localStorage.setItem('playlist', player.getPlaylist());
+              localStorage.setItem('playlist', JSON.stringify(player.getPlaylist()));
+              localStorage.setItem('playlistIndex', player.getPlaylistIndex());
+              var obj = player.getVideoData();
+              localStorage.setItem('videoID', obj[Object.keys(obj)[0]];
             }
           }
         });
