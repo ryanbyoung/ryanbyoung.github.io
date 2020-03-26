@@ -243,38 +243,45 @@
       // This function creates an iframe player after the API code downloads
       var player;
       function onYouTubeIframeAPIReady() {
-        // Random number decides which video will play first in the playlist
         console.log('YT IframeAPIReady');
-        var vidNum = Math.floor((Math.random() * 26) + 1);
         player = new YT.Player('player', {
-          /*
-          playerVars: {
-            listType:'playlist',
-            list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
-            index:vidNum
-          },
-          */
-          // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
+          // Set the height, width, and events for the player
           height: '100%',
           width: '100%',
           events: {
-            'onReady': function (event) {
-              console.log('YT PlayerOnReady');
-              player.cuePlaylist({
-                listType:'playlist',
-                list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
-                index:vidNum
-              });
-              setTimeout(function() {
-                event.target.setShuffle({'shufflePlaylist' : true});
-              }, 1000);
-              player.setLoop(true);
-            }
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
           }
         });
       }
-      
-      
+      function onPlayerReady(event) {
+        console.log('YT PlayerOnReady');
+        // Random number decides which video will play first in the playlist
+        var vid = Math.floor((Math.random() * 26) + 1);
+        player.cuePlaylist({
+          listType:'playlist',
+          list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
+          index:vid
+        });
+        //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
+        setTimeout(function() {
+          event.target.setShuffle({'shufflePlaylist' : true});
+        }, 1000);
+        player.setLoop(true);
+      }
+      function onPlayerStateChange(event) {
+        if (playerStatus == 5) {
+          //local storage
+          console.log(JSON.stringify(player.getPlaylist()));
+          //localStorage.setItem('ytPlaylist', JSON.stringify(player.getPlaylist()));
+          //localStorage.setItem('ytPlaylistIndex', player.getPlaylistIndex());
+          //var obj = player.getVideoData();
+          //localStorage.setItem('ytVideoID', obj[Object.keys(obj)[0]]);
+          //localStorage.setItem('ytTime', player.getCurrentTime());
+        }
+      }
+
+
       // Variables for counters and determining empty fields
       console.log('Variables start creating');
       var a, b, c, d, e, f, g, h;
@@ -340,13 +347,6 @@
         // Initiate and populate local storage if there isn't any
         // Otherwise set up page with saved components
         console.log('init fired');
-      //local storage
-      console.log(player);
-      //localStorage.setItem('ytPlaylist', JSON.stringify(player.getPlaylist()));
-      //localStorage.setItem('ytPlaylistIndex', player.getPlaylistIndex());
-      //var obj = player.getVideoData();
-      //localStorage.setItem('ytVideoID', obj[Object.keys(obj)[0]]);
-      //localStorage.setItem('ytTime', player.getCurrentTime());
         if (localStorage.length === 0) {
           populateChannelStorage();
           populateFilterStorage();
