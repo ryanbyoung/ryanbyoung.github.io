@@ -270,7 +270,7 @@
         player.setLoop(true);
       }
       function onPlayerStateChange(event) {
-        if (playerStatus == 5) {
+        if (event.data == 5) {
           //local storage
           console.log(JSON.stringify(player.getPlaylist()));
           //localStorage.setItem('ytPlaylist', JSON.stringify(player.getPlaylist()));
