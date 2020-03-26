@@ -243,7 +243,6 @@
       // This function creates an iframe player after the API code downloads
       var player;
       function onYouTubeIframeAPIReady() {
-        console.log('YT IframeAPIReady');
         player = new YT.Player('player', {
           // Set the height, width, and events for the player
           height: '100%',
@@ -255,7 +254,6 @@
         });
       }
       function onPlayerReady(event) {
-        console.log('YT PlayerOnReady');
         // Random number decides which video will play first in the playlist
         var vid = Math.floor((Math.random() * 26) + 1);
         player.cuePlaylist({
@@ -282,7 +280,6 @@
 
 
       // Variables for counters and determining empty fields
-      console.log('Variables start creating');
       var a, b, c, d, e, f, g, h;
       const EMPTY = '';
 
@@ -345,7 +342,6 @@
 
         // Initiate and populate local storage if there isn't any
         // Otherwise set up page with saved components
-        console.log('init fired');
         if (localStorage.length === 0) {
           populateChannelStorage();
           populateFilterStorage();
