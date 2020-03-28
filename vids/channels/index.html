@@ -414,7 +414,10 @@
 
       function close() {
         player1.pauseVideo();
-        OVERLAY.classList.add('hide');
+        BODY.removeAttribue('class');
+        MAIN.removeAttribute('hidden');
+        NAV.removeAttribute('class');
+        OVERLAY.setAttribute('hidden', '');
         var pathArray = window.location.pathname.split('/');
         var fullURL = window.location.protocol + "//" + window.location.host;
         for (i = 0; i < 3; i++) {
