@@ -283,11 +283,13 @@
         }
       }
       function onPlayer1StateChange(event) {
-        localStorage.setItem('Player1Playlist', player1.getPlaylist());
-        localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
-        var obj = player1.getVideoData();
-        localStorage.setItem('Player1VideoID', obj[Object.keys(obj)[0]]);
-        localStorage.setItem('Player1Time', player1.getCurrentTime());
+        if (event.data === 2 || event.data === 5) {
+          localStorage.setItem('Player1Playlist', player1.getPlaylist());
+          localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
+          var obj = player1.getVideoData();
+          localStorage.setItem('Player1VideoID', obj[Object.keys(obj)[0]]);
+          localStorage.setItem('Player1Time', player1.getCurrentTime());
+        }
       }
 
 
