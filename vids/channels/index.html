@@ -338,7 +338,7 @@
         var data = e.target.getAttribute('id'),
           url = data + '/';
         history.pushState(data, null, url);
-        MAIN.setAttribute('hidden');
+        MAIN.setAttribute('hidden', '');
         OVERLAY.removeAttribute('hidden');
         document.title = 'Dane Reynolds Channel';
         e.stopPropagation();
@@ -348,10 +348,10 @@
         if (ch == null) {
           player1.pauseVideo();
           MAIN.removeAttribute('hidden');
-          OVERLAY.setAttribute('hidden');
+          OVERLAY.setAttribute('hidden', '');
           document.title = TITLE;
         } else {
-          MAIN.setAttribute('hidden');
+          MAIN.setAttribute('hidden', '');
           OVERLAY.removeAttribute('hidden');
           player1.playVideo();
           document.title = 'Dane Reynolds Channel';
