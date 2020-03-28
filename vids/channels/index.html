@@ -287,11 +287,11 @@
       function onPlayer1StateChange(event) {
         if (event.data == 5) {
           //local storage
-          localStorage.setItem('Player1Playlist', player.getPlaylist());
-          localStorage.setItem('Player1PlaylistIndex', player.getPlaylistIndex());
-          var obj = player.getVideoData();
+          localStorage.setItem('Player1Playlist', player1.getPlaylist());
+          localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
+          var obj = player1.getVideoData();
           localStorage.setItem('Player1VideoID', obj[Object.keys(obj)[0]]);
-          localStorage.setItem('Player1Time', player.getCurrentTime());
+          localStorage.setItem('Player1Time', player1.getCurrentTime());
         }
       }
 
