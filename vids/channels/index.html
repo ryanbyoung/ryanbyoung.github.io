@@ -10,6 +10,9 @@
         font-size: 20px;
         margin: 0
       }
+      .dark {
+       background-color: black 
+      }
       main {
         margin: 0 auto;
         max-width: 700px;
@@ -17,7 +20,7 @@
         position: relative;
         z-index: 1
       }
-      h1, p {
+      h1, p, button {
         text-align: center
       }
       #search {
@@ -314,6 +317,7 @@
       var filters = document.querySelectorAll('input[name=filter]');
 
 
+      const BODY = document.querySelector('body');
       const OVERLAY = document.getElementById('overlay');
       const CLOSE = document.getElementById('close');
       const D = document.getElementById('dane-reynolds');
@@ -339,6 +343,7 @@
           url = data + '/';
         history.pushState(data, null, url);
         MAIN.setAttribute('hidden', '');
+        BODY.setAttribute('class', 'dark');
         OVERLAY.removeAttribute('hidden');
         document.title = 'Dane Reynolds Channel';
         e.stopPropagation();
@@ -348,10 +353,12 @@
         if (ch == null) {
           player1.pauseVideo();
           MAIN.removeAttribute('hidden');
+          BODY.removeAttribue('class');
           OVERLAY.setAttribute('hidden', '');
           document.title = TITLE;
         } else {
           MAIN.setAttribute('hidden', '');
+          BODY.setAttribute('class', 'dark');
           OVERLAY.removeAttribute('hidden');
           player1.playVideo();
           document.title = 'Dane Reynolds Channel';
