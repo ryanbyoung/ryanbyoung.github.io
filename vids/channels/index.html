@@ -155,10 +155,14 @@
         z-index: 2
       }
       #close {
-        background-color: white;
-        color: black;
+    border: 2px solid white;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    background-color: black;
         font: 16px serif;
-        height: 30px;
         margin-top: 30px
       }
     </style>
@@ -396,7 +400,7 @@
 
 
       function close() {
-        player.pauseVideo();
+        player1.pauseVideo();
         OVERLAY.classList.add('hide');
         var pathArray = window.location.pathname.split('/');
         var fullURL = window.location.protocol + "//" + window.location.host;
