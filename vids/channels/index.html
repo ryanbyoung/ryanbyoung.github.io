@@ -235,47 +235,62 @@
     <script>
 
       
-      // This code loads the iframe Player API code asynchronously
+      // This code loads the iframe Player API code asynchronously (only need this once)
       var tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      // This function creates an iframe player after the API code downloads
-      var player;
+
+      // This function creates an iframe player for channel id 1 after the API code downloads
+      var player1; //using channel id for number in variable
       function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
+        player = new YT.Player('player1', {
           // Set the height, width, and events for the player
           height: '100%',
           width: '100%',
           events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            'onReady': onPlayer1Ready,
+            'onStateChange': onPlayer1StateChange
           }
         });
       }
-      function onPlayerReady(event) {
+      function onPlayer1Ready(event) {
         // Check if there is a playlist in local storage
-        if (localStorage.ytPlaylist != '') {
-          player.cuePlaylist(
-            localStorage.ytPlaylist,
-            localStorage.ytPlaylistIndex,
-            localStorage.ytTime
+        if (localStorage.Player1Playlist != '') {
+          player1.cuePlaylist(
+            localStorage.Player1Playlist,
+            localStorage.Player1PlaylistIndex,
+            localStorage.Player1Time
           );
           //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
           setTimeout(function() {
             event.target.setShuffle({'shufflePlaylist' : true});
           }, 1000);
-          player.setLoop(true);
+          player1.setLoop(true);
+        }
+        else {
+          // Random number decides which video will play first in the playlist
+          var vid = Math.floor((Math.random() * 26) + 1);
+          player1.cuePlaylist({
+            listType:'playlist',
+            list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
+            index:vid
+          });
+          //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
+          setTimeout(function() {
+            player1.setShuffle({'shufflePlaylist' : true});
+          }, 1000);
+          player1.setLoop(true); 
         }
       }
-      function onPlayerStateChange(event) {
+      function onPlayer1StateChange(event) {
         if (event.data == 5) {
           //local storage
-          localStorage.setItem('ytPlaylist', player.getPlaylist());
-          localStorage.setItem('ytPlaylistIndex', player.getPlaylistIndex());
+          localStorage.setItem('Player1Playlist', player.getPlaylist());
+          localStorage.setItem('Player1PlaylistIndex', player.getPlaylistIndex());
           var obj = player.getVideoData();
-          localStorage.setItem('ytVideoID', obj[Object.keys(obj)[0]]);
-          localStorage.setItem('ytTime', player.getCurrentTime());
+          localStorage.setItem('Player1VideoID', obj[Object.keys(obj)[0]]);
+          localStorage.setItem('Player1Time', player.getCurrentTime());
         }
       }
 
@@ -317,19 +332,7 @@
       D.addEventListener('click', daneClick, false);
       function daneClick(e) {
         e.preventDefault();
-        // Random number decides which video will play first in the playlist
-        var vid = Math.floor((Math.random() * 26) + 1);
-        player.cuePlaylist({
-          listType:'playlist',
-          list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
-          index:vid
-        });
-        //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
-        setTimeout(function() {
-          player.setShuffle({'shufflePlaylist' : true});
-        }, 1000);
-        player.setLoop(true);
-        player.playVideo();
+        player1.playVideo();
         var data = e.target.getAttribute('id'),
           url = data + '/';
         history.pushState(data, null, url);
@@ -340,12 +343,12 @@
       window.addEventListener('popstate', function(e){
         var ch = e.state;
         if (ch == null) {
-          player.pauseVideo();
+          player1.pauseVideo();
           OVERLAY.classList.add('hide');
           document.title = TITLE;
         } else {
           OVERLAY.removeAttribute('class');
-          player.playVideo();
+          player1.playVideo();
           document.title = 'Dane Reynolds Channel';
         }
       });
