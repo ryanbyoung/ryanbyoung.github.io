@@ -219,6 +219,17 @@
       <p class="hide" id="empty-query">No channels exist that match your query.</p>
       <p class="hide" id="empty-filter">No favorite channels have been selected.</p>
     </main>
+
+    
+    <main id="overlay" hidden>
+      <h1>Dane Reynolds Channel</h1>
+      <div class="embed-container">
+        <div id="player1"></div>
+      </div>
+      <button id="close">Close Channel</button>
+    </main>
+    
+    
     <nav>
       <ul>
         <li>Channels</li>
@@ -228,16 +239,6 @@
       </ul>
     </nav>
 
-
-    <main id="overlay" hidden>
-      <h1>Dane Reynolds Channel</h1>
-      <div class="embed-container">
-        <div id="player1"></div>
-      </div>
-      <button id="close">Close Channel</button>
-    </main>
-
-    
     <script>
 
       
@@ -337,6 +338,7 @@
         var data = e.target.getAttribute('id'),
           url = data + '/';
         history.pushState(data, null, url);
+        MAIN.setAttribute('hidden');
         OVERLAY.removeAttribute('hidden');
         document.title = 'Dane Reynolds Channel';
         e.stopPropagation();
@@ -345,10 +347,12 @@
         var ch = e.state;
         if (ch == null) {
           player1.pauseVideo();
+          MAIN.removeAttribute('hidden');
           OVERLAY.setAttribute('hidden');
           document.title = TITLE;
         } else {
-          OVERLAY.setAttribute('hidden');
+          MAIN.setAttribute('hidden');
+          OVERLAY.removeAttribute('hidden');
           player1.playVideo();
           document.title = 'Dane Reynolds Channel';
         }
