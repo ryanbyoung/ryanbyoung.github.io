@@ -20,7 +20,7 @@
         position: relative;
         z-index: 1
       }
-      h1, p, button {
+      h1, p {
         text-align: center
       }
       #search {
@@ -229,7 +229,9 @@
       <div class="embed-container">
         <div id="player1"></div>
       </div>
-      <button id="close">Close Channel</button>
+      <p>
+        <button id="close">Close Channel</button>
+      </p>
     </main>
     
     
@@ -318,6 +320,7 @@
 
 
       const BODY = document.querySelector('body');
+      const NAV = document.querySelector('nav');
       const OVERLAY = document.getElementById('overlay');
       const CLOSE = document.getElementById('close');
       const D = document.getElementById('dane-reynolds');
@@ -344,6 +347,7 @@
         history.pushState(data, null, url);
         MAIN.setAttribute('hidden', '');
         BODY.setAttribute('class', 'dark');
+        NAV.setAttribute('class', 'hide');
         OVERLAY.removeAttribute('hidden');
         document.title = 'Dane Reynolds Channel';
         e.stopPropagation();
@@ -354,11 +358,13 @@
           player1.pauseVideo();
           MAIN.removeAttribute('hidden');
           BODY.removeAttribue('class');
+          NAV.removeAttribute('class');
           OVERLAY.setAttribute('hidden', '');
           document.title = TITLE;
         } else {
           MAIN.setAttribute('hidden', '');
           BODY.setAttribute('class', 'dark');
+          NAV.setAttribute('class', 'hide');
           OVERLAY.removeAttribute('hidden');
           player1.playVideo();
           document.title = 'Dane Reynolds Channel';
