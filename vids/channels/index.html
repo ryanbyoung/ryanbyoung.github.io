@@ -256,7 +256,7 @@
       }
       function onPlayer1Ready(event) {
         // Check if there is a playlist in local storage
-        if (localStorage.Player1Playlist != '') {
+        if (localStorage.Player1Playlist != null) {
           console.log('fuck');
           player1.cuePlaylist(
             localStorage.Player1Playlist,
