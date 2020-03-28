@@ -345,7 +345,7 @@
         var ch = e.state;
         if (ch == null) {
           player1.pauseVideo();
-          OVERLAY.('hidden');
+          OVERLAY.setAttribute('hidden');
           document.title = TITLE;
         } else {
           OVERLAY.setAttribute('hidden');
