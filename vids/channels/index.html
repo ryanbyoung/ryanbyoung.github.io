@@ -329,6 +329,7 @@
       */
       D.addEventListener('click', daneClick, false);
       function daneClick(e) {
+        console.log(e);
         e.preventDefault();
         player1.playVideo();
         var data = e.target.getAttribute('id'),
