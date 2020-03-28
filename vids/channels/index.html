@@ -260,7 +260,6 @@
       function onPlayer1Ready(event) {
         // Check if there is a playlist in local storage
         if (localStorage.Player1Playlist != null) {
-          console.log('if localStore exists');
           player1.cuePlaylist(
             localStorage.Player1Playlist,
             localStorage.Player1PlaylistIndex,
@@ -269,7 +268,6 @@
           player1.setLoop(true);
         }
         else {
-          console.log('no local storage');
           // Random number decides which video will play first in the playlist
           var vid = Math.floor((Math.random() * 26) + 1);
           player1.cuePlaylist({
@@ -286,7 +284,6 @@
       }
       function onPlayer1StateChange(event) {
         if (event.data === 2) {
-          console.log('state');
           localStorage.setItem('Player1Playlist', player1.getPlaylist());
           localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
           var obj = player1.getVideoData();
