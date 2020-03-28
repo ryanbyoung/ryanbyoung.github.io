@@ -283,7 +283,7 @@
         }
       }
       function onPlayer1StateChange(event) {
-        if (event.data === 2 || event.data === 5) {
+        if (event.data === 2) {
           localStorage.setItem('Player1Playlist', player1.getPlaylist());
           localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
           var obj = player1.getVideoData();
