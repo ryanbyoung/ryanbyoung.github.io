@@ -260,12 +260,12 @@
       function onPlayer1Ready(event) {
         // Check if there is a playlist in local storage
         if (localStorage.Player1Playlist != null) {
-          console.log('fuck');
           player1.cuePlaylist(
             localStorage.Player1Playlist,
             localStorage.Player1PlaylistIndex,
             localStorage.Player1Time
           );
+          player1.setLoop(true);
         }
         else {
           // Random number decides which video will play first in the playlist
