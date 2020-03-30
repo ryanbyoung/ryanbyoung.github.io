@@ -9,6 +9,9 @@
         font-size: 20px;
         margin: 0
       }
+      .dark {
+       background-color: black 
+      }
       main {
         margin: 0 auto;
         max-width: 700px;
@@ -142,7 +145,8 @@
         width: 100%%
       }
       #overlay {
-        background-color: rgba(0,0,0,0.9);
+        padding-bottom: 0;
+        background-color: black /* rgba(0,0,0,0.9);
         bottom: 0;
         height: 100%;
         left: 0;
@@ -151,65 +155,90 @@
         right: 0;
         top: 0;
         width: calc(100% - 20px);
-        z-index: 2
+        z-index: 2 
+        */
+      }
+      #overlay h1 {
+        color: white;
+        font-size: 1.5em;
+        margin: .83em 0
       }
       #close {
-        background-color: white;
-        color: black;
-        font: 16px serif;
-        height: 30px;
-        margin-top: 30px
+        background-color: black;
+        border: 2px solid white;
+        color: #fff;
+        font: 20px serif;
+        line-height: 2.5;
+        margin-top: 30px;
+        padding: 0 20px
       }
     </style>
   </head>
-  <body>
-    <main>
+  <body class="dark">
+    <main id="overlay">
       <h1>Dane Reynolds Channel</h1>
-      <!-- Div to make player responsive -->
       <div class="embed-container">
-        <!-- The iframe (and player) will replace the player div -->
-        <div id="player"></div>
+        <div id="player1"></div>
       </div>
+      <p>
+        <button id="close">Close Channel</button>
+      </p>
     </main>
-    <nav>
-      <ul>
-        <li>
-          <a href="../">Channels</a>
-        </li>
-        <li>
-          <a href="../../movies">Movies</a>
-        </li>
-      </ul>
-    </nav>
     <script>
       // This code loads the iframe Player API code asynchronously
       var tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
       // This function creates an iframe player after the API code downloads
-      var player;
+      var player1;
       function onYouTubeIframeAPIReady() {
         // Random number decides which video will play first in the playlist
         var vids = Math.floor((Math.random() * 26) + 1);
-        player = new YT.Player('player', {
+        player1 = new YT.Player('player1', {
           // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
           height: '100%',
           width: '100%',
           events: {
-            'onReady': function (event) {
-              player.cuePlaylist({
-                listType:'playlist',
-                list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
-                index:vids
-              });
-              setTimeout(function() {
-                event.target.setShuffle({'shufflePlaylist' : true});
-              }, 1000);
-              player.setLoop(true);
-            }
+            'onReady': onPlayer1Ready,
+            'onStateChange': onPlayer1StateChange
           }
         });
+      }
+      function onPlayer1Ready(event) {
+        // Check if there is a playlist in local storage
+        if (localStorage.Player1Playlist != null) {
+          player1.cuePlaylist(
+            localStorage.Player1Playlist,
+            localStorage.Player1PlaylistIndex,
+            localStorage.Player1Time
+          );
+          player1.setLoop(true);
+        }
+        else {
+          // Random number decides which video will play first in the playlist
+          var vid = Math.floor((Math.random() * 26) + 1);
+          player1.cuePlaylist({
+            listType:'playlist',
+            list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
+            index:vid
+          });
+          //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
+          setTimeout(function() {
+            event.target.setShuffle({'shufflePlaylist' : true});
+          }, 1000);
+          player1.setLoop(true); 
+        }
+      }
+      function onPlayer1StateChange(event) {
+        if (event.data === 2) {
+          localStorage.setItem('Player1Playlist', player1.getPlaylist());
+          localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
+          var obj = player1.getVideoData();
+          localStorage.setItem('Player1VideoID', obj[Object.keys(obj)[0]]);
+          localStorage.setItem('Player1Time', player1.getCurrentTime());
+        }
       }
       // To fix bug where a user would refresh the overlay and not be able to use the back button in the browser
       // window.onload = function() {
