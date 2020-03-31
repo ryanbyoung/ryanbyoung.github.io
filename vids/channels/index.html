@@ -707,6 +707,13 @@
 
       window.onload = init();
 
+
+      // Pause video before the user leaves, to handle when the user closes the browser or refreshes the page
+      window.addEventListener('beforeunload', function (e) {
+        player1.pauseVideo();
+      });
+
+
     </script>
     <!-- When javascript is turned off -->
     <noscript>
