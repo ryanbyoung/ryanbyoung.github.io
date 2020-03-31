@@ -251,11 +251,12 @@
         }
       // };
       // Pause video before the user leaves, to handle when the user closes the browser or refreshes the page
-      window.addEventListener('onbeforeunload', function (e) {
+      window.addEventListener('beforeunload', function (e) {
         player1.pauseVideo();
-        //var confirmationMessage = '';
-        //(e || window.event).returnValue = confirmationMessage;
-        //return confirmationMessage;
+        console.log('o');
+        var confirmationMessage = 'sure?';
+        (e || window.event).returnValue = confirmationMessage;
+        return confirmationMessage;
       });
     </script>
   </body>
