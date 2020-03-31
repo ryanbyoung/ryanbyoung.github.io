@@ -710,10 +710,12 @@
 
       // Pause video before the user leaves, to handle when the user closes the browser or refreshes the page
       window.addEventListener('beforeunload', function (e) {
-        player1.pauseVideo();
-        var confirmationMessage = 'sure?';
-        (e || window.event).returnValue = confirmationMessage;
-        return confirmationMessage;
+        console.log(e);
+        var pause = player1.pauseVideo();
+        return pause;
+        //var confirmationMessage = 'sure?';
+        //(e || window.event).returnValue = confirmationMessage;
+        //return confirmationMessage;
       });
 
 
