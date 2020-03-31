@@ -251,7 +251,7 @@
         }
       // };
       // Pause video before the user leaves, to handle when the user closes the browser or refreshes the page
-      window.addEventListener('beforeunload', function (e) {
+      window.addEventListener('onbeforeunload', function (e) {
         player1.pauseVideo();
         //var confirmationMessage = '';
         //(e || window.event).returnValue = confirmationMessage;
