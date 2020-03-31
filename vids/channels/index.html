@@ -710,11 +710,8 @@
 
       // Pause video before the user leaves, to handle when the user closes the browser or refreshes the page
       window.addEventListener('beforeunload', function (e) {
-        // Cancel the event
-        e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+        delete e['returnValue'];
         player1.pauseVideo();
-        // Chrome requires returnValue to be set
-        e.returnValue = '';
       });
 
 
