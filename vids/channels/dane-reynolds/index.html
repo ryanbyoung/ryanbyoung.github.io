@@ -251,8 +251,13 @@
         }
       // };
       // Pause video before the user leaves, to handle when the user closes the browser or refreshes the page
+      // Pause video before the user leaves, to handle when the user closes the browser or refreshes the page
       window.addEventListener('beforeunload', function (e) {
+        delete e['returnValue'];
         player1.pauseVideo();
+      });
+      //window.addEventListener('beforeunload', function (e) {
+        //player1.pauseVideo();
         //console.log('o');
         //var confirmationMessage = 'sure?';
         //(e || window.event).returnValue = confirmationMessage;
