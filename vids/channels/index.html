@@ -268,7 +268,7 @@
         });
       }
       function onPlayer1Ready(event) {
-        console.log(event);
+        console.log(event.target);
         // Check if there is a playlist in local storage
         if (localStorage.Player1Playlist != null) {
           player1.cuePlaylist(
