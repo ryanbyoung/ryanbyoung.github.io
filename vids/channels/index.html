@@ -192,7 +192,7 @@
       <table>
         <tbody>
           <tr class="all">
-            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="dane" role="button" tabindex="0">♡</td>
+            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel1" role="button" tabindex="0">♡</td>
             <td class="channel">
               <a href="dane-reynolds" id="dane-reynolds">Dane</a>
             </td>
@@ -201,7 +201,7 @@
             </td>
           </tr>
           <tr class="all">
-            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="kelly" role="button" tabindex="0">♡</td>
+            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel2" role="button" tabindex="0">♡</td>
             <td class="channel">
               <a href="kelly/index.html">2</a>
             </td>
@@ -210,7 +210,7 @@
             </td>
           </tr>
           <tr class="all">
-            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="craig" role="button" tabindex="0">♡</td>
+            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel3" role="button" tabindex="0">♡</td>
             <td class="channel">
               <a href="channel/craig.html">3</a>
             </td>
@@ -503,7 +503,7 @@
         }
         for (f = 0; f < filters.length; f++){
           if (filters[f].checked) {
-            localStorage.setItem('filterChecked', filters[f].value);
+            localStorage.setItem('FilterSelected', filters[f].value);
           }
         }
         setFilterStyles();
@@ -514,7 +514,7 @@
        * Sets the search field value to the value that is saved in the local storage.
        */
       function populateSearchStorage() {
-        localStorage.setItem('searchValue', SEARCH.value);
+        localStorage.setItem('SearchValue', SEARCH.value);
         setSearchValue();
       }
 
@@ -541,7 +541,7 @@
        */
       function setFilterStyles() {
         var filterChecked;
-        filterChecked = localStorage.getItem('filterChecked');
+        filterChecked = localStorage.getItem('FilterSelected');
         if (filterChecked === 'all') {
           filters[0].checked = true;
           filters[0].setAttribute('checked', '');
@@ -557,7 +557,7 @@
        * Sets the search field value to the value that is saved in the local storage.
        */
       function setSearchValue() {
-        var savedSearch = localStorage.getItem('searchValue');
+        var savedSearch = localStorage.getItem('SearchValue');
         SEARCH.value = savedSearch;
       }
 
