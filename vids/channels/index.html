@@ -708,7 +708,7 @@
 
 
       //TODO need to finish this to only show in a laptop browser when a video is still playing and user tries to close window
-      // Pause video before the user leaves, to handle when the user closes the browser or refreshes the page
+      // Pause video before the user leaves, to handle when the user closes the browser
       window.addEventListener('beforeunload', function (e) {
         delete e['returnValue'];
         player1.pauseVideo();
