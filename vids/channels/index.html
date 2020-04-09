@@ -194,7 +194,7 @@
           <tr class="all">
             <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel1" role="button" tabindex="0">♡</td>
             <td class="channel">
-              <a href="dane-reynolds" id="dane-reynolds">Dane</a>
+              <a href="dane-reynolds">1</a>
             </td>
             <td class="search-item">
               <a href="dane/index.html">Dane Reynolds</a>
@@ -268,7 +268,7 @@
         });
       }
       function onPlayer1Ready(event) {
-        console.log(event.target);
+        //get player details -> console.log(event.target);
         // Check if there is a playlist in local storage
         if (localStorage.Player1Playlist != null) {
           player1.cuePlaylist(
@@ -325,7 +325,8 @@
       const NAV = document.querySelector('nav');
       const OVERLAY = document.getElementById('overlay');
       const CLOSE = document.getElementById('close');
-      const D = document.getElementById('dane-reynolds');
+      const D = document.querySelector('a[href=dane-reynolds]');
+      console.log(D);
       CLOSE.addEventListener('click', close);
       const TITLE = 'Channels';
       /*
