@@ -223,8 +223,6 @@
       <p class="hide" id="empty-query">No channels exist that match your query.</p>
       <p class="hide" id="empty-filter">No favorite channels have been selected.</p>
     </main>
-
-    
     <main id="overlay" hidden>
       <h1>Dane Reynolds Channel</h1>
       <div class="embed-container">
@@ -234,8 +232,6 @@
         <button id="close">Close Channel</button>
       </p>
     </main>
-    
-    
     <nav>
       <ul>
         <li>Channels</li>
@@ -247,7 +243,6 @@
 
     <script>
 
-      
       // This code loads the iframe Player API code asynchronously (only need this once)
       var tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
@@ -267,6 +262,7 @@
           }
         });
       }
+
       function onPlayer1Ready(event) {
         //get player details -> console.log(event.target);
         // Check if there is a playlist in local storage
@@ -280,7 +276,7 @@
         }
         else {
           // Random number decides which video will play first in the playlist
-          var vid = Math.floor((Math.random() * 26) + 1);
+          var vid = Math.floor((Math.random() * 62) + 1);
           player1.cuePlaylist({
             listType:'playlist',
             list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
@@ -293,6 +289,7 @@
           player1.setLoop(true); 
         }
       }
+
       function onPlayer1StateChange(event) {
         if (event.data === 2) {
           localStorage.setItem('Player1Playlist', player1.getPlaylist());
@@ -302,7 +299,6 @@
           localStorage.setItem('Player1Time', player1.getCurrentTime());
         }
       }
-
 
       // Variables for counters and determining empty fields
       var a, b, c, d, e, f, g, h;
@@ -326,7 +322,6 @@
       const OVERLAY = document.getElementById('overlay');
       const CLOSE = document.getElementById('close');
       const D = document.querySelectorAll('a[href=dane-reynolds]');
-      console.log(D);
       CLOSE.addEventListener('click', close);
       const TITLE = 'Channels';
       /*
@@ -712,6 +707,7 @@
       window.onload = init();
 
 
+      //TODO need to finish this to only show in a laptop browser when a video is still playing and user tries to close window
       // Pause video before the user leaves, to handle when the user closes the browser or refreshes the page
       window.addEventListener('beforeunload', function (e) {
         delete e['returnValue'];
@@ -720,18 +716,10 @@
 
 
     </script>
-    <!-- When javascript is turned off -->
+
+    <!-- For users who have javascript turned off -->
     <noscript>
       <style>
-        /* Don't show search, filter, or favorites column in channels table
-        label, #search, #filter {
-          display: none
-        }
-        .favorite { display: none }
-        */
-        /* Remove pointer cursor on table cells
-        td { cursor:default }
-        */
         body {
           margin: 10px;
         }
@@ -752,5 +740,6 @@
         <p>You can just <a href="https://www.youtube.com/channel/UCd1sfSmij8b-w7wP_7IPvSA/playlists?feature=guide&view=1">go to YouTube</a> and check out all our playlists there. Enjoy!<p>
       </div>
     </noscript>
+
   </body>
 </html>
