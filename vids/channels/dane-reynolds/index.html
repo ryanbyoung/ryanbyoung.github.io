@@ -196,10 +196,8 @@
       // This function creates an iframe player after the API code downloads
       var player1;
       function onYouTubeIframeAPIReady() {
-        // Random number decides which video will play first in the playlist
-        var vids = Math.floor((Math.random() * 26) + 1);
         player1 = new YT.Player('player1', {
-          // A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist
+          // Set the height, width, and events for the player
           height: '100%',
           width: '100%',
           events: {
@@ -220,7 +218,7 @@
         }
         else {
           // Random number decides which video will play first in the playlist
-          var vid = Math.floor((Math.random() * 26) + 1);
+          var vid = Math.floor((Math.random() * 62) + 1);
           player1.cuePlaylist({
             listType:'playlist',
             list:'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
