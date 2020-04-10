@@ -283,16 +283,17 @@
           width: '100%',
           events: {
             'onReady': function(event) {
-        //hide player document.getElementById('player1').setAttribute('hidden', '');
-        // Check if there is a playlist in local storage
-        if (localStorage.getItem(playerInfo.id+'Playlist') != null) {
-          event.target.cuePlaylist(
-            localStorage.getItem(playerInfo.id+'Playlist'),
-            localStorage.getItem(playerInfo.id+'Index'),
-            localStorage.getItem(playerInfo.id+'Time')
-          );
-          event.target.setLoop(true);
-        }
+              //hide player document.getElementById('player1').setAttribute('hidden', '');
+              // Check if there is a playlist in local storage
+              console.log(playerInfo.id);
+              if (localStorage.getItem(playerInfo.id+'Playlist') != null) {
+                event.target.cuePlaylist(
+                  localStorage.getItem(playerInfo.id+'Playlist'),
+                  localStorage.getItem(playerInfo.id+'Index'),
+                  localStorage.getItem(playerInfo.id+'Time')
+                );
+                event.target.setLoop(true);
+              }
         else {
           // Random number decides which video will play first in the playlist
           var vid = Math.floor((Math.random() * playerInfo.length) + 1);
