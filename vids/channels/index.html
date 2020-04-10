@@ -285,7 +285,7 @@
             'onReady': function(event) {
               //hide player document.getElementById('player1').setAttribute('hidden', '');
               // Check if there is a playlist in local storage
-              console.log(localStorage.getItem(playerInfo.id+'Playlist'));
+              console.log(localStorage.playerInfo.id+'Playlist');
               if (localStorage.getItem(playerInfo.id+'Playlist') != null) {
                 event.target.cuePlaylist(
                   localStorage.getItem(playerInfo.id+'Playlist'),
@@ -294,21 +294,21 @@
                 );
                 event.target.setLoop(true);
               }
-        else {
-          // Random number decides which video will play first in the playlist
-          var vid = Math.floor((Math.random() * playerInfo.length) + 1);
-          event.target.cuePlaylist({
-            listType:'playlist',
-            list:playerInfo.list,
-            index:vid
-          });
-          //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
-          setTimeout(function() {
-            event.target.setShuffle({'shufflePlaylist' : true});
-          }, 1000);
-          event.target.setLoop(true); 
-        }
-      }
+              else {
+                // Random number decides which video will play first in the playlist
+                var vid = Math.floor((Math.random() * playerInfo.length) + 1);
+                event.target.cuePlaylist({
+                  listType:'playlist',
+                  list:playerInfo.list,
+                  index:vid
+                });
+                //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
+                setTimeout(function() {
+                  event.target.setShuffle({'shufflePlaylist' : true});
+                }, 1000);
+                event.target.setLoop(true); 
+              }
+            }
             //'onStateChange': onPlayerStateChange
           }
         });
