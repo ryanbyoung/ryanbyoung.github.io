@@ -278,12 +278,7 @@
           height: '100%',
           width: '100%',
           events: {
-            'onReady': onPlayerReady
-            //'onStateChange': onPlayerStateChange
-          }
-        });
-      }
-      function onPlayerReady(event) {
+            'onReady': function(event) {
         //hide player document.getElementById('player1').setAttribute('hidden', '');
         // Check if there is a playlist in local storage
         if (localStorage.getItem(playerInfoList.id+'Playlist') != null) {
@@ -308,6 +303,10 @@
           }, 1000);
           event.target.setLoop(true); 
         }
+      }
+            //'onStateChange': onPlayerStateChange
+          }
+        });
       }
 
 
