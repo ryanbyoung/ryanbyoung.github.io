@@ -281,20 +281,20 @@
             'onReady': function(event) {
         //hide player document.getElementById('player1').setAttribute('hidden', '');
         // Check if there is a playlist in local storage
-        if (localStorage.getItem(playerInfoList.id+'Playlist') != null) {
+        if (localStorage.getItem(playerInfo.id+'Playlist') != null) {
           event.target.cuePlaylist(
-            localStorage.getItem(playerInfoList.id+'Playlist'),
-            localStorage.getItem(playerInfoList.id+'Index'),
-            localStorage.getItem(playerInfoList.id+'Time')
+            localStorage.getItem(playerInfo.id+'Playlist'),
+            localStorage.getItem(playerInfo.id+'Index'),
+            localStorage.getItem(playerInfo.id+'Time')
           );
           event.target.setLoop(true);
         }
         else {
           // Random number decides which video will play first in the playlist
-          var vid = Math.floor((Math.random() * playerInfoList.length) + 1);
+          var vid = Math.floor((Math.random() * playerInfo.length) + 1);
           event.target.cuePlaylist({
             listType:'playlist',
-            list:playerInfoList.list,
+            list:playerInfo.list,
             index:vid
           });
           //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
