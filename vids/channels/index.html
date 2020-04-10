@@ -227,6 +227,8 @@
       <h1>Dane Reynolds Channel</h1>
       <div class="embed-container">
         <div id="player1"></div>
+        <div id="player2"></div>
+        <div id="player3"></div>
       </div>
       <p>
         <button id="close">Close Channel</button>
@@ -249,23 +251,36 @@
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-      // This function creates an iframe player for channel id 1 after the API code downloads
-      var player1; //using channel id for number in variable
+      var playerInfoList = [{
+        id: 'player1'
+      }, {
+        id: 'player2'
+      }, {
+        id: 'player3'
+      }];
+      var players = new Array();
       function onYouTubeIframeAPIReady() {
-        player1 = new YT.Player('player1', {
-          // Set the height, width, and events for the player
+        if (typeof playerInfoList === 'undefined') return;
+        for (var y = 0; y < playerInfoList.length; y++) {
+          var currentPlayer = createPlayer(playerInfoList[y]);
+          players[y] = currentPlayer;
+        }
+      }
+      function createPlayer(playerInfo) {
+        return new YT.Player(playerInfo.id, {
           height: '100%',
           width: '100%',
           events: {
-            'onReady': onPlayer1Ready,
-            'onStateChange': onPlayer1StateChange
+            //'onReady': onPlayerReady,
+            //'onStateChange': onPlayerStateChange
           }
         });
       }
 
+
       function onPlayer1Ready(event) {
         //get player details -> console.log(event.target);
-        document.getElementById('player1').setAttribute('hidden', '');
+        //hide player document.getElementById('player1').setAttribute('hidden', '');
         // Check if there is a playlist in local storage
         if (localStorage.Player1Playlist != null) {
           player1.cuePlaylist(
