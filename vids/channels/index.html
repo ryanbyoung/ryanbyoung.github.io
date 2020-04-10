@@ -314,9 +314,8 @@
             },
             'onStateChange': function(event) {
               if (event.data === 2) {
-                console.log(playerPlaylist);
-                console.log(playerName);
-                console.log(currentPlayer);
+                console.log(event.target);
+                console.log(event.target.getPlaylist());
                 //localStorage.setItem(playerPlaylist, playerName.getPlaylist());
                 //localStorage.setItem(playerPlaylistIndex, playerInfo.id.getPlaylistIndex());
                 // For getting id of video playing - don't need this I don't think
