@@ -287,7 +287,9 @@
         //get player details -> console.log(event.target);
         //hide player document.getElementById('player1').setAttribute('hidden', '');
         // Loop through all of the players
+        console.log(playerInfoList.length);
         for (var z = 0; z < playerInfoList.length; z++) {
+          console.log(playerInfoList[z].id);
           // Check if there is a playlist in local storage
           if (localStorage.getItem(playerInfoList[z].id+'Playlist') != null) {
             playerInfoList[z].id.cuePlaylist(
