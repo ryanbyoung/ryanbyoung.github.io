@@ -278,7 +278,6 @@
         }
       }
       function createPlayer(playerInfo) {
-        var playerName = playerInfo.id;
         var playerPlaylist = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Playlist';
         var playerPlaylistIndex = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'PlaylistIndex';
         var playerTime = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Time';
@@ -314,14 +313,12 @@
             },
             'onStateChange': function(event) {
               if (event.data === 2) {
-                console.log(event.target);
-                console.log(event.target.getPlaylist());
-                //localStorage.setItem(playerPlaylist, playerName.getPlaylist());
-                //localStorage.setItem(playerPlaylistIndex, playerInfo.id.getPlaylistIndex());
+                localStorage.setItem(playerPlaylist, event.target.getPlaylist());
+                localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                 // For getting id of video playing - don't need this I don't think
                 // var obj = playerInfo.id.getVideoData();
                 // localStorage.setItem(playerVideoID, obj[Object.keys(obj)[0]]);
-                //localStorage.setItem(playerTime, playerInfo.id.getCurrentTime());
+                localStorage.setItem(playerTime, event.target.getCurrentTime());
               }
             }
           }
