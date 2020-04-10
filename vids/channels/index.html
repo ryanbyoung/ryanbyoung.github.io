@@ -287,9 +287,7 @@
         //get player details -> console.log(event.target);
         //hide player document.getElementById('player1').setAttribute('hidden', '');
         // Loop through all of the players
-        console.log(playerInfoList.length);
         for (var z = 0; z < playerInfoList.length; z++) {
-          console.log(playerInfoList[z].id);
           // Check if there is a playlist in local storage
           if (localStorage.getItem(playerInfoList[z].id+'Playlist') != null) {
             playerInfoList[z].id.cuePlaylist(
@@ -302,11 +300,11 @@
           else {
             // Random number decides which video will play first in the playlist
             var vid = Math.floor((Math.random() * playerInfoList[z].length) + 1);
-            playerInfoList[z].id.cuePlaylist({
-              listType:'playlist',
-              list:playerInfoList[z].list,
-              index:vid
-            });
+            playerInfoList[z].id.cuePlaylist(
+              'playlist',
+              playerInfoList[z].list,
+              vid
+            );
             //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
             setTimeout(function() {
               event.target.setShuffle({'shufflePlaylist' : true});
