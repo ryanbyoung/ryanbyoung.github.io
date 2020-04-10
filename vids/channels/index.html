@@ -284,16 +284,15 @@
           events: {
             'onReady': function(event) {
               //hide player document.getElementById('player1').setAttribute('hidden', '');
-              // Check if there is a playlist in local storage
               var playerPlaylist = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Playlist';
-              var playerIndex = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Index';
+              var playerPlaylistIndex = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'PlaylistIndex';
               var playerTime = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Time';
-              console.log(localStorage.getItem(playerPlaylist));
-              if (localStorage.playerPlaylist != null) {
+              // Check if there is a playlist for this player in local storage
+              if (localStorage.getItem(playerPlaylist) != null) {
                 event.target.cuePlaylist(
-                  localStorage.playerPlaylist,
-                  localStorage.playerIndex,
-                  localStorage.playerTime
+                  localStorage.getItem(playerPlaylist),
+                  localStorage.getItem(playerPlaylistIndex),
+                  localStorage.getItem(playerTime)
                 );
                 event.target.setLoop(true);
               }
@@ -312,21 +311,20 @@
                 event.target.setLoop(true); 
               }
             }
-            //'onStateChange': onPlayerStateChange
+            'onStateChange': function(event) {
+              if (event.data === 2) {
+                localStorage.setItem(playerPlaylist, playerInfo.id.getPlaylist());
+                localStorage.setItem(playerPlaylistIndex, playerInfo.id.getPlaylistIndex());
+                // For getting id of video playing - don't need this I don't think
+                // var obj = playerInfo.id.getVideoData();
+                // localStorage.setItem(playerVideoID, obj[Object.keys(obj)[0]]);
+                localStorage.setItem(playerTime, playerInfo.id.getCurrentTime());
+              }
+            }
           }
         });
       }
 
-
-      function onPlayer1StateChange(event) {
-        if (event.data === 2) {
-          localStorage.setItem('Player1Playlist', player1.getPlaylist());
-          localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
-          var obj = player1.getVideoData();
-          localStorage.setItem('Player1VideoID', obj[Object.keys(obj)[0]]);
-          localStorage.setItem('Player1Time', player1.getCurrentTime());
-        }
-      }
 
       // Variables for counters and determining empty fields
       var a, b, c, d, e, f, g, h;
