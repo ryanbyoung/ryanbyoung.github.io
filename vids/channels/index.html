@@ -278,15 +278,15 @@
         }
       }
       function createPlayer(playerInfo) {
+        var playerPlaylist = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Playlist';
+        var playerPlaylistIndex = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'PlaylistIndex';
+        var playerTime = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Time';
         return new YT.Player(playerInfo.id, {
           height: '100%',
           width: '100%',
           events: {
             'onReady': function(event) {
               //hide player document.getElementById('player1').setAttribute('hidden', '');
-              var playerPlaylist = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Playlist';
-              var playerPlaylistIndex = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'PlaylistIndex';
-              var playerTime = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Time';
               // Check if there is a playlist for this player in local storage
               if (localStorage.getItem(playerPlaylist) != null) {
                 event.target.cuePlaylist(
@@ -313,8 +313,7 @@
             },
             'onStateChange': function(event) {
               if (event.data === 2) {
-                console.log(playerInfo.id.getPlaylist());
-                //localStorage.setItem(playerPlaylist, playerInfo.id.getPlaylist());
+                localStorage.setItem(playerPlaylist, playerInfo.id.getPlaylist());
                 //localStorage.setItem(playerPlaylistIndex, playerInfo.id.getPlaylistIndex());
                 // For getting id of video playing - don't need this I don't think
                 // var obj = playerInfo.id.getVideoData();
