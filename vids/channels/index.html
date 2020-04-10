@@ -300,6 +300,7 @@
           else {
             // Random number decides which video will play first in the playlist
             var vid = Math.floor((Math.random() * playerInfoList[z].length) + 1);
+            console.log(players[z]);
             players[z].cuePlaylist({
               listType:'playlist',
               list:playerInfoList[z].list,
@@ -307,7 +308,7 @@
             });
             //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
             setTimeout(function() {
-              players[z].setShuffle({'shufflePlaylist' : true});
+              event.target.setShuffle({'shufflePlaylist' : true});
             }, 1000);
             players[z].setLoop(true); 
           }
