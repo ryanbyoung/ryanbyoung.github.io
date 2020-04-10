@@ -301,9 +301,10 @@
             // Random number decides which video will play first in the playlist
             var vid = Math.floor((Math.random() * playerInfoList[z].length) + 1);
             var player = playerInfoList[z].id;
+            var list = playerInfoList[z].list;
             player.cuePlaylist({
               listType:'playlist',
-              list:playerInfoList[z].list,
+              list:list,
               index:vid
             });
             //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
