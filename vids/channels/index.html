@@ -227,7 +227,11 @@
       <h1>Dane Reynolds Channel</h1>
       <div class="embed-container">
         <div id="player1"></div>
+      </div>
+      <div class="embed-container">
         <div id="player2"></div>
+      </div>
+      <div class="embed-container">
         <div id="player3"></div>
       </div>
       <p>
@@ -433,7 +437,7 @@
 
 
       function close() {
-        player1.pauseVideo();
+        players[0].pauseVideo();
         BODY.removeAttribute('class');
         MAIN.removeAttribute('hidden');
         NAV.removeAttribute('class');
