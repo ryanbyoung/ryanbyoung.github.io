@@ -286,12 +286,14 @@
               //hide player document.getElementById('player1').setAttribute('hidden', '');
               // Check if there is a playlist in local storage
               var playerPlaylist = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Playlist';
-              console.log(playerPlaylist);
-              if (localStorage.getItem(playerInfo.id+'Playlist') != null) {
+              var playerIndex = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Index';
+              var playerTime = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Time';
+              console.log(localStorage.playerPlaylist);
+              if (localStorage.playerPlaylist != null) {
                 event.target.cuePlaylist(
-                  localStorage.getItem(playerInfo.id+'Playlist'),
-                  localStorage.getItem(playerInfo.id+'Index'),
-                  localStorage.getItem(playerInfo.id+'Time')
+                  localStorage.playerPlaylist,
+                  localStorage.playerIndex,
+                  localStorage.playerTime
                 );
                 event.target.setLoop(true);
               }
