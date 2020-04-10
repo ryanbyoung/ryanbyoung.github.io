@@ -285,7 +285,9 @@
             'onReady': function(event) {
               //hide player document.getElementById('player1').setAttribute('hidden', '');
               // Check if there is a playlist in local storage
-              console.log(localStorage.playerInfo.id+'Playlist');
+              var playerPlaylist = playerInfo.id+'Playlist';
+              console.log(playerPlaylist);
+              console.log(localStorage.Player1Playlist);
               if (localStorage.getItem(playerInfo.id+'Playlist') != null) {
                 event.target.cuePlaylist(
                   localStorage.getItem(playerInfo.id+'Playlist'),
