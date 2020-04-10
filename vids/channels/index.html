@@ -288,7 +288,7 @@
               var playerPlaylist = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Playlist';
               var playerIndex = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Index';
               var playerTime = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Time';
-              console.log(localStorage.playerPlaylist);
+              console.log(localStorage.getItem(playerPlaylist));
               if (localStorage.playerPlaylist != null) {
                 event.target.cuePlaylist(
                   localStorage.playerPlaylist,
