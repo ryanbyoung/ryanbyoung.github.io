@@ -300,7 +300,7 @@
           else {
             // Random number decides which video will play first in the playlist
             var vid = Math.floor((Math.random() * playerInfoList[z].length) + 1);
-            player1.cuePlaylist({
+            playerInfoList[z].id.cuePlaylist({
               listType:'playlist',
               list:playerInfoList[z].list,
               index:vid
