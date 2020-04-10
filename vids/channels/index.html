@@ -275,7 +275,7 @@
         for (var y = 0; y < playerInfoList.length; y++) {
           var currentPlayer = createPlayer(playerInfoList[y]);
           players[y] = currentPlayer;
-          document.getElementById(playerInfoList.id).setAttribute('hidden', '');
+          document.getElementById(playerInfoList[y].id).setAttribute('hidden', '');
         }
       }
       function createPlayer(playerInfo) {
@@ -368,6 +368,7 @@
       }
       function daneClick(e) {
         e.preventDefault();
+        document.getElementById('player1').removeAttribute('hidden');
         players[0].playVideo();
         var data = e.target.getAttribute('href'),
           url = data + '/';
