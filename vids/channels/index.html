@@ -361,7 +361,7 @@
       }
       function daneClick(e) {
         e.preventDefault();
-        player1.playVideo();
+        players[0].playVideo();
         var data = e.target.getAttribute('href'),
           url = data + '/';
         history.pushState(data, null, url);
@@ -375,7 +375,7 @@
       window.addEventListener('popstate', function(e){
         var ch = e.state;
         if (ch == null) {
-          player1.pauseVideo();
+          players[0].pauseVideo();
           MAIN.removeAttribute('hidden');
           BODY.removeAttribute('class');
           NAV.removeAttribute('class');
@@ -386,7 +386,7 @@
           BODY.setAttribute('class', 'dark');
           NAV.setAttribute('class', 'hide');
           OVERLAY.removeAttribute('hidden');
-          player1.playVideo();
+          players[0].playVideo();
           document.title = 'Dane Reynolds Channel';
         }
       });
