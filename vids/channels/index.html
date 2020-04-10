@@ -284,10 +284,9 @@
         });
       }
       function onPlayerReady(event) {
-        console.log(event.target);
         //hide player document.getElementById('player1').setAttribute('hidden', '');
-        // Check if there is a playlist in local storage
-        if (localStorage.getItem(playerInfoList[z].id+'Playlist') != null) {
+        /* Check if there is a playlist in local storage
+        if (localStorage.getItem(playerInfoList[z].id+'Playlist') != null) {*/
           event.target.cuePlaylist(
             localStorage.getItem(playerInfoList[z].id+'Playlist'),
             localStorage.getItem(playerInfoList[z].id+'Index'),
