@@ -226,7 +226,7 @@
     <main id="overlay" hidden>
       <h1>Dane Reynolds Channel</h1>
       <div class="embed-container">
-        <div id="player1" hidden></div>
+        <div id="player1"></div>
       </div>
       <p>
         <button id="close">Close Channel</button>
@@ -265,6 +265,7 @@
 
       function onPlayer1Ready(event) {
         //get player details -> console.log(event.target);
+        document.getElementById('player1').setAttribute('hidden', '');
         // Check if there is a playlist in local storage
         if (localStorage.Player1Playlist != null) {
           player1.cuePlaylist(
