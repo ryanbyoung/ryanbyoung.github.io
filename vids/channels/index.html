@@ -387,6 +387,7 @@
           NAV.removeAttribute('class');
           OVERLAY.setAttribute('hidden', '');
           OVERLAYTITLE.innerText = '';
+          document.getElementById('player1').setAttribute('hidden', '');
           document.title = PAGETITLE;
         } else {
           MAIN.setAttribute('hidden', '');
@@ -447,6 +448,8 @@
         MAIN.removeAttribute('hidden');
         NAV.removeAttribute('class');
         OVERLAY.setAttribute('hidden', '');
+        OVERLAYTITLE.innerText = '';
+        document.getElementById('player1').setAttribute('hidden', '');
         var pathArray = window.location.pathname.split('/');
         var fullURL = window.location.protocol + "//" + window.location.host;
         for (i = 0; i < 3; i++) {
@@ -454,7 +457,7 @@
           fullURL += "/";
         }
         history.pushState(null, null, fullURL);
-        document.title = TITLE;
+        document.title = PAGETITLE;
       }
 
 
