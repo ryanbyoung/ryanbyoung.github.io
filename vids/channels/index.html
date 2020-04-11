@@ -146,18 +146,8 @@
         width: 100%
       }
       #overlay {
-        padding-bottom: 0;
-        background-color: black /* rgba(0,0,0,0.9);
-        bottom: 0;
-        height: 100%;
-        left: 0;
-        padding: 10px;
-        position: fixed;
-        right: 0;
-        top: 0;
-        width: calc(100% - 20px);
-        z-index: 2 
-        */
+        background-color: black;
+        padding-bottom: 0
       }
       #overlay-title {
         color: white;
@@ -283,7 +273,6 @@
           width: '100%',
           events: {
             'onReady': function(event) {
-              //hide player document.getElementById('player1').setAttribute('hidden', '');
               // Check if there is a playlist for this player in local storage
               if (localStorage.getItem(playerPlaylist) != null) {
                 event.target.cuePlaylist(
@@ -312,9 +301,6 @@
               if (event.data === 2) {
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
-                // For getting id of video playing - don't need this I don't think
-                // var obj = playerInfo.id.getVideoData();
-                // localStorage.setItem(playerVideoID, obj[Object.keys(obj)[0]]);
                 localStorage.setItem(playerTime, event.target.getCurrentTime());
               }
             }
@@ -348,18 +334,6 @@
       const D = document.querySelectorAll('a[href=dane-reynolds]');
       CLOSE.addEventListener('click', close);
       const PAGETITLE = 'Channels';
-      /*
-      D.addEventListener('click', function(e){
-        e.preventDefault();
-        var data = e.target.getAttribute('id'),
-          url = data + '/';
-        history.pushState(data, null, url);
-        OVERLAY.removeAttribute('class');
-        player.playVideo();
-        document.title = 'Dane Reynolds Channel';
-        e.stopPropagation();
-      }, false);
-      */
       for (x = 0; x < D.length; x++) {
         D[x].addEventListener('click', daneClick, false);
       }
