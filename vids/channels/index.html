@@ -159,7 +159,7 @@
         z-index: 2 
         */
       }
-      #overlay h1 {
+      #overlay-title {
         color: white;
         font-size: 1.5em;
         margin: .83em 0
@@ -224,14 +224,10 @@
       <p class="hide" id="empty-filter">No favorite channels have been selected.</p>
     </main>
     <main id="overlay" hidden>
-      <h1>Dane Reynolds Channel</h1>
+      <h1 id="overlay-title"></h1>
       <div class="embed-container">
         <div id="player1"></div>
-      </div>
-      <div class="embed-container">
         <div id="player2"></div>
-      </div>
-      <div class="embed-container">
         <div id="player3"></div>
       </div>
       <p>
@@ -347,10 +343,11 @@
       const BODY = document.querySelector('body');
       const NAV = document.querySelector('nav');
       const OVERLAY = document.getElementById('overlay');
+      const OVERLAYTITLE = document.getElementById('overlay-title');
       const CLOSE = document.getElementById('close');
       const D = document.querySelectorAll('a[href=dane-reynolds]');
       CLOSE.addEventListener('click', close);
-      const TITLE = 'Channels';
+      const PAGETITLE = 'Channels';
       /*
       D.addEventListener('click', function(e){
         e.preventDefault();
@@ -369,6 +366,7 @@
       function daneClick(e) {
         e.preventDefault();
         document.getElementById('player1').removeAttribute('hidden');
+        OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
         players[0].playVideo();
         var data = e.target.getAttribute('href'),
           url = data + '/';
@@ -388,12 +386,15 @@
           BODY.removeAttribute('class');
           NAV.removeAttribute('class');
           OVERLAY.setAttribute('hidden', '');
-          document.title = TITLE;
+          OVERLAYTITLE.innerText = '';
+          document.title = PAGETITLE;
         } else {
           MAIN.setAttribute('hidden', '');
           BODY.setAttribute('class', 'dark');
           NAV.setAttribute('class', 'hide');
           OVERLAY.removeAttribute('hidden');
+          OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
+          document.getElementById('player1').removeAttribute('hidden');
           players[0].playVideo();
           document.title = 'Dane Reynolds Channel';
         }
