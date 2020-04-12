@@ -350,21 +350,21 @@
           switch (e.target.innerHTML) {
             case '1':
             case 'Dane Reynolds':
-              players[0].l.removeAttribute('hidden');
+              players[0].f.removeAttribute('hidden');
               OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
               players[0].playVideo();
               document.title = 'Dane Reynolds Channel';
               break;
             case '2':
             case 'Kelly Slater':
-              players[1].l.removeAttribute('hidden');
+              players[1].f.removeAttribute('hidden');
               OVERLAYTITLE.innerText = 'Kelly Slater Channel';
               players[1].playVideo();
               document.title = 'Kelly Slater Channel';
               break;
             case '3':
             case 'Craig Anderson':
-              players[2].l.removeAttribute('hidden');
+              players[2].f.removeAttribute('hidden');
               OVERLAYTITLE.innerText = 'Craig Anderson Channel';
               players[2].playVideo();
               document.title = 'Craig Anderson Channel';
@@ -386,17 +386,17 @@
           case 'dane-reynolds':
             OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
             document.title = 'Dane Reynolds Channel';
-            players[0].l.removeAttribute('hidden');
+            players[0].f.removeAttribute('hidden');
             players[0].playVideo();
           case 'kelly-slater':
             OVERLAYTITLE.innerText = 'Kelly Slater Channel';
             document.title = 'Kelly Slater Channel';
-            players[1].l.removeAttribute('hidden');
+            players[1].f.removeAttribute('hidden');
             players[1].playVideo();
           case 'craig-anderson':
             OVERLAYTITLE.innerText = 'Craig Anderson Channel';
             document.title = 'Craig Anderson Channel';
-            players[2].l.removeAttribute('hidden');
+            players[2].f.removeAttribute('hidden');
             players[2].playVideo();
           MAIN.setAttribute('hidden', '');
           BODY.setAttribute('class', 'dark');
@@ -406,7 +406,7 @@
         if (recentChannel === null){
           players.forEach(function (el) {
             el.pauseVideo();
-            el.l.setAttribute('hidden', '');
+            el.f.setAttribute('hidden', '');
           });
           MAIN.removeAttribute('hidden');
           BODY.removeAttribute('class');
