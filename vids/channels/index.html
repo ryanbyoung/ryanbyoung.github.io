@@ -338,6 +338,8 @@
       const PAGETITLE = 'Channels';
       CLOSE.addEventListener('click', close);
       function linkClick(e) {
+        console.log(e.target);
+        console.log(e.target.innerHTML);
         e.preventDefault();
         switch (e.target.innerHTML) {
           case '1':
