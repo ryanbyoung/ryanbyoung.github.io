@@ -382,27 +382,6 @@
       }
       window.addEventListener('popstate', function(e){
         var recentChannel = e.state;
-        switch (recentChannel) {
-          case 'dane-reynolds':
-            OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
-            document.title = 'Dane Reynolds Channel';
-            players[0].f.removeAttribute('hidden');
-            players[0].playVideo();
-          case 'kelly-slater':
-            OVERLAYTITLE.innerText = 'Kelly Slater Channel';
-            document.title = 'Kelly Slater Channel';
-            players[1].f.removeAttribute('hidden');
-            players[1].playVideo();
-          case 'craig-anderson':
-            OVERLAYTITLE.innerText = 'Craig Anderson Channel';
-            document.title = 'Craig Anderson Channel';
-            players[2].f.removeAttribute('hidden');
-            players[2].playVideo();
-          MAIN.setAttribute('hidden', '');
-          BODY.setAttribute('class', 'dark');
-          NAV.setAttribute('class', 'hide');
-          OVERLAY.removeAttribute('hidden');
-        }
         if (recentChannel === null){
           players.forEach(function (el) {
             el.pauseVideo();
@@ -415,6 +394,30 @@
           OVERLAYTITLE.innerText = '';
           document.title = PAGETITLE;
         }
+        switch (recentChannel) {
+          case 'dane-reynolds':
+            OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
+            document.title = 'Dane Reynolds Channel';
+            players[0].f.removeAttribute('hidden');
+            players[0].playVideo();
+            break;
+          case 'kelly-slater':
+            OVERLAYTITLE.innerText = 'Kelly Slater Channel';
+            document.title = 'Kelly Slater Channel';
+            players[1].f.removeAttribute('hidden');
+            players[1].playVideo();
+            break;
+          case 'craig-anderson':
+            OVERLAYTITLE.innerText = 'Craig Anderson Channel';
+            document.title = 'Craig Anderson Channel';
+            players[2].f.removeAttribute('hidden');
+            players[2].playVideo();
+            break;
+        }
+        MAIN.setAttribute('hidden', '');
+        BODY.setAttribute('class', 'dark');
+        NAV.setAttribute('class', 'hide');
+        OVERLAY.removeAttribute('hidden');
       });
 
 
