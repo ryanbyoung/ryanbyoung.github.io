@@ -383,13 +383,15 @@
       window.addEventListener('popstate', function(e){
         var ch = e.state;
         if (ch == null) {
-          players[0].pauseVideo();
+          players.forEach(function (el) {
+            el.pauseVideo();
+            el.l.setAttribute('hidden', '');
+          });
           MAIN.removeAttribute('hidden');
           BODY.removeAttribute('class');
           NAV.removeAttribute('class');
           OVERLAY.setAttribute('hidden', '');
           OVERLAYTITLE.innerText = '';
-          document.getElementById('player1').setAttribute('hidden', '');
           document.title = PAGETITLE;
         } else {
           MAIN.setAttribute('hidden', '');
