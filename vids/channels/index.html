@@ -193,19 +193,19 @@
           <tr class="all">
             <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel2" role="button" tabindex="0">♡</td>
             <td class="channel">
-              <a href="kelly/index.html">2</a>
+              <a href="kelly-slater">2</a>
             </td>
             <td class="search-item">
-              <a href="kelly/index.html">Kelly Slater</a>
+              <a href="kelly-slater">Kelly Slater</a>
             </td>
           </tr>
           <tr class="all">
             <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel3" role="button" tabindex="0">♡</td>
             <td class="channel">
-              <a href="channel/craig.html">3</a>
+              <a href="craig-anderson">3</a>
             </td>
             <td class="search-item">
-              <a href="channel/craig.html">Craig Anderson</a>
+              <a href="craig-anderson">Craig Anderson</a>
             </td>
           </tr>
         </tbody>
@@ -235,13 +235,14 @@
 
     <script>
 
-      // This code loads the iframe Player API code asynchronously (only need this once)
+      // Load YouTube's iframe player API code asynchronously
       var tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 
+      // Object containing info for all of the players
       var playerInfoList = [{
         id: 'player1',
         list: 'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
@@ -255,7 +256,9 @@
         list: 'PLMxOsrgGH8n622jc8CpXksExjvI0z6Cxy',
         length: 1
       }];
+      // Array of created players
       var players = new Array();
+      // YouTube iframe API ready function
       function onYouTubeIframeAPIReady() {
         if (typeof playerInfoList === 'undefined') return;
         for (var y = 0; y < playerInfoList.length; y++) {
@@ -264,6 +267,7 @@
           document.getElementById(playerInfoList[y].id).setAttribute('hidden', '');
         }
       }
+      // createPlayer function
       function createPlayer(playerInfo) {
         var playerPlaylist = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Playlist';
         var playerPlaylistIndex = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'PlaylistIndex';
@@ -331,13 +335,14 @@
       const OVERLAY = document.getElementById('overlay');
       const OVERLAYTITLE = document.getElementById('overlay-title');
       const CLOSE = document.getElementById('close');
-      const D = document.querySelectorAll('a[href=dane-reynolds]');
+      const LINK = document.querySelectorAll('a');
       CLOSE.addEventListener('click', close);
       const PAGETITLE = 'Channels';
-      for (x = 0; x < D.length; x++) {
-        D[x].addEventListener('click', daneClick, false);
+      for (x = 0; x < LINK.length; x++) {
+        LINK[x].addEventListener('click', linkClick, false);
       }
-      function daneClick(e) {
+      function linkClick(e) {
+        console.log(e);
         e.preventDefault();
         document.getElementById('player1').removeAttribute('hidden');
         OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
