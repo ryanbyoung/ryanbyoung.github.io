@@ -343,7 +343,9 @@
       }
       function linkClick(e) {
         console.log(e.target.innerHTML);
-        if (e.target.innnerHTML == 'Movies') {}
+        if (e.target.innnerHTML == 'Movies') {
+          return false;
+        }
         else {
         e.preventDefault();
         document.getElementById('player1').removeAttribute('hidden');
