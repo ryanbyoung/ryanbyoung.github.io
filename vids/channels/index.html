@@ -355,6 +355,20 @@
               players[0].playVideo();
               document.title = 'Dane Reynolds Channel';
               break;
+            case '2':
+            case 'Kelly Slater':
+              document.getElementById('player2').removeAttribute('hidden');
+              OVERLAYTITLE.innerText = 'Kelly Slater Channel';
+              players[1].playVideo();
+              document.title = 'Kelly Slater Channel';
+              break;
+            case '3':
+            case 'Craig Anderson':
+              document.getElementById('player3').removeAttribute('hidden');
+              OVERLAYTITLE.innerText = 'Craig Anderson Channel';
+              players[2].playVideo();
+              document.title = 'Craig Anderson Channel';
+              break;
           }
           var data = e.target.getAttribute('href'),
             url = data + '/';
