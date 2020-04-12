@@ -350,21 +350,21 @@
           switch (e.target.innerHTML) {
             case '1':
             case 'Dane Reynolds':
-              document.getElementById('player1').removeAttribute('hidden');
+              players[0].l.removeAttribute('hidden');
               OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
               players[0].playVideo();
               document.title = 'Dane Reynolds Channel';
               break;
             case '2':
             case 'Kelly Slater':
-              document.getElementById('player2').removeAttribute('hidden');
+              players[1].l.removeAttribute('hidden');
               OVERLAYTITLE.innerText = 'Kelly Slater Channel';
               players[1].playVideo();
               document.title = 'Kelly Slater Channel';
               break;
             case '3':
             case 'Craig Anderson':
-              document.getElementById('player3').removeAttribute('hidden');
+              players[2].l.removeAttribute('hidden');
               OVERLAYTITLE.innerText = 'Craig Anderson Channel';
               players[2].playVideo();
               document.title = 'Craig Anderson Channel';
@@ -381,9 +381,29 @@
         }
       }
       window.addEventListener('popstate', function(e){
-        var ch = e.state;
-        console.log(e.state);
-        if (ch == null) {
+        var recentChannel = e.state;
+        switch (recentChannel) {
+          case: 'dane-reynolds':
+            OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
+            document.title = 'Dane Reynolds Channel';
+            players[0].l.removeAttribute('hidden');
+            players[0].playVideo();
+          case: 'kelly-slater':
+            OVERLAYTITLE.innerText = 'Kelly Slater Channel';
+            document.title = 'Kelly Slater Channel';
+            players[1].l.removeAttribute('hidden');
+            players[1].playVideo();
+          case: 'craig-anderson':
+            OVERLAYTITLE.innerText = 'Craig Anderson Channel';
+            document.title = 'Craig Anderson Channel';
+            players[2].l.removeAttribute('hidden');
+            players[2].playVideo();
+          MAIN.setAttribute('hidden', '');
+          BODY.setAttribute('class', 'dark');
+          NAV.setAttribute('class', 'hide');
+          OVERLAY.removeAttribute('hidden');
+        }
+        if (recentChannel === null){
           players.forEach(function (el) {
             el.pauseVideo();
             el.l.setAttribute('hidden', '');
@@ -394,15 +414,6 @@
           OVERLAY.setAttribute('hidden', '');
           OVERLAYTITLE.innerText = '';
           document.title = PAGETITLE;
-        } else {
-          MAIN.setAttribute('hidden', '');
-          BODY.setAttribute('class', 'dark');
-          NAV.setAttribute('class', 'hide');
-          OVERLAY.removeAttribute('hidden');
-          OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
-          document.getElementById('player1').removeAttribute('hidden');
-          players[0].playVideo();
-          document.title = 'Dane Reynolds Channel';
         }
       });
 
