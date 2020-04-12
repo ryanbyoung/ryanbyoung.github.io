@@ -338,10 +338,9 @@
       const PAGETITLE = 'Channels';
       CLOSE.addEventListener('click', close);
       function linkClick(e) {
-        console.log(e.target);
-        console.log(e.target.innerHTML);
         e.preventDefault();
         switch (e.target.innerHTML) {
+          case '<a href="dane-reynolds">1</a>':
           case '1':
           case 'Dane Reynolds':
             players[0].f.removeAttribute('hidden');
@@ -349,6 +348,7 @@
             players[0].playVideo();
             document.title = 'Dane Reynolds Channel';
             break;
+          case '<a href="kelly-slater">2</a>':
           case '2':
           case 'Kelly Slater':
             players[1].f.removeAttribute('hidden');
@@ -356,6 +356,7 @@
             players[1].playVideo();
             document.title = 'Kelly Slater Channel';
             break;
+          case '<a href="craig-anderson">3</a>':
           case '3':
           case 'Craig Anderson':
             players[2].f.removeAttribute('hidden');
