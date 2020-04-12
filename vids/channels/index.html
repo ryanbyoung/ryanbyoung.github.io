@@ -383,17 +383,17 @@
       window.addEventListener('popstate', function(e){
         var recentChannel = e.state;
         switch (recentChannel) {
-          case: 'dane-reynolds':
+          case 'dane-reynolds':
             OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
             document.title = 'Dane Reynolds Channel';
             players[0].l.removeAttribute('hidden');
             players[0].playVideo();
-          case: 'kelly-slater':
+          case 'kelly-slater':
             OVERLAYTITLE.innerText = 'Kelly Slater Channel';
             document.title = 'Kelly Slater Channel';
             players[1].l.removeAttribute('hidden');
             players[1].playVideo();
-          case: 'craig-anderson':
+          case 'craig-anderson':
             OVERLAYTITLE.innerText = 'Craig Anderson Channel';
             document.title = 'Craig Anderson Channel';
             players[2].l.removeAttribute('hidden');
