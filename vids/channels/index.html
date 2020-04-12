@@ -343,23 +343,27 @@
       }
       function linkClick(e) {
         if (e.target.innerHTML == 'Movies') {
-          console.log('here');
           return true;
         }
         else {
-        e.preventDefault();
-        document.getElementById('player1').removeAttribute('hidden');
-        OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
-        players[0].playVideo();
-        var data = e.target.getAttribute('href'),
-          url = data + '/';
-        history.pushState(data, null, url);
-        MAIN.setAttribute('hidden', '');
-        BODY.setAttribute('class', 'dark');
-        NAV.setAttribute('class', 'hide');
-        OVERLAY.removeAttribute('hidden');
-        document.title = 'Dane Reynolds Channel';
-        e.stopPropagation();
+          e.preventDefault();
+          switch (e.target.innerHTML) {
+            case '1':
+            case 'Dane Reynolds':
+              document.getElementById('player1').removeAttribute('hidden');
+              OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
+              players[0].playVideo();
+              document.title = 'Dane Reynolds Channel';
+              break;
+          }
+          var data = e.target.getAttribute('href'),
+            url = data + '/';
+          history.pushState(data, null, url);
+          MAIN.setAttribute('hidden', '');
+          BODY.setAttribute('class', 'dark');
+          NAV.setAttribute('class', 'hide');
+          OVERLAY.removeAttribute('hidden');
+          e.stopPropagation();
         }
       }
       window.addEventListener('popstate', function(e){
