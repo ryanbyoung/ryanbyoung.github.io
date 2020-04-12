@@ -382,6 +382,7 @@
       }
       window.addEventListener('popstate', function(e){
         var ch = e.state;
+        console.log(e.state);
         if (ch == null) {
           players.forEach(function (el) {
             el.pauseVideo();
