@@ -342,7 +342,9 @@
         LINK[x].addEventListener('click', linkClick, false);
       }
       function linkClick(e) {
-        console.log(e);
+        console.log(e.target.innerHTML);
+        if (e.target.innnerHTML == 'Movies') {}
+        else {
         e.preventDefault();
         document.getElementById('player1').removeAttribute('hidden');
         OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
@@ -356,6 +358,7 @@
         OVERLAY.removeAttribute('hidden');
         document.title = 'Dane Reynolds Channel';
         e.stopPropagation();
+        }
       }
       window.addEventListener('popstate', function(e){
         var ch = e.state;
