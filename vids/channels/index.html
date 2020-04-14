@@ -342,7 +342,6 @@
         LINK[x].addEventListener('click', linkClick, false);
       }
       function linkClick(e) {
-        console.log(e);
         if (e.target.innerHTML == 'Movies') {
           return true;
         }
@@ -668,7 +667,9 @@
        * Allows whole table cell to be clicked or touched and goes to the link in the
        * anchor tag.
        */
-      function tdClick() {
+      function tdClick(e) {
+        console.log(e.target.innerHTML);
+        console.log(this.querySelector('a').href);
         location.href = this.querySelector('a').href;
       }
 
