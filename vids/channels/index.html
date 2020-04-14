@@ -384,13 +384,16 @@
         OVERLAYTITLE.innerText = '';
         document.title = PAGETITLE;
       }
+      function pausePlayers() {
+        players.forEach(function (el) {
+          el.pauseVideo();
+          el.f.setAttribute('hidden', '');
+        });
+      }
       window.addEventListener('popstate', function(e){
         var recentChannel = e.state;
         if (recentChannel === null){
-          players.forEach(function (el) {
-            el.pauseVideo();
-            el.f.setAttribute('hidden', '');
-          });
+          pausePlayers();
           hideOverlay();
         }
         else {
@@ -449,10 +452,7 @@
 
 
       function close() {
-        players.forEach(function (el) {
-          el.pauseVideo();
-          el.l.setAttribute('hidden', '');
-        });
+        pausePlayers();
         hideOverlay();
         var pathArray = window.location.pathname.split('/');
         var fullURL = window.location.protocol + "//" + window.location.host;
