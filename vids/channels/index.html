@@ -347,38 +347,42 @@
         }
         else {
           e.preventDefault();
+          var data = e.target.getAttribute('href'),
+              url = data + '/';
+          history.pushState(data, null, url);
           switch (e.target.innerHTML) {
             case '1':
             case 'Dane Reynolds':
-              players[0].f.removeAttribute('hidden');
-              OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
-              players[0].playVideo();
-              document.title = 'Dane Reynolds Channel';
+              showOverlay(0, 'Dane Reynolds Channel');
               break;
             case '2':
             case 'Kelly Slater':
-              players[1].f.removeAttribute('hidden');
-              OVERLAYTITLE.innerText = 'Kelly Slater Channel';
-              players[1].playVideo();
-              document.title = 'Kelly Slater Channel';
+              showOverlay(1, 'Kelly Slater Channel');
               break;
             case '3':
             case 'Craig Anderson':
-              players[2].f.removeAttribute('hidden');
-              OVERLAYTITLE.innerText = 'Craig Anderson Channel';
-              players[2].playVideo();
-              document.title = 'Craig Anderson Channel';
-              break;
+              showOverlay(2, 'Craig Anderson Channel');
           }
-          var data = e.target.getAttribute('href'),
-            url = data + '/';
-          history.pushState(data, null, url);
-          MAIN.setAttribute('hidden', '');
-          BODY.setAttribute('class', 'dark');
-          NAV.setAttribute('class', 'hide');
-          OVERLAY.removeAttribute('hidden');
           e.stopPropagation();
         }
+      }
+      function showOverlay(playerIndex, channelTitle) {
+        MAIN.setAttribute('hidden', '');
+        BODY.setAttribute('class', 'dark');
+        OVERLAY.removeAttribute('hidden');
+        OVERLAYTITLE.innerText = channelTitle;
+        players[playerIndex].f.removeAttribute('hidden');
+        players[playerIndex].playVideo();
+        document.title = channelTitle;
+        NAV.setAttribute('class', 'hide');
+      }
+      function hideOverlay() {
+        MAIN.removeAttribute('hidden');
+        BODY.removeAttribute('class');
+        NAV.removeAttribute('class');
+        OVERLAY.setAttribute('hidden', '');
+        OVERLAYTITLE.innerText = '';
+        document.title = PAGETITLE;
       }
       window.addEventListener('popstate', function(e){
         var recentChannel = e.state;
@@ -387,37 +391,19 @@
             el.pauseVideo();
             el.f.setAttribute('hidden', '');
           });
-          MAIN.removeAttribute('hidden');
-          BODY.removeAttribute('class');
-          NAV.removeAttribute('class');
-          OVERLAY.setAttribute('hidden', '');
-          OVERLAYTITLE.innerText = '';
-          document.title = PAGETITLE;
+          hideOverlay();
         }
         else {
           switch (recentChannel) {
             case 'dane-reynolds':
-              OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
-              document.title = 'Dane Reynolds Channel';
-              players[0].f.removeAttribute('hidden');
-              players[0].playVideo();
+              showOverlay(0, 'Dane Reynolds Channel');
               break;
             case 'kelly-slater':
-              OVERLAYTITLE.innerText = 'Kelly Slater Channel';
-              document.title = 'Kelly Slater Channel';
-              players[1].f.removeAttribute('hidden');
-              players[1].playVideo();
+              showOverlay(1, 'Kelly Slater Channel');
               break;
             case 'craig-anderson':
-              OVERLAYTITLE.innerText = 'Craig Anderson Channel';
-              document.title = 'Craig Anderson Channel';
-              players[2].f.removeAttribute('hidden');
-              players[2].playVideo();
+              showOverlay(2, 'Craig Anderson Channel');
           }
-          MAIN.setAttribute('hidden', '');
-          BODY.setAttribute('class', 'dark');
-          NAV.setAttribute('class', 'hide');
-          OVERLAY.removeAttribute('hidden');
         }
       });
 
@@ -467,11 +453,7 @@
           el.pauseVideo();
           el.l.setAttribute('hidden', '');
         });
-        BODY.removeAttribute('class');
-        MAIN.removeAttribute('hidden');
-        NAV.removeAttribute('class');
-        OVERLAY.setAttribute('hidden', '');
-        OVERLAYTITLE.innerText = '';
+        hideOverlay();
         var pathArray = window.location.pathname.split('/');
         var fullURL = window.location.protocol + "//" + window.location.host;
         for (i = 0; i < 3; i++) {
@@ -479,7 +461,6 @@
           fullURL += "/";
         }
         history.pushState(null, null, fullURL);
-        document.title = PAGETITLE;
       }
 
 
