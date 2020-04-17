@@ -221,12 +221,10 @@
           player2.setLoop(true); 
         }
       }
-      function onPlayer1StateChange(event) {
+      function onPlayer2StateChange(event) {
         if (event.data === 2) {
           localStorage.setItem('Player2Playlist', player2.getPlaylist());
           localStorage.setItem('Player2PlaylistIndex', player2.getPlaylistIndex());
-          var obj = player2.getVideoData();
-          localStorage.setItem('Player2VideoID', obj[Object.keys(obj)[0]]);
           localStorage.setItem('Player2Time', player2.getCurrentTime());
         }
       }
