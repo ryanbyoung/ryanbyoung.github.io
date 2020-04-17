@@ -451,6 +451,9 @@
       } // end init
 
 
+      /**
+       * Runs when user presses close channel button
+       */
       function close() {
         pausePlayers();
         hideOverlay();
@@ -480,6 +483,7 @@
           filterFavorites();
         }
         else {
+          search();
           filters[0].setAttribute('checked', '');
           filters[0].checked = true;
           ALLLABEL.focus();
@@ -553,49 +557,6 @@
       }
 
       /**
-       * Sets the styles of all the channels based on their values in local storage.
-       */
-      function setChannelStyles() {
-        var channelIcons = [];
-        var rowFilters = [];
-        var arias = [];
-        for (g = 0; g < FAVORITES.length; g++) {
-          channelIcons[g] = localStorage.getItem(FAVORITES[g].id);
-          rowFilters[g] = localStorage.getItem(FAVORITES[g].id+'Filter');
-          arias[g] = localStorage.getItem(FAVORITES[g].id+'Pressed');
-          FAVORITES[g].innerText = channelIcons[g];
-          FAVORITES[g].parentElement.classList = rowFilters[g];
-          FAVORITES[g].setAttribute('aria-pressed', arias[g]);
-        }
-      }
-
-      /**
-       * Sets the style of the filter based on the values saved in local storage.
-       * If the filter is set to favorite channels, displays the favorite channels.
-       */
-      function setFilterStyles() {
-        var filterChecked;
-        filterChecked = localStorage.getItem('FilterSelected');
-        if (filterChecked === 'all') {
-          filters[0].checked = true;
-          filters[0].setAttribute('checked', '');
-        }
-        else {
-          filters[1].checked = true;
-          filters[1].setAttribute('checked', '');
-          filterFavorites();
-        }
-      }
-
-      /**
-       * Sets the search field value to the value that is saved in the local storage.
-       */
-      function setSearchValue() {
-        var savedSearch = localStorage.getItem('SearchValue');
-        SEARCH.value = savedSearch;
-      }
-
-      /**
        * Runs when the page is loaded and everytime the user presses a key in the search field.
        *
        * Populates the local storage with the value in the search field.
@@ -642,6 +603,49 @@
             }
           }
         }
+      }
+
+      /**
+       * Sets the styles of all the channels based on their values in local storage.
+       */
+      function setChannelStyles() {
+        var channelIcons = [];
+        var rowFilters = [];
+        var arias = [];
+        for (g = 0; g < FAVORITES.length; g++) {
+          channelIcons[g] = localStorage.getItem(FAVORITES[g].id);
+          rowFilters[g] = localStorage.getItem(FAVORITES[g].id+'Filter');
+          arias[g] = localStorage.getItem(FAVORITES[g].id+'Pressed');
+          FAVORITES[g].innerText = channelIcons[g];
+          FAVORITES[g].parentElement.classList = rowFilters[g];
+          FAVORITES[g].setAttribute('aria-pressed', arias[g]);
+        }
+      }
+
+      /**
+       * Sets the style of the filter based on the values saved in local storage.
+       * If the filter is set to favorite channels, displays the favorite channels.
+       */
+      function setFilterStyles() {
+        var filterChecked;
+        filterChecked = localStorage.getItem('FilterSelected');
+        if (filterChecked === 'all') {
+          filters[0].checked = true;
+          filters[0].setAttribute('checked', '');
+        }
+        else {
+          filters[1].checked = true;
+          filters[1].setAttribute('checked', '');
+          filterFavorites();
+        }
+      }
+
+      /**
+       * Sets the search field value to the value that is saved in the local storage.
+       */
+      function setSearchValue() {
+        var savedSearch = localStorage.getItem('SearchValue');
+        SEARCH.value = savedSearch;
       }
 
       /**
