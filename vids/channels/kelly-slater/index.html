@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>Dane Reynolds Channel</title>
+    <style>
+      body {
+        font-size: 20px;
+        margin: 0
+      }
+      .dark {
+       background-color: black 
+      }
+      main {
+        margin: 0 auto;
+        max-width: 700px;
+        padding: 0 10px 70px;
+        position: relative;
+        z-index: 1
+      }
+      h1, p {
+        text-align: center
+      }
+      #search {
+        -webkit-appearance: none;
+        -webkit-border-radius:0;
+        border: solid #000 1px;
+        border-radius:0;
+        font-family: serif;
+        font-size: 20px;
+        padding: 6px;
+        width: 175px
+      }
+      #search::placeholder {
+        font-family: serif;
+        font-size: 20px
+      }
+      input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAn0lEQVR42u3UMQrDMBBEUZ9WfQqDmm22EaTyjRMHAlM5K+Y7lb0wnUZPIKHlnutOa+25Z4D++MRBX98MD1V/trSppLKHqj9TTBWKcoUqffbUcbBBEhTjBOV4ja4l4OIAZThEOV6jHO8ARXD+gPPvKMABinGOrnu6gTNUawrcQKNCAQ7QeTxORzle3+sDfjJpPCqhJh7GixZq4rHcc9l5A9qZ+WeBhgEuAAAAAElFTkSuQmCC);
+        background-repeat: no-repeat;
+        background-size: 20px;
+        cursor: pointer;
+        display: block;
+        height: 20px;
+        width: 20px
+      }
+      fieldset {
+        border: 0;
+        margin: 1em 0;
+        padding: 0;
+        text-align: center
+      }
+      legend, input[type="radio"] {
+        border: 0;
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+      input[type="radio"]:checked + label {
+        text-decoration: underline
+      }
+      #filter label {
+        cursor: pointer
+      }
+      #filter label:last-child {
+        margin-left: 20px
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        margin: 0 auto
+      }
+      td {
+        border: 1px solid black;
+        height: 36px;
+        padding: 5px 12px
+      }
+      td {
+        cursor: pointer
+      }
+      td a {
+        text-decoration: none
+      }
+      .favorite, .channel {
+        text-align: center;
+        width: 30px
+      }
+      .search-item {
+        padding: 5px 20px
+      }
+      nav {
+        background-color: #000;
+        bottom: 0;
+        color: white;
+        position: fixed;
+        text-align: center;
+        width: 100%;
+        z-index: 1
+      }
+      nav ul {
+        font-size: 0; /* no space between nav items */
+        margin: 0 auto;
+        max-width: 700px;
+        padding: 0
+      }
+      nav li {
+        border-right: 1px solid #fff;
+        display: inline-block;
+        font-size: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 10px 0;
+        width: 45%
+      }
+      nav li:last-child {
+        border: 0
+      }
+      nav a {
+        color: #fff;
+        display: inline-block;
+        width: 100%
+      }
+      nav a:hover {
+        color: red
+      }
+      .hide {
+        display: none
+      }
+      .embed-container {
+        height: 0;
+        padding-bottom: 56.25%;
+        position: relative
+      }
+      .embed-container iframe {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%%
+      }
+      #overlay {
+        background-color: black;
+        padding-bottom: 0
+      }
+      #overlay h1 {
+        color: white;
+        font-size: 1.5em;
+        margin: .83em 0
+      }
+      #close {
+        background-color: black;
+        border: 2px solid white;
+        color: #fff;
+        display: inline-block;
+        font: 20px serif;
+        line-height: 2.5;
+        margin-top: 30px;
+        padding: 0 20px;
+        text-decoration: none
+      }
+    </style>
+  </head>
+  <body class="dark">
+    <main id="overlay">
+      <h1>Kelly Slater Channel</h1>
+      <div class="embed-container">
+        <div id="player2"></div>
+      </div>
+      <p>
+        <a href="../../channels/" id="close">Close Channel</a><!-- For new close channel: location.href = this.querySelector('a').href; -->
+      </p>
+    </main>
+    <script>
+      // This code loads the iframe Player API code asynchronously
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // This function creates an iframe player after the API code downloads
+      var player2;
+      function onYouTubeIframeAPIReady() {
+        player1 = new YT.Player('player2', {
+          // Set the height, width, and events for the player
+          height: '100%',
+          width: '100%',
+          events: {
+            'onReady': onPlayer2Ready,
+            'onStateChange': onPlayer2StateChange
+          }
+        });
+      }
+      function onPlayer2Ready(event) {
+        // Check if there is a playlist in local storage
+        if (localStorage.Player2Playlist != null) {
+          player2.cuePlaylist(
+            localStorage.Player2Playlist,
+            localStorage.Player2PlaylistIndex,
+            localStorage.Player2Time
+          );
+          player2.setLoop(true);
+        }
+        else {
+          // Random number decides which video will play first in the playlist
+          var vid = Math.floor((Math.random() * 6) + 1);
+          player2.cuePlaylist({
+            listType:'playlist',
+            list:'PLMxOsrgGH8n49WElPVU1isa7ifuUkZFMf',
+            index:vid
+          });
+          //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
+          setTimeout(function() {
+            event.target.setShuffle({'shufflePlaylist' : true});
+          }, 1000);
+          player2.setLoop(true); 
+        }
+      }
+      function onPlayer1StateChange(event) {
+        if (event.data === 2) {
+          localStorage.setItem('Player2Playlist', player2.getPlaylist());
+          localStorage.setItem('Player2PlaylistIndex', player2.getPlaylistIndex());
+          var obj = player2.getVideoData();
+          localStorage.setItem('Player2VideoID', obj[Object.keys(obj)[0]]);
+          localStorage.setItem('Player2Time', player2.getCurrentTime());
+        }
+      }
+
+      // To fix bug where a user would refresh the overlay and not be able to use the back button in the browser
+      if (history.state != null) {
+        window.onpopstate = function(event) {
+          window.history.go();
+        }
+      }
+
+      // Pause video before the window refreshes
+      // TODO: Pause video when the window closes
+      window.addEventListener('beforeunload', function (e) {
+        delete e['returnValue'];
+        player2.pauseVideo();
+      });
+
+    </script>
+  </body>
+</html>
