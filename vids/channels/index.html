@@ -483,7 +483,10 @@
           filterFavorites();
         }
         else {
-          search();
+          // If user left anything in the search field, run the search function
+          if (SEARCH.value !== EMPTY) {
+            search();
+          }
           filters[0].setAttribute('checked', '');
           filters[0].checked = true;
           ALLLABEL.focus();
