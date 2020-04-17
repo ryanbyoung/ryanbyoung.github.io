@@ -145,18 +145,8 @@
         width: 100%%
       }
       #overlay {
-        padding-bottom: 0;
-        background-color: black /* rgba(0,0,0,0.9);
-        bottom: 0;
-        height: 100%;
-        left: 0;
-        padding: 10px;
-        position: fixed;
-        right: 0;
-        top: 0;
-        width: calc(100% - 20px);
-        z-index: 2 
-        */
+        background-color: black;
+        padding-bottom: 0
       }
       #overlay h1 {
         color: white;
@@ -242,26 +232,18 @@
       }
 
       // To fix bug where a user would refresh the overlay and not be able to use the back button in the browser
-      // window.onload = function() {
-        if (history.state != null) {
-          window.onpopstate = function(event) {
-            window.history.go();
-          }
+      if (history.state != null) {
+        window.onpopstate = function(event) {
+          window.history.go();
         }
-      // };
+      }
 
-      // TODO: Pause video before the user leaves, to handle when the user closes the browser
+      // Pause video before the window refreshes
+      // TODO: Pause video when the window closes
       window.addEventListener('beforeunload', function (e) {
         delete e['returnValue'];
         player1.pauseVideo();
       });
-      //window.addEventListener('beforeunload', function (e) {
-        //player1.pauseVideo();
-        //console.log('o');
-        //var confirmationMessage = 'sure?';
-        //(e || window.event).returnValue = confirmationMessage;
-        //return confirmationMessage;
-      //});
 
     </script>
   </body>
