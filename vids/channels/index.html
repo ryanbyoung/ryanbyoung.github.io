@@ -484,7 +484,12 @@
           filterFavorites();
         }
         else {
-          // If user left anything in the search field, run the search function
+          filters[0].setAttribute('checked', '');
+          filters[0].checked = true;
+          ALLLABEL.focus();
+          filters[1].removeAttribute('checked');
+          populateFilterStorage();
+          // If user left anything in the search field
           var searchValue = SEARCH.value.toUpperCase();
           if (searchValue !== EMPTY) {
             var tr = document.getElementsByTagName('tr');
@@ -508,11 +513,6 @@
             }
           }
           else {
-            filters[0].setAttribute('checked', '');
-            filters[0].checked = true;
-            ALLLABEL.focus();
-            filters[1].removeAttribute('checked');
-            populateFilterStorage();
             EMPTYFILTER.classList.add('hide');
             TABLE.removeAttribute('class');
             var tr = document.getElementsByTagName('tr');
