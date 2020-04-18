@@ -488,6 +488,7 @@
           filters[0].checked = true;
           ALLLABEL.focus();
           filters[1].removeAttribute('checked');
+          EMPTYFILTER.classList.add('hide');
           populateFilterStorage();
           // If user left anything in the search field
           var searchValue = SEARCH.value.toUpperCase();
