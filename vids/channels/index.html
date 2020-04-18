@@ -322,6 +322,7 @@
       const CHANNELNAMES = document.querySelectorAll('.search-item');
       const CHANNELNUMBERS = document.querySelectorAll('.channel');
       const EMPTYFILTER = document.getElementById('empty-filter');
+      const EMPTYQUERY = document.getElementById('empty-query');
       const FAVORITELABEL = document.querySelector('label[for=favorites]');
       const FAVORITES = document.querySelectorAll('.favorite');
       const MAIN = document.querySelector('main');
@@ -484,19 +485,40 @@
         }
         else {
           // If user left anything in the search field, run the search function
-          if (SEARCH.value !== EMPTY) {
-            console.log('here');
+          var searchValue = SEARCH.value.toUpperCase();
+          if (searchValue !== EMPTY) {
+            var tr = document.getElementsByTagName('tr');
+            var hiddenRowCount = 0;
+            for (x = 0; x < tr.length; x++) {
+              var channelLink = CHANNELNAMES[x].getElementsByTagName('a');
+              var cName = channelLink[0].innerText;
+              if (cName.toUpperCase().indexOf(searchValue) > -1) {
+                TABLE.classList.remove('hide');
+                tr[x].classList.remove('hide');
+                EMPTYQUERY.classList.add('hide');
+              }
+              else {
+                tr[x].classList.add('hide');
+                hiddenRowCount++;
+                if (hiddenRowCount === tr.length) {
+                  TABLE.classList.add('hide');
+                  EMPTYQUERY.removeAttribute('class');
+                }
+              }
+            }
           }
-          filters[0].setAttribute('checked', '');
-          filters[0].checked = true;
-          ALLLABEL.focus();
-          filters[1].removeAttribute('checked');
-          populateFilterStorage();
-          EMPTYFILTER.classList.add('hide');
-          TABLE.removeAttribute('class');
-          var tr = document.getElementsByTagName('tr');
-          for (c = 0; c < tr.length; c++) {
-            tr[c].classList.remove('hide');
+          else {
+            filters[0].setAttribute('checked', '');
+            filters[0].checked = true;
+            ALLLABEL.focus();
+            filters[1].removeAttribute('checked');
+            populateFilterStorage();
+            EMPTYFILTER.classList.add('hide');
+            TABLE.removeAttribute('class');
+            var tr = document.getElementsByTagName('tr');
+            for (c = 0; c < tr.length; c++) {
+              tr[c].classList.remove('hide');
+            }
           }
         }
       }
@@ -578,12 +600,11 @@
        */
       function search() {
         populateSearchStorage();
-        var channelLink, cName, emptyQuery, hiddenRowCount, searchValue, tr;
+        var channelLink, cName, hiddenRowCount, searchValue, tr;
         searchValue = SEARCH.value.toUpperCase();
-        emptyQuery = document.getElementById('empty-query');
         if (filters[1].checked === true) {
           tr = document.getElementsByClassName('favorites');
-          emptyQuery.classList.add('hide');
+          EMPTYQUERY.classList.add('hide');
         }
         else {
           tr = document.getElementsByTagName('tr');
@@ -595,14 +616,14 @@
           if (cName.toUpperCase().indexOf(searchValue) > -1) {
             TABLE.classList.remove('hide');
             tr[h].classList.remove('hide');
-            emptyQuery.classList.add('hide');
+            EMPTYQUERY.classList.add('hide');
           }
           else {
             tr[h].classList.add('hide');
             hiddenRowCount++;
             if (hiddenRowCount === tr.length) {
               TABLE.classList.add('hide');
-              emptyQuery.removeAttribute('class');
+              EMPTYQUERY.removeAttribute('class');
             }
           }
         }
