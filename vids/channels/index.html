@@ -590,7 +590,7 @@
         }
         hiddenRowCount = 0;
         for (h = 0; h < tr.length; h++) {
-          channelLink = CHANNELNAMES[h].getElementsByTagName('a')[0];
+          channelLink = CHANNELNAMES[h].getElementsByTagName('a')[h];
           cName = channelLink.innerText;
           if (cName.toUpperCase().indexOf(searchValue) > -1) {
             TABLE.classList.remove('hide');
