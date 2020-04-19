@@ -644,7 +644,7 @@
           FAVORITES[g].innerText = channelIcons[g];
           console.log('setting row filter style');
           console.log(FAVORITES[g].parentElement.classList[0], rowFilters[g]);
-          FAVORITES[g].parentElement.classList[0] = rowFilters[g];
+          FAVORITES[g].parentElement.classList = rowFilters[g];
           FAVORITES[g].setAttribute('aria-pressed', arias[g]);
         }
       }
