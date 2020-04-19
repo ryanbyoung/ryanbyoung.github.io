@@ -499,7 +499,7 @@
               var channelLink = CHANNELNAMES[x].getElementsByTagName('a');
               var cName = channelLink[0].innerText;
               if (cName.toUpperCase().indexOf(searchValue) > -1) {
-                TABLE.classList.remove('hide');
+                TABLE.removeAttribue('hidden');
                 tr[x].classList.remove('hide');
                 EMPTYQUERY.classList.add('hide');
               }
@@ -507,7 +507,7 @@
                 tr[x].classList.add('hide');
                 hiddenRowCount++;
                 if (hiddenRowCount === tr.length) {
-                  TABLE.classList.add('hide');
+                  TABLE.setAttribute('hidden', '');
                   EMPTYQUERY.removeAttribute('class');
                 }
               }
@@ -515,7 +515,7 @@
           }
           else {
             EMPTYFILTER.classList.add('hide');
-            TABLE.removeAttribute('class');
+            TABLE.removeAttribute('hidden');
             var tr = document.getElementsByTagName('tr');
             for (c = 0; c < tr.length; c++) {
               tr[c].classList.remove('hide');
@@ -535,11 +535,11 @@
         FAVORITELABEL.focus();
         var allOnlyRows = document.querySelectorAll('.all');
         for (d = 0; d < allOnlyRows.length; d++) {
-          allOnlyRows[d].classList.add('hide');
+          allOnlyRows[d].setAttribute('hidden', '');
         }
         if (allOnlyRows.length === 3) { // **** change this number to the number of channels
-          TABLE.classList.add('hide');
-          EMPTYFILTER.removeAttribute('class');
+          TABLE.setAttribute('hidden', '');
+          EMPTYFILTER.removeAttribute('hidden');
         }
       }
 
@@ -615,7 +615,7 @@
           channelLink = CHANNELNAMES[h].getElementsByTagName('a');
           cName = channelLink[0].innerText;
           if (cName.toUpperCase().indexOf(searchValue) > -1) {
-            TABLE.classList.remove('hide');
+            TABLE.removeAttribue('hidden');
             tr[h].classList.remove('hide');
             EMPTYQUERY.classList.add('hide');
           }
@@ -623,7 +623,7 @@
             tr[h].classList.add('hide');
             hiddenRowCount++;
             if (hiddenRowCount === tr.length) {
-              TABLE.classList.add('hide');
+              TABLE.setAttribute('hidden', '');
               EMPTYQUERY.removeAttribute('class');
             }
           }
@@ -767,7 +767,6 @@
         button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
         button.parentElement.classList = (isAriaPressed === true) ? 'all' : 'favorites';
         if (filterSelected === 'favorites' && button.innerText === '♡') {
-          console.log('here');
           filterFavorites();
         }
         populateChannelStorage();
