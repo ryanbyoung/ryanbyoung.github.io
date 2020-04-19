@@ -130,9 +130,6 @@
       nav a:hover {
         color: red
       }
-      .hide {
-        display: none
-      }
       .embed-container {
         height: 0;
         padding-bottom: 56.25%;
@@ -210,8 +207,8 @@
           </tr>
         </tbody>
       </table>
-      <p class="hide" id="empty-query">No channels exist that match your query.</p>
-      <p class="hide" id="empty-filter">No favorite channels have been selected.</p>
+      <p id="empty-query" hidden>No channels exist that match your query.</p>
+      <p id="empty-filter" hidden>No favorite channels have been selected.</p>
     </main>
     <main id="overlay" hidden>
       <h1 id="overlay-title"></h1>
@@ -314,7 +311,7 @@
       
       
       // Variables for counters and determining empty fields
-      var a, b, c, d, e, f, g, h;
+      var a, b, c, d, e, f, g, h, i, j;
       const EMPTY = '';
 
       // Variables for all of the components
@@ -377,8 +374,8 @@
         ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler);
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
-        for (x = 0; x < LINK.length; x++) {
-          LINK[x].addEventListener('click', linkClick, false);
+        for (i = 0; i < LINK.length; i++) {
+          LINK[i].addEventListener('click', linkClick, false);
         }
         
       } // end init
@@ -431,12 +428,12 @@
         players[playerIndex].f.removeAttribute('hidden');
         players[playerIndex].playVideo();
         document.title = channelTitle;
-        NAV.setAttribute('class', 'hide');
+        NAV.setAttribute('hidden', '');
       }
       function hideOverlay() {
         MAIN.removeAttribute('hidden');
         BODY.removeAttribute('class');
-        NAV.removeAttribute('class');
+        NAV.removeAttribute('hidden');
         OVERLAY.setAttribute('hidden', '');
         OVERLAYTITLE.innerText = '';
         document.title = PAGETITLE;
@@ -488,33 +485,33 @@
           filters[0].checked = true;
           ALLLABEL.focus();
           filters[1].removeAttribute('checked');
-          EMPTYFILTER.classList.add('hide');
+          EMPTYFILTER.setAttribute('hidden', '');
           populateFilterStorage();
           // If user left anything in the search field
           var searchValue = SEARCH.value.toUpperCase();
           if (searchValue !== EMPTY) {
             var tr = document.getElementsByTagName('tr');
             var hiddenRowCount = 0;
-            for (x = 0; x < tr.length; x++) {
-              var channelLink = CHANNELNAMES[x].getElementsByTagName('a');
+            for (j = 0; j < tr.length; j++) {
+              var channelLink = CHANNELNAMES[j].getElementsByTagName('a');
               var cName = channelLink[0].innerText;
               if (cName.toUpperCase().indexOf(searchValue) > -1) {
                 TABLE.removeAttribue('hidden');
-                tr[x].removeAttribute('hidden');
-                EMPTYQUERY.classList.add('hide');
+                tr[j].removeAttribute('hidden');
+                EMPTYQUERY.setAttribute('hidden', '');
               }
               else {
-                tr[x].setAttribute('hidden', '');
+                tr[j].setAttribute('hidden', '');
                 hiddenRowCount++;
                 if (hiddenRowCount === tr.length) {
                   TABLE.setAttribute('hidden', '');
-                  EMPTYQUERY.removeAttribute('class');
+                  EMPTYQUERY.removeAttribute('hidden');
                 }
               }
             }
           }
           else {
-            EMPTYFILTER.classList.add('hide');
+            EMPTYFILTER.setAttribute('hidden', '');
             TABLE.removeAttribute('hidden');
             var tr = document.getElementsByTagName('tr');
             for (c = 0; c < tr.length; c++) {
@@ -539,7 +536,7 @@
         }
         if (allOnlyRows.length === 3) { // **** change this number to the number of channels
           TABLE.setAttribute('hidden', '');
-          EMPTYFILTER.classList.remove('hide');
+          EMPTYFILTER.removeAttribute('hidden');
         }
       }
 
@@ -605,7 +602,7 @@
         searchValue = SEARCH.value.toUpperCase();
         if (filters[1].checked === true) {
           tr = document.getElementsByClassName('favorites');
-          EMPTYQUERY.classList.add('hide');
+          EMPTYQUERY.setAttribute('hidden', '');
         }
         else {
           tr = document.getElementsByTagName('tr');
@@ -615,16 +612,16 @@
           channelLink = CHANNELNAMES[h].getElementsByTagName('a');
           cName = channelLink[0].innerText;
           if (cName.toUpperCase().indexOf(searchValue) > -1) {
-            TABLE.removeAttribue('hidden');
-            tr[h].classList.remove('hide');
-            EMPTYQUERY.classList.add('hide');
+            TABLE.removeAttribute('hidden');
+            tr[h].removeAttribute('hidden');
+            EMPTYQUERY.setAttribute('hidden', '');
           }
           else {
-            tr[h].classList.add('hide');
+            tr[h].setAttribute('hidden', '');
             hiddenRowCount++;
             if (hiddenRowCount === tr.length) {
               TABLE.setAttribute('hidden', '');
-              EMPTYQUERY.removeAttribute('class');
+              EMPTYQUERY.removeAttribute('hidden');
             }
           }
         }
@@ -779,7 +776,7 @@
       // Pause video before the user leaves, to handle when the user closes the browser
       window.addEventListener('beforeunload', function (e) {
         delete e['returnValue'];
-        //players[0].pauseVideo();
+        pausePlayers();
       });
 
 
