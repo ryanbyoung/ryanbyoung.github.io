@@ -642,8 +642,6 @@
           rowFilters[g] = localStorage.getItem(FAVORITES[g].id+'Filter');
           arias[g] = localStorage.getItem(FAVORITES[g].id+'Pressed');
           FAVORITES[g].innerText = channelIcons[g];
-          console.log('setting row filter style');
-          console.log(FAVORITES[g].parentElement.classList[0], rowFilters[g]);
           FAVORITES[g].parentElement.classList = rowFilters[g];
           FAVORITES[g].setAttribute('aria-pressed', arias[g]);
         }
@@ -768,7 +766,8 @@
         button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
         button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
         button.parentElement.classList = (isAriaPressed === true) ? 'all' : 'favorites';
-        if (filterSelected == 'favorites' && button.innerText == '♡') {
+        if (filterSelected === 'favorites' && button.innerText === '♡') {
+          console.log('here');
           filterFavorites();
         }
         populateChannelStorage();
