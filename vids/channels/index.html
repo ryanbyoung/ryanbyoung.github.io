@@ -552,7 +552,7 @@
         for (e = 0; e < FAVORITES.length; e++) {
           localStorage.setItem(FAVORITES[e].id, FAVORITES[e].innerText);
           localStorage.setItem(FAVORITES[e].id+'Pressed', FAVORITES[e].getAttribute('aria-pressed'));
-          localStorage.setItem(FAVORITES[e].id+'Filter', FAVORITES[e].parentElement.classList);
+          localStorage.setItem(FAVORITES[e].id+'Filter', FAVORITES[e].parentElement.classList[0]);
         }
         setChannelStyles();
       }
@@ -642,7 +642,7 @@
           rowFilters[g] = localStorage.getItem(FAVORITES[g].id+'Filter');
           arias[g] = localStorage.getItem(FAVORITES[g].id+'Pressed');
           FAVORITES[g].innerText = channelIcons[g];
-          FAVORITES[g].parentElement.classList = rowFilters[g];
+          FAVORITES[g].parentElement.classList[0] = rowFilters[g];
           FAVORITES[g].setAttribute('aria-pressed', arias[g]);
         }
       }
