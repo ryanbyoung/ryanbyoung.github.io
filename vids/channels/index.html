@@ -764,11 +764,14 @@
        */
       function toggleButtonState (button) {
         var filterSelected = localStorage.getItem('FilterSelected');
-        if (filterSelected == 'favorites' && button.innerText == '♡') {
-          console.log(button);
+        var isAriaPressed = button.getAttribute('aria-pressed') === 'true';
+        if (filterSelected == 'favorites' && button.innerText == '❤️') {
+          button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
+          button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
+          button.parentElement.classList = (isAriaPressed === true) ? 'all' : 'favorites';
+          filterFavorites();
         }
         else {
-          var isAriaPressed = button.getAttribute('aria-pressed') === 'true';
           button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
           button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
           button.parentElement.classList = (isAriaPressed === true) ? 'all' : 'favorites';
