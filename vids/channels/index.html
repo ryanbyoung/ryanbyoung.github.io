@@ -765,12 +765,12 @@
       function toggleButtonState (button) {
         var filterSelected = localStorage.getItem('FilterSelected');
         var isAriaPressed = button.getAttribute('aria-pressed') === 'true';
-        if (filterSelected == 'favorites' && button.innerText == '❤️') {
-          filterFavorites();
-        }
         button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
         button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
         button.parentElement.classList = (isAriaPressed === true) ? 'all' : 'favorites';
+        if (filterSelected == 'favorites' && button.innerText == '♡') {
+          filterFavorites();
+        }
         populateChannelStorage();
       }
 
