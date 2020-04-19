@@ -500,11 +500,11 @@
               var cName = channelLink[0].innerText;
               if (cName.toUpperCase().indexOf(searchValue) > -1) {
                 TABLE.removeAttribue('hidden');
-                tr[x].classList.remove('hide');
+                tr[x].removeAttribute('hidden');
                 EMPTYQUERY.classList.add('hide');
               }
               else {
-                tr[x].classList.add('hide');
+                tr[x].setAttribute('hidden', '');
                 hiddenRowCount++;
                 if (hiddenRowCount === tr.length) {
                   TABLE.setAttribute('hidden', '');
@@ -518,7 +518,7 @@
             TABLE.removeAttribute('hidden');
             var tr = document.getElementsByTagName('tr');
             for (c = 0; c < tr.length; c++) {
-              tr[c].classList.remove('hide');
+              tr[c].removeAttribute('hidden');
             }
           }
         }
@@ -539,7 +539,7 @@
         }
         if (allOnlyRows.length === 3) { // **** change this number to the number of channels
           TABLE.setAttribute('hidden', '');
-          EMPTYFILTER.removeAttribute('hidden');
+          EMPTYFILTER.classList.remove('hide');
         }
       }
 
