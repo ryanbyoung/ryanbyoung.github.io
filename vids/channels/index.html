@@ -261,9 +261,7 @@
       const LINK = document.querySelectorAll('a');
       CLOSE.addEventListener('click', close);
       const PAGETITLE = 'Channels';
-      for (x = 0; x < LINK.length; x++) {
-        LINK[x].addEventListener('click', linkClick, false);
-      }
+
       function linkClick(e) {
         if (e.target.innerHTML == 'Movies') {
           return true;
@@ -449,7 +447,10 @@
         ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler);
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
-
+        for (x = 0; x < LINK.length; x++) {
+          LINK[x].addEventListener('click', linkClick, false);
+        }
+        
       } // end init
 
 
@@ -679,8 +680,6 @@
        * anchor tag.
        */
       function tdClick(e) {
-        console.log(e.target.innerHTML);
-        console.log(this.querySelector('a').href);
         location.href = this.querySelector('a').href;
       }
 
