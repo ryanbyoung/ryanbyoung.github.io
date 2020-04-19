@@ -763,6 +763,10 @@
        * @param {HTMLElement} button
        */
       function toggleButtonState (button) {
+        var filterSelected = localStorage.getItem('FilterSelected');
+        if (filterSelected === 'favorites' & button.innerText === '♡') {
+          filterFavorites();
+        }
         var isAriaPressed = button.getAttribute('aria-pressed') === 'true';
         button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
         button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
