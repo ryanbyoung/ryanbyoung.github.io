@@ -766,17 +766,12 @@
         var filterSelected = localStorage.getItem('FilterSelected');
         var isAriaPressed = button.getAttribute('aria-pressed') === 'true';
         if (filterSelected == 'favorites' && button.innerText == '❤️') {
-          button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
-          button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
-          button.parentElement.classList = (isAriaPressed === true) ? 'all' : 'favorites';
           filterFavorites();
         }
-        else {
-          button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
-          button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
-          button.parentElement.classList = (isAriaPressed === true) ? 'all' : 'favorites';
-          populateChannelStorage();
-        }
+        button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
+        button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
+        button.parentElement.classList = (isAriaPressed === true) ? 'all' : 'favorites';
+        populateChannelStorage();
       }
 
       window.onload = init();
