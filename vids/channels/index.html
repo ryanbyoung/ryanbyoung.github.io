@@ -262,75 +262,6 @@
       CLOSE.addEventListener('click', close);
       const PAGETITLE = 'Channels';
 
-      function linkClick(e) {
-        if (e.target.innerHTML == 'Movies') {
-          return true;
-        }
-        else {
-          e.preventDefault();
-          var data = e.target.getAttribute('href'),
-              url = data + '/';
-          history.pushState(data, null, url);
-          switch (e.target.innerHTML) {
-            case '1':
-            case 'Dane Reynolds':
-              showOverlay(0, 'Dane Reynolds Channel');
-              break;
-            case '2':
-            case 'Kelly Slater':
-              showOverlay(1, 'Kelly Slater Channel');
-              break;
-            case '3':
-            case 'Craig Anderson':
-              showOverlay(2, 'Craig Anderson Channel');
-          }
-          e.stopPropagation();
-        }
-      }
-      function showOverlay(playerIndex, channelTitle) {
-        MAIN.setAttribute('hidden', '');
-        BODY.setAttribute('class', 'dark');
-        OVERLAY.removeAttribute('hidden');
-        OVERLAYTITLE.innerText = channelTitle;
-        players[playerIndex].f.removeAttribute('hidden');
-        players[playerIndex].playVideo();
-        document.title = channelTitle;
-        NAV.setAttribute('class', 'hide');
-      }
-      function hideOverlay() {
-        MAIN.removeAttribute('hidden');
-        BODY.removeAttribute('class');
-        NAV.removeAttribute('class');
-        OVERLAY.setAttribute('hidden', '');
-        OVERLAYTITLE.innerText = '';
-        document.title = PAGETITLE;
-      }
-      function pausePlayers() {
-        players.forEach(function (el) {
-          el.pauseVideo();
-          el.f.setAttribute('hidden', '');
-        });
-      }
-      window.addEventListener('popstate', function(e){
-        var recentChannel = e.state;
-        if (recentChannel === null){
-          pausePlayers();
-          hideOverlay();
-        }
-        else {
-          switch (recentChannel) {
-            case 'dane-reynolds':
-              showOverlay(0, 'Dane Reynolds Channel');
-              break;
-            case 'kelly-slater':
-              showOverlay(1, 'Kelly Slater Channel');
-              break;
-            case 'craig-anderson':
-              showOverlay(2, 'Craig Anderson Channel');
-          }
-        }
-      });
-
 
       function init() {
 
@@ -468,6 +399,74 @@
         }
         history.pushState(null, null, fullURL);
       }
+      function linkClick(e) {
+        if (e.target.innerHTML == 'Movies') {
+          return true;
+        }
+        else {
+          e.preventDefault();
+          var data = e.target.getAttribute('href'),
+              url = data + '/';
+          history.pushState(data, null, url);
+          switch (e.target.innerHTML) {
+            case '1':
+            case 'Dane Reynolds':
+              showOverlay(0, 'Dane Reynolds Channel');
+              break;
+            case '2':
+            case 'Kelly Slater':
+              showOverlay(1, 'Kelly Slater Channel');
+              break;
+            case '3':
+            case 'Craig Anderson':
+              showOverlay(2, 'Craig Anderson Channel');
+          }
+          e.stopPropagation();
+        }
+      }
+      function showOverlay(playerIndex, channelTitle) {
+        MAIN.setAttribute('hidden', '');
+        BODY.setAttribute('class', 'dark');
+        OVERLAY.removeAttribute('hidden');
+        OVERLAYTITLE.innerText = channelTitle;
+        players[playerIndex].f.removeAttribute('hidden');
+        players[playerIndex].playVideo();
+        document.title = channelTitle;
+        NAV.setAttribute('class', 'hide');
+      }
+      function hideOverlay() {
+        MAIN.removeAttribute('hidden');
+        BODY.removeAttribute('class');
+        NAV.removeAttribute('class');
+        OVERLAY.setAttribute('hidden', '');
+        OVERLAYTITLE.innerText = '';
+        document.title = PAGETITLE;
+      }
+      function pausePlayers() {
+        players.forEach(function (el) {
+          el.pauseVideo();
+          el.f.setAttribute('hidden', '');
+        });
+      }
+      window.addEventListener('popstate', function(e){
+        var recentChannel = e.state;
+        if (recentChannel === null){
+          pausePlayers();
+          hideOverlay();
+        }
+        else {
+          switch (recentChannel) {
+            case 'dane-reynolds':
+              showOverlay(0, 'Dane Reynolds Channel');
+              break;
+            case 'kelly-slater':
+              showOverlay(1, 'Kelly Slater Channel');
+              break;
+            case 'craig-anderson':
+              showOverlay(2, 'Craig Anderson Channel');
+          }
+        }
+      });
 
 
       /**
