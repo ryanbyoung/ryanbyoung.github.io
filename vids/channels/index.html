@@ -235,43 +235,12 @@
 
     <script>
 
-      // Variables for counters and determining empty fields
-      var a, b, c, d, e, f, g, h;
-      const EMPTY = '';
-
-      // Variables for all of the components
-      const ALLLABEL = document.querySelector('label[for=all]');
-      const CHANNELNAMES = document.querySelectorAll('.search-item');
-      const CHANNELNUMBERS = document.querySelectorAll('.channel');
-      const EMPTYFILTER = document.getElementById('empty-filter');
-      const EMPTYQUERY = document.getElementById('empty-query');
-      const FAVORITELABEL = document.querySelector('label[for=favorites]');
-      const FAVORITES = document.querySelectorAll('.favorite');
-      const MAIN = document.querySelector('main');
-      const SEARCH = document.querySelector('#search');
-      const TABLE = document.querySelector('table');
-      var filters = document.querySelectorAll('input[name=filter]');
-
-
-      const BODY = document.querySelector('body');
-      const NAV = document.querySelector('nav');
-      const OVERLAY = document.getElementById('overlay');
-      const OVERLAYTITLE = document.getElementById('overlay-title');
-      const CLOSE = document.getElementById('close');
-      const LINK = document.querySelectorAll('a');
-      CLOSE.addEventListener('click', close);
-      const PAGETITLE = 'Channels';
-
-
-      function init() {
-
-
+      
       // Load YouTube's iframe player API code asynchronously
       var tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
 
       // Object containing info for all of the players
       var playerInfoList = [{
@@ -342,8 +311,38 @@
           }
         });
       }
+      
+      
+      // Variables for counters and determining empty fields
+      var a, b, c, d, e, f, g, h;
+      const EMPTY = '';
 
-        
+      // Variables for all of the components
+      const ALLLABEL = document.querySelector('label[for=all]');
+      const CHANNELNAMES = document.querySelectorAll('.search-item');
+      const CHANNELNUMBERS = document.querySelectorAll('.channel');
+      const EMPTYFILTER = document.getElementById('empty-filter');
+      const EMPTYQUERY = document.getElementById('empty-query');
+      const FAVORITELABEL = document.querySelector('label[for=favorites]');
+      const FAVORITES = document.querySelectorAll('.favorite');
+      const MAIN = document.querySelector('main');
+      const SEARCH = document.querySelector('#search');
+      const TABLE = document.querySelector('table');
+      var filters = document.querySelectorAll('input[name=filter]');
+
+
+      const BODY = document.querySelector('body');
+      const NAV = document.querySelector('nav');
+      const OVERLAY = document.getElementById('overlay');
+      const OVERLAYTITLE = document.getElementById('overlay-title');
+      const CLOSE = document.getElementById('close');
+      const LINK = document.querySelectorAll('a');
+      CLOSE.addEventListener('click', close);
+      const PAGETITLE = 'Channels';
+
+
+      function init() {
+
         // Initiate and populate local storage if there isn't any
         // Otherwise set up page with saved components
         if (localStorage.length === 0) {
