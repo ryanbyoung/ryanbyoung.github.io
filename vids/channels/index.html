@@ -642,7 +642,6 @@
           rowFilters[g] = localStorage.getItem(FAVORITES[g].id+'Filter');
           arias[g] = localStorage.getItem(FAVORITES[g].id+'Pressed');
           FAVORITES[g].innerText = channelIcons[g];
-          console.log(rowFilters[g]);
           FAVORITES[g].parentElement.classList[0] = rowFilters[g];
           FAVORITES[g].setAttribute('aria-pressed', arias[g]);
         }
@@ -662,7 +661,7 @@
         else {
           filters[1].checked = true;
           filters[1].setAttribute('checked', '');
-          filterFavorites();
+          //filterFavorites();
         }
       }
 
