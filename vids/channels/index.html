@@ -235,84 +235,6 @@
 
     <script>
 
-      // Load YouTube's iframe player API code asynchronously
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-
-      // Object containing info for all of the players
-      var playerInfoList = [{
-        id: 'player1',
-        list: 'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
-        length: 60
-      }, {
-        id: 'player2',
-        list: 'PLMxOsrgGH8n49WElPVU1isa7ifuUkZFMf',
-        length: 6
-      }, {
-        id: 'player3',
-        list: 'PLMxOsrgGH8n622jc8CpXksExjvI0z6Cxy',
-        length: 4
-      }];
-      // Array of created players
-      var players = new Array();
-      // YouTube iframe API ready function
-      function onYouTubeIframeAPIReady() {
-        if (typeof playerInfoList === 'undefined') return;
-        for (var y = 0; y < playerInfoList.length; y++) {
-          var currentPlayer = createPlayer(playerInfoList[y]);
-          players[y] = currentPlayer;
-          document.getElementById(playerInfoList[y].id).setAttribute('hidden', '');
-        }
-      }
-      // createPlayer function
-      function createPlayer(playerInfo) {
-        var playerPlaylist = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Playlist';
-        var playerPlaylistIndex = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'PlaylistIndex';
-        var playerTime = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Time';
-        return new YT.Player(playerInfo.id, {
-          height: '100%',
-          width: '100%',
-          events: {
-            'onReady': function(event) {
-              // Check if there is a playlist for this player in local storage
-              if (localStorage.getItem(playerPlaylist) != null) {
-                event.target.cuePlaylist(
-                  localStorage.getItem(playerPlaylist),
-                  localStorage.getItem(playerPlaylistIndex),
-                  localStorage.getItem(playerTime)
-                );
-                event.target.setLoop(true);
-              }
-              else {
-                // Random number decides which video will play first in the playlist
-                var vid = Math.floor((Math.random() * playerInfo.length) + 1);
-                event.target.cuePlaylist({
-                  listType:'playlist',
-                  list:playerInfo.list,
-                  index:vid
-                });
-                //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
-                setTimeout(function() {
-                  event.target.setShuffle({'shufflePlaylist' : true});
-                }, 1000);
-                event.target.setLoop(true); 
-              }
-            },
-            'onStateChange': function(event) {
-              if (event.data === 2) {
-                localStorage.setItem(playerPlaylist, event.target.getPlaylist());
-                localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
-                localStorage.setItem(playerTime, event.target.getCurrentTime());
-              }
-            }
-          }
-        });
-      }
-
-
       // Variables for counters and determining empty fields
       var a, b, c, d, e, f, g, h;
       const EMPTY = '';
@@ -413,7 +335,86 @@
 
 
       function init() {
-        console.log('init');
+
+
+      // Load YouTube's iframe player API code asynchronously
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+      // Object containing info for all of the players
+      var playerInfoList = [{
+        id: 'player1',
+        list: 'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
+        length: 60
+      }, {
+        id: 'player2',
+        list: 'PLMxOsrgGH8n49WElPVU1isa7ifuUkZFMf',
+        length: 6
+      }, {
+        id: 'player3',
+        list: 'PLMxOsrgGH8n622jc8CpXksExjvI0z6Cxy',
+        length: 4
+      }];
+      // Array of created players
+      var players = new Array();
+      // YouTube iframe API ready function
+      function onYouTubeIframeAPIReady() {
+        if (typeof playerInfoList === 'undefined') return;
+        for (var y = 0; y < playerInfoList.length; y++) {
+          var currentPlayer = createPlayer(playerInfoList[y]);
+          players[y] = currentPlayer;
+          document.getElementById(playerInfoList[y].id).setAttribute('hidden', '');
+        }
+      }
+      // createPlayer function
+      function createPlayer(playerInfo) {
+        var playerPlaylist = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Playlist';
+        var playerPlaylistIndex = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'PlaylistIndex';
+        var playerTime = playerInfo.id.charAt(0).toUpperCase() + playerInfo.id.slice(1) + 'Time';
+        return new YT.Player(playerInfo.id, {
+          height: '100%',
+          width: '100%',
+          events: {
+            'onReady': function(event) {
+              // Check if there is a playlist for this player in local storage
+              if (localStorage.getItem(playerPlaylist) != null) {
+                event.target.cuePlaylist(
+                  localStorage.getItem(playerPlaylist),
+                  localStorage.getItem(playerPlaylistIndex),
+                  localStorage.getItem(playerTime)
+                );
+                event.target.setLoop(true);
+              }
+              else {
+                // Random number decides which video will play first in the playlist
+                var vid = Math.floor((Math.random() * playerInfo.length) + 1);
+                event.target.cuePlaylist({
+                  listType:'playlist',
+                  list:playerInfo.list,
+                  index:vid
+                });
+                //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
+                setTimeout(function() {
+                  event.target.setShuffle({'shufflePlaylist' : true});
+                }, 1000);
+                event.target.setLoop(true); 
+              }
+            },
+            'onStateChange': function(event) {
+              if (event.data === 2) {
+                localStorage.setItem(playerPlaylist, event.target.getPlaylist());
+                localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
+                localStorage.setItem(playerTime, event.target.getCurrentTime());
+              }
+            }
+          }
+        });
+      }
+
+        
         // Initiate and populate local storage if there isn't any
         // Otherwise set up page with saved components
         if (localStorage.length === 0) {
