@@ -350,7 +350,6 @@
           populateFilterStorage();
           populateSearchStorage();
         } else {
-          console.log('setting channel styles');
           setChannelStyles();
           setFilterStyles();
           setSearchValue();
@@ -643,6 +642,7 @@
           rowFilters[g] = localStorage.getItem(FAVORITES[g].id+'Filter');
           arias[g] = localStorage.getItem(FAVORITES[g].id+'Pressed');
           FAVORITES[g].innerText = channelIcons[g];
+          console.log(FAVORITES[g].parentElement.classList[0]);
           FAVORITES[g].parentElement.classList[0] = rowFilters[g];
           FAVORITES[g].setAttribute('aria-pressed', arias[g]);
         }
