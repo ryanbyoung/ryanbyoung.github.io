@@ -231,6 +231,7 @@
       const CLOSE = document.getElementById('close');
       CLOSE.addEventListener('click', function () {
         player1.pauseVideo();
+        localStorage.setItem('Player1Time', player1.getCurrentTime());
         location.pathname = 'vids/channels/';
       });
 
