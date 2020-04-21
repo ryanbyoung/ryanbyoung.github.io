@@ -220,6 +220,7 @@
         }
       }
       function onPlayer1StateChange(event) {
+        console.log(event.data);
         if (event.data === 2) {
           localStorage.setItem('Player1Playlist', player1.getPlaylist());
           localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
@@ -249,12 +250,6 @@
           window.history.go();
         }
       }
-
-      function handlePagehide() {
-        player1.pauseVideo();
-        localStorage.setItem('Player1Time', player1.getCurrentTime());
-      }
-      window.addEventListener('pagehide', handlePagehide);
       
     </script>
   </body>
