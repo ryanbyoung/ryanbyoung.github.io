@@ -251,7 +251,8 @@
       }
 
       function handlePagehide() {
-        alert('yo');
+        player1.pauseVideo();
+        localStorage.setItem('Player1Time', player1.getCurrentTime());
       }
       window.addEventListener('pagehide', handlePagehide);
       
