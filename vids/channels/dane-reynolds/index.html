@@ -238,8 +238,9 @@
       // Pause video if user refreshes the browser window
       // TODO: Try and pause video when the window closes
       window.addEventListener('beforeunload', function (e) {
-        delete e['returnValue'];
         player1.pauseVideo();
+        localStorage.setItem('Player1Time', player1.getCurrentTime());
+        delete e['returnValue'];
       });
 
       // To fix a bug where the user refreshes the channel page with overlay and not be able to use the back button in the browser
