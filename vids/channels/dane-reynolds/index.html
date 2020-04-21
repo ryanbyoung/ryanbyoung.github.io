@@ -157,12 +157,10 @@
         background-color: black;
         border: 2px solid white;
         color: #fff;
-        display: inline-block;
         font: 20px serif;
         line-height: 2.5;
         margin-top: 30px;
-        padding: 0 20px;
-        text-decoration: none
+        padding: 0 20px
       }
     </style>
   </head>
@@ -173,7 +171,7 @@
         <div id="player1"></div>
       </div>
       <p>
-        <a href="../../channels/" id="close">Close Channel</a><!-- For new close channel: location.href = this.querySelector('a').href; -->
+        <button id="close">Close Channel</button><!-- For new close channel: location.href = this.querySelector('a').href; -->
       </p>
     </main>
     <script>
@@ -229,19 +227,26 @@
         }
       }
 
-      // To fix bug where a user would refresh the overlay and not be able to use the back button in the browser
+      // When user press close button, pause the video and go to the channels page
+      const CLOSE = document.getElementById('close');
+      CLOSE.addEventListener('click', function (e) {
+        player1.pauseVideo();
+        location.pathname = 'vids/channels/';
+      });
+
+      // Pause video if user refreshes the browser window
+      // TODO: Try and pause video when the window closes
+      window.addEventListener('beforeunload', function (e) {
+        delete e['returnValue'];
+        player1.pauseVideo();
+      });
+
+      // To fix a bug where the user refreshes the channel page with overlay and not be able to use the back button in the browser
       if (history.state != null) {
         window.onpopstate = function(event) {
           window.history.go();
         }
       }
-
-      // Pause video before the window refreshes
-      // TODO: Pause video when the window closes
-      window.addEventListener('beforeunload', function (e) {
-        delete e['returnValue'];
-        player1.pauseVideo();
-      });
 
     </script>
   </body>
