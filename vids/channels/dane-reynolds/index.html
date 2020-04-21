@@ -220,7 +220,6 @@
         }
       }
       function onPlayer1StateChange(event) {
-        console.log(event.data);
         if (event.data === 2) {
           localStorage.setItem('Player1Playlist', player1.getPlaylist());
           localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
@@ -232,6 +231,8 @@
       const CLOSE = document.getElementById('close');
       CLOSE.addEventListener('click', function () {
         player1.pauseVideo();
+        localStorage.setItem('Player1Playlist', player1.getPlaylist());
+        localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
         localStorage.setItem('Player1Time', player1.getCurrentTime());
         location.pathname = 'vids/channels/';
       });
@@ -240,6 +241,8 @@
       // TODO: Try and pause video when the window closes
       window.addEventListener('beforeunload', function (e) {
         player1.pauseVideo();
+        localStorage.setItem('Player1Playlist', player1.getPlaylist());
+        localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
         localStorage.setItem('Player1Time', player1.getCurrentTime());
         delete e['returnValue'];
       });
