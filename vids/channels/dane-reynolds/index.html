@@ -237,6 +237,15 @@
         location.pathname = 'vids/channels/';
       });
 
+      document.addEventListener("visibilitychange", function() {
+        if (document.visibilityState === 'hidden') {
+          player1.pauseVideo();
+          localStorage.setItem('Player1Playlist', player1.getPlaylist());
+          localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
+          localStorage.setItem('Player1Time', player1.getCurrentTime());
+        }
+      });
+
       // Pause video if user refreshes the browser window
       // TODO: Try and pause video when the window closes
       window.addEventListener('beforeunload', function (e) {
