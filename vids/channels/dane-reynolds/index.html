@@ -252,6 +252,9 @@
           localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
           localStorage.setItem('Player1Time', player1.getCurrentTime());
         }
+        else if (document.visibilityState === 'visible') {
+          player1.playVideo();
+        }
       });
 
       // Pause video if user refreshes the browser window
