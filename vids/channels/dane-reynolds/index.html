@@ -221,11 +221,18 @@
         }
       }
       function onPlayer1StateChange(event) {
-        if (event.data === 2) {
-          localStorage.setItem('Player1Playlist', player1.getPlaylist());
-          localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
-          localStorage.setItem('Player1Time', player1.getCurrentTime());
+        if (event.data === 1) {
+          setInterval(storeVidProps, 3000);    
         }
+        if (event.data === 2) {
+          storeVidProps();
+        }
+      }
+
+      function storeVidProps() {
+        localStorage.setItem('Player1Playlist', player1.getPlaylist());
+        localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
+        localStorage.setItem('Player1Time', player1.getCurrentTime()); 
       }
 
       // When user press close button, pause the video and go to the channels page
@@ -262,13 +269,6 @@
         window.onpopstate = function() {
           window.history.go();
         }
-      }
-      
-      setInterval(storeVidProps, 3000);
-      function storeVidProps() {
-        localStorage.setItem('Player1Playlist', player1.getPlaylist());
-        localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
-        localStorage.setItem('Player1Time', player1.getCurrentTime()); 
       }
       
     </script>
