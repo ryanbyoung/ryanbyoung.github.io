@@ -7,8 +7,8 @@
     <title>Channels</title>
     <style>
       body {
-        background-color: black;
-        color: white;
+        background-color: #000;
+        color: #fff;
         font-size: 20px;
         margin: 0
       }
@@ -25,7 +25,6 @@
       #search {
         -webkit-appearance: none;
         -webkit-border-radius:0;
-        border: solid #000 1px;
         border-radius:0;
         font-family: serif;
         font-size: 20px;
@@ -140,17 +139,14 @@
         width: 100%
       }
       #overlay {
-        background-color: black;
         padding-bottom: 0
       }
       #overlay-title {
-        color: white;
         font-size: 1.5em;
         margin: .83em 0
       }
       #close {
-        background-color: black;
-        border: 2px solid white;
+        border: 2px solid #fff;
         color: #fff;
         font: 20px serif;
         line-height: 2.5;
@@ -419,7 +415,6 @@
       }
       function showOverlay(playerIndex, channelTitle) {
         MAIN.setAttribute('hidden', '');
-        BODY.setAttribute('class', 'dark');
         OVERLAY.removeAttribute('hidden');
         OVERLAYTITLE.innerText = channelTitle;
         players[playerIndex].f.removeAttribute('hidden');
