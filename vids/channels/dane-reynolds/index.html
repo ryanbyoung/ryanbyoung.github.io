@@ -235,7 +235,7 @@
         localStorage.setItem('Player1Time', player1.getCurrentTime()); 
       }
 
-      // When user press close button, pause the video and go to the channels page
+      // When user presses close button, pause the video and go to the Channels page
       const CLOSE = document.getElementById('close');
       CLOSE.addEventListener('click', function () {
         player1.pauseVideo();
@@ -258,7 +258,6 @@
       });
 
       // Pause video if user refreshes the browser window
-      // TODO: Try and pause video when the window closes
       window.addEventListener('beforeunload', function (e) {
         player1.pauseVideo();
         localStorage.setItem('Player1Playlist', player1.getPlaylist());
@@ -267,7 +266,7 @@
         delete e['returnValue'];
       });
 
-      // To fix a bug where the user refreshes the channel page with overlay and not be able to use the back button in the browser
+      // This allows the user to use the back button to go to the Channels page if they refresh the overlay
       if (history.state != null) {
         window.onpopstate = function() {
           window.history.go();
