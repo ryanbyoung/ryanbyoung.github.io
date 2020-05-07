@@ -25,6 +25,7 @@
       #search {
         -webkit-appearance: none;
         -webkit-border-radius:0;
+        border: solid #000 1px;
         border-radius:0;
         font-family: serif;
         font-size: 20px;
@@ -100,28 +101,10 @@
         width: 100%;
         z-index: 1
       }
-      nav ul {
-        font-size: 0; /* no space between nav items */
+      nav p {
         margin: 0 auto;
         max-width: 700px;
         padding: 0
-      }
-      nav li {
-        border-right: 1px solid #fff;
-        display: inline-block;
-        font-size: 20px;
-        list-style-type: none;
-        margin: 0;
-        padding: 10px 0;
-        width: 45%
-      }
-      nav li:last-child {
-        border: 0
-      }
-      nav a {
-        color: #fff;
-        display: inline-block;
-        width: 100%
       }
       nav a:hover {
         color: red
@@ -215,12 +198,12 @@
       </p>
     </main>
     <nav>
-      <ul>
-        <li>Channels</li>
-        <li>
-          <a href="../movies/">Movies</a>
-        </li>
-      </ul>
+      <p>
+        <a href="../">Home</a> |
+        Channels |
+        <a href="../shows/">Shows</a> |
+        <a href="../movies/">Movies</a>
+      </p>
     </nav>
 
     <script>
