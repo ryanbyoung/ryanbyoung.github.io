@@ -426,6 +426,7 @@
       }
       window.addEventListener('popstate', function(e){
         var recentChannel = e.state;
+        console.log('pop ' + recentChannel);
         if (recentChannel === null){
           pausePlayers();
           hideOverlay();
@@ -755,6 +756,7 @@
       //TODO need to finish this to only show in a laptop browser when a video is still playing and user tries to close window
       // Pause video before the user leaves, to handle when the user closes the browser
       window.addEventListener('beforeunload', function (e) {
+        console.log('beforeunload');
         delete e['returnValue'];
         pausePlayers();
       });
