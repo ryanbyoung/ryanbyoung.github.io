@@ -221,7 +221,6 @@
         }
       }
       function onPlayer1StateChange(event) {
-        console.log(event.data);
         if (event.data === 1) {
           setInterval(storeVidProps, 3000);    
         }
@@ -260,6 +259,7 @@
 
       // Pause video if user refreshes the browser window
       window.addEventListener('beforeunload', function (e) {
+        console.log('unload');
         player1.pauseVideo();
         localStorage.setItem('Player1Playlist', player1.getPlaylist());
         localStorage.setItem('Player1PlaylistIndex', player1.getPlaylistIndex());
