@@ -221,6 +221,7 @@
         }
       }
       function onPlayer1StateChange(event) {
+        console.log(event.data);
         if (event.data === 1) {
           setInterval(storeVidProps, 3000);    
         }
