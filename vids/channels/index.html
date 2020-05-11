@@ -215,13 +215,13 @@
       
       // Creating YouTube players for each channel first so they'll be ready when user clicks on the channel
 
-      // This will load YouTube's iframe player API code asynchronously
+      // These variables will load YouTube's iframe player API code asynchronously (Google code: https://developers.google.com/youtube/iframe_api_reference)
       let tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
       let firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-      // This is the object containing info for all of the players (it can be pulled dynamically from the data file in the app)
+      // The playerInfoList object containing info for all of the players (it can be pulled dynamically from the data file in the app)
       var playerInfoList = [{
         length: 60,
         playlist: 'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
@@ -235,9 +235,20 @@
         playlist: 'PLMxOsrgGH8n622jc8CpXksExjvI0z6Cxy',
         playlistName: 'CraigAnderson'
       }];
-      // Creating an array of players
+
+      // Create an array for all of the YouTube players
       let players = new Array();
-      // YouTube iframe API ready function for when API is ready
+
+       /**
+       * onYouTubeIframeAPIReady function (Google code: https://developers.google.com/youtube/iframe_api_reference)
+       *
+       * Runs when the YouTube API is ready
+       *
+       * Check to see if the playerInfoList object has been created. If not, return.
+       *
+       * Loop through each element in the playerInfoList object, create player from that info,
+       * populate the players array with each player, and hide each player in the DOM.
+       */
       function onYouTubeIframeAPIReady() {
         if (typeof playerInfoList === 'undefined') return;
         for (let y = 0; y < playerInfoList.length; y++) {
@@ -246,12 +257,32 @@
           document.getElementById(players[y].f.id).setAttribute('hidden', '');
         }
       }
-      // createPlayer function
+       /**
+       * createPlayer function
+       *
+       * Called from onYouTubeIframeAPIReady function.
+       *
+       * Creates a YouTube player for each channnel.
+       *
+       * Create variables for player name and local storage (playlist, playlist index, and player time.
+       *
+       * Create each player with the player name, height and width of player (100% for responsive), and events.
+       * 
+       * The onReady event fires when each player is ready. It first checks if there is a playlist for the player
+       * in local storage. If it does, it retrieves the playlist, index, and time for that player and cues the playlist.
+       * It also sets the playlist to loop. If the player isn't found in local storage, it creates a random number
+       * based on the number of videos in the playlist to decide which video to play first and creates a new playlist.
+       * A second after the playlist is created, it is set to shuffle all of the videos in the playlist. It is also set 
+       * to loop the playlist.
+       *
+       * The onStateChange event updates all of the local storage items (playlist, index, and time) whenever the player is
+       * paused (event.data = 2).
+       */
       function createPlayer(playerInfo) {
         let playerName = playerInfo.playlistName + 'Player';
         let playerPlaylist = playerInfo.playlistName + 'Playlist';
         let playerPlaylistIndex = playerInfo.playlistName + 'PlaylistIndex';
-        let playerTime = playerInfo.playlistName + 'Time';
+        let playerTime = playerInfo.playlistName + 'PlayerTime';
         return new YT.Player(playerName, {
           height: '100%',
           width: '100%',
@@ -267,14 +298,12 @@
                 event.target.setLoop(true);
               }
               else {
-                // Random number decides which video will play first in the playlist
                 var vid = Math.floor((Math.random() * playerInfo.length) + 1);
                 event.target.cuePlaylist({
                   listType:'playlist',
                   list:playerInfo.playlist,
                   index:vid
                 });
-                //A second after the player is ready, it is set to shuffle all of the videos in the playlist. It is also set to loop the playlist.
                 setTimeout(function() {
                   event.target.setShuffle({'shufflePlaylist' : true});
                 }, 1000);
@@ -321,6 +350,17 @@
       const PAGETITLE = 'Channels';
 
 
+       /**
+       * init function
+       *
+       * Runs everytime the page is loaded.
+       *
+       * .
+       *
+       * ,
+       * .
+       *
+       */
       function init() {
 
         // Initiate and populate local storage if there isn't any
@@ -365,6 +405,8 @@
 
 
       /**
+       * close function
+       *
        * Runs when user presses close channel button
        */
       function close() {
