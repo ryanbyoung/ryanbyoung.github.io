@@ -243,7 +243,7 @@
         for (let y = 0; y < playerInfoList.length; y++) {
           let currentPlayer = createPlayer(playerInfoList[y]);
           players[y] = currentPlayer;
-          document.getElementById(currentPlayer).setAttribute('hidden', '');
+          document.getElementById(players[y].f.id).setAttribute('hidden', '');
         }
       }
       // createPlayer function
