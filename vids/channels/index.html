@@ -194,9 +194,9 @@
     <main id="overlay" hidden>
       <h1 id="overlay-title"></h1>
       <div class="embed-container">
-        <div id="player1"></div>
-        <div id="player2"></div>
-        <div id="player3"></div>
+        <div id="DaneReynoldsPlayer"></div>
+        <div id="KellySlaterPlayer"></div>
+        <div id="CraigAndersonPlayer"></div>
       </div>
       <p>
         <button id="close">Close Channel</button>
@@ -243,7 +243,7 @@
         for (let y = 0; y < playerInfoList.length; y++) {
           let currentPlayer = createPlayer(playerInfoList[y]);
           players[y] = currentPlayer;
-          document.getElementById(playerInfoList[y].playlistName).setAttribute('hidden', '');
+          document.getElementById(currentPlayer).setAttribute('hidden', '');
         }
       }
       // createPlayer function
