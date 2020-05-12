@@ -222,7 +222,7 @@
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
       // The playerInfoList object containing info for all of the players (it can be pulled dynamically from the data file in the app)
-      var playerInfoList = [{
+      let playerInfoList = [{
         length: 60,
         playlist: 'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
         playlistName: 'DaneReynolds'
@@ -254,7 +254,7 @@
         for (let y = 0; y < playerInfoList.length; y++) {
           let currentPlayer = createPlayer(playerInfoList[y]);
           players[y] = currentPlayer;
-          document.getElementById(players[y].f.id).setAttribute('hidden', '');
+          document.querySelector(players[y].f.id).setAttribute('hidden', '');
         }
       }
        /**
