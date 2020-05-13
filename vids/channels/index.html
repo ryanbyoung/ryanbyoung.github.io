@@ -309,21 +309,21 @@
                 }, 1000);
                 event.target.setLoop(true); 
               }
-            },
+            }, // end onReady event
             'onStateChange': function(event) {
               if (event.data === 2) {
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                 localStorage.setItem(playerTime, event.target.getCurrentTime());
               }
-            }
-          }
-        });
-      }
+            } // end onStateChange event
+          } // end events
+        }); // end return
+      } // end createPlayer function
       
       
       // Variables for counters and determining empty fields
-      var a, b, c, d, e, f, g, h, i, j;
+      let b, c, d, e, f, g, h, i, j;
       const EMPTY = '';
 
       // Variables for all of the components
@@ -337,7 +337,7 @@
       const MAIN = document.querySelector('main');
       const SEARCH = document.querySelector('#search');
       const TABLE = document.querySelector('table');
-      var filters = document.querySelectorAll('input[name=filter]');
+      let filters = document.querySelectorAll('input[name=filter]');
 
 
       const PAGETITLE = 'Channels';
@@ -346,7 +346,7 @@
       const OVERLAY = document.getElementById('overlay');
       const OVERLAYTITLE = document.getElementById('overlay-title');
       const CLOSE = document.getElementById('close');
-      const LINK = document.querySelectorAll('a');
+      const LINKS = document.querySelectorAll('a');
       CLOSE.addEventListener('click', close);
 
 
@@ -355,16 +355,15 @@
        *
        * Runs everytime the page is loaded.
        *
-       * .
+       * Checks to see if local storage exists for channel, filter, or search components. 
+       * If that information isn't in local storage, it populates it with what is currently on the page. 
+       * If local storage exists, it sets up the page with components from the information in local storage.
        *
-       * ,
-       * .
+       * If the user left anything in the search field, it runs the search function.
        *
+       * It then adds event listeners for all of the components (search, filter labels, and table elements).
        */
       function init() {
-
-        // Initiate and populate local storage if there isn't any
-        // Otherwise set up page with saved components
         if (localStorage.length === 0) {
           populateChannelStorage();
           populateFilterStorage();
@@ -374,34 +373,29 @@
           setFilterStyles();
           setSearchValue();
         }
-
-        // If user left anything in the search field, run the search function
         if (SEARCH.value !== EMPTY) {
           search();
         }
-
-        // Add event listeners - search, table cell, filter, and label interactions
         SEARCH.addEventListener('keyup', search);
         SEARCH.addEventListener('search', search);
-        for (a = 0; a < CHANNELNAMES.length; a++) {
-          FAVORITES[a].addEventListener('click', toggleButtonClickHandler);
-          FAVORITES[a].addEventListener('keydown', toggleButtonKeydownHandler);
-          FAVORITES[a].addEventListener('keyup', toggleButtonKeyupHandler);
-          CHANNELNUMBERS[a].addEventListener('click', tdClick);
-          CHANNELNAMES[a].addEventListener('click', tdClick);
-        }
-        for (b = 0; b < filters.length; b++){
-          filters[b].addEventListener('click', filterClick);
-        }
+        CHANNELNAMES.forEach((channel) => {
+          FAVORITES[channel].addEventListener('click', toggleButtonClickHandler);
+          FAVORITES[channel].addEventListener('keydown', toggleButtonKeydownHandler);
+          FAVORITES[channel].addEventListener('keyup', toggleButtonKeyupHandler);
+          CHANNELNUMBERS[channel].addEventListener('click', tdClick);
+          CHANNELNAMES[channel].addEventListener('click', tdClick);
+        })
+        filters.forEach((filter) => {
+          filters[filter].addEventListener('click', filterClick);
+        })
         ALLLABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler);
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
-        for (i = 0; i < LINK.length; i++) {
-          LINK[i].addEventListener('click', linkClick, false);
+        LINKS.forEach((link) => {
+          LINKS[link].addEventListener('click', linkClick);
         }
-        
-      } // end init
+      } // end init function
 
 
       /**
@@ -414,8 +408,8 @@
         hideOverlay();
         var pathArray = window.location.pathname.split('/');
         var fullURL = window.location.protocol + "//" + window.location.host;
-        for (i = 0; i < 3; i++) {
-          fullURL += pathArray[i];
+        for (a = 0; a < 3; a++) {
+          fullURL += pathArray[a];
           fullURL += "/";
         }
         history.pushState(null, null, fullURL);
@@ -464,9 +458,9 @@
         document.title = PAGETITLE;
       }
       function pausePlayers() {
-        players.forEach(function (el) {
-          el.pauseVideo();
-          el.f.setAttribute('hidden', '');
+        players.forEach(function(player) {
+          player.pauseVideo();
+          player.f.setAttribute('hidden', '');
         });
       }
       window.addEventListener('popstate', function(e){
@@ -517,16 +511,16 @@
           if (searchValue !== EMPTY) {
             var tr = document.getElementsByTagName('tr');
             var hiddenRowCount = 0;
-            for (j = 0; j < tr.length; j++) {
-              var channelLink = CHANNELNAMES[j].getElementsByTagName('a');
+            for (b = 0; b < tr.length; b++) {
+              var channelLink = CHANNELNAMES[b].getElementsByTagName('a');
               var cName = channelLink[0].innerText;
               if (cName.toUpperCase().indexOf(searchValue) > -1) {
                 TABLE.removeAttribue('hidden');
-                tr[j].removeAttribute('hidden');
+                tr[b].removeAttribute('hidden');
                 EMPTYQUERY.setAttribute('hidden', '');
               }
               else {
-                tr[j].setAttribute('hidden', '');
+                tr[b].setAttribute('hidden', '');
                 hiddenRowCount++;
                 if (hiddenRowCount === tr.length) {
                   TABLE.setAttribute('hidden', '');
@@ -633,16 +627,16 @@
           tr = document.getElementsByTagName('tr');
         }
         hiddenRowCount = 0;
-        for (h = 0; h < tr.length; h++) {
-          channelLink = CHANNELNAMES[h].getElementsByTagName('a');
+        for (g = 0; g < tr.length; g++) {
+          channelLink = CHANNELNAMES[g].getElementsByTagName('a');
           cName = channelLink[0].innerText;
           if (cName.toUpperCase().indexOf(searchValue) > -1) {
             TABLE.removeAttribute('hidden');
-            tr[h].removeAttribute('hidden');
+            tr[g].removeAttribute('hidden');
             EMPTYQUERY.setAttribute('hidden', '');
           }
           else {
-            tr[h].setAttribute('hidden', '');
+            tr[g].setAttribute('hidden', '');
             hiddenRowCount++;
             if (hiddenRowCount === tr.length) {
               TABLE.setAttribute('hidden', '');
@@ -659,13 +653,13 @@
         var channelIcons = [];
         var rowFilters = [];
         var arias = [];
-        for (g = 0; g < FAVORITES.length; g++) {
-          channelIcons[g] = localStorage.getItem(FAVORITES[g].id);
-          rowFilters[g] = localStorage.getItem(FAVORITES[g].id+'Filter');
-          arias[g] = localStorage.getItem(FAVORITES[g].id+'Pressed');
-          FAVORITES[g].innerText = channelIcons[g];
-          FAVORITES[g].parentElement.classList = rowFilters[g];
-          FAVORITES[g].setAttribute('aria-pressed', arias[g]);
+        for (h = 0; h < FAVORITES.length; h++) {
+          channelIcons[h] = localStorage.getItem(FAVORITES[h].id);
+          rowFilters[h] = localStorage.getItem(FAVORITES[h].id+'Filter');
+          arias[h] = localStorage.getItem(FAVORITES[h].id+'Pressed');
+          FAVORITES[h].innerText = channelIcons[h];
+          FAVORITES[h].parentElement.classList = rowFilters[h];
+          FAVORITES[h].setAttribute('aria-pressed', arias[h]);
         }
       }
 
