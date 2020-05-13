@@ -384,17 +384,17 @@
           FAVORITES[channel].addEventListener('keyup', toggleButtonKeyupHandler);
           CHANNELNUMBERS[channel].addEventListener('click', tdClick);
           CHANNELNAMES[channel].addEventListener('click', tdClick);
-        })
+        });
         filters.forEach((filter) => {
           filters[filter].addEventListener('click', filterClick);
-        })
+        });
         ALLLABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler);
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
         LINKS.forEach((link) => {
           LINKS[link].addEventListener('click', linkClick);
-        }
+        });
       } // end init function
 
 
