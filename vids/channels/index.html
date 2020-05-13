@@ -378,7 +378,8 @@
         }
         SEARCH.addEventListener('keyup', search);
         SEARCH.addEventListener('search', search);
-        CHANNELNAMES.forEach((channel) => {
+        CHANNELNAMES.forEach(function(channel) {
+          console.log(channel);
           FAVORITES[channel].addEventListener('click', toggleButtonClickHandler);
           FAVORITES[channel].addEventListener('keydown', toggleButtonKeydownHandler);
           FAVORITES[channel].addEventListener('keyup', toggleButtonKeyupHandler);
