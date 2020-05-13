@@ -218,7 +218,7 @@
       // These variables will load YouTube's iframe player API code asynchronously (Google code: https://developers.google.com/youtube/iframe_api_reference)
       let tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
-      let firstScriptTag = document.getElementsByTagName('script')[0];
+      let firstScriptTag = document.querySelector('script');
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
       // The playerInfoList object containing info for all of the players (it can be pulled dynamically from the data file in the app)
@@ -254,7 +254,7 @@
         for (let y = 0; y < playerInfoList.length; y++) {
           let currentPlayer = createPlayer(playerInfoList[y]);
           players[y] = currentPlayer;
-          document.querySelector(players[y].f.id).setAttribute('hidden', '');
+          document.getElementById(players[y].f.id).setAttribute('hidden', '');
         }
       }
        /**
@@ -298,11 +298,11 @@
                 event.target.setLoop(true);
               }
               else {
-                var vid = Math.floor((Math.random() * playerInfo.length) + 1);
+                let index = Math.floor((Math.random() * playerInfo.length) + 1);
                 event.target.cuePlaylist({
                   listType:'playlist',
                   list:playerInfo.playlist,
-                  index:vid
+                  index:index
                 });
                 setTimeout(function() {
                   event.target.setShuffle({'shufflePlaylist' : true});
