@@ -216,13 +216,13 @@
       // Creating YouTube players for each channel first so they'll be ready when user clicks on the channel
 
       // These variables will load YouTube's iframe player API code asynchronously (Google code: https://developers.google.com/youtube/iframe_api_reference)
-      let tag = document.createElement('script');
+      const tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
-      let firstScriptTag = document.querySelector('script');
+      const firstScriptTag = document.querySelector('script');
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
       // The playerInfoList object containing info for all of the players (it can be pulled dynamically from the data file in the app)
-      let playerInfoList = [{
+      const playerInfoList = [{
         length: 60,
         playlist: 'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
         playlistName: 'DaneReynolds'
@@ -251,10 +251,10 @@
        */
       function onYouTubeIframeAPIReady() {
         if (typeof playerInfoList === 'undefined') return;
-        for (let y = 0; y < playerInfoList.length; y++) {
-          let currentPlayer = createPlayer(playerInfoList[y]);
-          players[y] = currentPlayer;
-          document.getElementById(players[y].f.id).setAttribute('hidden', '');
+        for (let i = 0; i < playerInfoList.length; i++) {
+          let currentPlayer = createPlayer(playerInfoList[i]);
+          players[i] = currentPlayer;
+          document.getElementById(players[i].f.id).setAttribute('hidden', '');
         }
       }
        /**
@@ -279,10 +279,10 @@
        * paused (event.data = 2).
        */
       function createPlayer(playerInfo) {
-        let playerName = playerInfo.playlistName + 'Player';
-        let playerPlaylist = playerInfo.playlistName + 'Playlist';
-        let playerPlaylistIndex = playerInfo.playlistName + 'PlaylistIndex';
-        let playerTime = playerInfo.playlistName + 'IndexTime';
+        const playerName = playerInfo.playlistName + 'Player';
+        const playerPlaylist = playerInfo.playlistName + 'Playlist';
+        const playerPlaylistIndex = playerInfo.playlistName + 'PlaylistIndex';
+        const playerTime = playerInfo.playlistName + 'IndexTime';
         return new YT.Player(playerName, {
           height: '100%',
           width: '100%',
