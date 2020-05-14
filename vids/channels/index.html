@@ -212,12 +212,10 @@
     </nav>
 
     <script>
-      document.addEventListener("DOMContentLoaded",console.log('dom cl'));
       
       // Creating YouTube players for each channel first so they'll be ready when user clicks on the channel
 
       // These variables will load YouTube's iframe player API code asynchronously (Google code: https://developers.google.com/youtube/iframe_api_reference)
-      console.log('yt starting');
       const tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
       const firstScriptTag = document.querySelector('script');
@@ -366,7 +364,6 @@
        * It then adds event listeners for all of the components (search, filter labels, and table elements).
        */
       function init() {
-        console.log('start init');
         if (localStorage.length === 0) {
           populateChannelStorage();
           populateFilterStorage();
@@ -395,9 +392,12 @@
         ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler);
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
-        for (k = 0; k < LINKS.length; k++) {
-          LINKS[k].addEventListener('click', linkClick);
-        } 
+        //for (k = 0; k < LINKS.length; k++) {
+          //LINKS[k].addEventListener('click', linkClick);
+        //}
+        for (const link of LINKS) {
+          link.addEventListener('click', linkClick);
+        }
       } // end init function
 
 
@@ -791,10 +791,9 @@
         populateChannelStorage();
       }
 
-      window.onload = init();
+      // Run init function after the DOM content is loaded
+      document.addEventListener('DOMContentLoaded',init);
 
-
-      //TODO need to finish this to only show in a laptop browser when a video is still playing and user tries to close window
       // Pause video before the user leaves, to handle when the user closes the browser
       window.addEventListener('beforeunload', function (e) {
         delete e['returnValue'];
