@@ -212,10 +212,12 @@
     </nav>
 
     <script>
+      document.addEventListener("DOMContentLoaded",console.log('dom cl'));
       
       // Creating YouTube players for each channel first so they'll be ready when user clicks on the channel
 
       // These variables will load YouTube's iframe player API code asynchronously (Google code: https://developers.google.com/youtube/iframe_api_reference)
+      console.log('yt starting');
       const tag = document.createElement('script');
       tag.src = "https://www.youtube.com/iframe_api";
       const firstScriptTag = document.querySelector('script');
@@ -364,6 +366,7 @@
        * It then adds event listeners for all of the components (search, filter labels, and table elements).
        */
       function init() {
+        console.log('start init');
         if (localStorage.length === 0) {
           populateChannelStorage();
           populateFilterStorage();
