@@ -212,16 +212,9 @@
     </nav>
 
     <script>
-      
-      // Creating YouTube players for each channel first so they'll be ready when user clicks on the channel
 
-      // These variables will load YouTube's iframe player API code asynchronously (Google code: https://developers.google.com/youtube/iframe_api_reference)
-      const tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      const firstScriptTag = document.querySelector('script');
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      // The playerInfoList object containing info for all of the players (it can be pulled dynamically from the data file in the app)
+      // The playerInfoList object containing info for all of the players
+      // (this probably can be pulled dynamically from the data file in the app so probably won't be needed)
       const playerInfoList = [{
         length: 60,
         playlist: 'PLMxOsrgGH8n5HGL-UjsVoRQnemeWRcwkx',
@@ -236,13 +229,25 @@
         playlistName: 'CraigAnderson'
       }];
 
+      // Leaving this global for right now
       // Create an array for all of the YouTube players
       let players = new Array();
 
-       /**
+      /**
+       * createYouTubeScript function (Google code: https://developers.google.com/youtube/iframe_api_reference)
+       *
+       * Creates the script to load YouTube's iframe player API code asynchronously.
+       */
+      function createYouTubeScript() {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.querySelector('script');
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      }
+      /**
        * onYouTubeIframeAPIReady function (Google code: https://developers.google.com/youtube/iframe_api_reference)
        *
-       * Runs when the YouTube API is ready
+       * Automatically runs when the YouTube API is ready
        *
        * Check to see if the playerInfoList object has been created. If not, return.
        *
@@ -257,7 +262,7 @@
           document.getElementById(players[i].f.id).setAttribute('hidden', '');
         }
       }
-       /**
+      /**
        * createPlayer function
        *
        * Called from onYouTubeIframeAPIReady function.
@@ -323,7 +328,7 @@
       
       
       // Variables for counters and determining empty fields
-      let a, b, c, d, e, f, g, h, i, j, k;
+      let a, b, c, d, e, f, g, h;
       const EMPTY = '';
 
       // Variables for all of the components
@@ -350,7 +355,7 @@
       CLOSE.addEventListener('click', close);
 
 
-       /**
+      /**
        * init function
        *
        * Runs everytime the page is loaded.
@@ -360,6 +365,9 @@
        * If local storage exists, it sets up the page with components from the information in local storage.
        *
        * If the user left anything in the search field, it runs the search function.
+       *
+       * Call createYouTubeScript function to load YouTube's iframe player API code asynchronously. All of the 
+       * channel YouTube players will then be created.
        *
        * It then adds event listeners for all of the components (search, filter labels, and table elements).
        */
@@ -376,27 +384,25 @@
         if (SEARCH.value !== EMPTY) {
           search();
         }
+        createYouTubeScript();
         SEARCH.addEventListener('keyup', search);
         SEARCH.addEventListener('search', search);
-        for (i = 0; i < CHANNELNAMES.length; i++) {
+        for (let i = 0; i < CHANNELNAMES.length; i++) {
           FAVORITES[i].addEventListener('click', toggleButtonClickHandler);
           FAVORITES[i].addEventListener('keydown', toggleButtonKeydownHandler);
           FAVORITES[i].addEventListener('keyup', toggleButtonKeyupHandler);
           CHANNELNUMBERS[i].addEventListener('click', tdClick);
           CHANNELNAMES[i].addEventListener('click', tdClick);
         }
-        for (j = 0; j < filters.length; j++) {
+        for (let j = 0; j < filters.length; j++) {
           filters[j].addEventListener('click', filterClick);
         }
         ALLLABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler);
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
-        //for (k = 0; k < LINKS.length; k++) {
-          //LINKS[k].addEventListener('click', linkClick);
-        //}
-        for (const link of LINKS) {
-          link.addEventListener('click', linkClick);
+        for (let k = 0; k < LINKS.length; k++) {
+          LINKS[k].addEventListener('click', linkClick);
         }
       } // end init function
 
@@ -417,6 +423,11 @@
         }
         history.pushState(null, null, fullURL);
       }
+      /**
+       * linkClick function
+       *
+       *
+       */
       function linkClick(e) {
         // Handle clicks on nav links with the default action
         if (e.target.innerHTML == 'Home' || e.target.innerHTML == 'Shows' || e.target.innerHTML == 'Movies') {
@@ -442,7 +453,12 @@
           }
           e.stopPropagation();
         }
-      }
+      } // end linkClick function
+      /**
+       * showOverlay function
+       *
+       *
+       */
       function showOverlay(playerIndex, channelTitle) {
         MAIN.setAttribute('hidden', '');
         OVERLAY.removeAttribute('hidden');
@@ -452,6 +468,11 @@
         document.title = channelTitle;
         NAV.setAttribute('hidden', '');
       }
+      /**
+       * hideOverlay function
+       *
+       *
+       */
       function hideOverlay() {
         MAIN.removeAttribute('hidden');
         BODY.removeAttribute('class');
@@ -460,34 +481,22 @@
         OVERLAYTITLE.innerText = '';
         document.title = PAGETITLE;
       }
+      /**
+       * pausePlayers function
+       *
+       * Runs when user presses close channel button
+       */
       function pausePlayers() {
         players.forEach(function(player) {
           player.pauseVideo();
           player.f.setAttribute('hidden', '');
         });
       }
-      window.addEventListener('popstate', function(e){
-        var recentChannel = e.state;
-        if (recentChannel === null){
-          pausePlayers();
-          hideOverlay();
-        }
-        else {
-          switch (recentChannel) {
-            case 'dane-reynolds':
-              showOverlay(0, 'Dane Reynolds Channel');
-              break;
-            case 'kelly-slater':
-              showOverlay(1, 'Kelly Slater Channel');
-              break;
-            case 'craig-anderson':
-              showOverlay(2, 'Craig Anderson Channel');
-          }
-        }
-      });
 
 
       /**
+       * filterClick function
+       * 
        * Runs when user interacts with the channel filter (by click or keyboard).
        * Filter the page contents according to the incoming channel filter.
        * Populate filter in local storage.
@@ -794,7 +803,28 @@
       // Run init function after the DOM content is loaded
       document.addEventListener('DOMContentLoaded',init);
 
-      // Pause video before the user leaves, to handle when the user closes the browser
+      // popstate event listener for when the overlay is displayed and the back button is pressed
+      window.addEventListener('popstate', function(e){
+        var recentChannel = e.state;
+        if (recentChannel === null){
+          pausePlayers();
+          hideOverlay();
+        }
+        else {
+          switch (recentChannel) {
+            case 'dane-reynolds':
+              showOverlay(0, 'Dane Reynolds Channel');
+              break;
+            case 'kelly-slater':
+              showOverlay(1, 'Kelly Slater Channel');
+              break;
+            case 'craig-anderson':
+              showOverlay(2, 'Craig Anderson Channel');
+          }
+        }
+      });
+
+      // beforeunload event listener to pause all the players when the user closes the browser (couldn't figure out how to pause player that was playing)
       window.addEventListener('beforeunload', function (e) {
         delete e['returnValue'];
         pausePlayers();
