@@ -404,6 +404,7 @@
         for (let k = 0; k < LINKS.length; k++) {
           LINKS[k].addEventListener('click', linkClick);
         }
+        console.log('init done running');
       } // end init function
 
 
@@ -422,6 +423,7 @@
           fullURL += "/";
         }
         history.pushState(null, null, fullURL);
+        console.log('close loaded');
       }
       /**
        * linkClick function
@@ -829,6 +831,8 @@
         delete e['returnValue'];
         pausePlayers();
       });
+      
+      console.log('bottom of script tag');
 
 
     </script>
