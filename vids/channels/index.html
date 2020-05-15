@@ -235,17 +235,6 @@
       let players = new Array();
 
       /**
-       * createYouTubeScript function (Google code: https://developers.google.com/youtube/iframe_api_reference)
-       *
-       * Creates the script to load YouTube's iframe player API code asynchronously.
-       */
-      //function createYouTubeScript() {
-        //const tag = document.createElement('script');
-        //tag.src = "https://www.youtube.com/iframe_api";
-        //const firstScriptTag = document.querySelector('script');
-        //firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      //}
-      /**
        * onYouTubeIframeAPIReady function (Google code: https://developers.google.com/youtube/iframe_api_reference)
        *
        * Automatically runs when the YouTube API is ready
@@ -328,8 +317,7 @@
       } // end createPlayer function
       
       
-      // Variables for counters and determining empty fields
-      let a, b, c, d, e, f, g, h;
+      // Determine empty fields
       const EMPTY = '';
 
       // Variables for all of the components
@@ -385,7 +373,6 @@
         if (SEARCH.value !== EMPTY) {
           search();
         }
-        //createYouTubeScript();
         SEARCH.addEventListener('keyup', search, false);
         SEARCH.addEventListener('search', search, false);
         for (let i = 0; i < CHANNELNAMES.length; i++) {
@@ -418,7 +405,7 @@
         hideOverlay();
         var pathArray = window.location.pathname.split('/');
         var fullURL = window.location.protocol + "//" + window.location.host;
-        for (a = 0; a < 3; a++) {
+        for (let a = 0; a < 3; a++) {
           fullURL += pathArray[a];
           fullURL += "/";
         }
@@ -451,6 +438,9 @@
             case '3':
             case 'Craig Anderson':
               showOverlay(2, 'Craig Anderson Channel');
+              break;
+            default:
+              showOverlay(0, 'Dane Reynolds Channel');
           }
           e.stopPropagation();
         }
@@ -485,13 +475,13 @@
       /**
        * pausePlayers function
        *
-       * Runs when user presses close channel button
+       * Runs when user presses close channel button. Pauses and hides all players.
        */
       function pausePlayers() {
-        players.forEach(function(player) {
-          player.pauseVideo();
-          player.f.setAttribute('hidden', '');
-        });
+        for (let l = 0; l < players.length; l++) {
+          players[l].pauseVideo();
+          players[l].f.setAttribute('hidden', '');
+        }
       }
 
 
@@ -524,7 +514,7 @@
           if (searchValue !== EMPTY) {
             var tr = document.getElementsByTagName('tr');
             var hiddenRowCount = 0;
-            for (b = 0; b < tr.length; b++) {
+            for (let b = 0; b < tr.length; b++) {
               var channelLink = CHANNELNAMES[b].getElementsByTagName('a');
               var cName = channelLink[0].innerText;
               if (cName.toUpperCase().indexOf(searchValue) > -1) {
@@ -546,7 +536,7 @@
             EMPTYFILTER.setAttribute('hidden', '');
             TABLE.removeAttribute('hidden');
             var tr = document.getElementsByTagName('tr');
-            for (c = 0; c < tr.length; c++) {
+            for (let c = 0; c < tr.length; c++) {
               tr[c].removeAttribute('hidden');
             }
           }
@@ -563,7 +553,7 @@
       function filterFavorites() {
         FAVORITELABEL.focus();
         var allOnlyRows = document.querySelectorAll('.all');
-        for (d = 0; d < allOnlyRows.length; d++) {
+        for (let d = 0; d < allOnlyRows.length; d++) {
           allOnlyRows[d].setAttribute('hidden', '');
         }
         if (allOnlyRows.length === 3) { // **** change this number to the number of channels
@@ -578,7 +568,7 @@
        * Set the channel styles on their respective componets.
        */
       function populateChannelStorage() {
-        for (e = 0; e < FAVORITES.length; e++) {
+        for (let e = 0; e < FAVORITES.length; e++) {
           localStorage.setItem(FAVORITES[e].id, FAVORITES[e].innerText);
           localStorage.setItem(FAVORITES[e].id+'Pressed', FAVORITES[e].getAttribute('aria-pressed'));
           localStorage.setItem(FAVORITES[e].id+'Filter', FAVORITES[e].parentElement.classList[0]);
@@ -594,7 +584,7 @@
         if (filters[0].checked === false && filters[1].checked === false){
           filters[0].setAttribute('checked', '');
         }
-        for (f = 0; f < filters.length; f++){
+        for (let f = 0; f < filters.length; f++){
           if (filters[f].checked) {
             localStorage.setItem('FilterSelected', filters[f].value);
           }
@@ -640,7 +630,7 @@
           tr = document.getElementsByTagName('tr');
         }
         hiddenRowCount = 0;
-        for (g = 0; g < tr.length; g++) {
+        for (let g = 0; g < tr.length; g++) {
           channelLink = CHANNELNAMES[g].getElementsByTagName('a');
           cName = channelLink[0].innerText;
           if (cName.toUpperCase().indexOf(searchValue) > -1) {
@@ -666,7 +656,7 @@
         var channelIcons = [];
         var rowFilters = [];
         var arias = [];
-        for (h = 0; h < FAVORITES.length; h++) {
+        for (let h = 0; h < FAVORITES.length; h++) {
           channelIcons[h] = localStorage.getItem(FAVORITES[h].id);
           rowFilters[h] = localStorage.getItem(FAVORITES[h].id+'Filter');
           arias[h] = localStorage.getItem(FAVORITES[h].id+'Pressed');
@@ -821,6 +811,9 @@
               break;
             case 'craig-anderson':
               showOverlay(2, 'Craig Anderson Channel');
+              break;
+            default:
+              showOverlay(0, 'Dane Reynolds Channel');
           }
         }
       }, false);
