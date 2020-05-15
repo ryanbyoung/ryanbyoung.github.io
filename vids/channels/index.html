@@ -211,6 +211,7 @@
       </p>
     </nav>
 
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
 
       // The playerInfoList object containing info for all of the players
@@ -238,12 +239,12 @@
        *
        * Creates the script to load YouTube's iframe player API code asynchronously.
        */
-      function createYouTubeScript() {
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.querySelector('script');
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      }
+      //function createYouTubeScript() {
+        //const tag = document.createElement('script');
+        //tag.src = "https://www.youtube.com/iframe_api";
+        //const firstScriptTag = document.querySelector('script');
+        //firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      //}
       /**
        * onYouTubeIframeAPIReady function (Google code: https://developers.google.com/youtube/iframe_api_reference)
        *
@@ -384,7 +385,7 @@
         if (SEARCH.value !== EMPTY) {
           search();
         }
-        createYouTubeScript();
+        //createYouTubeScript();
         SEARCH.addEventListener('keyup', search, false);
         SEARCH.addEventListener('search', search, false);
         for (let i = 0; i < CHANNELNAMES.length; i++) {
