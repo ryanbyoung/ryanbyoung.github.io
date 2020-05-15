@@ -244,9 +244,6 @@
       const FAVORITES = document.querySelectorAll('.favorite');
       let filters = document.querySelectorAll('input[name=filter]');
       const LINKS = document.querySelectorAll('a');
-      for (let i = 0, len = LINKS.length; i < len ; i++) {
-        LINKS[i].addEventListener('click', linkClick, false);
-      }
       const MAIN = document.querySelector('main');
       const NAV = document.querySelector('nav');
       const OVERLAY = document.getElementById('overlay');
@@ -267,8 +264,8 @@
         hideOverlay();
         var pathArray = window.location.pathname.split('/');
         var fullURL = window.location.protocol + "//" + window.location.host;
-        for (let a = 0; a < 3; a++) {
-          fullURL += pathArray[a];
+        for (let i = 0; i < 3; i++) {
+          fullURL += pathArray[i];
           fullURL += "/";
         }
         history.pushState(null, null, fullURL);
@@ -363,20 +360,20 @@
           EMPTYFILTER.setAttribute('hidden', '');
           populateFilterStorage();
           // If user left anything in the search field
-          var searchValue = SEARCH.value.toUpperCase();
+          let searchValue = SEARCH.value.toUpperCase();
           if (searchValue !== EMPTY) {
-            var tr = document.getElementsByTagName('tr');
-            var hiddenRowCount = 0;
-            for (let b = 0; b < tr.length; b++) {
-              var channelLink = CHANNELNAMES[b].getElementsByTagName('a');
-              var cName = channelLink[0].innerText;
+            let tr = document.getElementsByTagName('tr');
+            let hiddenRowCount = 0;
+            for (let i = 0, trLength = tr.length; i < trLength; i++) {
+              let channelLink = CHANNELNAMES[i].getElementsByTagName('a');
+              let cName = channelLink[0].innerText;
               if (cName.toUpperCase().indexOf(searchValue) > -1) {
                 TABLE.removeAttribue('hidden');
-                tr[b].removeAttribute('hidden');
+                tr[i].removeAttribute('hidden');
                 EMPTYQUERY.setAttribute('hidden', '');
               }
               else {
-                tr[b].setAttribute('hidden', '');
+                tr[i].setAttribute('hidden', '');
                 hiddenRowCount++;
                 if (hiddenRowCount === tr.length) {
                   TABLE.setAttribute('hidden', '');
@@ -388,9 +385,8 @@
           else {
             EMPTYFILTER.setAttribute('hidden', '');
             TABLE.removeAttribute('hidden');
-            var tr = document.getElementsByTagName('tr');
-            for (let c = 0; c < tr.length; c++) {
-              tr[c].removeAttribute('hidden');
+            for (let j = 0; j < trLength; j++) {
+              tr[j].removeAttribute('hidden');
             }
           }
         }
@@ -405,11 +401,11 @@
        */
       function filterFavorites() {
         FAVORITELABEL.focus();
-        var allOnlyRows = document.querySelectorAll('.all');
-        for (let d = 0; d < allOnlyRows.length; d++) {
-          allOnlyRows[d].setAttribute('hidden', '');
+        let allOnlyRows = document.querySelectorAll('.all');
+        for (let i = 0, allLength = allOnlyRows.length; i < allLength; i++) {
+          allOnlyRows[i].setAttribute('hidden', '');
         }
-        if (allOnlyRows.length === 3) { // **** change this number to the number of channels
+        if (allOnlyRows.length === playerInfoList.length) { // **** change this variable for prod
           TABLE.setAttribute('hidden', '');
           EMPTYFILTER.removeAttribute('hidden');
         }
@@ -458,7 +454,7 @@
         ALL_LABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
         ALL_LABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
         CLOSE.addEventListener('click', close, false);
-        for (let i = 0; i < CHANNELNAMES.length; i++) {
+        for (let i = 0, namesLength = CHANNELNAMES.length; i < namesLength; i++) {
           CHANNELNAMES[i].addEventListener('click', tdClick, false);
           CHANNELNUMBERS[i].addEventListener('click', tdClick, false);
           FAVORITES[i].addEventListener('click', toggleButtonClickHandler, false);
@@ -467,8 +463,11 @@
         }
         FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
-        for (let j = 0; j < filters.length; j++) {
+        for (let j = 0, filtersLength = filters.length; j < filtersLength; j++) {
           filters[j].addEventListener('click', filterClick, false);
+        }
+        for (let k = 0, linksLength = LINKS.length; k < linksLength ; k++) {
+          LINKS[k].addEventListener('click', linkClick, false);
         }
         SEARCH.addEventListener('keyup', search, false);
         SEARCH.addEventListener('search', search, false);
@@ -486,8 +485,8 @@
         }
         else {
           e.preventDefault();
-          var data = e.target.getAttribute('href'),
-              url = data + '/';
+          let data = e.target.getAttribute('href');
+          let url = data + '/';
           history.pushState(data, null, url);
           switch (e.target.innerHTML) {
             case '1':
@@ -521,7 +520,7 @@
        */
       window.onYouTubeIframeAPIReady = function() {
         if (typeof playerInfoList === 'undefined') return;
-        for (let i = 0; i < playerInfoList.length; i++) {
+        for (let i = 0, listLength = playerInfoList.length; i < listLength; i++) {
           let currentPlayer = createPlayer(playerInfoList[i]);
           players[i] = currentPlayer;
           document.getElementById(players[i].f.id).setAttribute('hidden', '');
@@ -534,9 +533,9 @@
        * Runs when user presses close channel button. Pauses and hides all players.
        */
       function pausePlayers() {
-        for (let l = 0; l < players.length; l++) {
-          players[l].pauseVideo();
-          players[l].f.setAttribute('hidden', '');
+        for (let i = 0, playersLength = players.length; i < playersLength; i++) {
+          players[i].pauseVideo();
+          players[i].f.setAttribute('hidden', '');
         }
       }
 
@@ -546,10 +545,10 @@
        * Set the channel styles on their respective componets.
        */
       function populateChannelStorage() {
-        for (let e = 0; e < FAVORITES.length; e++) {
-          localStorage.setItem(FAVORITES[e].id, FAVORITES[e].innerText);
-          localStorage.setItem(FAVORITES[e].id+'Pressed', FAVORITES[e].getAttribute('aria-pressed'));
-          localStorage.setItem(FAVORITES[e].id+'Filter', FAVORITES[e].parentElement.classList[0]);
+        for (let i = 0, favLength = FAVORITES.length; i < favLength; i++) {
+          localStorage.setItem(FAVORITES[i].id, FAVORITES[i].innerText);
+          localStorage.setItem(FAVORITES[i].id+'Pressed', FAVORITES[i].getAttribute('aria-pressed'));
+          localStorage.setItem(FAVORITES[i].id+'Filter', FAVORITES[i].parentElement.classList[0]);
         }
         setChannelStyles();
       }
@@ -562,9 +561,9 @@
         if (filters[0].checked === false && filters[1].checked === false){
           filters[0].setAttribute('checked', '');
         }
-        for (let f = 0; f < filters.length; f++){
-          if (filters[f].checked) {
-            localStorage.setItem('FilterSelected', filters[f].value);
+        for (let i = 0, filtersLength = filters.length; i < filtersLength; i++){
+          if (filters[i].checked) {
+            localStorage.setItem('FilterSelected', filters[i].value);
           }
         }
         setFilterStyles();
@@ -598,7 +597,7 @@
        */
       function search() {
         populateSearchStorage();
-        var channelLink, cName, hiddenRowCount, searchValue, tr;
+        let channelLink, cName, hiddenRowCount, searchValue, tr;
         searchValue = SEARCH.value.toUpperCase();
         if (filters[1].checked === true) {
           tr = document.getElementsByClassName('favorites');
@@ -608,16 +607,16 @@
           tr = document.getElementsByTagName('tr');
         }
         hiddenRowCount = 0;
-        for (let g = 0; g < tr.length; g++) {
-          channelLink = CHANNELNAMES[g].getElementsByTagName('a');
+        for (let i = 0, trLength = tr.length; i < trLength; i++) {
+          channelLink = CHANNELNAMES[i].getElementsByTagName('a');
           cName = channelLink[0].innerText;
           if (cName.toUpperCase().indexOf(searchValue) > -1) {
             TABLE.removeAttribute('hidden');
-            tr[g].removeAttribute('hidden');
+            tr[i].removeAttribute('hidden');
             EMPTYQUERY.setAttribute('hidden', '');
           }
           else {
-            tr[g].setAttribute('hidden', '');
+            tr[i].setAttribute('hidden', '');
             hiddenRowCount++;
             if (hiddenRowCount === tr.length) {
               TABLE.setAttribute('hidden', '');
@@ -631,16 +630,16 @@
        * Sets the styles of all the channels based on their values in local storage.
        */
       function setChannelStyles() {
-        var channelIcons = [];
-        var rowFilters = [];
-        var arias = [];
-        for (let h = 0; h < FAVORITES.length; h++) {
-          channelIcons[h] = localStorage.getItem(FAVORITES[h].id);
-          rowFilters[h] = localStorage.getItem(FAVORITES[h].id+'Filter');
-          arias[h] = localStorage.getItem(FAVORITES[h].id+'Pressed');
-          FAVORITES[h].innerText = channelIcons[h];
-          FAVORITES[h].parentElement.classList = rowFilters[h];
-          FAVORITES[h].setAttribute('aria-pressed', arias[h]);
+        let channelIcons = [];
+        let rowFilters = [];
+        let arias = [];
+        for (let i = 0, favLength = FAVORITES.length; i < favLength; i++) {
+          channelIcons[i] = localStorage.getItem(FAVORITES[i].id);
+          rowFilters[i] = localStorage.getItem(FAVORITES[i].id+'Filter');
+          arias[i] = localStorage.getItem(FAVORITES[i].id+'Pressed');
+          FAVORITES[i].innerText = channelIcons[i];
+          FAVORITES[i].parentElement.classList = rowFilters[i];
+          FAVORITES[i].setAttribute('aria-pressed', arias[i]);
         }
       }
 
@@ -649,8 +648,7 @@
        * If the filter is set to favorite channels, displays the favorite channels.
        */
       function setFilterStyles() {
-        var filterChecked;
-        filterChecked = localStorage.getItem('FilterSelected');
+        let filterChecked = localStorage.getItem('FilterSelected');
         if (filterChecked === 'all') {
           filters[0].checked = true;
           filters[0].setAttribute('checked', '');
@@ -666,7 +664,7 @@
        * Sets the search field value to the value that is saved in the local storage.
        */
       function setSearchValue() {
-        var savedSearch = localStorage.getItem('SearchValue');
+        let savedSearch = localStorage.getItem('SearchValue');
         SEARCH.value = savedSearch;
       }
 
@@ -744,7 +742,7 @@
            filterClick(event.currentTarget);
          }
          else if (event.keyCode > 36 && event.keyCode < 41) {
-           var reverseLabel = (event.currentTarget.htmlFor === 'all') ? FAVORITELABEL : ALL_LABEL;
+           let reverseLabel = (event.currentTarget.htmlFor === 'all') ? FAVORITELABEL : ALL_LABEL;
            filterClick(reverseLabel);
          }
        }
@@ -773,8 +771,8 @@
        * @param {HTMLElement} button
        */
       function toggleButtonState (button) {
-        var filterSelected = localStorage.getItem('FilterSelected');
-        var isAriaPressed = button.getAttribute('aria-pressed') === 'true';
+        const filterSelected = localStorage.getItem('FilterSelected');
+        const isAriaPressed = button.getAttribute('aria-pressed') === 'true';
         button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
         button.innerText = (isAriaPressed === true) ? '♡' : '❤️';
         button.parentElement.classList = (isAriaPressed === true) ? 'all' : 'favorites';
@@ -789,7 +787,7 @@
 
       // popstate event listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(e){
-        var recentChannel = e.state;
+        const recentChannel = e.state;
         if (recentChannel === null){
           pausePlayers();
           hideOverlay();
