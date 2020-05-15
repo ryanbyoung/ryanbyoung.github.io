@@ -231,7 +231,7 @@
         playlistName: 'CraigAnderson'
       }];
 
-      const ALLLABEL = document.querySelector('label[for=all]');
+      const ALL_LABEL = document.querySelector('label[for=all]');
       const BODY = document.querySelector('body');
       const CHANNELNAMES = document.querySelectorAll('.search-item');
       const CHANNELNUMBERS = document.querySelectorAll('.channel');
@@ -355,7 +355,7 @@
         else {
           filters[0].setAttribute('checked', '');
           filters[0].checked = true;
-          ALLLABEL.focus();
+          ALL_LABEL.focus();
           filters[1].removeAttribute('checked');
           EMPTYFILTER.setAttribute('hidden', '');
           populateFilterStorage();
@@ -452,8 +452,8 @@
         if (SEARCH.value !== EMPTY) {
           search();
         }
-        ALLLABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
-        ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
+        ALL_LABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
+        ALL_LABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
         CLOSE.addEventListener('click', close, false);
         for (let i = 0; i < CHANNELNAMES.length; i++) {
           CHANNELNAMES[i].addEventListener('click', tdClick, false);
@@ -744,7 +744,7 @@
            filterClick(event.currentTarget);
          }
          else if (event.keyCode > 36 && event.keyCode < 41) {
-           var reverseLabel = (event.currentTarget.htmlFor === 'all') ? FAVORITELABEL : ALLLABEL;
+           var reverseLabel = (event.currentTarget.htmlFor === 'all') ? FAVORITELABEL : ALL_LABEL;
            filterClick(reverseLabel);
          }
        }
@@ -760,7 +760,7 @@
       function toggleButtonKeyupHandler (event) {
         if (event.keyCode === 32) {
           event.preventDefault();
-          if (event.currentTarget === ALLLABEL || event.currentTarget === FAVORITELABEL) {
+          if (event.currentTarget === ALL_LABEL || event.currentTarget === FAVORITELABEL) {
             filterClick(event.currentTarget);
           }
           else toggleButtonState(event.currentTarget);
