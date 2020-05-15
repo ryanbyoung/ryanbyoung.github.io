@@ -373,6 +373,7 @@
         if (SEARCH.value !== EMPTY) {
           search();
         }
+        onYouTubeIframeAPIReady();
         SEARCH.addEventListener('keyup', search, false);
         SEARCH.addEventListener('search', search, false);
         for (let i = 0; i < CHANNELNAMES.length; i++) {
