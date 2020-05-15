@@ -213,7 +213,7 @@
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-
+    (function(){
       // The playerInfoList object containing info for all of the players
       // (this probably can be pulled dynamically from the data file in the app so probably won't be needed)
       const playerInfoList = [{
@@ -824,6 +824,7 @@
         pausePlayers();
       }, false);
 
+    })();
     </script>
 
     <!-- For users who have javascript turned off -->
