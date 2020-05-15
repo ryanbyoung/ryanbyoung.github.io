@@ -345,6 +345,8 @@
        * @param {KeyboardEvent} event
        */
       function filterClick(event) {
+        let searchValue = SEARCH.value.toUpperCase();
+        let tr = document.getElementsByTagName('tr');
         if (this.value === 'favorites' || event.htmlFor === 'favorites') {
           filters[0].removeAttribute('checked');
           filters[1].setAttribute('checked', '');
@@ -360,9 +362,7 @@
           EMPTYFILTER.setAttribute('hidden', '');
           populateFilterStorage();
           // If user left anything in the search field
-          let searchValue = SEARCH.value.toUpperCase();
           if (searchValue !== EMPTY) {
-            let tr = document.getElementsByTagName('tr');
             let hiddenRowCount = 0;
             for (let i = 0, trLength = tr.length; i < trLength; i++) {
               let channelLink = CHANNELNAMES[i].getElementsByTagName('a');
@@ -385,7 +385,7 @@
           else {
             EMPTYFILTER.setAttribute('hidden', '');
             TABLE.removeAttribute('hidden');
-            for (let j = 0; j < trLength; j++) {
+            for (let j = 0, tr.length; j < trLength; j++) {
               tr[j].removeAttribute('hidden');
             }
           }
