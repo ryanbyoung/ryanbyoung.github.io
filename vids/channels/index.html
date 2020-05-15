@@ -244,7 +244,7 @@
        * Loop through each element in the playerInfoList object, create player from that info,
        * populate the players array with each player, and hide each player in the DOM.
        */
-      function onYouTubeIframeAPIReady() {
+      window.onYouTubeIframeAPIReady = function() {
         if (typeof playerInfoList === 'undefined') return;
         for (let i = 0; i < playerInfoList.length; i++) {
           let currentPlayer = createPlayer(playerInfoList[i]);
@@ -373,7 +373,6 @@
         if (SEARCH.value !== EMPTY) {
           search();
         }
-        onYouTubeIframeAPIReady();
         SEARCH.addEventListener('keyup', search, false);
         SEARCH.addEventListener('search', search, false);
         for (let i = 0; i < CHANNELNAMES.length; i++) {
