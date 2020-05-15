@@ -244,6 +244,9 @@
       const FAVORITES = document.querySelectorAll('.favorite');
       let filters = document.querySelectorAll('input[name=filter]');
       const LINKS = document.querySelectorAll('a');
+      for (let i = 0, len = LINKS.length; i < len ; i++) {
+        LINKS[i].addEventListener('click', linkClick, false);
+      }
       const MAIN = document.querySelector('main');
       const NAV = document.querySelector('nav');
       const OVERLAY = document.getElementById('overlay');
@@ -466,9 +469,6 @@
         FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
         for (let j = 0; j < filters.length; j++) {
           filters[j].addEventListener('click', filterClick, false);
-        }
-        for (let k = 0; k < LINKS.length; k++) {
-          LINKS[k].addEventListener('click', linkClick, false);
         }
         SEARCH.addEventListener('keyup', search, false);
         SEARCH.addEventListener('search', search, false);
