@@ -245,7 +245,6 @@
        * populate the players array with each player, and hide each player in the DOM.
        */
       function onYouTubeIframeAPIReady() {
-        console.log('iframe called');
         if (typeof playerInfoList === 'undefined') return;
         for (let i = 0; i < playerInfoList.length; i++) {
           let currentPlayer = createPlayer(playerInfoList[i]);
@@ -374,7 +373,6 @@
         if (SEARCH.value !== EMPTY) {
           search();
         }
-        console.log('soon to be iframe call');
         SEARCH.addEventListener('keyup', search, false);
         SEARCH.addEventListener('search', search, false);
         for (let i = 0; i < CHANNELNAMES.length; i++) {
