@@ -352,7 +352,7 @@
       const OVERLAYTITLE = document.getElementById('overlay-title');
       const CLOSE = document.getElementById('close');
       const LINKS = document.querySelectorAll('a');
-      CLOSE.addEventListener('click', close);
+      CLOSE.addEventListener('click', close, false);
 
 
       /**
@@ -385,24 +385,24 @@
           search();
         }
         createYouTubeScript();
-        SEARCH.addEventListener('keyup', search);
-        SEARCH.addEventListener('search', search);
+        SEARCH.addEventListener('keyup', search, false);
+        SEARCH.addEventListener('search', search, false);
         for (let i = 0; i < CHANNELNAMES.length; i++) {
-          FAVORITES[i].addEventListener('click', toggleButtonClickHandler);
-          FAVORITES[i].addEventListener('keydown', toggleButtonKeydownHandler);
-          FAVORITES[i].addEventListener('keyup', toggleButtonKeyupHandler);
-          CHANNELNUMBERS[i].addEventListener('click', tdClick);
-          CHANNELNAMES[i].addEventListener('click', tdClick);
+          FAVORITES[i].addEventListener('click', toggleButtonClickHandler, false);
+          FAVORITES[i].addEventListener('keydown', toggleButtonKeydownHandler, false);
+          FAVORITES[i].addEventListener('keyup', toggleButtonKeyupHandler, false);
+          CHANNELNUMBERS[i].addEventListener('click', tdClick, false);
+          CHANNELNAMES[i].addEventListener('click', tdClick, false);
         }
         for (let j = 0; j < filters.length; j++) {
-          filters[j].addEventListener('click', filterClick);
+          filters[j].addEventListener('click', filterClick, false);
         }
-        ALLLABEL.addEventListener('keydown', toggleFilterKeydownHandler);
-        ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler);
-        FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler);
-        FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler);
+        ALLLABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
+        ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
+        FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
+        FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
         for (let k = 0; k < LINKS.length; k++) {
-          LINKS[k].addEventListener('click', linkClick);
+          LINKS[k].addEventListener('click', linkClick, false);
         }
       } // end init function
 
@@ -801,7 +801,7 @@
       }
 
       // Run init function after the DOM content is loaded
-      document.addEventListener('DOMContentLoaded',init);
+      document.addEventListener('DOMContentLoaded',init, false);
 
       // popstate event listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(e){
@@ -822,13 +822,13 @@
               showOverlay(2, 'Craig Anderson Channel');
           }
         }
-      });
+      }, false);
 
       // beforeunload event listener to pause all the players when the user closes the browser (couldn't figure out how to pause player that was playing)
       window.addEventListener('beforeunload', function (e) {
         delete e['returnValue'];
         pausePlayers();
-      });
+      }, false);
 
     </script>
 
