@@ -214,6 +214,7 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
     (function(){
+
       // The playerInfoList object containing info for all of the players
       // (this probably can be pulled dynamically from the data file in the app so probably won't be needed)
       const playerInfoList = [{
@@ -230,28 +231,46 @@
         playlistName: 'CraigAnderson'
       }];
 
-      // Leaving this global for right now
+      const ALLLABEL = document.querySelector('label[for=all]');
+      const BODY = document.querySelector('body');
+      const CHANNELNAMES = document.querySelectorAll('.search-item');
+      const CHANNELNUMBERS = document.querySelectorAll('.channel');
+      const CLOSE = document.getElementById('close');
+      // Determine empty fields
+      const EMPTY = '';
+      const EMPTYFILTER = document.getElementById('empty-filter');
+      const EMPTYQUERY = document.getElementById('empty-query');
+      const FAVORITELABEL = document.querySelector('label[for=favorites]');
+      const FAVORITES = document.querySelectorAll('.favorite');
+      let filters = document.querySelectorAll('input[name=filter]');
+      const LINKS = document.querySelectorAll('a');
+      const MAIN = document.querySelector('main');
+      const NAV = document.querySelector('nav');
+      const OVERLAY = document.getElementById('overlay');
+      const OVERLAYTITLE = document.getElementById('overlay-title');
+      const PAGETITLE = 'Channels';
       // Create an array for all of the YouTube players
       let players = new Array();
+      const SEARCH = document.querySelector('#search');
+      const TABLE = document.querySelector('table');
 
       /**
-       * onYouTubeIframeAPIReady function (Google code: https://developers.google.com/youtube/iframe_api_reference)
+       * close function
        *
-       * Automatically runs when the YouTube API is ready
-       *
-       * Check to see if the playerInfoList object has been created. If not, return.
-       *
-       * Loop through each element in the playerInfoList object, create player from that info,
-       * populate the players array with each player, and hide each player in the DOM.
+       * Runs when user presses close channel button
        */
-      window.onYouTubeIframeAPIReady = function() {
-        if (typeof playerInfoList === 'undefined') return;
-        for (let i = 0; i < playerInfoList.length; i++) {
-          let currentPlayer = createPlayer(playerInfoList[i]);
-          players[i] = currentPlayer;
-          document.getElementById(players[i].f.id).setAttribute('hidden', '');
+      function close() {
+        pausePlayers();
+        hideOverlay();
+        var pathArray = window.location.pathname.split('/');
+        var fullURL = window.location.protocol + "//" + window.location.host;
+        for (let a = 0; a < 3; a++) {
+          fullURL += pathArray[a];
+          fullURL += "/";
         }
+        history.pushState(null, null, fullURL);
       }
+
       /**
        * createPlayer function
        *
@@ -315,175 +334,6 @@
           } // end events
         }); // end return
       } // end createPlayer function
-      
-      
-      // Determine empty fields
-      const EMPTY = '';
-
-      // Variables for all of the components
-      const ALLLABEL = document.querySelector('label[for=all]');
-      const CHANNELNAMES = document.querySelectorAll('.search-item');
-      const CHANNELNUMBERS = document.querySelectorAll('.channel');
-      const EMPTYFILTER = document.getElementById('empty-filter');
-      const EMPTYQUERY = document.getElementById('empty-query');
-      const FAVORITELABEL = document.querySelector('label[for=favorites]');
-      const FAVORITES = document.querySelectorAll('.favorite');
-      const MAIN = document.querySelector('main');
-      const SEARCH = document.querySelector('#search');
-      const TABLE = document.querySelector('table');
-      let filters = document.querySelectorAll('input[name=filter]');
-
-
-      const PAGETITLE = 'Channels';
-      const BODY = document.querySelector('body');
-      const NAV = document.querySelector('nav');
-      const OVERLAY = document.getElementById('overlay');
-      const OVERLAYTITLE = document.getElementById('overlay-title');
-      const CLOSE = document.getElementById('close');
-      const LINKS = document.querySelectorAll('a');
-      CLOSE.addEventListener('click', close, false);
-
-
-      /**
-       * init function
-       *
-       * Runs everytime the page is loaded.
-       *
-       * Checks to see if local storage exists for channel, filter, or search components. 
-       * If that information isn't in local storage, it populates it with what is currently on the page. 
-       * If local storage exists, it sets up the page with components from the information in local storage.
-       *
-       * If the user left anything in the search field, it runs the search function.
-       *
-       * Call createYouTubeScript function to load YouTube's iframe player API code asynchronously. All of the 
-       * channel YouTube players will then be created.
-       *
-       * It then adds event listeners for all of the components (search, filter labels, and table elements).
-       */
-      function init() {
-        if (localStorage.length === 0) {
-          populateChannelStorage();
-          populateFilterStorage();
-          populateSearchStorage();
-        } else {
-          setChannelStyles();
-          setFilterStyles();
-          setSearchValue();
-        }
-        if (SEARCH.value !== EMPTY) {
-          search();
-        }
-        SEARCH.addEventListener('keyup', search, false);
-        SEARCH.addEventListener('search', search, false);
-        for (let i = 0; i < CHANNELNAMES.length; i++) {
-          FAVORITES[i].addEventListener('click', toggleButtonClickHandler, false);
-          FAVORITES[i].addEventListener('keydown', toggleButtonKeydownHandler, false);
-          FAVORITES[i].addEventListener('keyup', toggleButtonKeyupHandler, false);
-          CHANNELNUMBERS[i].addEventListener('click', tdClick, false);
-          CHANNELNAMES[i].addEventListener('click', tdClick, false);
-        }
-        for (let j = 0; j < filters.length; j++) {
-          filters[j].addEventListener('click', filterClick, false);
-        }
-        ALLLABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
-        ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
-        FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
-        FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
-        for (let k = 0; k < LINKS.length; k++) {
-          LINKS[k].addEventListener('click', linkClick, false);
-        }
-      } // end init function
-
-
-      /**
-       * close function
-       *
-       * Runs when user presses close channel button
-       */
-      function close() {
-        pausePlayers();
-        hideOverlay();
-        var pathArray = window.location.pathname.split('/');
-        var fullURL = window.location.protocol + "//" + window.location.host;
-        for (let a = 0; a < 3; a++) {
-          fullURL += pathArray[a];
-          fullURL += "/";
-        }
-        history.pushState(null, null, fullURL);
-      }
-      /**
-       * linkClick function
-       *
-       *
-       */
-      function linkClick(e) {
-        // Handle clicks on nav links with the default action
-        if (e.target.innerHTML == 'Home' || e.target.innerHTML == 'Shows' || e.target.innerHTML == 'Movies') {
-          return true;
-        }
-        else {
-          e.preventDefault();
-          var data = e.target.getAttribute('href'),
-              url = data + '/';
-          history.pushState(data, null, url);
-          switch (e.target.innerHTML) {
-            case '1':
-            case 'Dane Reynolds':
-              showOverlay(0, 'Dane Reynolds Channel');
-              break;
-            case '2':
-            case 'Kelly Slater':
-              showOverlay(1, 'Kelly Slater Channel');
-              break;
-            case '3':
-            case 'Craig Anderson':
-              showOverlay(2, 'Craig Anderson Channel');
-              break;
-            default:
-              showOverlay(0, 'Dane Reynolds Channel');
-          }
-          e.stopPropagation();
-        }
-      } // end linkClick function
-      /**
-       * showOverlay function
-       *
-       *
-       */
-      function showOverlay(playerIndex, channelTitle) {
-        MAIN.setAttribute('hidden', '');
-        OVERLAY.removeAttribute('hidden');
-        OVERLAYTITLE.innerText = channelTitle;
-        players[playerIndex].f.removeAttribute('hidden');
-        players[playerIndex].playVideo();
-        document.title = channelTitle;
-        NAV.setAttribute('hidden', '');
-      }
-      /**
-       * hideOverlay function
-       *
-       *
-       */
-      function hideOverlay() {
-        MAIN.removeAttribute('hidden');
-        BODY.removeAttribute('class');
-        NAV.removeAttribute('hidden');
-        OVERLAY.setAttribute('hidden', '');
-        OVERLAYTITLE.innerText = '';
-        document.title = PAGETITLE;
-      }
-      /**
-       * pausePlayers function
-       *
-       * Runs when user presses close channel button. Pauses and hides all players.
-       */
-      function pausePlayers() {
-        for (let l = 0; l < players.length; l++) {
-          players[l].pauseVideo();
-          players[l].f.setAttribute('hidden', '');
-        }
-      }
-
 
       /**
        * filterClick function
@@ -541,7 +391,7 @@
             }
           }
         }
-      }
+      } // end filterClick function
 
       /**
        * When filter is set to favorite channels, focus on the filter, hide rows
@@ -559,6 +409,134 @@
         if (allOnlyRows.length === 3) { // **** change this number to the number of channels
           TABLE.setAttribute('hidden', '');
           EMPTYFILTER.removeAttribute('hidden');
+        }
+      }
+
+      /**
+       * hideOverlay function
+       *
+       *
+       */
+      function hideOverlay() {
+        MAIN.removeAttribute('hidden');
+        BODY.removeAttribute('class');
+        NAV.removeAttribute('hidden');
+        OVERLAY.setAttribute('hidden', '');
+        OVERLAYTITLE.innerText = '';
+        document.title = PAGETITLE;
+      }
+
+      /**
+       * init function
+       *
+       * Runs everytime the page is loaded.
+       *
+       * Checks to see if local storage exists for channel, filter, or search components. 
+       * If that information isn't in local storage, it populates it with what is currently on the page. 
+       * If local storage exists, it sets up the page with components from the information in local storage.
+       *
+       * If the user left anything in the search field, it runs the search function.
+       *
+       * It then adds event listeners for all of the components (search, filter labels, and table elements).
+       */
+      function init() {
+        if (localStorage.length === 0) {
+          populateChannelStorage();
+          populateFilterStorage();
+          populateSearchStorage();
+        } else {
+          setChannelStyles();
+          setFilterStyles();
+          setSearchValue();
+        }
+        if (SEARCH.value !== EMPTY) {
+          search();
+        }
+        ALLLABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
+        ALLLABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
+        CLOSE.addEventListener('click', close, false);
+        for (let i = 0; i < CHANNELNAMES.length; i++) {
+          CHANNELNAMES[i].addEventListener('click', tdClick, false);
+          CHANNELNUMBERS[i].addEventListener('click', tdClick, false);
+          FAVORITES[i].addEventListener('click', toggleButtonClickHandler, false);
+          FAVORITES[i].addEventListener('keydown', toggleButtonKeydownHandler, false);
+          FAVORITES[i].addEventListener('keyup', toggleButtonKeyupHandler, false);
+        }
+        FAVORITELABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
+        FAVORITELABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
+        for (let j = 0; j < filters.length; j++) {
+          filters[j].addEventListener('click', filterClick, false);
+        }
+        for (let k = 0; k < LINKS.length; k++) {
+          LINKS[k].addEventListener('click', linkClick, false);
+        }
+        SEARCH.addEventListener('keyup', search, false);
+        SEARCH.addEventListener('search', search, false);
+      } // end init function
+
+      /**
+       * linkClick function
+       *
+       *
+       */
+      function linkClick(e) {
+        // Handle clicks on nav links with the default action
+        if (e.target.innerHTML == 'Home' || e.target.innerHTML == 'Shows' || e.target.innerHTML == 'Movies') {
+          return true;
+        }
+        else {
+          e.preventDefault();
+          var data = e.target.getAttribute('href'),
+              url = data + '/';
+          history.pushState(data, null, url);
+          switch (e.target.innerHTML) {
+            case '1':
+            case 'Dane Reynolds':
+              showOverlay(0, 'Dane Reynolds Channel');
+              break;
+            case '2':
+            case 'Kelly Slater':
+              showOverlay(1, 'Kelly Slater Channel');
+              break;
+            case '3':
+            case 'Craig Anderson':
+              showOverlay(2, 'Craig Anderson Channel');
+              break;
+            default:
+              showOverlay(0, 'Dane Reynolds Channel');
+          }
+          e.stopPropagation();
+        }
+      } // end linkClick function
+
+      /**
+       * onYouTubeIframeAPIReady function (Google code: https://developers.google.com/youtube/iframe_api_reference)
+       *
+       * Automatically runs when the YouTube API is ready. It needs to be in global (window.) scope so API can access it.
+       *
+       * Check to see if the playerInfoList object has been created. If not, return.
+       *
+       * Loop through each element in the playerInfoList object, create player from that info,
+       * populate the players array with each player, and hide each player in the DOM.
+       */
+      window.onYouTubeIframeAPIReady = function() {
+        if (typeof playerInfoList === 'undefined') return;
+        for (let i = 0; i < playerInfoList.length; i++) {
+          let currentPlayer = createPlayer(playerInfoList[i]);
+          players[i] = currentPlayer;
+          document.getElementById(players[i].f.id).setAttribute('hidden', '');
+        }
+      }
+
+      /**
+       * pausePlayers function
+       *
+       * Runs when user presses close channel button. Pauses and hides all players.
+       */
+      function pausePlayers() {
+        for (let l = 0; l < players.length; l++) {
+          players[l].pauseVideo();
+          players[l].f.setAttribute('hidden', '');
         }
       }
 
@@ -690,6 +668,21 @@
       function setSearchValue() {
         var savedSearch = localStorage.getItem('SearchValue');
         SEARCH.value = savedSearch;
+      }
+
+      /**
+       * showOverlay function
+       *
+       *
+       */
+      function showOverlay(playerIndex, channelTitle) {
+        MAIN.setAttribute('hidden', '');
+        OVERLAY.removeAttribute('hidden');
+        OVERLAYTITLE.innerText = channelTitle;
+        players[playerIndex].f.removeAttribute('hidden');
+        players[playerIndex].playVideo();
+        document.title = channelTitle;
+        NAV.setAttribute('hidden', '');
       }
 
       /**
