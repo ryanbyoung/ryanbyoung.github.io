@@ -484,7 +484,6 @@
           return true;
         }
         else {
-          e.preventDefault();
           let data = e.target.getAttribute('href');
           //let url = data + '/';
           alert('here');
@@ -505,6 +504,7 @@
             default:
               showOverlay(0, 'Dane Reynolds Channel');
           }
+          e.preventDefault();
           e.stopPropagation();
         }
       } // end linkClick function
