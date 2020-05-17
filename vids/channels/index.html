@@ -70,10 +70,10 @@
       input[type="radio"]:checked + label {
         text-decoration: underline
       }
-      #filter label {
+      fieldset label {
         cursor: pointer
       }
-      #filter label:last-child {
+      fieldset label:last-child {
         margin-left: 20px
       }
       table {
@@ -91,7 +91,7 @@
       td a {
         text-decoration: none
       }
-      .favorite, .channel {
+      .favorite, .channel-number {
         text-align: center;
         width: 30px
       }
@@ -150,7 +150,7 @@
         <label for="search">Search:</label>
         <input aria-label="Search channels" id="search" name="search" placeholder="Dane, Kelly, etc." type="search">
       </p>
-      <fieldset id="filter">
+      <fieldset>
         <legend>Filter</legend>
         <input id="all" name="filter" tabindex="-1" type="radio" value="all">
         <label for="all" tabindex="0">All Channels</label>
@@ -160,29 +160,29 @@
       <table>
         <tbody>
           <tr class="all">
-            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel1" role="button" tabindex="0">♡</td>
-            <td class="channel">
+            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" role="button" tabindex="0">♡</td>
+            <td class="channel-number">
               <a href="dane-reynolds">1</a>
             </td>
-            <td class="search-item">
+            <td class="channel-name">
               <a href="dane-reynolds">Dane Reynolds</a>
             </td>
           </tr>
           <tr class="all">
-            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel2" role="button" tabindex="0">♡</td>
-            <td class="channel">
+            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" role="button" tabindex="0">♡</td>
+            <td class="channel-number">
               <a href="kelly-slater">2</a>
             </td>
-            <td class="search-item">
+            <td class="channel-name">
               <a href="kelly-slater">Kelly Slater</a>
             </td>
           </tr>
           <tr class="all">
-            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel3" role="button" tabindex="0">♡</td>
-            <td class="channel">
+            <td aria-label="Favorite channel" aria-pressed="false" class="favorite" role="button" tabindex="0">♡</td>
+            <td class="channel-number">
               <a href="craig-anderson">3</a>
             </td>
-            <td class="search-item">
+            <td class="channel-name">
               <a href="craig-anderson">Craig Anderson</a>
             </td>
           </tr>
@@ -233,8 +233,8 @@
 
       const ALL_LABEL = document.querySelector('label[for=all]');
       const BODY = document.querySelector('body');
-      const CHANNELNAMES = document.querySelectorAll('.search-item');
-      const CHANNELNUMBERS = document.querySelectorAll('.channel');
+      const CHANNELNAMES = document.querySelectorAll('.channel-name');
+      const CHANNELNUMBERS = document.querySelectorAll('.channel-number');
       const CLOSE = document.getElementById('close');
       // Determine empty fields
       const EMPTY = '';
@@ -555,9 +555,10 @@
        */
       function populateChannelStorage() {
         for (let i = 0, favLength = FAVORITES.length; i < favLength; i++) {
-          localStorage.setItem(FAVORITES[i].id, FAVORITES[i].innerText);
-          localStorage.setItem(FAVORITES[i].id+'Pressed', FAVORITES[i].getAttribute('aria-pressed'));
-          localStorage.setItem(FAVORITES[i].id+'Filter', FAVORITES[i].parentElement.classList[0]);
+          const channel = CHANNELNAMES[i].innerText.replace(/\s/g,'');
+          localStorage.setItem(channel, FAVORITES[i].innerText);
+          localStorage.setItem(channel+'Pressed', FAVORITES[i].getAttribute('aria-pressed'));
+          localStorage.setItem(channel+'Filter', FAVORITES[i].parentElement.classList[0]);
         }
         setChannelStyles();
       }
@@ -655,9 +656,10 @@
         let rowFilters = [];
         let arias = [];
         for (let i = 0, favLength = FAVORITES.length; i < favLength; i++) {
-          channelIcons[i] = localStorage.getItem(FAVORITES[i].id);
-          rowFilters[i] = localStorage.getItem(FAVORITES[i].id+'Filter');
-          arias[i] = localStorage.getItem(FAVORITES[i].id+'Pressed');
+          const channel = CHANNELNAMES[i].innerText.replace(/\s/g,'');
+          channelIcons[i] = localStorage.getItem(channel);
+          rowFilters[i] = localStorage.getItem(channel+'Filter');
+          arias[i] = localStorage.getItem(channel+'Pressed');
           FAVORITES[i].innerText = channelIcons[i];
           FAVORITES[i].parentElement.classList = rowFilters[i];
           FAVORITES[i].setAttribute('aria-pressed', arias[i]);
