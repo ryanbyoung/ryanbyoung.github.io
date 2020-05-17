@@ -479,8 +479,6 @@
        *
        */
       function linkClick(e) {
-        e.bubbles = false;
-        console.log(e.bubbles);
         // Handle clicks on nav links with the default action
         if (e.target.innerHTML == 'Home' || e.target.innerHTML == 'Shows' || e.target.innerHTML == 'Movies') {
           return true;
@@ -490,6 +488,7 @@
           const data = e.target.getAttribute('href');
           const url = data + '/';
           history.pushState(data, null, url);
+          alert(e.target.innerHTML);
           switch (e.target.innerHTML) {
             case '1':
             case 'Dane Reynolds':
