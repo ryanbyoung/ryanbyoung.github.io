@@ -244,7 +244,6 @@
       const FAVORITES = document.querySelectorAll('.favorite');
       let filters = document.querySelectorAll('input[name=filter]');
       const LINKS = document.querySelectorAll('a');
-      console.log(LINKS[1]);
       const MAIN = document.querySelector('main');
       const NAV = document.querySelector('nav');
       const OVERLAY = document.getElementById('overlay');
@@ -480,6 +479,7 @@
        *
        */
       function linkClick(e) {
+        alert(e.target.href);
         // Handle clicks on nav links with the default action
         if (e.target.innerHTML == 'Home' || e.target.innerHTML == 'Shows' || e.target.innerHTML == 'Movies') {
           return true;
