@@ -488,6 +488,7 @@
           const data = e.target.getAttribute('href');
           const url = data + '/';
           history.pushState(data, null, url);
+          alert(e.target.href, LINKS[1].href);
           switch (e.target.innerHTML) {
             case '1':
             case 'Dane Reynolds':
@@ -504,7 +505,6 @@
             default:
               showOverlay(0, 'Dane Reynolds Channel');
           }
-          alert(e.target.href);
           e.stopPropagation();
         }
       } // end linkClick function
