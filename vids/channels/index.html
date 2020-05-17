@@ -491,8 +491,15 @@
           switch (e.target.innerHTML) {
             case '1':
             case 'Dane Reynolds':
-              alert('here');
-              showOverlay(0, 'Dane Reynolds Channel');
+              MAIN.setAttribute('hidden', '');
+              OVERLAY.removeAttribute('hidden');
+              OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
+              players[0].f.removeAttribute('hidden');
+              players[0].playVideo();
+              document.title = 'Dane Reynolds Channel';
+              NAV.setAttribute('hidden', '');
+              e.stopPropagation();
+              //showOverlay(0, 'Dane Reynolds Channel');
               break;
             case '2':
             case 'Kelly Slater':
