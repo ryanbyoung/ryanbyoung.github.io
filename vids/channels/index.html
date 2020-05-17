@@ -784,7 +784,6 @@
 
       // Run init function after the DOM content is loaded
       document.addEventListener('DOMContentLoaded',init, false);
-      document.addEventListener('load', TABLE.removeAttribute('hidden'), false);
 
       // popstate event listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(e){
