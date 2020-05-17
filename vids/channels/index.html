@@ -162,10 +162,10 @@
           <tr class="all">
             <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel1" role="button" tabindex="0">♡</td>
             <td class="channel">
-              <a href="dane-reynolds/">1</a>
+              <a href="dane-reynolds">1</a>
             </td>
             <td class="search-item">
-              <a href="dane-reynolds/">Dane Reynolds</a>
+              <a href="dane-reynolds">Dane Reynolds</a>
             </td>
           </tr>
           <tr class="all">
@@ -484,22 +484,15 @@
           return true;
         }
         else {
+          console.log(e);
           e.preventDefault();
-          let data = e.target.getAttribute('href');
-          //let url = data + '/';
-          history.pushState(data, null, data);
+          const data = e.target.getAttribute('href');
+          const url = data + '/';
+          history.pushState(data, null, url);
           switch (e.target.innerHTML) {
             case '1':
             case 'Dane Reynolds':
-              MAIN.setAttribute('hidden', '');
-              OVERLAY.removeAttribute('hidden');
-              OVERLAYTITLE.innerText = 'Dane Reynolds Channel';
-              players[0].f.removeAttribute('hidden');
-              players[0].playVideo();
-              document.title = 'Dane Reynolds Channel';
-              NAV.setAttribute('hidden', '');
-              e.stopPropagation();
-              //showOverlay(0, 'Dane Reynolds Channel');
+              showOverlay(0, 'Dane Reynolds Channel');
               break;
             case '2':
             case 'Kelly Slater':
