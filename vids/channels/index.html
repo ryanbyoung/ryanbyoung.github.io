@@ -253,7 +253,8 @@
       let players = new Array();
       const SEARCH = document.querySelector('#search');
       const TABLE = document.querySelector('table');
-
+      const TABLE_ROWS = document.getElementsByTagName('tr');
+      
       /**
        * close function
        *
@@ -340,17 +341,63 @@
       } // end createPlayer function
 
       /**
+       * filterAll function
+       *
+       * Called by filterClick function.
+       *
+       * If search field isn't empty, loop through all table rows. If the channel
+       * name matches what's in the search field, remove the hidden attribute on the table and all of it's rows,
+       * and hide the empty query element. Ottherwise, hide all of the table rows and increase the hidden row
+       * counter. If the counter equals the total number of table rows, hide the table and show the empty query
+       * element.
+       *
+       * If the search field is empty, hide the empty filter element, show the table and all of it's rows.
+       */
+      function filterAll() {
+        const searchValue = SEARCH.value.toUpperCase();
+        if (searchValue !== EMPTY) {
+          let hiddenRowCount = 0;
+          for (let i = 0, trLength = TABLE_ROWS.length; i < trLength; i++) {
+            const channelLink = CHANNELNAMES[i].getElementsByTagName('a');
+            const cName = channelLink[0].innerText;
+            if (cName.toUpperCase().indexOf(searchValue) > -1) {
+              TABLE.removeAttribue('hidden');
+              TABLE_ROWS[i].removeAttribute('hidden');
+              EMPTYQUERY.setAttribute('hidden', '');
+            }
+            else {
+              TABLE_ROWS[i].setAttribute('hidden', '');
+              hiddenRowCount++;
+              if (hiddenRowCount === TABLE_ROWS.length) {
+                TABLE.setAttribute('hidden', '');
+                EMPTYQUERY.removeAttribute('hidden');
+              }
+            }
+          } // end loop
+        }
+        else {
+          EMPTYFILTER.setAttribute('hidden', '');
+          TABLE.removeAttribute('hidden');
+          for (let j = 0, trLength = TABLE_ROWS.length; j < trLength; j++) {
+            TABLE_ROWS[j].removeAttribute('hidden');
+          }
+        }
+      } // end filterAll function
+
+      /**
        * filterClick function
        * 
        * Runs when user interacts with the channel filter (by click or keyboard).
-       * Filter the page contents according to the incoming channel filter.
-       * Populate filter in local storage.
+       *
+       * Update document with selection.
+       *
+       * Populate filter information in local storage.
+       *
+       * Filter the document content according to the incoming channel filter.
        *
        * @param {KeyboardEvent} event
        */
       function filterClick(event) {
-        let searchValue = SEARCH.value.toUpperCase();
-        let tr = document.getElementsByTagName('tr');
         if (this.value === 'favorites' || event.htmlFor === 'favorites') {
           filters[0].removeAttribute('checked');
           filters[1].setAttribute('checked', '');
@@ -365,34 +412,7 @@
           filters[1].removeAttribute('checked');
           EMPTYFILTER.setAttribute('hidden', '');
           populateFilterStorage();
-          // If user left anything in the search field
-          if (searchValue !== EMPTY) {
-            let hiddenRowCount = 0;
-            for (let i = 0, trLength = tr.length; i < trLength; i++) {
-              let channelLink = CHANNELNAMES[i].getElementsByTagName('a');
-              let cName = channelLink[0].innerText;
-              if (cName.toUpperCase().indexOf(searchValue) > -1) {
-                TABLE.removeAttribue('hidden');
-                tr[i].removeAttribute('hidden');
-                EMPTYQUERY.setAttribute('hidden', '');
-              }
-              else {
-                tr[i].setAttribute('hidden', '');
-                hiddenRowCount++;
-                if (hiddenRowCount === tr.length) {
-                  TABLE.setAttribute('hidden', '');
-                  EMPTYQUERY.removeAttribute('hidden');
-                }
-              }
-            }
-          }
-          else {
-            EMPTYFILTER.setAttribute('hidden', '');
-            TABLE.removeAttribute('hidden');
-            for (let j = 0, trLength = tr.length; j < trLength; j++) {
-              tr[j].removeAttribute('hidden');
-            }
-          }
+          filterAll();
         }
       } // end filterClick function
 
