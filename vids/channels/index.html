@@ -469,7 +469,6 @@
         for (let k = 0, linksLength = LINKS.length; k < linksLength ; k++) {
           LINKS[k].addEventListener('click', linkClick, false);
         }
-        TABLE.removeAttribute('hidden');
         SEARCH.addEventListener('keyup', search, false);
         SEARCH.addEventListener('search', search, false);
       } // end init function
@@ -785,6 +784,7 @@
 
       // Run init function after the DOM content is loaded
       document.addEventListener('DOMContentLoaded',init, false);
+      document.addEventListener('load', TABLE.removeAttribute('hidden'), false);
 
       // popstate event listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(e){
