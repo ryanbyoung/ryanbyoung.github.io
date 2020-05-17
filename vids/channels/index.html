@@ -479,9 +479,8 @@
        *
        */
       function linkClick(e) {
-        console.log(e);
         // Handle clicks on nav links with the default action
-        if (e.href == 'https://ryanbyoung.github.io/vids/channels/dane-reynolds' || e.target.innerHTML == 'Home' || e.target.innerHTML == 'Shows' || e.target.innerHTML == 'Movies') {
+        if (e.target.href == 'https://ryanbyoung.github.io/vids/channels/dane-reynolds' || e.target.innerHTML == 'Home' || e.target.innerHTML == 'Shows' || e.target.innerHTML == 'Movies') {
           return true;
         }
         else {
