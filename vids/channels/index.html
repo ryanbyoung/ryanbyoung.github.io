@@ -257,17 +257,19 @@
       /**
        * close function
        *
-       * Runs when user presses close channel button
+       * Runs when close channel button is pressed.
+       *
+       * Builds fullURL for history. Calls pausePlayers and hideOverlay functions. Pushes URL to history state.
        */
       function close() {
-        pausePlayers();
-        hideOverlay();
-        var pathArray = window.location.pathname.split('/');
-        var fullURL = window.location.protocol + "//" + window.location.host;
+        const pathArray = window.location.pathname.split('/');
+        let fullURL = window.location.protocol + "//" + window.location.host;
         for (let i = 0; i < 3; i++) {
           fullURL += pathArray[i];
           fullURL += "/";
         }
+        pausePlayers();
+        hideOverlay();
         history.pushState(null, null, fullURL);
       }
 
@@ -291,6 +293,8 @@
        *
        * The onStateChange event updates all of the local storage items (playlist, index, and time) whenever the player is
        * paused (event.data = 2).
+       *
+       * @param {Object} playerInfo
        */
       function createPlayer(playerInfo) {
         const playerName = playerInfo.playlistName + 'Player';
@@ -393,8 +397,10 @@
       } // end filterClick function
 
       /**
-       * When filter is set to favorite channels, focus on the filter, hide rows
-       * with the all channels filter.
+       * filterFavorites function
+       *
+       * When filter is set to favorite channels, focus on the filter and hide rows that
+       * have the all channels filter on them.
        *
        * If no favorites are selected, hide the whole table and show the empty
        * filter paragraph.
@@ -405,7 +411,7 @@
         for (let i = 0, allLength = allOnlyRows.length; i < allLength; i++) {
           allOnlyRows[i].setAttribute('hidden', '');
         }
-        if (allOnlyRows.length === playerInfoList.length) { // **** change this variable for prod
+        if (allOnlyRows.length === playerInfoList.length) { // **** make sure you change this variable for prod
           TABLE.setAttribute('hidden', '');
           EMPTYFILTER.removeAttribute('hidden');
         }
@@ -414,11 +420,11 @@
       /**
        * hideOverlay function
        *
-       *
+       * Called by close function. Unhides the main and nav elements. Hides the overlay element, removes the text
+       * for the overlay H1, and sets the title of the page back to Channels.
        */
       function hideOverlay() {
         MAIN.removeAttribute('hidden');
-        BODY.removeAttribute('class');
         NAV.removeAttribute('hidden');
         OVERLAY.setAttribute('hidden', '');
         OVERLAYTITLE.innerText = '';
@@ -477,15 +483,16 @@
        * linkClick function
        *
        *
+       * @param {MouseEvent} event
        */
-      function linkClick(e) {
+      function linkClick(event) {
         // Handle clicks on nav links with the default action
-        if (e.target.innerHTML == 'Home' || e.target.innerHTML == 'Shows' || e.target.innerHTML == 'Movies') {
+        if (event.target.innerHTML == 'Home' || event.target.innerHTML == 'Shows' || event.target.innerHTML == 'Movies') {
           return true;
         }
         else {
-          e.preventDefault();
-          switch (e.target.innerHTML) {
+          event.preventDefault();
+          switch (event.target.innerHTML) {
             case '1':
             case 'Dane Reynolds':
               showOverlay(0, 'Dane Reynolds Channel');
@@ -501,17 +508,17 @@
             default:
               showOverlay(0, 'Dane Reynolds Channel');
           }
-          const data = e.target.getAttribute('href');
+          const data = event.target.getAttribute('href');
           const url = data + '/';
           history.pushState(data, null, url);
-          e.stopPropagation();
+          event.stopPropagation();
         }
       } // end linkClick function
 
       /**
        * onYouTubeIframeAPIReady function (Google code: https://developers.google.com/youtube/iframe_api_reference)
        *
-       * Automatically runs when the YouTube API is ready. It needs to be in global (window.) scope so API can access it.
+       * Automatically runs when the YouTube API is ready. It needs to be in the global scope (window.) so API can access it.
        *
        * Check to see if the playerInfoList object has been created. If not, return.
        *
@@ -530,7 +537,7 @@
       /**
        * pausePlayers function
        *
-       * Runs when user presses close channel button. Pauses and hides all players.
+       * Called from close function. Loops through all of the players then pauses and hides each one.
        */
       function pausePlayers() {
         for (let i = 0, playersLength = players.length; i < playersLength; i++) {
@@ -540,6 +547,8 @@
       }
 
       /**
+       * populateChannelStorage function
+       *
        * Populate local storage with the id of the channel when the favorite
        * icon is pressed. Also save whether the icon is pressed and the channel filter.
        * Set the channel styles on their respective componets.
@@ -554,6 +563,8 @@
       }
 
       /**
+       * populateFilterStorage function
+       *
        * If no filter is checked (likely on user's first visit), set the filter to all channels.
        * Populate local storage with the channel filter that is selected.
        */
@@ -570,6 +581,8 @@
       }
 
       /**
+       * populateSearchStorage function
+       *
        * Populate local storage with the value that is in the search field.
        * Sets the search field value to the value that is saved in the local storage.
        */
@@ -579,7 +592,10 @@
       }
 
       /**
-       * Runs when the page is loaded and everytime the user presses a key in the search field.
+       * search function
+       *
+       * Called from init when the page is loaded, every time the user presses a key in the search field, and when
+       * the X is clicked in the search field.
        *
        * Populates the local storage with the value in the search field.
        *
@@ -594,8 +610,11 @@
        * Otherwise, hide the table row and add one to the hidden row counter.
        * If the hidden row counter equals the total number of rows than hide the whole table
        * and show the empty query paragraph.
+       *
+       * @param {KeyboardEvent, SearchEvent} event
        */
-      function search() {
+      function search(event) {
+        console.log(event);
         populateSearchStorage();
         let channelLink, cName, hiddenRowCount, searchValue, tr;
         searchValue = SEARCH.value.toUpperCase();
@@ -624,9 +643,11 @@
             }
           }
         }
-      }
+      } // end search function
 
       /**
+       * setChannelStyles function
+       *
        * Sets the styles of all the channels based on their values in local storage.
        */
       function setChannelStyles() {
@@ -644,6 +665,8 @@
       }
 
       /**
+       * setFilterStyles function
+       *
        * Sets the style of the filter based on the values saved in local storage.
        * If the filter is set to favorite channels, displays the favorite channels.
        */
@@ -661,7 +684,9 @@
       }
 
       /**
-       * Sets the search field value to the value that is saved in the local storage.
+       * setSearchValue function
+       * 
+       * Sets the search field value to the value that is saved in local storage.
        */
       function setSearchValue() {
         let savedSearch = localStorage.getItem('SearchValue');
@@ -671,7 +696,7 @@
       /**
        * showOverlay function
        *
-       *
+       * @param
        */
       function showOverlay(playerIndex, channelTitle) {
         MAIN.setAttribute('hidden', '');
@@ -684,25 +709,33 @@
       }
 
       /**
+       * tdClick function
+       *
        * Allows whole table cell to be clicked or touched and goes to the link in the
        * anchor tag.
+       *
+       * @param {MouseEvent} event
        */
-      function tdClick(e) {
+      function tdClick(event) {
         location.href = this.querySelector('a').href;
       }
 
       /**
+       * toggleButtonClickHandler function
+       *
        * If the event target has a button role, toggle it's state.
        *
        * @param {MouseEvent} event
        */
-      function toggleButtonClickHandler (event) {
+      function toggleButtonClickHandler(event) {
         if (event.currentTarget.getAttribute('role') === 'button') {
           toggleButtonState(event.currentTarget);
         }
       }
 
       /**
+       * toggleButtonKeydownHandler function
+       *
        * Toggles the toggle button's state on key down. Prevents default actions of
        * space and enter keys.
        *
@@ -711,7 +744,7 @@
        *
        * @param {KeyboardEvent} event
        */
-      function toggleButtonKeydownHandler (event) {
+      function toggleButtonKeydownHandler(event) {
         if (event.keyCode === 32) {
           event.preventDefault();
         }
@@ -722,6 +755,8 @@
       }
 
       /**
+       * toggleFilterKeydownHandler function
+       *
        * Toggles the channel filter based on the keydown event fired.
        *
        * If keydown is space, prevent the default action and ignore it.
@@ -733,7 +768,7 @@
        *
        * @param {KeyboardEvent} event
        */
-       function toggleFilterKeydownHandler (event) {
+       function toggleFilterKeydownHandler(event) {
          if (event.keyCode === 32) {
            event.preventDefault();
          }
@@ -748,6 +783,8 @@
        }
 
       /**
+       * toggleButtonKeyupHandler function
+       *
        * If the space bar is pressed, prevent the default action and check what event
        * was fired. If the user pressed it on the channel filter, filter the channels.
        *
@@ -755,7 +792,7 @@
        *
        * @param {KeyboardEvent} event
        */
-      function toggleButtonKeyupHandler (event) {
+      function toggleButtonKeyupHandler(event) {
         if (event.keyCode === 32) {
           event.preventDefault();
           if (event.currentTarget === ALL_LABEL || event.currentTarget === FAVORITELABEL) {
@@ -766,11 +803,13 @@
       }
 
       /**
+       * toggleButtonState function
+       *
        * Toggles the toggle button's state between *pressed* and *not pressed*.
        *
        * @param {HTMLElement} button
        */
-      function toggleButtonState (button) {
+      function toggleButtonState(button) {
         const filterSelected = localStorage.getItem('FilterSelected');
         const isAriaPressed = button.getAttribute('aria-pressed') === 'true';
         button.setAttribute('aria-pressed', isAriaPressed ? 'false' : 'true');
@@ -807,7 +846,7 @@
               showOverlay(0, 'Dane Reynolds Channel');
           }
         }
-      }, false);
+      }, false); // end popstate listener
 
       // beforeunload event listener to pause all the players when the user closes the browser (couldn't figure out how to pause player that was playing)
       window.addEventListener('beforeunload', function (e) {
