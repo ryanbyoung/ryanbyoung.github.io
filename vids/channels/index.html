@@ -486,7 +486,8 @@
         else {
           e.preventDefault();
           let data = e.target.getAttribute('href');
-          let url = data + '/';
+          //let url = data + '/';
+          alert('here');
           history.pushState(data, null, url);
           switch (e.target.innerHTML) {
             case '1':
