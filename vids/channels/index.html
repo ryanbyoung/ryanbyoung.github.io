@@ -479,11 +479,13 @@
        *
        */
       function linkClick(e) {
+        alert(e.target.href);
         // Handle clicks on nav links with the default action
         if (e.target.innerHTML == 'Home' || e.target.innerHTML == 'Shows' || e.target.innerHTML == 'Movies') {
           return true;
         }
         else {
+          alert(e.target.href);
           e.preventDefault();
           const data = e.target.getAttribute('href');
           const url = data + '/';
