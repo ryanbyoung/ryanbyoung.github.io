@@ -488,7 +488,7 @@
           const data = e.target.getAttribute('href');
           const url = data + '/';
           history.pushState(data, null, url);
-          alert(e.target.href, LINKS[1].href);
+          LINKS[1].href = 'dane-reynolds';
           switch (e.target.innerHTML) {
             case '1':
             case 'Dane Reynolds':
