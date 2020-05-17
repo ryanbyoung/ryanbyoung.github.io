@@ -484,10 +484,8 @@
           return true;
         }
         else {
-          console.log(e);
           e.preventDefault();
           const data = e.target.getAttribute('href');
-          console.log(data);
           const url = data + '/';
           history.pushState(data, null, url);
           switch (e.target.innerHTML) {
