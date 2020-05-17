@@ -487,11 +487,11 @@
           e.preventDefault();
           let data = e.target.getAttribute('href');
           //let url = data + '/';
-          alert('here');
           history.pushState(data, null, data);
           switch (e.target.innerHTML) {
             case '1':
             case 'Dane Reynolds':
+              alert('here');
               showOverlay(0, 'Dane Reynolds Channel');
               break;
             case '2':
@@ -506,7 +506,6 @@
               showOverlay(0, 'Dane Reynolds Channel');
           }
           e.stopPropagation();
-          return false;
         }
       } // end linkClick function
 
