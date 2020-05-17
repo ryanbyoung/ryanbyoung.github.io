@@ -157,7 +157,7 @@
         <input id="favorites" name="filter" tabindex="-1" type="radio" value="favorites">
         <label for="favorites" tabindex="0">Favorite Channels</label>
       </fieldset>
-      <table>
+      <table hidden>
         <tbody>
           <tr class="all">
             <td aria-label="Favorite channel" aria-pressed="false" class="favorite" id="Channel1" role="button" tabindex="0">♡</td>
@@ -469,6 +469,7 @@
         for (let k = 0, linksLength = LINKS.length; k < linksLength ; k++) {
           LINKS[k].addEventListener('click', linkClick, false);
         }
+        TABLE.removeAttribute('hidden');
         SEARCH.addEventListener('keyup', search, false);
         SEARCH.addEventListener('search', search, false);
       } // end init function
