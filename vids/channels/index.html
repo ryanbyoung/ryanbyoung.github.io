@@ -876,7 +876,7 @@
 
       // PopStateEvent (object) listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(event){
-        if (event.state === null){
+        if (event.state === null) {
           pausePlayers();
           hideOverlay();
         }
@@ -886,8 +886,8 @@
       }, false); // end popstate listener
 
       // beforeunload event listener to pause all the players when the user closes the browser (couldn't figure out how to pause player that was playing)
-      window.addEventListener('beforeunload', function (e) {
-        delete e['returnValue'];
+      window.addEventListener('beforeunload', function(event) {
+        delete event['returnValue'];
         pausePlayers();
       }, false);
 
