@@ -286,13 +286,15 @@
        * @param {MouseEvent, PopStateEvent} event
        */
       function chooseOverlay(event) {
+        let href = [];
         let trigger = '';
         if (event.type === 'popstate') {
           trigger = event.state;
         }
         else {
-          trigger = event.target.href;
-          
+          href = event.target.href.split('/');
+          trigger = href[href.length - 1];
+        }
         switch (trigger) {
           case '1':
           case 'dane-reynolds':
