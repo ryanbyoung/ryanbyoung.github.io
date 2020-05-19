@@ -507,7 +507,7 @@
        * @param {MouseEvent} event
        */
       function linkClick(event) {
-        console.log('linkClick event' + event);
+        console.log(event);
         if (event.target.innerHTML == 'Home' || event.target.innerHTML == 'Shows' || event.target.innerHTML == 'Movies') {
           return true;
         }
@@ -848,9 +848,9 @@
       // Run init function after the DOM content is loaded
       document.addEventListener('DOMContentLoaded',init, false);
 
-      // popstate event listener for when the overlay is displayed and the back button is pressed
+      // PopStateEvent (object) listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(event){
-        console.log('pop event' + event);
+        console.log(event);
         const recentChannel = event.state;
         if (recentChannel === null){
           pausePlayers();
