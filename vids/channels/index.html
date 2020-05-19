@@ -551,6 +551,7 @@
           players[i] = currentPlayer;
           document.getElementById(players[i].f.id).setAttribute('hidden', '');
         }
+        console.log(players);
       }
 
       /**
@@ -846,8 +847,8 @@
       document.addEventListener('DOMContentLoaded',init, false);
 
       // popstate event listener for when the overlay is displayed and the back button is pressed
-      window.addEventListener('popstate', function(e){
-        const recentChannel = e.state;
+      window.addEventListener('popstate', function(event){
+        const recentChannel = event.state;
         if (recentChannel === null){
           pausePlayers();
           hideOverlay();
