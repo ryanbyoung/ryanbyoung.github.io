@@ -579,7 +579,6 @@
           players[i] = currentPlayer;
           document.getElementById(players[i].f.id).setAttribute('hidden', '');
         }
-        console.log(players);
       }
 
       /**
@@ -663,7 +662,6 @@
        * @param {KeyboardEvent, SearchEvent} event
        */
       function search(event) {
-        console.log(event);
         populateSearchStorage();
         let channelLink, cName, hiddenRowCount, searchValue, tr;
         searchValue = SEARCH.value.toUpperCase();
