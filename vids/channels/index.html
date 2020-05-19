@@ -253,7 +253,67 @@
       const SEARCH = document.querySelector('#search');
       const TABLE = document.querySelector('table');
       const TABLE_ROWS = document.getElementsByTagName('tr');
+
+      /**
+       * event listeners
+       */
+      ALL_LABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
+      ALL_LABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
+      CLOSE.addEventListener('click', close, false);
+      for (let i = 0, namesLength = CHANNEL_NAMES.length; i < namesLength; i++) {
+        CHANNEL_NAMES[i].addEventListener('click', tdClick, false);
+        CHANNEL_NUMBERS[i].addEventListener('click', tdClick, false);
+        FAVORITES[i].addEventListener('click', toggleButtonClickHandler, false);
+        FAVORITES[i].addEventListener('keydown', toggleButtonKeydownHandler, false);
+        FAVORITES[i].addEventListener('keyup', toggleButtonKeyupHandler, false);
+      }
+      FAVORITE_LABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
+      FAVORITE_LABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
+      for (let j = 0, filtersLength = FILTERS.length; j < filtersLength; j++) {
+        FILTERS[j].addEventListener('click', filterClick, false);
+      }
+      for (let k = 0, linksLength = LINKS.length; k < linksLength ; k++) {
+        LINKS[k].addEventListener('click', linkClick, false);
+      }
+      SEARCH.addEventListener('keyup', search, false);
+      SEARCH.addEventListener('search', search, false);
       
+      /**
+       * chooseOverlay function
+       *
+       * Called by linkClick function and popstate event handler. 
+       *
+       * @param {MouseEvent, PopStateEvent} event
+       */
+      function chooseOverlay(event) {
+        let trigger = '';
+        if (event.type === 'popstate') {
+          trigger = event.state;
+        }
+        else {
+          trigger = event.target.href;
+          
+        switch (trigger) {
+          case '1':
+          case 'dane-reynolds':
+          case 'Dane Reynolds':
+            showOverlay(0, 'Dane Reynolds Channel');
+            break;
+          case '2':
+          case 'kelly-slater':
+          case 'Kelly Slater':
+            showOverlay(1, 'Kelly Slater Channel');
+            break;
+          case '3':
+          case 'craig-anderson':
+          case 'Craig Anderson':
+            showOverlay(2, 'Craig Anderson Channel');
+            break;
+          default:
+            showOverlay(0, 'Dane Reynolds Channel');
+        }
+      } // end chooseOverlay function
+
       /**
        * close function
        *
@@ -476,26 +536,6 @@
         if (SEARCH.value !== EMPTY) {
           search();
         }
-        ALL_LABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
-        ALL_LABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
-        CLOSE.addEventListener('click', close, false);
-        for (let i = 0, namesLength = CHANNEL_NAMES.length; i < namesLength; i++) {
-          CHANNEL_NAMES[i].addEventListener('click', tdClick, false);
-          CHANNEL_NUMBERS[i].addEventListener('click', tdClick, false);
-          FAVORITES[i].addEventListener('click', toggleButtonClickHandler, false);
-          FAVORITES[i].addEventListener('keydown', toggleButtonKeydownHandler, false);
-          FAVORITES[i].addEventListener('keyup', toggleButtonKeyupHandler, false);
-        }
-        FAVORITE_LABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
-        FAVORITE_LABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
-        for (let j = 0, filtersLength = FILTERS.length; j < filtersLength; j++) {
-          FILTERS[j].addEventListener('click', filterClick, false);
-        }
-        for (let k = 0, linksLength = LINKS.length; k < linksLength ; k++) {
-          LINKS[k].addEventListener('click', linkClick, false);
-        }
-        SEARCH.addEventListener('keyup', search, false);
-        SEARCH.addEventListener('search', search, false);
       } // end init function
 
       /**
@@ -507,28 +547,12 @@
        * @param {MouseEvent} event
        */
       function linkClick(event) {
-        console.log(event);
         if (event.target.innerHTML == 'Home' || event.target.innerHTML == 'Shows' || event.target.innerHTML == 'Movies') {
           return true;
         }
         else {
           event.preventDefault();
-          switch (event.target.innerHTML) {
-            case '1':
-            case 'Dane Reynolds':
-              showOverlay(0, 'Dane Reynolds Channel');
-              break;
-            case '2':
-            case 'Kelly Slater':
-              showOverlay(1, 'Kelly Slater Channel');
-              break;
-            case '3':
-            case 'Craig Anderson':
-              showOverlay(2, 'Craig Anderson Channel');
-              break;
-            default:
-              showOverlay(0, 'Dane Reynolds Channel');
-          }
+          chooseOverlay(event);
           const data = event.target.getAttribute('href');
           const url = data + '/';
           history.pushState(data, null, url);
@@ -850,26 +874,12 @@
 
       // PopStateEvent (object) listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(event){
-        console.log(event);
-        const recentChannel = event.state;
-        if (recentChannel === null){
+        if (event.state === null){
           pausePlayers();
           hideOverlay();
         }
         else {
-          switch (recentChannel) {
-            case 'dane-reynolds':
-              showOverlay(0, 'Dane Reynolds Channel');
-              break;
-            case 'kelly-slater':
-              showOverlay(1, 'Kelly Slater Channel');
-              break;
-            case 'craig-anderson':
-              showOverlay(2, 'Craig Anderson Channel');
-              break;
-            default:
-              showOverlay(0, 'Dane Reynolds Channel');
-          }
+          chooseOverlay(event);
         }
       }, false); // end popstate listener
 
