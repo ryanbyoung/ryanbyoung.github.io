@@ -501,11 +501,13 @@
       /**
        * linkClick function
        *
+       * Event handler action for all links in the document. If user clicks on any of the nav links, perform 
+       * the default link action. Otherwise
        *
        * @param {MouseEvent} event
        */
       function linkClick(event) {
-        // Handle clicks on nav links with the default action
+        cosole.log('linkClick event' + event);
         if (event.target.innerHTML == 'Home' || event.target.innerHTML == 'Shows' || event.target.innerHTML == 'Movies') {
           return true;
         }
@@ -848,6 +850,7 @@
 
       // popstate event listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(event){
+        cosole.log('pop event' + event);
         const recentChannel = event.state;
         if (recentChannel === null){
           pausePlayers();
