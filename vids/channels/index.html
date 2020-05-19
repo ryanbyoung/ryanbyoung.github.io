@@ -507,7 +507,7 @@
        * @param {MouseEvent} event
        */
       function linkClick(event) {
-        cosole.log('linkClick event' + event);
+        console.log('linkClick event' + event);
         if (event.target.innerHTML == 'Home' || event.target.innerHTML == 'Shows' || event.target.innerHTML == 'Movies') {
           return true;
         }
@@ -850,7 +850,7 @@
 
       // popstate event listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(event){
-        cosole.log('pop event' + event);
+        console.log('pop event' + event);
         const recentChannel = event.state;
         if (recentChannel === null){
           pausePlayers();
