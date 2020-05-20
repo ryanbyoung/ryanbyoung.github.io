@@ -215,7 +215,8 @@
     <script>
     (function(){
 
-      /* The playerInfoList object containing info for all of the players
+      /**
+       * The playerInfoList object containing info for all of the players
        * (this probably can be pulled dynamically from the data file in the app so probably won't be needed)
        */
       const playerInfoList = [{
@@ -232,6 +233,9 @@
         playlistName: 'CraigAnderson'
       }];
 
+      /**
+       * Components and variables
+       */
       const ALL_LABEL = document.querySelector('label[for=all]');
       const BODY = document.querySelector('body');
       const CHANNEL_NAMES = document.querySelectorAll('.channel-name');
@@ -255,7 +259,7 @@
       const TABLE_ROWS = document.getElementsByTagName('tr');
 
       /**
-       * event listeners
+       * Event listeners
        */
       ALL_LABEL.addEventListener('keydown', toggleFilterKeydownHandler, false);
       ALL_LABEL.addEventListener('keyup', toggleButtonKeyupHandler, false);
@@ -281,7 +285,12 @@
       /**
        * chooseOverlay function
        *
-       * Called by linkClick function and popstate event handler. 
+       * Called by linkClick function and popstate event handler.
+       *
+       * If the event calling the function is popstate, set the trigger to event.state, otherwise set it to the last
+       * path of the event.target.href.
+       *
+       * Show the corresponding overlay of the event trigger. Default to Dane Reynolds channel.
        *
        * @param {MouseEvent, PopStateEvent} event
        */
@@ -745,16 +754,22 @@
       /**
        * showOverlay function
        *
-       * @param
+       * Called by chooseOverlay function.
+       *
+       * Hide the main and nav elements, show the overlay, populate the overlay H1 with the channel title parameter
+       * being sent, show the appropriate player based on the player parameter being sent, start playing the video,
+       * and set the document's title to the channel title parameter being sent.
+       *
+       * @param {Integer} playerIndex, {String} channelTitle
        */
       function showOverlay(playerIndex, channelTitle) {
         MAIN.setAttribute('hidden', '');
+        NAV.setAttribute('hidden', '');
         OVERLAY.removeAttribute('hidden');
         OVERLAY_TITLE.innerText = channelTitle;
         players[playerIndex].f.removeAttribute('hidden');
         players[playerIndex].playVideo();
         document.title = channelTitle;
-        NAV.setAttribute('hidden', '');
       }
 
       /**
