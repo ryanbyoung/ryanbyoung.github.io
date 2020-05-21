@@ -17,10 +17,8 @@
         max-width: 700px;
         padding: 0 10px 70px;
         position: relative;
+        text-align: center;
         z-index: 1
-      }
-      h1, p {
-        text-align: center
       }
       a, a:visited {
         color: #fff
@@ -92,11 +90,11 @@
         text-decoration: none
       }
       .favorite, .channel-number {
-        text-align: center;
         width: 30px
       }
-      .search-item {
-        padding: 5px 20px
+      .channel-name {
+        padding: 5px 20px;
+        text-align: left
       }
       nav {
         background-color: #303030;
@@ -138,7 +136,7 @@
         color: #fff;
         font: 20px serif;
         line-height: 2.5;
-        margin-top: 30px;
+        margin: 50px 0 20px;
         padding: 0 20px
       }
     </style>
@@ -146,10 +144,8 @@
   <body>
     <main>
       <h1>Channels</h1>
-      <p>
-        <label for="search">Search:</label>
-        <input aria-label="Search channels" id="search" name="search" placeholder="Dane, Kelly, etc." type="search">
-      </p>
+      <label for="search">Search:</label>
+      <input aria-label="Search channels" id="search" name="search" placeholder="Dane, Kelly, etc." type="search">
       <fieldset>
         <legend>Filter</legend>
         <input id="all" name="filter" tabindex="-1" type="radio" value="all">
@@ -198,9 +194,7 @@
         <div id="KellySlaterPlayer"></div>
         <div id="CraigAndersonPlayer"></div>
       </div>
-      <p>
-        <button id="close">Close Channel</button>
-      </p>
+      <button id="close">Close Channel</button>
     </main>
     <nav>
       <p>
