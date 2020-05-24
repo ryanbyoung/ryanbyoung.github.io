@@ -408,6 +408,7 @@
        * @param {Object} playerInfo
        */
       function createPlayer(playerInfo) {
+        let intervalId;
         const playerName = playerInfo.playlistName + 'Player';
         const playerPlaylist = playerInfo.playlistName + 'Playlist';
         const playerPlaylistIndex = playerInfo.playlistName + 'PlaylistIndex';
@@ -416,7 +417,6 @@
           height: '100%',
           width: '100%',
           events: {
-            let intervalId;
             'onReady': function(event) {
               // Check if there is a playlist for this player in local storage
               if (localStorage.getItem(playerPlaylist) != null) {
