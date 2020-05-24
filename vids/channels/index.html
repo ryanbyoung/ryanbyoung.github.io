@@ -881,6 +881,7 @@
 
       // PopStateEvent (object) listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(event){
+        console.log(event.state);
         if (event.state === null) {
           pausePlayers();
           hideOverlay();
