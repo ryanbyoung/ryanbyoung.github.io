@@ -324,16 +324,16 @@
        * overlay. Pushes the URL to history state.
        */
       function close() {
-        const pathArray = window.location.pathname.split('/');
-        let fullURL = window.location.protocol + "//" + window.location.host;
-        for (let i = 0; i < 3; i++) {
-          fullURL += pathArray[i];
-          fullURL += "/";
-        }
-        // window.location.href;
+        //const pathArray = window.location.pathname.split('/');
+        //let fullURL = window.location.protocol + "//" + window.location.host;
+        //for (let i = 0; i < 3; i++) {
+        //  fullURL += pathArray[i];
+        //  fullURL += "/";
+        //}
         pausePlayers();
         hideOverlay();
-        history.pushState(null, null, fullURL);
+        history.pushState(null, null, window.location.href);
+        document.title = PAGE_TITLE;
       }
 
       /**
@@ -512,7 +512,6 @@
         NAV.removeAttribute('hidden');
         OVERLAY.setAttribute('hidden', '');
         OVERLAY_TITLE.innerText = '';
-        document.title = PAGE_TITLE;
       }
 
       /**
@@ -882,15 +881,15 @@
 
       // PopStateEvent (object) listener for when the overlay is displayed and the back button is pressed
       window.addEventListener('popstate', function(event){
-        console.log(event.state);
+        console.log(event);
         if (event.state === null) {
           pausePlayers();
           hideOverlay();
+          document.title = PAGE_TITLE;
         }
         else {
           chooseOverlay(event);
-          console.log('setting title in popstate');
-          document.title = event.target.innerText + ' Channel';
+          console.log('gotta set the title in popstate');
         }
       }, false); // end popstate listener
 
