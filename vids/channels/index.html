@@ -449,7 +449,7 @@
                   localStorage.setItem(playerTime, event.target.getCurrentTime());
                 }, 3000);
               }
-              if (event.data === 2) {
+              else if (event.data === 2) {
                 window.clearInterval(intervalId);
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
