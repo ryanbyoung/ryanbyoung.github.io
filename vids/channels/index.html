@@ -440,9 +440,9 @@
               }
             }, // end onReady event
             'onStateChange': function(event) {
-              let intervalID;
+              let intervalId;
               if (event.data === 1) {
-                intervalID = setInterval(function() {
+                intervalId = window.setInterval(function() {
                   console.log('setting interval');
                   localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                   localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
@@ -450,7 +450,7 @@
                 }, 3000);
               }
               if (event.data === 2) {
-                clearInterval(intervalID);
+                window.clearInterval(intervalId);
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                 localStorage.setItem(playerTime, event.target.getCurrentTime());
