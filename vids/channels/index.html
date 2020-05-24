@@ -294,6 +294,8 @@
           href = event.target.href.split('/');
           trigger = href[href.length - 1];
         }
+        console.log('start chooseOverlay');
+        console.log(trigger);
         switch (trigger) {
           case '1':
           case 'dane-reynolds':
@@ -556,8 +558,12 @@
         else {
           event.preventDefault();
           chooseOverlay(event);
+          console.log('back to linkClick');
           const data = event.target.getAttribute('href');
           const url = data + '/';
+          console.log(data);
+          console.log(url);
+          console.log('setting history state to be data former and url later);
           history.pushState(data, null, url);
           event.stopPropagation();
         }
@@ -755,12 +761,15 @@
        * @param {Integer} playerIndex, {String} channelTitle
        */
       function showOverlay(playerIndex, channelTitle) {
+        console.log('start showOverlay');
         MAIN.setAttribute('hidden', '');
         NAV.setAttribute('hidden', '');
         OVERLAY.removeAttribute('hidden');
         OVERLAY_TITLE.innerText = channelTitle;
         players[playerIndex].f.removeAttribute('hidden');
         players[playerIndex].playVideo();
+        console.log('setting document title to be channel title below');
+        console.log(channelTitle);
         document.title = channelTitle;
       }
 
