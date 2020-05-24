@@ -324,15 +324,16 @@
        * overlay. Pushes the URL to history state.
        */
       function close() {
-        //const pathArray = window.location.pathname.split('/');
-        //let fullURL = window.location.protocol + "//" + window.location.host;
-        //for (let i = 0; i < 3; i++) {
-        //  fullURL += pathArray[i];
-        //  fullURL += "/";
-        //}
+        const pathArray = window.location.pathname.split('/');
+        let fullURL = window.location.protocol + "//" + window.location.host;
+        for (let i = 0; i < 3; i++) {
+          fullURL += pathArray[i];
+          fullURL += "/";
+        }
+        // window.location.href;
         pausePlayers();
         hideOverlay();
-        history.pushState(null, null, window.location.href);
+        history.pushState(null, null, fullURL);
       }
 
       /**
@@ -509,7 +510,7 @@
         NAV.removeAttribute('hidden');
         OVERLAY.setAttribute('hidden', '');
         OVERLAY_TITLE.innerText = '';
-        //document.title = PAGE_TITLE;
+        document.title = PAGE_TITLE;
       }
 
       /**
