@@ -318,20 +318,21 @@
       /**
        * close function
        *
-       * Runs when close channel button is pressed.
+       * Called by close button event listener.
        *
-       * Builds fullURL for history. Calls pausePlayers and hideOverlay functions. Pushes URL to history state.
+       * Builds fullURL for history. Calls pausePlayers and hideOverlay functions to pause players and hide the 
+       * overlay. Pushes the URL to history state.
        */
       function close() {
-        const pathArray = window.location.pathname.split('/');
-        let fullURL = window.location.protocol + "//" + window.location.host;
-        for (let i = 0; i < 3; i++) {
-          fullURL += pathArray[i];
-          fullURL += "/";
-        }
+        //const pathArray = window.location.pathname.split('/');
+        //let fullURL = window.location.protocol + "//" + window.location.host;
+        //for (let i = 0; i < 3; i++) {
+        //  fullURL += pathArray[i];
+        //  fullURL += "/";
+        //}
         pausePlayers();
         hideOverlay();
-        history.pushState(null, null, fullURL);
+        history.pushState(null, null, window.location.href);
       }
 
       /**
