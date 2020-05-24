@@ -448,13 +448,13 @@
                   localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                   localStorage.setItem(playerTime, event.target.getCurrentTime());
                 }, 3000);
-                clearInterval(intervalId);
               }
               else if (event.data === 2) {
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                 localStorage.setItem(playerTime, event.target.getCurrentTime());
               }
+              clearInterval(intervalId);
             } // end onStateChange event
           } // end events
         }); // end return
