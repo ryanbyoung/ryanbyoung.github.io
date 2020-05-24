@@ -294,8 +294,6 @@
           href = event.target.href.split('/');
           trigger = href[href.length - 1];
         }
-        console.log('start chooseOverlay');
-        console.log(trigger);
         switch (trigger) {
           case '1':
           case 'dane-reynolds':
@@ -504,7 +502,9 @@
       /**
        * hideOverlay function
        *
-       * Called by close function. Unhides the main and nav elements. Hides the overlay element, removes the text
+       * Called by close function and popstate event listener.
+       *
+       * Unhides the main and nav elements. Hides the overlay element, removes the text
        * for the overlay H1, and sets the title of the page back to Channels.
        */
       function hideOverlay() {
@@ -558,15 +558,10 @@
         else {
           event.preventDefault();
           chooseOverlay(event);
-          console.log('back to linkClick');
           const data = event.target.getAttribute('href');
           const url = data + '/';
-          console.log(data);
-          console.log(url);
-          console.log('setting history state to be data former and url later');
           history.pushState(data, null, url);
-          document.title = 'how about here';
-          console.log(event);
+          document.title = event.target.innerText + ' Channel';
           event.stopPropagation();
         }
       } // end linkClick function
@@ -588,7 +583,6 @@
           players[i] = currentPlayer;
           document.getElementById(players[i].f.id).setAttribute('hidden', '');
         }
-        console.log(players);
       }
 
       /**
@@ -757,22 +751,17 @@
        * Called by chooseOverlay function.
        *
        * Hide the main and nav elements, show the overlay, populate the overlay H1 with the channel title parameter
-       * being sent, show the appropriate player based on the player parameter being sent, start playing the video,
-       * and set the document's title to the channel title parameter being sent.
+       * being sent, show the appropriate player based on the player parameter being sent, and start playing the video.
        *
        * @param {Integer} playerIndex, {String} channelTitle
        */
       function showOverlay(playerIndex, channelTitle) {
-        console.log('start showOverlay');
         MAIN.setAttribute('hidden', '');
         NAV.setAttribute('hidden', '');
         OVERLAY.removeAttribute('hidden');
         OVERLAY_TITLE.innerText = channelTitle;
         players[playerIndex].f.removeAttribute('hidden');
         players[playerIndex].playVideo();
-        //console.log('setting document title to be channel title below');
-        //console.log(channelTitle);
-        //document.title = channelTitle;
       }
 
       /**
@@ -900,6 +889,8 @@
         }
         else {
           chooseOverlay(event);
+          console.log('setting title in popstate');
+          document.title = event.target.innerText + ' Channel';
         }
       }, false); // end popstate listener
 
