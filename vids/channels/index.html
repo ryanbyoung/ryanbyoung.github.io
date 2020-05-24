@@ -442,16 +442,15 @@
             'onStateChange': function(event) {
               let intervalId;
               if (event.data === 1) {
-                console.log('playing');
                 intervalId = setInterval(function() {
                   console.log('setting interval');
                   localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                   localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                   localStorage.setItem(playerTime, event.target.getCurrentTime());
                 }, 3000);
+                clearInterval(intervalId);
               }
               else if (event.data === 2) {
-                clearInterval(intervalId);
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                 localStorage.setItem(playerTime, event.target.getCurrentTime());
