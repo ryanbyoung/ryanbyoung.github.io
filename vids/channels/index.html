@@ -334,7 +334,6 @@
         hideOverlay();
         history.pushState(null, null, fullURL);
         document.title = PAGE_TITLE;
-        console.log('set title?');
       }
 
       /**
@@ -888,7 +887,11 @@
           document.title = PAGE_TITLE;
         }
         else {
-          console.log(event);
+          let string = event.target;
+          string.replace(/-/g, ' ');
+          string.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+          string = string + ' Channel';
+          console.log(string);
           chooseOverlay(event);
         }
       }, false); // end popstate listener
