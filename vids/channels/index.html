@@ -890,7 +890,7 @@
           let path = event.state;
           let removeDash = path.replace(/-/g, ' ');
           let addCaps = removeDash.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
-          let title = string + ' Channel';
+          let title = addCaps + ' Channel';
           chooseOverlay(event);
           document.title = title;
         }
