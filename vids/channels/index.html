@@ -275,7 +275,7 @@
       /**
        * chooseOverlay function
        *
-       * Called by linkClick function and popstate event handler.
+       * Called by linkClick function and popstate event listener.
        *
        * If the event calling the function is popstate, set the trigger to event.state, otherwise set it to the last
        * path of the event.target.href.
@@ -320,8 +320,8 @@
        *
        * Called by close button event listener.
        *
-       * Builds fullURL for history. Calls pausePlayers and hideOverlay functions to pause players and hide the 
-       * overlay. Pushes the URL to history state.
+       * Builds url of channels page for history. Calls pausePlayers and hideOverlay functions to pause players and hide the 
+       * overlay. Pushes the url to history state and sets the document title to Channels.
        */
       function close() {
         const pathArray = window.location.pathname.split('/');
@@ -343,12 +343,12 @@
        *
        * Creates a YouTube player for each channnel.
        *
-       * Create variables for player name and local storage (playlist, playlist index, and player time.
+       * Create variables for player name and local storage (playlist, playlist index, and player index time).
        *
        * Create each player with the player name, height and width of player (100% for responsive), and events.
        * 
        * The onReady event fires when each player is ready. It first checks if there is a playlist for the player
-       * in local storage. If it does, it retrieves the playlist, index, and time for that player and cues the playlist.
+       * in local storage. If there is, it retrieves the playlist, index, and time for that player and cues the playlist.
        * It also sets the playlist to loop. If the player isn't found in local storage, it creates a random number
        * based on the number of videos in the playlist to decide which video to play first and creates a new playlist.
        * A second after the playlist is created, it is set to shuffle all of the videos in the playlist. It is also set 
@@ -448,14 +448,16 @@
 
       /**
        * filterClick function
-       * 
+       *
+       * Called by FILTERS event listener.
+       *
        * Runs when user interacts with the channel filter (by click or keyboard).
        *
-       * Update document with selection.
+       * Update document with selection made by user. If favorites filter or else all filter.
        *
        * Populate filter information in local storage.
        *
-       * Filter the document content according to the incoming channel filter.
+       * Filter the document content according to the incoming channel filter selected.
        *
        * @param {KeyboardEvent} event
        */
@@ -481,6 +483,8 @@
       /**
        * filterFavorites function
        *
+       * Called by filterClick function and the setFilterStyles function.
+       *
        * When filter is set to favorite channels, focus on the filter and hide rows that
        * have the all channels filter on them.
        *
@@ -504,8 +508,7 @@
        *
        * Called by close function and popstate event listener.
        *
-       * Unhides the main and nav elements. Hides the overlay element, removes the text
-       * for the overlay H1, and sets the title of the page back to Channels.
+       * Unhides the main and nav elements. Hides the overlay element and removes the text for the overlay H1.
        */
       function hideOverlay() {
         MAIN.removeAttribute('hidden');
@@ -517,15 +520,13 @@
       /**
        * init function
        *
-       * Runs everytime the page is loaded.
+       * Called by the DOMContentLoaded event listener.
        *
        * Checks to see if local storage exists for channel, filter, or search components. 
        * If that information isn't in local storage, it populates it with what is currently on the page. 
        * If local storage exists, it sets up the page with components from the information in local storage.
        *
        * If the user left anything in the search field, it runs the search function.
-       *
-       * It then adds event listeners for all of the components (search, filter labels, and table elements).
        */
       function init() {
         if (localStorage.length === 0) {
@@ -545,8 +546,14 @@
       /**
        * linkClick function
        *
+       * Called by the LINKS event listener.
+       *
        * Event handler action for all links in the document. If user clicks on any of the nav links, perform 
-       * the default link action. Otherwise
+       * the default link action.
+       *
+       * Otherwise, prevent the default action of an href click. Choose which overlay to display by calling the
+       * chooseOverlay function. Create data for the history pushState and push that information to history. Set
+       * the document title to be the name of the channel that the user clicks on. Stop link event propagation.
        *
        * @param {MouseEvent} event
        */
@@ -587,7 +594,9 @@
       /**
        * pausePlayers function
        *
-       * Called from close function. Loops through all of the players then pauses and hides each one.
+       * Called from the close function.
+       *
+       * Loops through all of the players then pauses and hides each one.
        */
       function pausePlayers() {
         for (let i = 0, playersLength = players.length; i < playersLength; i++) {
@@ -599,9 +608,12 @@
       /**
        * populateChannelStorage function
        *
-       * Populate local storage with the id of the channel when the favorite
-       * icon is pressed. Also save whether the icon is pressed and the channel filter.
-       * Set the channel styles on their respective componets.
+       * Called by the init function.
+       *
+       * Loop through all of the channel rows. Populate local storage with the channel name and favorite icon. Also save
+       * aria-pressed state and the channel filter.
+       *
+       * Sets the channel styles on their respective components by calling setChannelStyles function.
        */
       function populateChannelStorage() {
         for (let i = 0, favLength = FAVORITES.length; i < favLength; i++) {
@@ -616,8 +628,13 @@
       /**
        * populateFilterStorage function
        *
+       * Called by the init fuction and filterClick function.
+       *
        * If no filter is checked (likely on user's first visit), set the filter to all channels.
-       * Populate local storage with the channel filter that is selected.
+       *
+       * Loop through the filters and whichever is checked, populate local storage with that filter.
+       *
+       * Set the filter styles on the page by calling setFilterStyles function.
        */
       function populateFilterStorage() {
         if (FILTERS[0].checked === false && FILTERS[1].checked === false){
@@ -634,8 +651,11 @@
       /**
        * populateSearchStorage function
        *
+       * Called by the init function and the search function.
+       *
        * Populate local storage with the value that is in the search field.
-       * Sets the search field value to the value that is saved in the local storage.
+       *
+       * Set the search field value to the value that is saved in the local storage by calling setSearchValue function.
        */
       function populateSearchStorage() {
         localStorage.setItem('SearchValue', SEARCH.value);
@@ -645,22 +665,22 @@
       /**
        * search function
        *
-       * Called from init when the page is loaded, every time the user presses a key in the search field, and when
+       * Called by the init function and the SEARCH event listener.
+       *
+       * Called when the page is loaded, every time the user presses a key in the search field, and when
        * the X is clicked in the search field.
        *
-       * Populates the local storage with the value in the search field.
+       * Populates the local storage with the value in the search field by calling populateSearchStorage.
        *
-       * Converts any alpha character to upper case. If filter is set to favorite channels,
-       * collect all of the favorited table rows and hid the empty query paragraph.
-       * Otherwise get all of the table rows. Set a counter for hidden rows
-       * and loop through all of the table rows.
+       * Converts any alpha character to upper case. If the filter is set to favorite channels, collect all of
+       * the favorite table rows and hide the empty query paragraph. Otherwise get all of the table rows. Set
+       * a counter for hidden rows and loop through all of the table rows.
        *
        * If the value in the search field matches any of the part of the displayed channels,
        * show those channels to the user and hide the empty query paragraph.
        *
-       * Otherwise, hide the table row and add one to the hidden row counter.
-       * If the hidden row counter equals the total number of rows than hide the whole table
-       * and show the empty query paragraph.
+       * Otherwise, hide the table row and add one to the hidden row counter. If the hidden row counter equals
+       * the total number of rows then hide the whole table and show the empty query paragraph.
        *
        * @param {KeyboardEvent, SearchEvent} event
        */
@@ -690,15 +710,18 @@
             if (hiddenRowCount === tr.length) {
               TABLE.setAttribute('hidden', '');
               EMPTY_QUERY.removeAttribute('hidden');
-            }
+            } // end if
           }
-        }
+        } // end loop
       } // end search function
 
       /**
        * setChannelStyles function
        *
-       * Sets the styles of all the channels based on their values in local storage.
+       * Called by the init function and the populateChannelStorage function.
+       *
+       * Loops through all of the channel rows and sets the styles of all the channels based on their values
+       * in local storage (channel icon, filter, and aria-pressed values).
        */
       function setChannelStyles() {
         let channelIcons = [];
@@ -718,8 +741,10 @@
       /**
        * setFilterStyles function
        *
-       * Sets the style of the filter based on the values saved in local storage.
-       * If the filter is set to favorite channels, displays the favorite channels.
+       * Called by the init function and the populateFilterStorage function.
+       *
+       * Sets the style of the filter on the page based on the filter value saved in local storage. If the filter is set to 
+       * favorite channels, displays the favorite channels by calling the filterFavorites function.
        */
       function setFilterStyles() {
         let filterChecked = localStorage.getItem('FilterSelected');
@@ -736,8 +761,10 @@
 
       /**
        * setSearchValue function
+       *
+       * Called by the init function and the populateSearchStorage function.
        * 
-       * Sets the search field value to the value that is saved in local storage.
+       * Sets the search field value to the search value that is saved in local storage.
        */
       function setSearchValue() {
         let savedSearch = localStorage.getItem('SearchValue');
