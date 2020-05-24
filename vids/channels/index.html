@@ -401,8 +401,8 @@
        * A second after the playlist is created, it is set to shuffle all of the videos in the playlist. It is also set 
        * to loop the playlist.
        *
-       * The onStateChange event updates all of the local storage items (playlist, index, and time) whenever the player is
-       * paused (event.data = 2).
+       * The onStateChange event updates all of the local storage items (playlist, index, and time) every three seconds
+       * when the player is playing (event.data = 1) and everytime the player is paused (event.data = 2).
        *
        * @param {Object} playerInfo
        */
@@ -439,6 +439,13 @@
               }
             }, // end onReady event
             'onStateChange': function(event) {
+              if (event.data === 1) {
+                setInterval(function() {
+                  localStorage.setItem(playerPlaylist, event.target.getPlaylist());
+                  localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
+                  localStorage.setItem(playerTime, event.target.getCurrentTime());
+                }, 3000);
+              }
               if (event.data === 2) {
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
