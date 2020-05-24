@@ -332,8 +332,9 @@
         //}
         pausePlayers();
         hideOverlay();
-        history.pushState(null, null, window.location.href);
         document.title = PAGE_TITLE;
+        console.log(window.location.href);
+        history.pushState(null, null, window.location.href);
       }
 
       /**
@@ -889,7 +890,6 @@
         }
         else {
           chooseOverlay(event);
-          console.log('gotta set the title in popstate');
         }
       }, false); // end popstate listener
 
