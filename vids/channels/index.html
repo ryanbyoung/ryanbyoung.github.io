@@ -440,15 +440,16 @@
               }
             }, // end onReady event
             'onStateChange': function(event) {
+              let intervalID;
               if (event.data === 1) {
-                setInterval(function() {
+                intervalID = setInterval(function() {
                   localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                   localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                   localStorage.setItem(playerTime, event.target.getCurrentTime());
                 }, 3000);
               }
               if (event.data === 2) {
-                clearInterval();
+                clearInterval(intervalID);
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                 localStorage.setItem(playerTime, event.target.getCurrentTime());
