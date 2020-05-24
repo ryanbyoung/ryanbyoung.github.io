@@ -887,12 +887,12 @@
           document.title = PAGE_TITLE;
         }
         else {
-          let string = event.target;
-          string.replace(/-/g, ' ');
-          string.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
-          string = string + ' Channel';
-          console.log(string);
+          let path = event.target;
+          let removeDash = path.replace(/-/g, ' ');
+          let addCaps = removeDash.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+          let title = string + ' Channel';
           chooseOverlay(event);
+          document.title = title;
         }
       }, false); // end popstate listener
 
