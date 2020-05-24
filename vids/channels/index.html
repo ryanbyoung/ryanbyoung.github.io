@@ -330,9 +330,15 @@
           fullURL += pathArray[i];
           fullURL += "/";
         }
+        console.log(fullURL);
+        console.log('pausing players');
         pausePlayers();
+        console.log('back');
+        console.log('hiding overlay');
         hideOverlay();
+        console.log('back from hiding overlay');
         history.pushState(null, null, fullURL);
+        console.log('pushed state');
         document.title = PAGE_TITLE;
       }
 
