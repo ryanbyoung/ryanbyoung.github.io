@@ -332,9 +332,8 @@
         }
         pausePlayers();
         hideOverlay();
-        document.title = 'title set here?'; //PAGE_TITLE;
-        console.log(fullURL);
         history.pushState(null, null, fullURL);
+        document.title = PAGE_TITLE;
       }
 
       /**
