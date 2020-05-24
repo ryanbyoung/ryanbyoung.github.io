@@ -559,13 +559,14 @@
           event.preventDefault();
           chooseOverlay(event);
           console.log('back to linkClick');
-          document.title = 'trying this here';
           const data = event.target.getAttribute('href');
           const url = data + '/';
           console.log(data);
           console.log(url);
           console.log('setting history state to be data former and url later');
           history.pushState(data, null, url);
+          document.title = 'how about here';
+          console.log(event);
           event.stopPropagation();
         }
       } // end linkClick function
