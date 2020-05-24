@@ -450,12 +450,12 @@
                 }, 3000);
               }
               else if (event.data === 2) {
+                clearInterval(intervalId);
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                 localStorage.setItem(playerTime, event.target.getCurrentTime());
               }
             } // end onStateChange event
-            clearInterval(intervalId);
           } // end events
         }); // end return
       } // end createPlayer function
