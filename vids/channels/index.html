@@ -887,7 +887,7 @@
           document.title = PAGE_TITLE;
         }
         else {
-          let path = event.target;
+          let path = event.state;
           let removeDash = path.replace(/-/g, ' ');
           let addCaps = removeDash.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
           let title = string + ' Channel';
