@@ -416,6 +416,7 @@
           height: '100%',
           width: '100%',
           events: {
+            let intervalId;
             'onReady': function(event) {
               // Check if there is a playlist for this player in local storage
               if (localStorage.getItem(playerPlaylist) != null) {
@@ -440,7 +441,6 @@
               }
             }, // end onReady event
             'onStateChange': function(event) {
-              let intervalId;
               if (event.data === 1) {
                 intervalId = setInterval(function() {
                   console.log('setting interval');
@@ -454,8 +454,8 @@
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                 localStorage.setItem(playerTime, event.target.getCurrentTime());
               }
-              clearInterval(intervalId);
             } // end onStateChange event
+            clearInterval(intervalId);
           } // end events
         }); // end return
       } // end createPlayer function
