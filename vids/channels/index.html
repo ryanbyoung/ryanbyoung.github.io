@@ -402,7 +402,8 @@
        * to loop the playlist.
        *
        * The onStateChange event updates all of the local storage items (playlist, index, and time) every three seconds
-       * when the player is playing (event.data = 1) and everytime the player is paused (event.data = 2).
+       * when the player is playing (event.data = 1) and everytime the player is paused (event.data = 2). The three
+       * second timer is cleared on player pause.
        *
        * @param {Object} playerInfo
        */
@@ -447,6 +448,7 @@
                 }, 3000);
               }
               if (event.data === 2) {
+                clearInterval();
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                 localStorage.setItem(playerTime, event.target.getCurrentTime());
