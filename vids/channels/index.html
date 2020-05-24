@@ -324,17 +324,17 @@
        * overlay. Pushes the URL to history state.
        */
       function close() {
-        //const pathArray = window.location.pathname.split('/');
-        //let fullURL = window.location.protocol + "//" + window.location.host;
-        //for (let i = 0; i < 3; i++) {
-        //  fullURL += pathArray[i];
-        //  fullURL += "/";
-        //}
+        const pathArray = window.location.pathname.split('/');
+        let fullURL = window.location.protocol + "//" + window.location.host;
+        for (let i = 0; i < 3; i++) {
+          fullURL += pathArray[i];
+          fullURL += "/";
+        }
         pausePlayers();
         hideOverlay();
-        document.title = PAGE_TITLE;
-        console.log(window.location.href);
-        history.pushState(null, null, window.location.href);
+        document.title = 'title set here?'; //PAGE_TITLE;
+        console.log(fullURL);
+        history.pushState(null, null, fullURL);
       }
 
       /**
