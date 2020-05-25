@@ -341,22 +341,21 @@
           href = event.target.href.split('/');
           trigger = href[href.length - 1];
         }
-        console.log(trigger);
-        //localStorage.setItem(currentPlayer, trigger);
+        localStorage.setItem(currentPlayer, trigger);
         switch (trigger) {
-          case '1':
+          //case '1':
           case 'dane-reynolds':
-          case 'Dane Reynolds':
+          //case 'Dane Reynolds':
             showOverlay(0, 'Dane Reynolds Channel');
             break;
-          case '2':
+          //case '2':
           case 'kelly-slater':
-          case 'Kelly Slater':
+          //case 'Kelly Slater':
             showOverlay(1, 'Kelly Slater Channel');
             break;
-          case '3':
+          //case '3':
           case 'craig-anderson':
-          case 'Craig Anderson':
+          //case 'Craig Anderson':
             showOverlay(2, 'Craig Anderson Channel');
             break;
           default:
