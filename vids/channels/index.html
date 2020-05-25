@@ -307,6 +307,7 @@
         if (event.state === null) {
           pausePlayers();
           hideOverlay();
+          localStorage.setItem('currentPlayer', '');
           document.title = PAGE_TITLE;
         }
         else {
@@ -341,6 +342,7 @@
           href = event.target.href.split('/');
           trigger = href[href.length - 1];
         }
+        localStorage.setItem('currentPlayer', trigger);
         switch (trigger) {
           //case '1':
           case 'dane-reynolds':
@@ -360,7 +362,6 @@
           default:
             showOverlay(0, 'Dane Reynolds Channel');
         }
-        localStorage.setItem(currentPlayer, trigger);
       } // end chooseOverlay function
 
       /**
@@ -380,6 +381,7 @@
         }
         pausePlayers();
         hideOverlay();
+        localStorage.setItem('currentPlayer', '');
         history.pushState(null, null, fullURL);
         document.title = PAGE_TITLE;
       }
