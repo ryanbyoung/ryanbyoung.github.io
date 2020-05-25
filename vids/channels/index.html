@@ -237,6 +237,7 @@
       const FAVORITE_LABEL = document.querySelector('label[for=favorites]');
       const FAVORITES = document.querySelectorAll('.favorite');
       const FILTERS = document.querySelectorAll('input[name=filter]');
+      let INTERVAL;
       const LINKS = document.querySelectorAll('a');
       const MAIN = document.querySelector('main');
       const NAV = document.querySelector('nav');
@@ -415,7 +416,6 @@
        * @param {Object} playerInfo
        */
       function createPlayer(playerInfo) {
-        let intervalId;
         const playerName = playerInfo.playlistName + 'Player';
         const playerPlaylist = playerInfo.playlistName + 'Playlist';
         const playerPlaylistIndex = playerInfo.playlistName + 'PlaylistIndex';
@@ -448,14 +448,14 @@
             }, // end onReady event
             'onStateChange': function(event) {
               if (event.data === 1) {
-                intervalId = setInterval(function() {
+                INTERVAL = setInterval(function() {
                   localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                   localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                   localStorage.setItem(playerTime, event.target.getCurrentTime());
                 }, 3000);
               }
               else if (event.data === 2) {
-                clearInterval(intervalId);
+                clearInterval(INTERVAL);
                 localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                 localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                 localStorage.setItem(playerTime, event.target.getCurrentTime());
