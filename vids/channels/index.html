@@ -341,6 +341,7 @@
           href = event.target.href.split('/');
           trigger = href[href.length - 1];
         }
+        console.log(trigger);
         //localStorage.setItem(currentPlayer, trigger);
         switch (trigger) {
           case '1':
@@ -419,7 +420,6 @@
           width: '100%',
           events: {
             'onReady': function(event) {
-              // Check if there is a playlist for this player in local storage
               if (localStorage.getItem(playerPlaylist) != null) {
                 event.target.cuePlaylist(
                   localStorage.getItem(playerPlaylist),
@@ -444,7 +444,6 @@
             'onStateChange': function(event) {
               if (event.data === 1) {
                 intervalId = setInterval(function() {
-                  console.log('setting interval');
                   localStorage.setItem(playerPlaylist, event.target.getPlaylist());
                   localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
                   localStorage.setItem(playerTime, event.target.getCurrentTime());
