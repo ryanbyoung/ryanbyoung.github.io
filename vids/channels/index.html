@@ -275,12 +275,14 @@
       /**
        * beforeunload event listener function
        *
-       * When the user closes the browser window, delete the event returnValue so alert doesn't show and pause all
-       * of the players by calling the pausePlayers function.
+       * When the user closes the browser window, delete the event returnValue so alert doesn't show.
        */
       window.addEventListener('beforeunload', function(event) {
         delete event['returnValue'];
-        pausePlayers();
+        players[0].pauseVideo();
+                  //localStorage.setItem(playerPlaylist, event.target.getPlaylist());
+                  //localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
+                  //localStorage.setItem(playerTime, event.target.getCurrentTime());
       }, false);
 
       /**
@@ -295,11 +297,10 @@
        *
        * Called every time the overlay is displayed and the back button is pressed.
        *
-       * If the event.state is null, pause the players, hide the overlay, set the current player index value in local
-       * storage to none, and set the document title to 'Channels'.
+       * If the event.state is null, pause the players, hide the overlay, and set the document title to 'Channels'.
        *
        * Otherwise, create a title variable by taking the event.state, replacing the dash with a space, capitalizing
-       * the two words, and adding the word Channel to it. Choose which overlay to display and set the document
+       * the two words, and adding the word 'Channel' to it. Choose which overlay to display and set the document
        * title to the title variable created.
        *
        * @param {popstate} event
@@ -308,7 +309,6 @@
         if (event.state === null) {
           pausePlayers();
           hideOverlay();
-          localStorage.setItem('CurrentPlayerIndex', 'none');
           document.title = PAGE_TITLE;
         }
         else {
@@ -370,8 +370,7 @@
        * Called by close button event listener.
        *
        * Builds url of channels page for history. Calls pausePlayers and hideOverlay functions to pause players and hide the 
-       * overlay. Sets current player index local storage value to none. Pushes the url to history state and sets the
-       * document title to Channels.
+       * overlay. Pushes the url to history state and sets the document title to 'Channels'.
        */
       function close() {
         const pathArray = window.location.pathname.split('/');
@@ -382,7 +381,6 @@
         }
         pausePlayers();
         hideOverlay();
-        localStorage.setItem('CurrentPlayerIndex', 'none');
         history.pushState(null, null, fullURL);
         document.title = PAGE_TITLE;
       }
@@ -656,12 +654,14 @@
        *
        * Called from the close function, the popstate event listener, and the beforeunload event listener.
        *
-       * Loops through all of the players, pauses, and hides each player.
+       * Loops through all of the players, pauses, and hides each player. Sets the current player index value in local
+       * storage to none.
        */
       function pausePlayers() {
         for (let i = 0, playersLength = players.length; i < playersLength; i++) {
           players[i].pauseVideo();
           players[i].f.setAttribute('hidden', '');
+          localStorage.setItem('CurrentPlayerIndex', 'none');
         }
       }
 
