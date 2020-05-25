@@ -277,12 +277,11 @@
        *
        * When the user closes the browser window, delete the event returnValue so alert doesn't show and pause all
        * of the players by calling the pausePlayers function.
-       *
+       */
       window.addEventListener('beforeunload', function(event) {
         delete event['returnValue'];
         pausePlayers();
       }, false);
-      */
 
       /**
        * DOMContentLoaded event listener
