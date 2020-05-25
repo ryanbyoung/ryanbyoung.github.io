@@ -276,11 +276,13 @@
        * beforeunload event listener function
        *
        * When the user closes the browser window, delete the event returnValue so alert doesn't show.
+       *
+       * @param {beforeunload} event
        */
       window.addEventListener('beforeunload', function(event) {
-        localStorage.setItem('fuck1', players[0].getPlaylist());
-        localStorage.setItem('fuck2', players[0].getPlaylistIndex());
-        localStorage.setItem('fuck3', players[0].getCurrentTime());
+        if (localStorage) {
+          localStorage.setItem('DaneReynoldsIndexTime', players[localStorage.getItem('CurrentPlayerIndex')].getCurrentTime());
+        }
         delete event['returnValue'];
       }, false);
 
