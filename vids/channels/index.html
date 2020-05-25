@@ -307,7 +307,6 @@
         if (event.state === null) {
           pausePlayers();
           hideOverlay();
-          localStorage.setItem('CurrentPlayer', '');
           document.title = PAGE_TITLE;
         }
         else {
@@ -342,7 +341,6 @@
           href = event.target.href.split('/');
           trigger = href[href.length - 1];
         }
-        localStorage.setItem('CurrentPlayer', trigger);
         console.log(players);
         switch (trigger) {
           //case '1':
@@ -382,7 +380,6 @@
         }
         pausePlayers();
         hideOverlay();
-        localStorage.setItem('CurrentPlayer', '');
         history.pushState(null, null, fullURL);
         document.title = PAGE_TITLE;
       }
@@ -656,12 +653,13 @@
        *
        * Called from the close function, the popstate event listener, and the beforeunload event listener.
        *
-       * Loops through all of the players then pauses and hides each one.
+       * Loops through all of the players, pauses, hides, and sets current player index local storage to none for each one.
        */
       function pausePlayers() {
         for (let i = 0, playersLength = players.length; i < playersLength; i++) {
           players[i].pauseVideo();
           players[i].f.setAttribute('hidden', '');
+          localStorage.setItem('CurrentPlayerIndex', 'none');
         }
       }
 
@@ -837,7 +835,8 @@
        * Called by chooseOverlay function.
        *
        * Hide the main and nav elements, show the overlay, populate the overlay H1 with the channel title parameter
-       * being sent, show the appropriate player based on the player parameter being sent, and start playing the video.
+       * being sent, show the appropriate player based on the player parameter being sent, start playing the video, and
+       * set the current player index local storage value to the player being played index.
        *
        * @param {Integer} playerIndex, {String} channelTitle
        */
@@ -848,6 +847,7 @@
         OVERLAY_TITLE.innerText = channelTitle;
         players[playerIndex].f.removeAttribute('hidden');
         players[playerIndex].playVideo();
+        localStorage.setItem('CurrentPlayerIndex', players[playerIndex]);
       }
 
       /**
