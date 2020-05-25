@@ -312,20 +312,21 @@
       /**
        * visibilitychange event listener
        *
-       * If document's visibility state is hidden, pause the current playing video. If the state is visible, start playing
-       * the last player being viewed.
+       * If the current player index local storage value isn't equal to 'none', check the document's visibility state.
+       * If the state is hidden, pause the current playing video. If the state is visible, start playing
+       * the last player that was being viewed.
        *
        * @param {visibilitychange} event
        */ 
       document.addEventListener("visibilitychange", function(event) {
-        console.log(event);
-        if (document.visibilityState === 'hidden') {
-          players[localStorage.getItem('CurrentPlayerIndex')].pauseVideo();
+        if (localStorage.getItem('CurrentPlayerIndex') !== 'none') {
+          if (event.target.visibilityState === 'hidden') {
+            players[localStorage.getItem('CurrentPlayerIndex')].pauseVideo();
+          } else if (event.target.visibilityState === 'visible') {
+            players[localStorage.getItem('CurrentPlayerIndex')].playVideo();
+          }
         }
-        else if (document.visibilityState === 'visible') {
-          players[localStorage.getItem('CurrentPlayerIndex')].playVideo();
-        }
-      });
+      }, false); // end visibilitychange listener
 
       /**
        * chooseOverlay function
