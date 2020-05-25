@@ -653,14 +653,15 @@
        *
        * Called from the close function, the popstate event listener, and the beforeunload event listener.
        *
-       * Loops through all of the players, pauses, hides, and sets current player index local storage to none for each one.
+       * Loops through all of the players, pauses, and hides each player. Sets current player index in local storage
+       * to none.
        */
       function pausePlayers() {
         for (let i = 0, playersLength = players.length; i < playersLength; i++) {
           players[i].pauseVideo();
           players[i].f.setAttribute('hidden', '');
-          localStorage.setItem('CurrentPlayerIndex', 'none');
         }
+        localStorage.setItem('CurrentPlayerIndex', 'none');
       }
 
       /**
@@ -847,7 +848,7 @@
         OVERLAY_TITLE.innerText = channelTitle;
         players[playerIndex].f.removeAttribute('hidden');
         players[playerIndex].playVideo();
-        localStorage.setItem('CurrentPlayerIndex', players[playerIndex]);
+        localStorage.setItem('CurrentPlayerIndex', playerIndex);
       }
 
       /**
