@@ -295,7 +295,8 @@
        *
        * Called every time the overlay is displayed and the back button is pressed.
        *
-       * If the event.state is null, pause the players, hide the overlay, and set the document title to Channels.
+       * If the event.state is null, pause the players, hide the overlay, set the current player index value in local
+       * storage to none, and set the document title to 'Channels'.
        *
        * Otherwise, create a title variable by taking the event.state, replacing the dash with a space, capitalizing
        * the two words, and adding the word Channel to it. Choose which overlay to display and set the document
@@ -307,6 +308,7 @@
         if (event.state === null) {
           pausePlayers();
           hideOverlay();
+          localStorage.setItem('CurrentPlayerIndex', 'none');
           document.title = PAGE_TITLE;
         }
         else {
@@ -368,7 +370,8 @@
        * Called by close button event listener.
        *
        * Builds url of channels page for history. Calls pausePlayers and hideOverlay functions to pause players and hide the 
-       * overlay. Pushes the url to history state and sets the document title to Channels.
+       * overlay. Sets current player index local storage value to none. Pushes the url to history state and sets the
+       * document title to Channels.
        */
       function close() {
         const pathArray = window.location.pathname.split('/');
@@ -379,6 +382,7 @@
         }
         pausePlayers();
         hideOverlay();
+        localStorage.setItem('CurrentPlayerIndex', 'none');
         history.pushState(null, null, fullURL);
         document.title = PAGE_TITLE;
       }
@@ -660,7 +664,6 @@
           players[i].pauseVideo();
           players[i].f.setAttribute('hidden', '');
         }
-        localStorage.setItem('CurrentPlayerIndex', 'none');
       }
 
       /**
