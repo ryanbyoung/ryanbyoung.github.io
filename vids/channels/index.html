@@ -276,12 +276,13 @@
        * beforeunload event listener function
        *
        * When the user closes the browser window, delete the event returnValue so alert doesn't show and pause all
-       * of the players (couldn't figure out how to pause specific player that was playing).
-       */
+       * of the players by calling the pausePlayers function.
+       *
       window.addEventListener('beforeunload', function(event) {
         delete event['returnValue'];
         pausePlayers();
       }, false);
+      */
 
       /**
        * DOMContentLoaded event listener
@@ -656,8 +657,7 @@
        *
        * Called from the close function, the popstate event listener, and the beforeunload event listener.
        *
-       * Loops through all of the players, pauses, and hides each player. Sets current player index in local storage
-       * to none.
+       * Loops through all of the players, pauses, and hides each player.
        */
       function pausePlayers() {
         for (let i = 0, playersLength = players.length; i < playersLength; i++) {
