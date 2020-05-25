@@ -278,11 +278,10 @@
        * When the user closes the browser window, delete the event returnValue so alert doesn't show.
        */
       window.addEventListener('beforeunload', function(event) {
-        players[0].pauseVideo();
+        localStorage.setItem('fuck1', players[0].getPlaylist());
+        localStorage.setItem('fuck2', players[0].getPlaylistIndex());
+        localStorage.setItem('fuck3', players[0].getCurrentTime());
         delete event['returnValue'];
-                  //localStorage.setItem(playerPlaylist, event.target.getPlaylist());
-                  //localStorage.setItem(playerPlaylistIndex, event.target.getPlaylistIndex());
-                  //localStorage.setItem(playerTime, event.target.getCurrentTime());
       }, false);
 
       /**
