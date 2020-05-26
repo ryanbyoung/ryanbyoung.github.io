@@ -157,5 +157,17 @@
         <a href="movies/">Movies</a>
       </p>
     </nav>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./vids/sw.js', {scope: './vids/'})
+        .then((reg) => {
+          // registration worked
+          console.log('Registration succeeded. Scope is ' + reg.scope);
+        }).catch((error) => {
+          // registration failed
+          console.log('Registration failed with ' + error);
+        });
+      sss}  
+    </script>
   </body>
 </html>
