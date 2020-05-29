@@ -4,7 +4,9 @@ self.addEventListener('install', (event) => {
     caches.open('v1').then((cache) => {
       return cache.addAll([
         '/vids/',
-        '/vids/index.html'
+        '/vids/index.html',
+        '/vids/channels/',
+        '/vids/channels/dane-reynolds/'
       ]);
     })
   );
@@ -20,7 +22,7 @@ self.addEventListener('fetch', (event) => {
         return response;
       });
     }).catch(() => {
-      return caches.match('/vids/');
+      return ('<p>Sorry, something has gone wrong. Return <a href="/vids/">home</a>.</p>');
     })
   );
 });
