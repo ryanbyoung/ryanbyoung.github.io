@@ -11,6 +11,14 @@ self.addEventListener('install', (event) => {
     })
   );
 });
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+});
+/* Mozilla
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((resp) => {
@@ -26,3 +34,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+*/
