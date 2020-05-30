@@ -182,11 +182,12 @@
       //On/offline listeners
       //if (window.navigator.onLine === true) { console.log('online') }
       window.addEventListener('offline', function(event) {
+        document.querySelector('#online').setAttribute('hidden', '');
         document.querySelector('#offline').removeAttribute('hidden');
       }, false);
       window.addEventListener('online', function(event) {
-        console.log(event);
         document.querySelector('#offline').setAttribute('hidden', '');
+        document.querySelector('#online').removeAttribute('hidden');
       }, false);
     </script>
   </body>
