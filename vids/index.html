@@ -180,7 +180,10 @@
       }
       
       //Offline and online event listeners
-      //if (window.navigator.onLine === true) { console.log('online') }
+      if (window.navigator.onLine === false) {
+        document.querySelector('#online').setAttribute('hidden', '');
+        document.querySelector('#offline').removeAttribute('hidden');
+      }
       window.addEventListener('offline', function(event) {
         document.querySelector('#online').setAttribute('hidden', '');
         document.querySelector('#offline').removeAttribute('hidden');
