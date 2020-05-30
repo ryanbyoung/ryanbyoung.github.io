@@ -198,6 +198,7 @@
       <h1>No Connection</h1>
       <p>It looks like there isn't an internet connection available.</p>
       <p>This section needs one to function.</p>
+      <p>You can go <a href="https://ryanbyoung.github.io/vids/">home now</a>;
       <p>Hopefully you have some <a href="../shows/">shows</a> or <a href="../movies/">movies</a> saved.</p>
     </main>
     <nav>
@@ -297,6 +298,9 @@
         MAIN.setAttribute('hidden', '');
         OVERLAY.setAttribute('hidden', '');
         OFFLINE.removeAttribute('hidden');
+        if (localStorage.getItem('CurrentPlayerIndex') !== 'none') {
+          NAV.removeAttribute('hidden');
+        }
       }, false);
 
       /**
