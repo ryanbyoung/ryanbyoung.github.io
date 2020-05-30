@@ -121,9 +121,6 @@
         top: 0;
         width: 100%
       }
-      #overlay {
-        padding-bottom: 0
-      }
       #overlay-title {
         font-size: 1.5em;
         margin: .83em 0
@@ -197,9 +194,8 @@
     <main id="offline" hidden>
       <h1>No Connection</h1>
       <p>It looks like there isn't an internet connection available.</p>
-      <p>This section needs one to function.</p>
-      <p>You can go <a href="https://ryanbyoung.github.io/vids/">home now</a>;
-      <p>Hopefully you have some <a href="../shows/">shows</a> or <a href="../movies/">movies</a> saved.</p>
+      <p>This section needs one to work.</p>
+      <p>Come back when you're back online.</p>
     </main>
     <nav>
       <a href="..">Home</a> &nbsp;|&nbsp;
@@ -299,6 +295,7 @@
         OVERLAY.setAttribute('hidden', '');
         OFFLINE.removeAttribute('hidden');
         if (localStorage.getItem('CurrentPlayerIndex') !== 'none') {
+          NAV.innerHTML = '<a href="../../">Home</a> &nbsp;|&nbsp; Channels &nbsp;|&nbsp; <a href="../../shows/">Shows</a> &nbsp;|&nbsp; <a href="../../movies/">Movies</a>'
           NAV.removeAttribute('hidden');
         }
       }, false);
@@ -641,11 +638,13 @@
        * If the user left anything in the search field, it runs the search function.
        */
       function init() {
+        /*
         if (window.navigator.onLine === false) {
           MAIN.setAttribute('hidden', '');
           OVERLAY.setAttribute('hidden', '');
           OFFLINE.removeAttribute('hidden');
         }
+        */
         if (localStorage.length === 0) {
           populateChannelStorage();
           populateFilterStorage();
