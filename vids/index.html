@@ -150,14 +150,8 @@
     <main>
       <h1>Surf Flix</h1>
       <p>Thanks for dropping in.</p>
-      <div id="online">
-        <p>We're still working on things, but you can start checking out some of our <a href="channels/">channels</a>.</p>
-        <p><a href="shows/">Shows</a> and <a href="movies/">Movies</a> are coming soon.</p>
-      </div>
-      <div id="offline" hidden>
-        <p>It looks like there isn't an internet connection available.</p>
-        <p>Hopefully you have some <a href="shows/">shows</a> or <a href="movies/">movies</a> saved.</p>
-      </div>
+      <p>We're still working on things, but you can start checking out some of our <a href="channels/">channels</a>.</p>
+      <p><a href="shows/">Shows</a> and <a href="movies/">Movies</a> are coming soon.</p>
     </main>
     <nav>
       <p>
@@ -179,7 +173,7 @@
         });
       }
       
-      //Offline and online event listeners
+      /*Offline and online event listeners
       document.addEventListener('DOMContentLoaded', function(event) {
         if (window.navigator.onLine === true) {
           document.querySelector('#offline').setAttribute('hidden', '');
@@ -197,6 +191,7 @@
         document.querySelector('#offline').setAttribute('hidden', '');
         document.querySelector('#online').removeAttribute('hidden');
       }, false);
+      */
     </script>
   </body>
 </html>
