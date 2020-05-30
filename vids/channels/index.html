@@ -194,7 +194,7 @@
     <main id="offline" hidden>
       <h1>No Connection</h1>
       <p>It looks like there isn't an internet connection available.</p>
-      <p>The channels section needs one to work.</p>
+      <p>This section needs one to work.</p>
       <p>Come back when you're online.</p>
     </main>
     <nav>
@@ -311,8 +311,9 @@
        * that means the overlay should be shown. The main, nav, and offline sections should be hidden.
        *
        * Otherwise if there isn't a current player index set or it's set to none, that means the main and nav sections
-       * should be shown. The overlay and offline sections should be hidden. Also need to make sure nav has original
-       * content. It could've been changed when the app went offline.
+       * should be shown. The overlay and offline sections should be hidden. Set nav back to original status because
+       * it could've been changed when the app went offline. Create a URL for history purposes. Push state to history
+       * and set the page title to 'Channels'.
        *
        * @param {online} event
        */
@@ -327,7 +328,15 @@
           NAV.removeAttribute('hidden');
           NAV.innerHTML = '<a href="..">Home</a> &nbsp;|&nbsp; Channels &nbsp;|&nbsp; <a href="../shows/">Shows</a> &nbsp;|&nbsp; <a href="../movies/">Movies</a>';
           OVERLAY.setAttribute('hidden', '');
-          OFFLINE.setAttribute('hidden', ''); 
+          OFFLINE.setAttribute('hidden', '');
+          const pathArray = window.location.pathname.split('/');
+          let fullURL = window.location.protocol + "//" + window.location.host;
+          for (let i = 0; i < 3; i++) {
+            fullURL += pathArray[i];
+            fullURL += "/";
+          }
+          history.pushState(null, null, fullURL);
+          document.title = PAGE_TITLE;
         }
       }, false);
 
