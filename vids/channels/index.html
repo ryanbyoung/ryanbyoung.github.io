@@ -628,6 +628,8 @@
        *
        * Called by the DOMContentLoaded event listener.
        *
+       * Checks to see if user is offline. If so, main and overlay sections are hidden and offline section is shown.
+       *
        * Checks to see if local storage exists for channel, filter, or search components. 
        * If that information isn't in local storage, it populates it with what is currently on the page. 
        * If local storage exists, it sets up the page with components from the information in local storage.
@@ -635,6 +637,11 @@
        * If the user left anything in the search field, it runs the search function.
        */
       function init() {
+        if (window.navigator.onLine === false) {
+          MAIN.setAttribute('hidden', '');
+          OVERLAY.setAttribute('hidden', '');
+          OFFLINE.removeAttribute('hidden');
+        }
         if (localStorage.length === 0) {
           populateChannelStorage();
           populateFilterStorage();
