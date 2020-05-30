@@ -194,6 +194,12 @@
       </div>
       <button id="close">Close Channel</button>
     </main>
+    <main id="offline" hidden>
+      <h1>No Connection</h1>
+      <p>It looks like there isn't an internet connection available</p>
+      <p>This section needs one to function.</p>
+      <p>Hopefully you have some <a href="../shows/">shows</a> or <a href="../movies/">movies</a> saved.</p>
+    </main>
     <nav>
       <a href="..">Home</a> &nbsp;|&nbsp;
       Channels &nbsp;|&nbsp;
@@ -240,6 +246,7 @@
       const LINKS = document.querySelectorAll('a');
       const MAIN = document.querySelector('main');
       const NAV = document.querySelector('nav');
+      const OFFLINE = document.querySelector('#offline');
       const OVERLAY = document.getElementById('overlay');
       const OVERLAY_TITLE = document.getElementById('overlay-title');
       const PAGE_TITLE = 'Channels';
@@ -278,6 +285,42 @@
        * Call the init function after the DOM content is loaded.
        */
       document.addEventListener('DOMContentLoaded',init, false);
+
+      /**
+       * offline event listener
+       *
+       * If app is offline, hide main and overlay sections, show offline section.
+       *
+       * @param {offline} event
+       */
+      window.addEventListener('offline', function(event) {
+        MAIN.setAttribute('hidden', '');
+        OVERLAY.setAttribute('hidden', '');
+        OFFLINE.removeAttribute('hidden');
+      }, false);
+
+      /**
+       * online event listener
+       *
+       * If app is switched to online and there's a current player index set in local storage and it's not set to none,
+       * that means the overlay should be shown. The main and offline sections should be hidden.
+       *
+       * Otherwise if there isn't a current player index set or it's set to none, that means the main section should be
+       * shown. The overlay and offline sections should be hidden.
+       *
+       * @param {online} event
+       */
+      window.addEventListener('online', function(event) {
+        if (localStorage.getItem('CurrentPlayerIndex') && localStorage.getItem('CurrentPlayerIndex') !== 'none') {
+          MAIN.setAttribute('hidden', '');
+          OVERLAY.removeAttribute('hidden');
+          OFFLINE.setAttribute('hidden', '');
+        } else {
+          MAIN.removeAttribute('hidden');
+          OVERLAY.setAttribute('hidden', '');
+          OFFLINE.setAttribute('hidden', ''); 
+        }
+      }, false);
 
       /**
        * popstate event listener function
