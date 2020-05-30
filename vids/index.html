@@ -180,7 +180,7 @@
       }
       
       //Offline and online event listeners
-      window.addEventListener('onfocus', function(event) {
+      document.addEventListener('DOMContentLoaded', function(event) {
         if (window.navigator.onLine === true) {
           document.querySelector('#offline').setAttribute('hidden', '');
           document.querySelector('#online').removeAttribute('hidden'); 
