@@ -150,6 +150,7 @@
   </head>
   <body>
     <main>
+      <p id="offline" style="color: red; display: none">You're offline</p>
       <h1>Surf Flix</h1>
       <p>Thanks for dropping in.</p>
       <p>We're still working on things, but you can start checking out some of our <a href="channels/">channels</a>.</p>
@@ -173,7 +174,10 @@
           // registration failed
           console.log('Registration failed with ' + error);
         });
-      }  
+      }
+      window.addEventListener('offline', function(event) {
+        document.querySelector('#offline').style = 'display: inline';
+      }, false);
     </script>
   </body>
 </html>
