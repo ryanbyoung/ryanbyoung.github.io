@@ -180,10 +180,15 @@
       }
       
       //Offline and online event listeners
-      if (window.navigator.onLine === false) {
-        document.querySelector('#online').setAttribute('hidden', '');
-        document.querySelector('#offline').removeAttribute('hidden');
-      }
+      document.addEventListener("visibilitychange", function(event) {
+        if (window.navigator.onLine === true) {
+          document.querySelector('#offline').setAttribute('hidden', '');
+          document.querySelector('#online').removeAttribute('hidden'); 
+        } else {
+          document.querySelector('#online').setAttribute('hidden', '');
+          document.querySelector('#offline').removeAttribute('hidden');
+        }
+      }, false);
       window.addEventListener('offline', function(event) {
         document.querySelector('#online').setAttribute('hidden', '');
         document.querySelector('#offline').removeAttribute('hidden');
