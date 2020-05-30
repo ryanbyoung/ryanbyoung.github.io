@@ -1,8 +1,6 @@
-<!-- window.navigator.onLine -->
 <!doctype html>
 <html lang="en">
   <head>
-    <script>if (window.navigator.onLine === true) { console.log('online') }</script>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
     <title>Surf Flix</title>
@@ -150,33 +148,45 @@
   </head>
   <body>
     <main>
-      <p id="offline" style="color: red; display: none">You're offline</p>
       <h1>Surf Flix</h1>
       <p>Thanks for dropping in.</p>
-      <p>We're still working on things, but you can start checking out some of our <a href="channels/">channels</a>.</p>
-      <p><a href="shows/">Shows</a> and <a href="movies/">Movies</a> are coming soon.</p>
+      <div id="online">
+        <p>We're still working on things, but you can start checking out some of our <a href="channels/">channels</a>.</p>
+        <p><a href="shows/">Shows</a> and <a href="movies/">Movies</a> are coming soon.</p>
+      </div>
+      <div id="offline" hidden>
+        <p>It looks like you're not currently connected to the internet.</p>
+        <p>Hopefully you thought about that beforehand and saved some <a href="shows/">shows</a> or <a href="movies/">movies</a> to watch.</p>
+      </div>
     </main>
     <nav>
       <p>
         Home &nbsp;|&nbsp;
-        <a href="channels/" id="ch">Channels</a> &nbsp;|&nbsp;
+        <a href="channels/">Channels</a> &nbsp;|&nbsp;
         <a href="shows/">Shows</a> &nbsp;|&nbsp;
         <a href="movies/">Movies</a>
       </p>
     </nav>
     <script>
+      //Service Worker
+      /*
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js')
         .then((reg) => {
-          // registration worked
           console.log('Registration succeeded. Scope is ' + reg.scope);
         }).catch((error) => {
-          // registration failed
           console.log('Registration failed with ' + error);
         });
       }
+      */
+      //On/offline listeners
+      //if (window.navigator.onLine === true) { console.log('online') }
       window.addEventListener('offline', function(event) {
-        document.querySelector('#offline').style = 'display: inline';
+        document.querySelector('#offline').removeAttribute('hidden');
+      }, false);
+      window.addEventListener('online', function(event) {
+        console.log(event);
+        document.querySelector('#offline').setAttribute('hidden', '');
       }, false);
     </script>
   </body>
