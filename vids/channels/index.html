@@ -290,7 +290,7 @@
        * If app is offline, hide main and overlay sections, show the offline section.
        *
        * If the current player index in local storage had a value other than none (there was an overlay being shown)
-       * so set the current player index to none.
+       * so set the current player index to none. Also show the nav and update it so it works from the overlay.
        *
        * @param {offline} event
        */
@@ -300,6 +300,8 @@
         OFFLINE.removeAttribute('hidden');
         if (localStorage.getItem('CurrentPlayerIndex') !== 'none') {
           localStorage.setItem('CurrentPlayerIndex', 'none');
+          NAV.removeAttribute('hidden');
+          NAV.innerHTML = '<a href="../../">Home</a> &nbsp;|&nbsp; Channels &nbsp;|&nbsp; <a href="../../shows/">Shows</a> &nbsp;|&nbsp; <a href="../../movies/">Movies</a>';
         }
       }, false);
 
@@ -310,7 +312,8 @@
        * that means the overlay should be shown. The main, nav, and offline sections should be hidden.
        *
        * Otherwise if there isn't a current player index set or it's set to none, that means the main and nav sections
-       * should be shown. The overlay and offline sections should be hidden.
+       * should be shown. The overlay and offline sections should be hidden. Also need to make sure nav has original
+       * content. It could've been changed when the app went offline.
        *
        * @param {online} event
        */
@@ -323,6 +326,7 @@
         } else {
           MAIN.removeAttribute('hidden');
           NAV.removeAttribute('hidden');
+          NAV.innerHTML = '<a href="..">Home</a> &nbsp;|&nbsp; Channels &nbsp;|&nbsp; <a href="../shows/">Shows</a> &nbsp;|&nbsp; <a href="../movies/">Movies</a>';
           OVERLAY.setAttribute('hidden', '');
           OFFLINE.setAttribute('hidden', ''); 
         }
