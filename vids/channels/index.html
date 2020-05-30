@@ -194,8 +194,9 @@
     <main id="offline" hidden>
       <h1>No Connection</h1>
       <p>It looks like there isn't an internet connection available.</p>
-      <p>This section needs one to work.</p>
+      <p>The channels section needs one to work.</p>
       <p>Come back when you're back online.</p>
+      <p>Go to the <a href="../../">home screen</a>.<p>
     </main>
     <nav>
       <a href="..">Home</a> &nbsp;|&nbsp;
@@ -286,7 +287,10 @@
       /**
        * offline event listener
        *
-       * If app is offline, hide main and overlay sections, show offline section.
+       * If app is offline, hide main and overlay sections, show the offline section.
+       *
+       * If the current player index in local storage had a value other than none (there was an overlay being shown)
+       * so set the current player index to none.
        *
        * @param {offline} event
        */
@@ -295,8 +299,7 @@
         OVERLAY.setAttribute('hidden', '');
         OFFLINE.removeAttribute('hidden');
         if (localStorage.getItem('CurrentPlayerIndex') !== 'none') {
-          NAV.innerHTML = '<a href="../../">Home</a> &nbsp;|&nbsp; Channels &nbsp;|&nbsp; <a href="../../shows/">Shows</a> &nbsp;|&nbsp; <a href="../../movies/">Movies</a>'
-          NAV.removeAttribute('hidden');
+          localStorage.setItem('CurrentPlayerIndex', 'none');
         }
       }, false);
 
@@ -304,20 +307,22 @@
        * online event listener
        *
        * If app is switched to online and there's a current player index set in local storage and it's not set to none,
-       * that means the overlay should be shown. The main and offline sections should be hidden.
+       * that means the overlay should be shown. The main, nav, and offline sections should be hidden.
        *
-       * Otherwise if there isn't a current player index set or it's set to none, that means the main section should be
-       * shown. The overlay and offline sections should be hidden.
+       * Otherwise if there isn't a current player index set or it's set to none, that means the main and nav sections
+       * should be shown. The overlay and offline sections should be hidden.
        *
        * @param {online} event
        */
       window.addEventListener('online', function(event) {
         if (localStorage.getItem('CurrentPlayerIndex') && localStorage.getItem('CurrentPlayerIndex') !== 'none') {
-          MAIN.setAttribute('hidden', '');
           OVERLAY.removeAttribute('hidden');
+          MAIN.setAttribute('hidden', '');
+          NAV.setAttribute('hidden', '');
           OFFLINE.setAttribute('hidden', '');
         } else {
           MAIN.removeAttribute('hidden');
+          NAV.removeAttribute('hidden');
           OVERLAY.setAttribute('hidden', '');
           OFFLINE.setAttribute('hidden', ''); 
         }
