@@ -360,7 +360,7 @@
        *
        * @param {visibilitychange} event
        */ 
-      document.addEventListener("visibilitychange", function(event) {
+      document.addEventListener('visibilitychange', function(event) {
         if (localStorage.getItem('CurrentPlayerIndex') !== 'none') {
           if (event.target.visibilityState === 'hidden') {
             players[localStorage.getItem('CurrentPlayerIndex')].pauseVideo();
