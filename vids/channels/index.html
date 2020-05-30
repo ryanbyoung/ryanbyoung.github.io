@@ -2,14 +2,6 @@
 <!-- TODO When you add script to app, don't forget playerInfoList variable on this line **** -->
 <html lang="en">
   <head>
-    <script>
-      if (window.navigator.onLine === false) {
-        alert('head');
-        MAIN.setAttribute('hidden', '');
-        OVERLAY.setAttribute('hidden', '');
-        OFFLINE.removeAttribute('hidden');
-      }
-    </script>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
     <title>Channels</title>
@@ -663,13 +655,11 @@
        * If the user left anything in the search field, it runs the search function.
        */
       function init() {
-        /*
         if (window.navigator.onLine === false) {
           MAIN.setAttribute('hidden', '');
           OVERLAY.setAttribute('hidden', '');
           OFFLINE.removeAttribute('hidden');
         }
-        */
         if (localStorage.length === 0) {
           populateChannelStorage();
           populateFilterStorage();
