@@ -18,10 +18,8 @@
         max-width: 700px;
         padding: 0 10px 70px;
         position: relative;
+        text-align: center;
         z-index: 1
-      }
-      h1, p {
-        text-align: center
       }
       a, a:visited {
         color: #fff
@@ -71,10 +69,10 @@
       input[type="radio"]:checked + label {
         text-decoration: underline
       }
-      #filter label {
+      fieldset label {
         cursor: pointer
       }
-      #filter label:last-child {
+      fieldset label:last-child {
         margin-left: 20px
       }
       table {
@@ -92,24 +90,22 @@
       td a {
         text-decoration: none
       }
-      .favorite, .channel {
-        text-align: center;
+      .favorite, .channel-number {
         width: 30px
       }
-      .search-item {
-        padding: 5px 20px
+      .channel-name {
+        padding: 5px 20px;
+        text-align: left
       }
       nav {
         background-color: #303030;
         bottom: 0;
+        margin: 0 auto;
+        padding: 10px 0;
         position: fixed;
         text-align: center;
         width: 100%;
         z-index: 1
-      }
-      nav p {
-        margin: 10px auto;
-        max-width: 700px
       }
       nav a:hover {
         color: red
@@ -125,9 +121,6 @@
         position: absolute;
         top: 0;
         width: 100%
-      }
-      #overlay {
-        padding-bottom: 0
       }
       #overlay-title {
         font-size: 1.5em;
@@ -157,12 +150,10 @@
       <button id="install" hidden>Install</button>
     </main>
     <nav>
-      <p>
-        Home &nbsp;|&nbsp;
-        <a href="channels/">Channels</a> &nbsp;|&nbsp;
-        <a href="shows/">Shows</a> &nbsp;|&nbsp;
-        <a href="movies/">Movies</a>
-      </p>
+      Home &nbsp;|&nbsp;
+      <a href="channels/">Channels</a> &nbsp;|&nbsp;
+      <a href="shows/">Shows</a> &nbsp;|&nbsp;
+      <a href="movies/">Movies</a>
     </nav>
     <script>
 
@@ -176,7 +167,7 @@
         });
       }
 
-      //Install on Chrome/Edge
+      //Install for Android, Chrome, and Edge
       let deferredInstallPrompt = null;
       const installButton = document.getElementById('install');
       installButton.addEventListener('click', installPWA);
