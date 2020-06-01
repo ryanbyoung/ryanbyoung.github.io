@@ -131,7 +131,7 @@
         font-size: 1.5em;
         margin: .83em 0
       }
-      #close {
+      #install {
         background-color: #000;
         border: 2px solid #fff;
         color: #fff;
@@ -152,6 +152,7 @@
       <p>Thanks for dropping in.</p>
       <p>We're still working on things, but you can start checking out some of our <a href="channels/">channels</a>.</p>
       <p><a href="shows/">Shows</a> and <a href="movies/">Movies</a> are coming soon.</p>
+      <button id="install" hidden>Install</button>
     </main>
     <nav>
       <p>
@@ -162,8 +163,8 @@
       </p>
     </nav>
     <script>
+
       //Service Worker
-      
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js')
         .then((reg) => {
@@ -171,6 +172,31 @@
         }).catch((error) => {
           console.log('Registration failed with ' + error);
         });
+      }
+
+      //Install
+      let deferredInstallPrompt = null;
+      const installButton = document.getElementById('install');
+      installButton.addEventListener('click', installPWA);
+      window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
+      /**
+       * Event handler for beforeinstallprompt event.
+       *   Saves the event & shows install button.
+       *
+       * @param {Event} evt
+       */
+      function saveBeforeInstallPromptEvent(evt) {
+        deferredInstallPrompt = evt;
+        installButton.removeAttribute('hidden');
+      }
+      /**
+       * Event handler for butInstall - Does the PWA installation.
+       *
+       * @param {Event} evt
+       */
+      function installPWA(evt) {
+        deferredInstallPrompt.prompt();
+        evt.srcElement.setAttribute('hidden', true);
       }
       
       /*Offline and online event listeners
