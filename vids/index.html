@@ -175,6 +175,7 @@
 
       //Install for Android, Chrome, and Edge
       let deferredInstallPrompt = null;
+      const webApp = document.getElementById('web-app');
       const installButton = document.getElementById('install');
       installButton.addEventListener('click', installPWA);
       window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
@@ -186,7 +187,7 @@
        */
       function saveBeforeInstallPromptEvent(evt) {
         deferredInstallPrompt = evt;
-        installButton.removeAttribute('hidden');
+        webApp.removeAttribute('hidden');
       }
       /**
        * Event handler for butInstall - Does the PWA installation.
@@ -195,7 +196,7 @@
        */
       function installPWA(evt) {
         deferredInstallPrompt.prompt();
-        evt.srcElement.setAttribute('hidden', true);
+        webApp.setAttribute('hidden', true);
       }
       
       /*Offline and online event listeners
