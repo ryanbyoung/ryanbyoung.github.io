@@ -151,7 +151,7 @@
       <p><a href="shows/">Shows</a> and <a href="movies/">Movies</a> are coming soon.</p>
       <div id="web-app" hidden>
         <h2>Web App</h2>
-        <p id="chrome">Install this on your device by clicking the button and following the prompts.</p>
+        <p id="chromium">Install this on your device by clicking the button and following the prompts.</p>
         <button id="install">Install</button>
         <p id="safari">Install this on your device by clicking the share icon in Safari and then choosing Add to Home Screen.</p>
           <!--<img alt="Share icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAdVBMVEX///8zMzPKysodHR0mJibExMQVFRUbGxvv7++cnJygoKAwMDDW1tYsLCw9PT1paWlQUFDf398SEhInJycTExP39/fj4+OVlZXc3Nyzs7Pn5+d0dHRISEhkZGS8vLzS0tKKioqCgoJ6enoICAhaWlpDQ0OqqqodD8y2AAAE4klEQVR4nO2d6XaqMBRGwUSwYhxAr7NirX3/R7wYRvVoGyRJYX37T7u6iMnmZAK7ThwHAAAAAAAAAAAAAAAAAAAAAAAAADSzme0W6GUWzMPxxnYrNLJigesG/J/tdmhj5SWCXVZccSmYKLJuKsoumil2MooVwW4q3gh2UfFOsHuKxSTTVcVsmbhT7NCMWkRQ3PzoThSLCLJYuomYd0uxiKDXGzEp2juGXeqoxSwa9p1eapj8koW1C1EsBL2+Uxo6x3lXolgInhOtiqHTyxVbHsWbCN4YJh01j2Kbn4lnvBrBW0OnF7Y/ijO/nGQkN4YdiGIRwVzwzrCMYkunmyKC59zo3rDlUSwX+kLowbDVUZyxhwgShmUUeduiSEWQMizXxZZF8X6ZyCAMW7r0zxgVQdqwldPNIiIj+MSwnG4Cc018kzW7WwdzaMMiiuxgqoXvMuS04DPDPIr820z73id9wL3vos5zw+x58bwy0bpGOIUR9x49nhsmUeRReNLfssboxx/Ud2jPDZ3NR0z9uW28MOwIMGw/MGw/MGw/7TUcDbc7N+KPRF/H6nWU4WoyprhMJ8v+wKzGM/7Fgc9FQHxDmCDOo8qlhOHqnBQlERHzJz3TNo8MtmFEy2WK28rFhOFEvCjsCv9i23EdRq9amDzWTitXE4a7V7fnWn7+adrphk/vdfuSZ77qAwNhuP3hDiWfsFuY1irZ8/JeB4KCi+psQRhuvOjJOCw+WghrM84kFxTMF9P9hGB50zhqLt2cphQXwVgeXjG2FMVl9jom8PaH391lpfVw0TvljtHknXbWZpS9IuPT0c8Xp6iu+INTNs49K++oLulI8ePfF1Hf0xy8bJQrN+99DmkfZUuFMjV2bf1Uka1V2/c+6UJ2s6D/SJ196VJOZ8FOrXUNMEtHIVOa5WrtvMfyVnrGX/l/y1vLP5QK1TLMajL+tngv95NMbS2uZTgI1YdDE8i+c7Pp/AX1ng/Tqi5qhd5mIdsaxWql6hl+yu4yVyv0NgM5ifOhWql6hrHc2YSGd26DuTnDDznVeIa33zCkgSENDPUAQxoY0sBQDzCkgSENDPUAQxoY0sBQDzCkgSENDPUAQxoY0sBQDzCkgSENDPUAQxoY0sBQDzCkgSENDPUAQxoY0sBQDzCkgSENDPUAQxoY0sBQDzCk6b7hUf53uH/8+coqbTJ0xPXkgEixUKsMV67nBaqZhFpl6DgjxS7qtM6wBjDUAwybBIZ6gGGTwFAPMGwSGOoBhk0CQz3AsElgqAcYNgkM9QDDJrFkWCu3ST0sGcpvILhKoq/a2MneskhPwTOS2mgr6wpNVFVFJjMLxiaqcq1kUcpSG/kGcoxt5ua6S5W1HP6qiaLqMLSUzWxwduXo0D/DpZlMPfPn7KQJ28Redz1ZVkHFvGlNkB0Oo5QZsgbZUZA2MkM6X2kWZ0+r4sqXldg5RmiVjkSXbfWtxevsZCw7GVqLLLsR+9bjONr7WQ12suwmk02eypjzyfBwHDXJ8RDv/PxoZNdavutdkYxbcMb8JmGsSPUeMOpUHkN8lQm9tSHsHhx4Cn/IGv82/GIxglf6Y6bTUYSxXb8ra9d7eTpCbQLBz9u/cWLgaDllHmsYfx7sv//IER5XFrNjr1mOf8gOAAAAAAAAAAAAAAAAAAAAAADAH+E/5TxWlku9gO0AAAAASUVORK5CYII=">-->
@@ -174,7 +174,7 @@
         });
       }
       
-      // Install for Android, Chrome, and Edge
+      // Install for Chromium - Android, Chrome, and Edge
       let deferredInstallPrompt = null;
       const safari = document.getElementById('safari');
       const webApp = document.getElementById('web-app');
@@ -204,7 +204,7 @@
 
       // Install for IOS
       // Detects device
-      const chrome = document.getElementById('chrome');
+      const chromium = document.getElementById('chromium');
       const isIos = () => {
         const userAgent = window.navigator.userAgent.toLowerCase();
         return /iphone|ipad|ipod/.test( userAgent );
@@ -214,7 +214,7 @@
       // Checks if app should display install instructions
       if (isIos() && !isInStandaloneMode()) {
         webApp.removeAttribute('hidden');
-        chrome.setAttribute('hidden', true);
+        chromium.setAttribute('hidden', true);
         installButton.setAttribute('hidden', true);
       }
       
