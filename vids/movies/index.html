@@ -140,20 +140,45 @@
         margin-top: 30px;
         padding: 0 20px
       }
+
+      .gallery{margin:10px}
+      .gallery li{display:inline;list-style-type:none;padding:0 6px 10px 0}
+      .gallery li:last-child{padding-right:0}
+      .gallery-image{padding-bottom:7px;width:calc(50% - 6px)}
+      @media screen and (min-width:500px){
+        .gallery{width:480px;margin:20px auto;padding-top:10px}
+        .gallery-image{width:calc(33.33333% - 6px)}
+      }
+      @media screen and (min-width:970px){
+        .gallery{width:100%}
+        .gallery-image{width:220px}
+      }
     </style>
   </head>
   <body>
     <main>
       <h1>Movies</h1>
-      <p><a href="endless-summer-two/"><img src="../images/movies/endless-summer-two.jpg"><br>
-        Endless Summer 2</a></p>
+      <ul class="gallery">
+        <li>
+          <a href="endless-summer-two/"><img alt="Endless Summer 2" class="gallery-image" src="../images/movies/endless-summer-two.jpg"></a>
+        </li>
+        <li>
+          <a href="endless-summer-two/"><img alt="Endless Summer 2" class="gallery-image" src="../images/movies/endless-summer-two.jpg"></a>
+        </li>
+        <li>
+          <a href="endless-summer-two/"><img alt="Endless Summer 2" class="gallery-image" src="../images/movies/endless-summer-two.jpg"></a>
+        </li>
+        <li>
+          <a href="endless-summer-two/"><img alt="Endless Summer 2" class="gallery-image" src="../images/movies/endless-summer-two.jpg"></a>
+        </li>
+      </ul>
     </main>
     <nav>
       <p>
         <a href="..">Home</a> &nbsp;|&nbsp;
         <a href="../channels/">Channels</a> &nbsp;|&nbsp;
-        <a href="../shows/">Shows</a> &nbsp;|&nbsp;
-        Movies
+        Movies &nbsp;|&nbsp;
+        <a href="../shows/">Shows</a>
       </p>
     </nav>
   </body>
