@@ -145,8 +145,11 @@
       .gallery li{display:inline;list-style-type:none;padding:0 6px 10px 0}
       .gallery li:last-child{padding-right:0}
       .gallery-image{padding-bottom:7px;width:calc(50% - 6px)}
+      @media screen and (min-width:376px){
+        .gallery-image{width:calc(33% - 6px)}
+      }
       @media screen and (min-width:500px){
-        .gallery-image{width:calc(33.3333% - 6px)}
+        .gallery-image{width:calc(16% - 6px)}
       }
     </style>
   </head>
