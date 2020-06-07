@@ -16,10 +16,8 @@
         max-width: 700px;
         padding: 0 10px 70px;
         position: relative;
+        text-align: center;
         z-index: 1
-      }
-      h1, p {
-        text-align: center
       }
       a, a:visited {
         color: #fff
@@ -69,10 +67,10 @@
       input[type="radio"]:checked + label {
         text-decoration: underline
       }
-      #filter label {
+      fieldset label {
         cursor: pointer
       }
-      #filter label:last-child {
+      fieldset label:last-child {
         margin-left: 20px
       }
       table {
@@ -90,24 +88,22 @@
       td a {
         text-decoration: none
       }
-      .favorite, .channel {
-        text-align: center;
+      .favorite, .channel-number {
         width: 30px
       }
-      .search-item {
-        padding: 5px 20px
+      .channel-name {
+        padding: 5px 20px;
+        text-align: left
       }
       nav {
         background-color: #303030;
         bottom: 0;
+        margin: 0 auto;
+        padding: 10px 0;
         position: fixed;
         text-align: center;
         width: 100%;
         z-index: 1
-      }
-      nav p {
-        margin: 10px auto;
-        max-width: 700px
       }
       nav a:hover {
         color: red
@@ -124,9 +120,6 @@
         top: 0;
         width: 100%
       }
-      #overlay {
-        padding-bottom: 0
-      }
       #overlay-title {
         font-size: 1.5em;
         margin: .83em 0
@@ -137,7 +130,7 @@
         color: #fff;
         font: 20px serif;
         line-height: 2.5;
-        margin-top: 30px;
+        margin: 50px 0 20px;
         padding: 0 20px
       }
 
@@ -149,7 +142,10 @@
         .gallery-image{width:calc(33% - 6px)}
       }
       @media screen and (min-width:500px){
-        .gallery-image{width:calc(16% - 6px)}
+        .gallery-image{width:calc(24.68% - 6px)}
+      }
+      @media screen and (min-width:699px){
+        .gallery-image{width:calc(19% - 6px)}
       }
     </style>
   </head>
