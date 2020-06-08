@@ -137,44 +137,60 @@
         padding: 0 20px
       }
 
-ul {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  padding: 0;
-  margin: 5px;
-  list-style: none;
-}
-
-li {
-  padding: 5px;
-  width: 200px;
-  height: 300px;
-  margin: 5px;
-}
+        .gallery {
+          clear: both;
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0.5rem;
+          padding: 1rem 0 2rem;
+        }
+        .gallery-item {
+          flex: 1 0 12rem;
+          margin: 0.6rem;
+          position: relative
+        }
+        .gallery-image {
+          display: block;
+          height: 100%;
+          object-fit: cover;
+          width: 100%
+        }
+        @supports (display: grid) {
+          .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+            grid-gap: 1rem;
+            margin: 0 1rem;
+            width: auto
+          }
+          .gallery-item {
+            margin: 0;
+            width: auto
+          }
+        }
 
     </style>
   </head>
   <body>
     <main>
       <h1>Movies</h1>
-      <ul>
-        <li>
-          <a href="endless-summer-two/"><img alt="Endless Summer 2" src="../images/movies/endless-summer-two.jpg"></a>
+      <div class="gallery-item">
+        <li class="gallery">
+          <a href="endless-summer-two/"><img alt="Endless Summer 2" class="gallery-image" src="../images/movies/endless-summer-two.jpg"></a>
         </li>
-        <li>
-          <a href="endless-summer-two/"><img alt="Endless Summer 2" src="../images/movies/endless-summer-two.jpg"></a>
+        <li class="gallery-item">
+          <a href="endless-summer-two/"><img alt="Endless Summer 2" class="gallery-image" src="../images/movies/endless-summer-two.jpg"></a>
         </li>
-        <li>
-          <a href="endless-summer-two/"><img alt="Endless Summer 2" src="../images/movies/endless-summer-two.jpg"></a>
+        <li class="gallery-item">
+          <a href="endless-summer-two/"><img alt="Endless Summer 2" class="gallery-image" src="../images/movies/endless-summer-two.jpg"></a>
         </li>
-        <li>
-          <a href="endless-summer-two/"><img alt="Endless Summer 2" src="../images/movies/endless-summer-two.jpg"></a>
+        <li class="gallery-item">
+          <a href="endless-summer-two/"><img alt="Endless Summer 2" class="gallery-image" src="../images/movies/endless-summer-two.jpg"></a>
         </li>
-        <li>
-          <a href="endless-summer-two/"><img alt="Endless Summer 2" src="../images/movies/endless-summer-two.jpg"></a>
+        <li class="gallery-item">
+          <a href="endless-summer-two/"><img alt="Endless Summer 2" class="gallery-image" src="../images/movies/endless-summer-two.jpg"></a>
         </li>
-      </ul>
+      </div>
     </main>
     <nav>
       <a href="..">Home</a> &nbsp;|&nbsp;
