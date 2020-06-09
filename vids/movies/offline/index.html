@@ -212,10 +212,12 @@
       } // end if service worker exists
 
       // If cache exists...
-      const cache = caches.open('offline-/vids/movies/offline/');
+      async function {
+      const cache = await caches.open('offline-/vids/movies/offline/');
       if (cache.match('offline-/vids/movies/offline/')) {
         cacheButton.checked = true;
         document.querySelector('label').innerText = 'Saved for offline';
+      }
       }
     </script>
   </body>
