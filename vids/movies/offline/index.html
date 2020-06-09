@@ -130,7 +130,7 @@
         font-size: 1.5em;
         margin: .83em 0
       }
-      #close {
+      #save {
         background-color: #000;
         border: 2px solid #fff;
         color: #fff;
@@ -142,7 +142,6 @@
       video {
         border: 1px solid #fff;
       }
-
     </style>
   </head>
   <body>
@@ -152,9 +151,26 @@
         <source src="../../videos/offline.mp4" type="video/mp4">
         <p>It looks like your browser doesn't support HTML5 video. Here is a <a href="../../videos/offline.mp4">link to the video</a>.</p>
       </video>
+      <button id="save">Save Offline</button>
     </main>
     <script>
-      //
+      // Request if the movie is in the cache
+      const request = new Request('movie-offline');
+      // Retrieve movie from the cache if it is in the cache, log the request and response
+      const response = await cache.match(request);
+      console.log(request, response);
+      // Save button
+      const saveButton = document.getElementById('save');
+      // saveButton event listener
+      saveButton.addEventListener('click', function(event) {
+        // Save the video in cache: https://web.dev/cache-api-quick-guide/
+        // Check if cache is available
+        const cacheAvailable = 'caches' in self;
+        // Create and open the cache for the movie
+        const cache = await caches.open('movie-offline');
+        // Add movie to the cache
+        cache.add('../../videos/offline.mp4');
+      }, false); // end saveButton listener
     </script>
   </body>
 </html>
