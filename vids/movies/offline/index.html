@@ -141,7 +141,8 @@
       }
       video {
         border: 1px solid #fff;
-        display: block
+        display: block;
+        margin: 0 auto;
       }
     </style>
   </head>
@@ -155,7 +156,7 @@
       <button id="save">Save Offline</button>
     </main>
     <script>
-      const cache;
+      let cache = '';
       // Request if the movie is in the cache
       const request = new Request('movie-offline');
       // Retrieve movie from the cache if it is in the cache, log the request and response
