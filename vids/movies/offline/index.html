@@ -134,6 +134,7 @@
         background-color: #000;
         border: 2px solid #fff;
         color: #fff;
+        display: block;
         font: 20px serif;
         line-height: 2.5;
         margin: 50px 0 20px;
@@ -154,8 +155,10 @@
         <source src="../../videos/offline.mp4" type="video/mp4">
         <p>It looks like your browser doesn't support HTML5 video. Here is a <a href="../../videos/offline.mp4">link to the movie</a>.</p>
       </video>
-      <input type="checkbox" id="save" name="save">
-      <label for="save">Save for offline</label>
+      <p>
+        <input type="checkbox" id="save" name="save">
+        <label for="save">Save for offline</label>
+      </p>
       <button id="close">Close Movie</button>
     </main>
     <script>
@@ -187,6 +190,7 @@
             if (this.checked) {
               // Build an array of the page-specific resources.
               const pageResources = [currentPath, movie()];
+              console.log(pageResources);
               // Open the unique cache for this URL
               caches.open('offline-' + currentPath).then(function(cache) {
                 let updateCache = cache.addAll(pageResources);
