@@ -190,11 +190,13 @@
               // Open the unique cache for this URL
               caches.open('offline-' + currentPath).then(function(cache) {
                 let updateCache = cache.addAll(pageResources);
-                // Update UI to indicate success
-                // Or catch any errors if it doesn't succeed
                 updateCache.then(function() {
+                  // Update UI to indicate success
+                  document.querySelector('label').innerText = 'Saved for offline';
                   console.log('Movie is now available offline.');
                 }).catch(function (error) {
+                  // Catch any errors if cache doesn't succeed
+                  cacheButton.checked = false;
                   console.log('Movie could not be saved offline.');
                 });
               });
