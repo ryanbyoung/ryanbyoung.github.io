@@ -141,6 +141,7 @@
       }
       video {
         border: 1px solid #fff;
+        display: block
       }
     </style>
   </head>
@@ -154,6 +155,7 @@
       <button id="save">Save Offline</button>
     </main>
     <script>
+      const cache;
       // Request if the movie is in the cache
       const request = new Request('movie-offline');
       // Retrieve movie from the cache if it is in the cache, log the request and response
@@ -167,7 +169,7 @@
         // Check if cache is available
         const cacheAvailable = 'caches' in self;
         // Create and open the cache for the movie
-        const cache = await caches.open('movie-offline');
+        cache = await caches.open('movie-offline');
         // Add movie to the cache
         cache.add('../../videos/offline.mp4');
       }, false); // end saveButton listener
