@@ -142,7 +142,6 @@
       }
       video {
         border: 2px solid #fff;
-        display: block;
         margin: 0 auto;
         width: 100%
       }
@@ -178,8 +177,9 @@
         const cacheButton = document.querySelector('#save');
         const movie = function() {
           if (document.querySelector('video') !== null) {
-            return (document.querySelector('video').src);
+            return (document.querySelector('video source').src);
           } else {
+            console.log('Video source can not be found');
             return;
           }
         };
