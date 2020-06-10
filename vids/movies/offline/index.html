@@ -191,7 +191,6 @@
             if (this.checked) {
               // Build an array of the page-specific resources.
               const pageResources = [currentPath, movie()];
-              console.log(pageResources);
               // Open the unique cache for this URL
               caches.open('offline-' + currentPath).then(function(cache) {
                 let updateCache = cache.addAll(pageResources);
@@ -206,7 +205,8 @@
                 });
               });
             } else {
-              // Checkbox is not checked..
+              cache.delete(movie(), {ignoreVary: true, ignoreSearch: true});
+              console.log('Movie removed from cache.');
             }
           });
         } // end if cacheButton
@@ -214,13 +214,16 @@
         // If cache exists...
             caches.open('offline-' + currentPath).then(function(cache) {
               console.log('cache opened', cache);
-              /*
               return cache.match('offline-' + currentPath).then(function(response) {
                 if (response) {
                   console.log('Found response in cache: ', response);
                   return response;
+                } else {
+                  console.log('fuck');
                 }
-              }).catch(function(error) {
+              });
+              /*
+              .catch(function(error) {
                 console.error('Error in fetch handler: ', error);
                 throw error;
               });
