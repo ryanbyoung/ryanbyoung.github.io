@@ -201,7 +201,7 @@
                 }).catch(function (error) {
                   // Catch any errors if cache doesn't succeed
                   cacheButton.checked = false;
-                  console.log('Movie could not be saved offline.');
+                  console.log('Movie could not be saved offline.', error);
                 });
               });
             } else {
