@@ -215,7 +215,7 @@
         // If cache exists...
         async function findMovie() {
           const cache = await caches.open('offline-' + currentPath);
-          const response = await cache.match('offline-' + currentPath);
+          const response = await cache.match(movie());
           console.log(response);
         }
         findMovie();
