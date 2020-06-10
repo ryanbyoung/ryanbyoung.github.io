@@ -213,16 +213,14 @@
         } // end if cacheButton
       
         // If cache exists...
-        async function findMovie() {
-          const response = await cache.match(movie());
-          if (response) {
+        caches.has('offline-' + currentPath).then(function(cacheExists) {
+          if (cacheExists) {
             cacheButton.checked = true;
             document.querySelector('label').innerText = 'Save for offline';
           } else {
-            console.log('Movie not found in cache.'); 
+            console.log('Cache does not exist.'); 
           }
-        }
-        findMovie();
+        });
       } // end if service worker exists
     </script>
   </body>
