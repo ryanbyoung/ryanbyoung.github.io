@@ -216,7 +216,12 @@
         async function findMovie() {
           const cache = await caches.open('offline-' + currentPath);
           const response = await cache.match(movie());
-          console.log(response);
+          if (response) {
+            cacheButton.checked = true;
+            document.querySelector('label').innerText = 'Save for offline';
+          } else {
+            console.log('Movie not found in cache.'); 
+          }
         }
         findMovie();
       } // end if service worker exists
