@@ -205,7 +205,7 @@
                 });
               });
             } else {
-              cache.delete(movie(), {ignoreVary: true, ignoreSearch: true});
+              caches.delete('offline-' + currentPath, {ignoreVary: true, ignoreSearch: true});
               console.log('Movie removed from cache.');
               document.querySelector('label').innerText = 'Save for offline';
             }
@@ -216,7 +216,7 @@
         caches.has('offline-' + currentPath).then(function(cacheExists) {
           if (cacheExists) {
             cacheButton.checked = true;
-            document.querySelector('label').innerText = 'Save for offline';
+            document.querySelector('label').innerText = 'Saved';
           } else {
             console.log('Cache does not exist.'); 
           }
