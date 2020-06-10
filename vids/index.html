@@ -211,16 +211,21 @@
       }
 
       // Install for IOS
+      // Detects Safari
+      const isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+        navigator.userAgent &&
+        navigator.userAgent.indexOf('CriOS') == -1 &&
+        navigator.userAgent.indexOf('FxiOS') == -1;
       // Detects device
       const chromium = document.getElementById('chromium');
       const isIos = () => {
         const userAgent = window.navigator.userAgent.toLowerCase();
-        return /iphone|ipad|ipod/.test( userAgent );
+        return /iphone|ipad|ipod/.test(userAgent);
       }
       // Detects if device is in standalone mode
       const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
       // Checks if app should display install instructions
-      if (isIos() && !isInStandaloneMode()) {
+      if (isSafari && isIos() && !isInStandaloneMode()) {
         webApp.removeAttribute('hidden');
         chromium.setAttribute('hidden', true);
         installButton.setAttribute('hidden', true);
