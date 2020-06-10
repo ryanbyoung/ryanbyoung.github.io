@@ -184,7 +184,8 @@
           }
         };
 
-        // Event listener
+        // Event listeners
+        // cacheButton listener
         if (cacheButton) {
           cacheButton.addEventListener('change', function(event) {
             if (this.checked) {
@@ -209,16 +210,24 @@
             }
           });
         } // end if cacheButton
+      
+        // If cache exists...
+        self.addEventListener('fetch', function(event) {
+          console.log('Handling fetch event for', event.request.url);
+          event.respondWith(
+            caches.open('offline-' + currentPath).then(function(cache) {
+              return cache.match(event.request).then(function(response) {
+                if (response) {
+                  // If there is an entry in the cache for event.request, then response will be defined
+                  // and we can just return it. Note that in this example, only font resources are cached.
+                  console.log('Found response in cache: ', response);
+                  return response;
+                }
+              }
+            }
+          );
+        }); // end fetch
       } // end if service worker exists
-
-      // If cache exists...
-      async function {
-      const cache = await caches.open('offline-/vids/movies/offline/');
-      if (cache.match('offline-/vids/movies/offline/')) {
-        cacheButton.checked = true;
-        document.querySelector('label').innerText = 'Saved for offline';
-      }
-      }
     </script>
   </body>
 </html>
