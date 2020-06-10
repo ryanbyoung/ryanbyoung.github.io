@@ -213,7 +213,7 @@
       
         // If cache exists...
             caches.open('offline-' + currentPath).then(function(cache) {
-              return cache.match(event.request).then(function(response) {
+              return cache.match('offline-' + currentPath).then(function(response) {
                 if (response) {
                   // If there is an entry in the cache for event.request, then response will be defined
                   // and we can just return it. Note that in this example, only font resources are cached.
