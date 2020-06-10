@@ -212,17 +212,11 @@
         } // end if cacheButton
       
         // If cache exists...
-            caches.open('offline-' + currentPath).then(function(cache) {
-              console.log('cache opened', cache);
-              const response = await cache.match('offline-' + currentPath);
-              console.log(response);
-              /*
-              .catch(function(error) {
-                console.error('Error in fetch handler: ', error);
-                throw error;
-              });
-              */
-            });
+        async function findMovie() {
+          const response = await cache.match(movie());
+          console.log(response);
+        }
+        findMovie;
       } // end if service worker exists
     </script>
   </body>
