@@ -213,20 +213,18 @@
       
         // If cache exists...
             caches.open('offline-' + currentPath).then(function(cache) {
+              console.log('cache opened', cache);
+              /*
               return cache.match('offline-' + currentPath).then(function(response) {
                 if (response) {
-                  // If there is an entry in the cache for event.request, then response will be defined
-                  // and we can just return it. Note that in this example, only font resources are cached.
                   console.log('Found response in cache: ', response);
                   return response;
                 }
               }).catch(function(error) {
-                // This catch() will handle exceptions that arise from the match() operation.
-                // Note that a HTTP error response (e.g. 404) will NOT trigger an exception.
-                // It will return a normal response object that has the appropriate error code set.
                 console.error('Error in fetch handler: ', error);
                 throw error;
               });
+              */
             });
       } // end if service worker exists
     </script>
