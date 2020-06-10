@@ -196,7 +196,7 @@
                 let updateCache = cache.addAll(pageResources);
                 updateCache.then(function() {
                   // Update UI to indicate success
-                  document.querySelector('label').innerText = 'Saved for offline';
+                  document.querySelector('label').innerText = 'Saved';
                   console.log('Movie is now available offline.');
                 }).catch(function (error) {
                   // Catch any errors if cache doesn't succeed
@@ -207,12 +207,14 @@
             } else {
               cache.delete(movie(), {ignoreVary: true, ignoreSearch: true});
               console.log('Movie removed from cache.');
+              document.querySelector('label').innerText = 'Save for offline';
             }
           });
         } // end if cacheButton
       
         // If cache exists...
         async function findMovie() {
+          const cache = await caches.open('offline-' + currentPath);
           const response = await cache.match('offline-' + currentPath);
           console.log(response);
         }
