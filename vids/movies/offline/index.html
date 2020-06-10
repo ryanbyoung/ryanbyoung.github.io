@@ -212,9 +212,6 @@
         } // end if cacheButton
       
         // If cache exists...
-        self.addEventListener('fetch', function(event) {
-          console.log('Handling fetch event for', event.request.url);
-          event.respondWith(
             caches.open('offline-' + currentPath).then(function(cache) {
               return cache.match(event.request).then(function(response) {
                 if (response) {
@@ -224,9 +221,7 @@
                   return response;
                 }
               });
-            })
-          );
-        }); // end fetch
+            });
       } // end if service worker exists
     </script>
   </body>
