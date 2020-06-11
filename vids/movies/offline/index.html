@@ -212,8 +212,16 @@
           });
         } // end if cacheButton
 
-        // Fetch event listener
-
+        // If cache exists...
+        caches.has('offline-' + currentPath).then(function(cacheExists) {
+          if (cacheExists) {
+            cacheButton.checked = true;
+            document.querySelector('label').innerText = 'Saved';
+          } else {
+            console.log('Cache does not exist.'); 
+          }
+        });
+      } // end if service worker exists
 //This code is based on  https://googlechrome.github.io/samples/service-worker/prefetch-video/ 
 self.addEventListener('fetch', function(event) {
   
@@ -302,16 +310,6 @@ self.addEventListener('fetch', function(event) {
   }
 });
 
-        // If cache exists...
-        caches.has('offline-' + currentPath).then(function(cacheExists) {
-          if (cacheExists) {
-            cacheButton.checked = true;
-            document.querySelector('label').innerText = 'Saved';
-          } else {
-            console.log('Cache does not exist.'); 
-          }
-        });
-      } // end if service worker exists
     </script>
   </body>
 </html>
