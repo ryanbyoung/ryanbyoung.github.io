@@ -74,8 +74,9 @@ self.addEventListener('activate', function(event) {
     );
 });
 
+//This code is based on  https://googlechrome.github.io/samples/service-worker/prefetch-video/ 
 self.addEventListener('fetch', function(event) {
-
+  
   headersLog = [];
   for (var pair of event.request.headers.entries()) {
     console.log(pair[0]+ ': '+ pair[1]);
