@@ -188,10 +188,14 @@
       const webApp = document.getElementById('web-app');
       const installButton = document.getElementById('install');
       installButton.addEventListener('click', installPWA);
+      // On the beforeinstallprompt event, which normally happens automatically when the browser detects that a web app is
+      // available to install, call the saveBeforeInstallPromptEvent function
       window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
       /**
        * Event handler for beforeinstallprompt event.
-       *   Saves the event & shows install button.
+       *   Saves the beforeinstallprompt event for later & displays the web app section of the page including the 
+       *   install button. It also hides the Safari section of the web app div since Safari doesn't have the 
+       *   beforeinstallprompt event.
        *
        * @param {Event} evt
        */
@@ -201,7 +205,8 @@
         safari.setAttribute('hidden', true);
       }
       /**
-       * Event handler for butInstall - Does the PWA installation.
+       * Event handler for installButton.
+       *   When the install button is clicked, display the saved install prompt and hide the web app section of the page.
        *
        * @param {Event} evt
        */
