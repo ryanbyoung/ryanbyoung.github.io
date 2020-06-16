@@ -256,9 +256,12 @@
       const iosOfflineCheckbox = document.querySelector('#save');
       iosOfflineCheckbox.addEventListener('change', cache, false);
       function cache(event) {
-        if (iosOfflineCheckbox.checked || event.target.tagName === 'button') {
-          console.log('here');
+        if (iosOfflineCheckbox.checked || event.target.tagName === 'BUTTON') {
+          console.log('here'); //cache
+          document.querySelector('label').innerText = 'App saved for offline use.';
         } else {
+          //delete cache: caches.delete('offline-' + currentPath, {ignoreVary: true, ignoreSearch: true});
+          document.querySelector('label').innerText = 'Save app for offline use.';
         }
       }
       
