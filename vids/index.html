@@ -256,7 +256,7 @@
       const iosOfflineCheckbox = document.querySelector('#save');
       iosOfflineCheckbox.addEventListener('change', cache, false);
       function cache(event) {
-        if (iosOfflineCheckbox.checked || event.target == installButton) {
+        if (iosOfflineCheckbox.checked || event.target.nodeName == "BUTTON") {
           console.log('here'); //cache
           document.querySelector('label').innerText = 'App saved for offline use.';
         } else {
