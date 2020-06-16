@@ -163,11 +163,11 @@
             <path fill-rule="evenodd" d="M8 11.5a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-1 0v9a.5.5 0 0 0 .5.5z"/>
             <path fill-rule="evenodd" d="M2.5 14A1.5 1.5 0 0 0 4 15.5h8a1.5 1.5 0 0 0 1.5-1.5V7A1.5 1.5 0 0 0 12 5.5h-1.5a.5.5 0 0 0 0 1H12a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V7a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 0 0-1H4A1.5 1.5 0 0 0 2.5 7v7z"/>
           </svg>
-          at the bottom of your screen.<br>Then choose Add to Home Screen.</p>
-          <p>
-            <input type="checkbox" id="save" name="save">
-            <label for="save">Save app for offline use.</label>
-          </p>
+          at the bottom of your screen.<br>
+          Then choose Add to Home Screen.<br><br>
+          <input type="checkbox" id="save" name="save">
+          <label for="save">Save app for offline use.</label>
+        </p>
     </main>
     <nav>
       Home &nbsp;|&nbsp;
@@ -178,6 +178,7 @@
     <script>
 
       //Service Worker
+      /*
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js')
         .then((reg) => {
@@ -186,6 +187,7 @@
           console.log('Registration failed with ' + error);
         });
       }
+      */
       
       // Install for Chromium - Android, Chrome, and Edge
       // Variables
@@ -220,7 +222,6 @@
        * @param {Event} event
        */
       function installPWA(event) {
-        console.log(event);
         webApp.setAttribute('hidden', true);
         deferredInstallPrompt.prompt();
         deferredInstallPrompt.userChoice.then((choiceResult) => {
@@ -257,7 +258,8 @@
       const iosOfflineCheckbox = document.querySelector('#save');
       iosOfflineCheckbox.addEventListener('change', cache, false);
       function cache(event) {
-        if (iosOfflineCheckbox.checked) {
+        if (iosOfflineCheckbox.checked || event.target === 'button#install') {
+          console.log('here');
         } else {
         }
       }
