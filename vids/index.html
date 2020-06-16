@@ -156,13 +156,18 @@
         <h2>Web App</h2>
         <p id="chromium">Install this on your device by clicking the button and following the prompts.</p>
         <button id="install">Install</button>
-        <p id="safari">Install this on your device by tapping the share icon 
+        <p id="safari">
+          Add this on your home screen by tapping this icon: 
           <svg class="bi bi-box-arrow-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M4.646 4.354a.5.5 0 0 0 .708 0L8 1.707l2.646 2.647a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708z"/>
             <path fill-rule="evenodd" d="M8 11.5a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-1 0v9a.5.5 0 0 0 .5.5z"/>
             <path fill-rule="evenodd" d="M2.5 14A1.5 1.5 0 0 0 4 15.5h8a1.5 1.5 0 0 0 1.5-1.5V7A1.5 1.5 0 0 0 12 5.5h-1.5a.5.5 0 0 0 0 1H12a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V7a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 0 0-1H4A1.5 1.5 0 0 0 2.5 7v7z"/>
           </svg>
-          <br>Then choose Add to Home Screen.</p>
+          at the bottom of your screen.<br>Then choose Add to Home Screen.</p>
+          <p>
+            <input type="checkbox" id="save" name="save">
+            <label for="save">Save app for offline use.</label>
+          </p>
     </main>
     <nav>
       Home &nbsp;|&nbsp;
@@ -183,13 +188,15 @@
       }
       
       // Install for Chromium - Android, Chrome, and Edge
+      // Variables
       let deferredInstallPrompt = null;
+      const chromium = document.getElementById('chromium');
       const safari = document.getElementById('safari');
       const webApp = document.getElementById('web-app');
       const installButton = document.getElementById('install');
       installButton.addEventListener('click', installPWA);
       // On the beforeinstallprompt event, which normally happens automatically when the browser detects that a web app is
-      // available to install, call the saveBeforeInstallPromptEvent function
+      // available to install, call the saveBeforeInstallPromptEvent function which saves the event for later.
       window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
       /**
        * Event handler for beforeinstallprompt event.
@@ -206,34 +213,53 @@
       }
       /**
        * Event handler for installButton.
-       *   When the install button is clicked, display the saved install prompt and hide the web app section of the page.
+       *   When the install button is clicked, hide the web app section of the page, display the saved install prompt,
+       *   and wait for the user's response. If they accept the install, call the cache function and the browser will
+       *   install the app.
        *
-       * @param {Event} evt
+       * @param {Event} event
        */
-      function installPWA(evt) {
-        deferredInstallPrompt.prompt();
+      function installPWA(event) {
+        console.log(event);
         webApp.setAttribute('hidden', true);
-      }
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            cache(event);
+          } else {
+            webApp.setAttribute('hidden', false);
+          } // end if
+        }); // end user choice
+      } // end installPWA function
 
-      // Install for IOS
-      // Detects Safari
+      // Save to home screen functionality for IOS
+      // Variable to detect Safari
       const isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
         navigator.userAgent &&
         navigator.userAgent.indexOf('CriOS') == -1 &&
         navigator.userAgent.indexOf('FxiOS') == -1;
-      // Detects device
-      const chromium = document.getElementById('chromium');
+      // Variable to detect iOS
       const isIos = () => {
         const userAgent = window.navigator.userAgent.toLowerCase();
         return /iphone|ipad|ipod/.test(userAgent);
       }
       // Detects if device is in standalone mode
       const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
-      // Checks if app should display install instructions
+      // If device is iOS and using Safari and is NOT added to the home screen, show web app section of the page.
+      // Hide Chromium section of the page. Hide the (chromium) install button.
       if (isSafari && isIos() && !isInStandaloneMode()) {
         webApp.removeAttribute('hidden');
         chromium.setAttribute('hidden', true);
         installButton.setAttribute('hidden', true);
+      }
+      
+      // Cache
+      const iosOfflineCheckbox = document.querySelector('#save');
+      iosOfflineCheckbox.addEventListener('change', cache, false);
+      function cache(event) {
+        if (iosOfflineCheckbox.checked) {
+        } else {
+        }
       }
       
       /* Offline and online event listeners
