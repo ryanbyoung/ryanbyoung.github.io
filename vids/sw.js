@@ -30,6 +30,7 @@ var CURRENT_CACHES = {
 };
 
 self.addEventListener('install', function(event) {
+  console.log('install event listener from service worker');
   var urlsToPrefetch = [
     '/vids/',
     '/vids/index.html',
