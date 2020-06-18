@@ -181,12 +181,12 @@
             });
 
 
-          // For movie
-          self.addEventListener('fetch', function(event) {
+            // For movie
+            let request = new Request('../../videos/offline.mp4')
             caches.open('movie').then(function(cache) {
               return cache.match(movie);
             }).then(function(ab) {
-              let rangeHeader=event.request.headers.get('range');
+              let rangeHeader=request.headers.get('range');
               let rangeMatch =rangeHeader.match(/^bytes\=(\d+)\-(\d+)?/)
               let pos =Number(rangeMatch[1]);
               let pos2=rangeMatch[2];
@@ -218,7 +218,6 @@
               saveForOffline.checked = false;
               console.log('Movie could not be saved offline.', error);
             });
-          });
 
 
           } // end if service worker
