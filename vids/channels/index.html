@@ -292,7 +292,9 @@
        * If app is offline, hide main and overlay sections, show the offline section.
        *
        * If the current player index in local storage had a value other than none (there was an overlay being shown)
-       * so set the current player index to none. Also show the nav and update it so it works from the overlay.
+       * so set the current player index to none. Also show the nav. If the window location's current pathname is
+       * greater than 4 (actually more than two levels up, the user is on an overlay), so update links in the nav
+       * so it works from the overlay.
        *
        * @param {offline} event
        */
@@ -303,7 +305,10 @@
         if (localStorage.getItem('CurrentPlayerIndex') !== 'none') {
           localStorage.setItem('CurrentPlayerIndex', 'none');
           NAV.removeAttribute('hidden');
-          NAV.innerHTML = '<a href="../../">Home</a> &nbsp;|&nbsp; Channels &nbsp;|&nbsp; <a href="../../shows/">Shows</a> &nbsp;|&nbsp; <a href="../../movies/">Movies</a>';
+          let pathnameLevels = window.location.pathname.split('/');
+          if (pathnameLevels.length > 4) {
+            NAV.innerHTML = '<a href="../../">Home</a> &nbsp;|&nbsp; Channels &nbsp;|&nbsp; <a href="../../shows/">Shows</a> &nbsp;|&nbsp; <a href="../../movies/">Movies</a>';
+          }
         }
       }, false);
 
