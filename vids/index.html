@@ -256,6 +256,19 @@
       // Cache functionality
       const iosOfflineCheckbox = document.querySelector('#save');
       const iosOfflineLabel = document.querySelector('label');
+      const CACHE_VERSION = 1;
+      const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
+      let urlsToCache = [
+        '/favicon.ico',
+        '/vids/',
+        '/vids/index.html',
+        '/vids/channels/',
+        '/vids/channels/index.html',
+        '/vids/channels/dane-reynolds/',
+        '/vids/channels/dane-reynolds/index.html',
+        '/vids/movies/offline/',
+        '/vids/movies/offline/index.html'
+      ];
       iosOfflineCheckbox.addEventListener('change', function(event) {
         if (iosOfflineCheckbox.checked) {
           cacheApp();
@@ -267,19 +280,6 @@
       }, false);
       // cacheApp function called by iosOfflineCheckbox event and install button event
       function cacheApp() {
-        const CACHE_VERSION = 1;
-        const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
-        let urlsToCache = [
-          '/favicon.ico',
-          '/vids/',
-          '/vids/index.html',
-          '/vids/channels/',
-          '/vids/channels/index.html',
-          '/vids/channels/dane-reynolds/',
-          '/vids/channels/dane-reynolds/index.html',
-          '/vids/movies/offline/',
-          '/vids/movies/offline/index.html'
-        ];
         caches.open(CURRENT_CACHE).then(function(cache) {
           let updateCache = cache.addAll(urlsToCache);
           updateCache.then(function() {
@@ -288,7 +288,7 @@
             console.log('Could not populate cache: ' + error);
           });
         });
-      }
+      } // end cacheApp function
       // If cache exists...
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
         if (cacheExists) {
