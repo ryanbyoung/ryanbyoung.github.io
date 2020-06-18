@@ -174,13 +174,9 @@
             navigator.serviceWorker.register('../../sw.js').then(function() {
               // Success
               console.log('Service worker registration successful');
-              // Update UI to indicate success
-              document.querySelector('label').innerText = 'Saved';
-              console.log('Movie is now available offline.');
             }).catch(function(error) {
               // Fail
-              cacheButton.checked = false;
-              console.log('Movie could not be saved offline.', error);
+              console.log('ServiceWorker registration failed: ', error);
             });
 
   // For movie
@@ -189,9 +185,12 @@
   caches.open('movie-' + version).then(function(cache) {
     let updateCache = cache.addAll(movie);
     updateCache.then(function() {
-      console.log('Article is now available offline.');
+      // Update UI to indicate success
+      document.querySelector('label').innerText = 'Saved';
+      console.log('Movie is now available offline.');
     }).catch(function (error) {
-      console.log('Article could not be saved offline.');
+      cacheButton.checked = false;
+      console.log('Movie could not be saved offline.', error);
     });
   });
 
