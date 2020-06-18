@@ -161,35 +161,34 @@
     </main>
     <script>
 
-        // cacheButton event listener
-          cacheButton.addEventListener('change', function(event) {
-            if (cacheButton.checked) {
+      // cacheButton event listener
+      cacheButton.addEventListener('change', function(event) {
+        if (cacheButton.checked) {
 
-      // If service worker exists...
-      if ('serviceWorker' in navigator) {
+          // If service worker exists...
+          if ('serviceWorker' in navigator) {
 
-        // Attempt to register it
-        navigator.serviceWorker.register('../../sw.js').then(function() {
-          // Success
-          console.log('Service worker registration successful');
-                  // Update UI to indicate success
-                  document.querySelector('label').innerText = 'Saved';
-                  console.log('Movie is now available offline.');
-        }).catch(function(error) {
-          // Fail
-                  cacheButton.checked = false;
-                  console.log('Movie could not be saved offline.', error);
-        });
+            // Attempt to register it
+            navigator.serviceWorker.register('../../sw.js').then(function() {
+              // Success
+              console.log('Service worker registration successful');
+              // Update UI to indicate success
+              document.querySelector('label').innerText = 'Saved';
+              console.log('Movie is now available offline.');
+            }).catch(function(error) {
+              // Fail
+              cacheButton.checked = false;
+              console.log('Movie could not be saved offline.', error);
+            });
+          }
 
-
-              });
- 
-            } else {
-              caches.delete('prefetch', {ignoreVary: true, ignoreSearch: true});
-              console.log('Movie removed from cache.');
-              document.querySelector('label').innerText = 'Save for offline';
-            }
-          });
+        } else {
+          caches.delete('prefetch', {ignoreVary: true, ignoreSearch: true});
+          console.log('Movie removed from cache.');
+          document.querySelector('label').innerText = 'Save for offline';
+        }
+          
+      });
 
         // If cache exists...
         caches.has('prefetch').then(function(cacheExists) {
@@ -200,7 +199,6 @@
             console.log('Cache does not exist.'); 
           }
         });
-      } // end if service worker exists
 
     </script>
   </body>
