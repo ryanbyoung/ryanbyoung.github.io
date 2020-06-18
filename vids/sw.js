@@ -26,7 +26,8 @@
 // updated service worker is activated.
 var CACHE_VERSION = 1;
 var CURRENT_CACHES = {
-  prefetch: 'prefetch-cache-v' + CACHE_VERSION
+  prefetch: 'prefetch-cache-v' + CACHE_VERSION,
+  movie: 'movie'
 };
 
 self.addEventListener('install', function(event) {
