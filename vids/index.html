@@ -177,27 +177,21 @@
     </nav>
     <script>
 
-      //Service Worker
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js')
-        .then((reg) => {
-          console.log('Registration succeeded. Scope is ' + reg.scope);
-        }).catch((error) => {
-          console.log('Registration failed with ' + error);
-        });
-      }
-      
-      // Install for Chromium - Android, Chrome, and Edge
+      // Install functionality for Chromium - Android, Chrome, and Edge
+
       // Variables
       let deferredInstallPrompt = null;
       const chromium = document.getElementById('chromium');
       const safari = document.getElementById('safari');
       const webApp = document.getElementById('web-app');
       const installButton = document.getElementById('install');
+
+      // Event listeners
       installButton.addEventListener('click', installPWA);
       // On the beforeinstallprompt event, which normally happens automatically when the browser detects that a web app is
       // available to install, call the saveBeforeInstallPromptEvent function which saves the event for later.
       window.addEventListener('beforeinstallprompt', saveBeforeInstallPromptEvent);
+
       /**
        * Event handler for beforeinstallprompt event.
        *   Saves the beforeinstallprompt event for later & displays the web app section of the page including the 
@@ -211,6 +205,7 @@
         webApp.removeAttribute('hidden');
         safari.setAttribute('hidden', true);
       }
+
       /**
        * Event handler for installButton.
        *   When the install button is clicked, hide the web app section of the page, display the saved install prompt,
@@ -231,19 +226,24 @@
         }); // end user choice
       } // end installPWA function
 
+
       // Save to home screen functionality for IOS
+
       // Variable to detect Safari
       const isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
         navigator.userAgent &&
         navigator.userAgent.indexOf('CriOS') == -1 &&
         navigator.userAgent.indexOf('FxiOS') == -1;
+
       // Variable to detect iOS
       const isIos = () => {
         const userAgent = window.navigator.userAgent.toLowerCase();
         return /iphone|ipad|ipod/.test(userAgent);
       }
+
       // Detects if device is in standalone mode
       const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
       // If device is iOS and using Safari and is NOT added to the home screen, show web app section of the page.
       // Hide Chromium section of the page. Hide the (chromium) install button.
       if (isSafari && isIos() && !isInStandaloneMode()) {
@@ -251,13 +251,22 @@
         chromium.setAttribute('hidden', true);
         installButton.setAttribute('hidden', true);
       }
-      
-      // Cache
+
+
+      // Cache functionality
       const iosOfflineCheckbox = document.querySelector('#save');
       iosOfflineCheckbox.addEventListener('change', cache, false);
       function cache(event) {
-        if (iosOfflineCheckbox.checked || event.target.nodeName == "BUTTON") {
-          console.log('here'); //cache
+        if (iosOfflineCheckbox.checked || event.target.nodeName === "BUTTON") {
+          //Register the Service Worker if the browser is capable
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then((reg) => {
+              console.log('Registration succeeded. Scope is ' + reg.scope);
+            }).catch((error) => {
+              console.log('Registration failed with ' + error);
+            });
+          }
+          // Change checkbox label
           document.querySelector('label').innerText = 'App saved for offline use.';
         } else {
           //delete cache: caches.delete('offline-' + currentPath, {ignoreVary: true, ignoreSearch: true});
