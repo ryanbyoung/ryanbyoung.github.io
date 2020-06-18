@@ -189,7 +189,7 @@
       document.querySelector('label').innerText = 'Saved';
       console.log('Movie is now available offline.');
     }).catch(function (error) {
-      cacheButton.checked = false;
+      saveForOffline.checked = false;
       console.log('Movie could not be saved offline.', error);
     });
   });
@@ -208,7 +208,7 @@
         // If cache exists...
         caches.has('movie-' + version).then(function(cacheExists) {
           if (cacheExists) {
-            cacheButton.checked = true;
+            saveForOffline.checked = true;
             document.querySelector('label').innerText = 'Saved';
           } else {
             console.log('Cache does not exist.'); 
