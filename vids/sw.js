@@ -5,7 +5,7 @@ let urlsToCache = [
 ];
 
 self.addEventListener('install', event => {
-    log('SW INSTALLING. ', window.location.href);
+    log('SW INSTALLING');
     const installCompleted = Promise.resolve()
                         .then(() => log('SW INSTALLED'));
 
@@ -18,7 +18,6 @@ self.addEventListener('activate', event => {
         .then((activationCompleted) => log('SW ACTIVATED'));
 
     event.waitUntil(activationCompleted);
-    log('WAIT UNTIL EVENT: ' + event.target);
 });
 
 //self.addEventListener('install', function(event) {
