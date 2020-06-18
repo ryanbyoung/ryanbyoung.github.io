@@ -160,6 +160,11 @@
       <button id="close">Close Movie</button>
     </main>
     <script>
+
+        // cacheButton event listener
+          cacheButton.addEventListener('change', function(event) {
+            if (cacheButton.checked) {
+
       // If service worker exists...
       if ('serviceWorker' in navigator) {
 
@@ -167,143 +172,27 @@
         navigator.serviceWorker.register('../../sw.js').then(function() {
           // Success
           console.log('Service worker registration successful');
-        }).catch(function(err) {
-          // Fail
-          console.log('Service worker registration failed: ', err);
-        });
-
-        // Set variables for use in the event listeners
-        const currentPath = window.location.pathname;
-        const cacheButton = document.querySelector('#save');
-        const movie = function() {
-          if (document.querySelector('video') !== null) {
-            return (document.querySelector('video source').src);
-          } else {
-            console.log('Video source can not be found');
-            return;
-          }
-        };
-
-        // Event listeners
-        // cacheButton listener
-        if (cacheButton) {
-          cacheButton.addEventListener('change', function(event) {
-            if (this.checked) {
-              // Build an array of the page-specific resources.
-              const pageResources = [currentPath, movie()];
-
-              
-              
-              // Open the unique cache for this URL
-              caches.open('offline-' + currentPath).then(function(cache) {
-                let updateCache = cache.addAll(pageResources);
-                updateCache.then(function() {
                   // Update UI to indicate success
                   document.querySelector('label').innerText = 'Saved';
                   console.log('Movie is now available offline.');
-                }).catch(function (error) {
-                  // Catch any errors if cache doesn't succeed
+        }).catch(function(error) {
+          // Fail
                   cacheButton.checked = false;
                   console.log('Movie could not be saved offline.', error);
-                });
-              });
-
-//This code is based on  https://googlechrome.github.io/samples/service-worker/prefetch-video/ 
-self.addEventListener('fetch', function(event) {
-  headersLog = [];
-  for (let pair of event.request.headers.entries()) {
-    console.log(pair[0]+ ': '+ pair[1]);
-    headersLog.push(pair[0]+ ': '+ pair[1])
-  }
-  console.log('Handling fetch event for', event.request.url, JSON.stringify(headersLog));
-
-  if (event.request.headers.get('range')) {
-    console.log('Range request for', event.request.url);
-    let rangeHeader = event.request.headers.get('range');
-    let rangeMatch = rangeHeader.match(/^bytes\=(\d+)\-(\d+)?/)
-    let pos = Number(rangeMatch[1]);
-    let pos2 = rangeMatch[2];
-    if (pos2) { pos2 = Number(pos2); }   
-    console.log('Range request for '+ event.request.url,'Range: '+rangeHeader, "Parsed as: "+pos+"-"+pos2);
-    event.respondWith(
-      caches.open(CURRENT_CACHES.prefetch)
-      .then(function(cache) {
-        return cache.match(event.request.url);
-      }).then(function(res) {
-        if (!res) {
-          console.log("Not found in cache - doing fetch")
-          return fetch(event.request)
-          .then(res => {
-            console.log("Fetch done - returning response ",res)
-            return res.arrayBuffer();
-          });
-        }
-        console.log("FOUND in cache - doing fetch")
-        return res.arrayBuffer();
-      }).then(function(ab) {
-        console.log("Response procssing")
-        let responseHeaders = {
-          status: 206,
-          statusText: 'Partial Content',
-          headers: [
-            ['Content-Type', 'video/mp4'],
-            ['Content-Range', 'bytes ' + pos + '-' + 
-            (pos2||(ab.byteLength - 1)) + '/' + ab.byteLength]
-          ]
-        };
-        console.log("Response: ",JSON.stringify(responseHeaders))
-        let abSliced = {};
-        if (pos2>0){
-          abSliced=ab.slice(pos,pos2+1);
-        } else {
-          abSliced=ab.slice(pos);
-        }
-        console.log("Response length: ",abSliced.byteLength)
-        return new Response(
-          abSliced,responseHeaders
-        );
-      })
-    );
-  } else {
-    console.log('Non-range request for', event.request.url);
-    event.respondWith(
-      // caches.match() will look for a cache entry in all of the caches available to the service worker.
-      // It's an alternative to first opening a specific named cache and then matching on that.
-      caches.match(event.request).then(function(response) {
-        if (response) {
-          console.log('Found response in cache:', response);
-          return response;
-        }
-        console.log('No response found in cache. About to fetch from network...');
-        // event.request will always have the proper mode set ('cors, 'no-cors', etc.) so we don't
-        // have to hardcode 'no-cors' like we do when fetch()ing in the install handler.
-        return fetch(event.request).then(function(response) {
-          console.log('Response from network is:', response);
-          return response;
-        }).catch(function(error) {
-          // This catch() will handle exceptions thrown from the fetch() operation.
-          // Note that a HTTP error response (e.g. 404) will NOT trigger an exception.
-          // It will return a normal response object that has the appropriate error code set.
-          console.error('Fetching failed:', error);
-          throw error;
         });
-      })
-    );
-  }
-}); // end fetch event listener
 
 
+              });
  
             } else {
-              caches.delete('offline-' + currentPath, {ignoreVary: true, ignoreSearch: true});
+              caches.delete('prefetch', {ignoreVary: true, ignoreSearch: true});
               console.log('Movie removed from cache.');
               document.querySelector('label').innerText = 'Save for offline';
             }
           });
-        } // end if cacheButton
 
         // If cache exists...
-        caches.has('offline-' + currentPath).then(function(cacheExists) {
+        caches.has('prefetch').then(function(cacheExists) {
           if (cacheExists) {
             cacheButton.checked = true;
             document.querySelector('label').innerText = 'Saved';
