@@ -160,9 +160,11 @@
       <button id="close">Close Movie</button>
     </main>
     <script>
-      // saveForOffline checkbox
+      // variables
+      const movie = document.querySelector('video source').src;
       const saveForOffline = document.getElementById('save');
-
+      const version = 1;
+      
       // saveForOffline checkbox event listener
       saveForOffline.addEventListener('change', function(event) {
         if (saveForOffline.checked) {
@@ -180,8 +182,6 @@
             });
 
   // For movie
-  const version = 1;
-  const movie = document.querySelector('video source').src;
   caches.open('movie-' + version).then(function(cache) {
     let updateCache = cache.addAll(movie);
     updateCache.then(function() {
