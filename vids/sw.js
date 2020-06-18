@@ -35,7 +35,12 @@ self.addEventListener('install', function(event) {
     '/vids/',
     '/vids/index.html',
     '/vids/channels/',
-    '/vids/channels/dane-reynolds/'
+    '/vids/channels/index.html',
+    '/vids/channels/dane-reynolds/',
+    '/vids/movies/',
+    '/vids/movies/index.html',
+    '/vids/movies/offline/',
+    '/vids/movies/offline/index.html'
   ];
 
   // All of these logging statements should be visible via the "Inspect" interface
