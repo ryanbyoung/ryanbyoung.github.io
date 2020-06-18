@@ -198,10 +198,10 @@
        *   install button. It also hides the Safari section of the web app div since Safari doesn't have the 
        *   beforeinstallprompt event.
        *
-       * @param {Event} evt
+       * @param {Event} event
        */
-      function saveBeforeInstallPromptEvent(evt) {
-        deferredInstallPrompt = evt;
+      function saveBeforeInstallPromptEvent(event) {
+        deferredInstallPrompt = event;
         webApp.removeAttribute('hidden');
         safari.setAttribute('hidden', true);
       }
@@ -255,23 +255,49 @@
 
       // Cache functionality
       const iosOfflineCheckbox = document.querySelector('#save');
-      iosOfflineCheckbox.addEventListener('change', cache, false);
-      function cache(event) {
-        if (iosOfflineCheckbox.checked || event.target.nodeName === "BUTTON") {
-          //Register the Service Worker if the browser is capable
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').then((reg) => {
-              console.log('Registration succeeded. Scope is ' + reg.scope);
-            }).catch((error) => {
-              console.log('Registration failed with ' + error);
-            });
-          }
+      const iosOfflineLabel = document.querySelector('label');
+      iosOfflineCheckbox.addEventListener('change', function(event) {
+        if (iosOfflineCheckbox.checked) {
           // Change checkbox label
-          document.querySelector('label').innerText = 'App saved for offline use.';
+          cacheApp();
+          iosOfflineLabel.innerText = 'App saved for offline use.';
         } else {
-          //delete cache: caches.delete('offline-' + currentPath, {ignoreVary: true, ignoreSearch: true});
-          document.querySelector('label').innerText = 'Save app for offline use.';
-        }
+          iosOfflineLabel.innerText = 'Save app for offline use.';
+          caches.delete('app-' + version, {ignoreVary: true, ignoreSearch: true});
+      }, false);
+      // cacheApp event called by iosOfflineCheckbox event and install button event
+      function cacheApp(event) {
+        const CACHE_VERSION = 1;
+        const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
+        let urlsToCache = [
+          '/favicon.ico',
+          '/vids/',
+          '/vids/index.html',
+          '/vids/channels/',
+          '/vids/channels/index.html',
+          '/vids/channels/dane-reynolds/',
+          '/vids/channels/dane-reynolds/index.html',
+          '/vids/movies/offline/',
+          '/vids/movies/offline/index.html'
+        ];
+        caches.open(CURRENT_CACHE).then(function(cache) {
+          let updateCache = cache.addAll(urlsToCache);
+          updateCache.then(function() {
+            console.log('App is now cached for offline use.');
+          }).catch(function (error) {
+          console.log('Could not populate cache: ' + error);
+          });
+        });
+      }
+
+      // Service Worker - Register it if the browser is capable - this will automatically display the install button on
+      // Chromium because the saveBeforeInstallPromptEvent automatically looks for a service worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').then((reg) => {
+          console.log('Registration succeeded. Scope is: ' + reg.scope);
+        }).catch((error) => {
+          console.log('Registration failed: ' + error);
+        });
       }
       
       /* Offline and online event listeners
