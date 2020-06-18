@@ -17,10 +17,8 @@ self.addEventListener('activate', event => {
     const activationCompleted = Promise.resolve()
         .then((activationCompleted) => log('SW ACTIVATED'));
 
-    event.waitUntil(
-      log('WAIT UNTIL EVENT: ' + event.target);
-      activationCompleted
-    );
+    event.waitUntil(activationCompleted);
+    log('WAIT UNTIL EVENT: ' + event.target);
 });
 
 //self.addEventListener('install', function(event) {
