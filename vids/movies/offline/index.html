@@ -182,6 +182,39 @@
 
   // For movie
   caches.open('movie').then(function(cache) {
+
+    
+    return cache.match(movie);
+  }).then(function(ab) {
+          let rangeHeader=event.request.headers.get('range');
+          let rangeMatch =rangeHeader.match(/^bytes\=(\d+)\-(\d+)?/)
+          let pos =Number(rangeMatch[1]);
+          let pos2=rangeMatch[2];
+          if (pos2) { pos2=Number(pos2); }
+          let responseHeaders = {
+          status: 206,
+          statusText: 'Partial Content',
+          headers: [
+            ['Content-Type', 'video/mp4'],
+            ['Content-Range', 'bytes ' + pos + '-' + 
+            (pos2||(ab.byteLength - 1)) + '/' + ab.byteLength]]
+        };
+        
+        console.log("Response: ",JSON.stringify(responseHeaders))
+        var abSliced = {};
+        if (pos2>0){
+          abSliced=ab.slice(pos,pos2+1);
+        }else{
+          abSliced=ab.slice(pos);
+        }
+        
+        console.log("Response length: ",abSliced.byteLength)
+        return new Response(
+          abSliced,responseHeaders
+        );
+  }));
+    
+    
     let updateCache = cache.addAll(movie);
     updateCache.then(function() {
       // Update UI to indicate success
