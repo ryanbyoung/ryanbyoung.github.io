@@ -184,9 +184,9 @@
             // For movie
             let movieRequest = new Request('../../videos/offline.mp4');
             fetch(movieRequest).then(function(ab) {
-              console.log(ab);
               let rangeHeader = ab.headers.get('range');
-              let rangeMatch = rangeHeader.match(/^bytes\=(\d+)\-(\d+)?/)
+              console.log(rangeHeader);
+              let rangeMatch = rangeHeader.match(/^bytes\=(\d+)\-(\d+)?/);
               let pos = Number(rangeMatch[1]);
               let pos2 = rangeMatch[2];
               if (pos2) { pos2=Number(pos2); }
