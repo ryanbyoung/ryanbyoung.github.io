@@ -181,7 +181,8 @@
             });
 
 
-            // For movie
+          // For movie
+          self.addEventListener('fetch', function(event) {
             caches.open('movie').then(function(cache) {
               return cache.match(movie);
             }).then(function(ab) {
@@ -217,6 +218,7 @@
               saveForOffline.checked = false;
               console.log('Movie could not be saved offline.', error);
             });
+          });
 
 
           } // end if service worker
