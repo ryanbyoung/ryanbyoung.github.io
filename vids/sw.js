@@ -1,21 +1,26 @@
 const CACHE_VERSION = 1;
-const CURRENT_CACHE = 'OfflineMovie-v' + CACHE_VERSION;
+const CURRENT_CACHE = 'PrefetchVideos-v' + CACHE_VERSION;
+let urlsToCache = [
+  '/vids/videos/offline.mp4'
+];
 
 self.addEventListener('install', event => {
-    log('Install event: ' + event);
-    log("INSTALLING ");
+    log('SW INSTALLING');
     const installCompleted = Promise.resolve()
-                        .then(() => log("INSTALLED"));
+                        .then(() => log('SW INSTALLED'));
 
     event.waitUntil(installCompleted);
 });
 
 self.addEventListener('activate', event => {
-    log("ACTIVATING");
+    log('SW ACTIVATING');
     const activationCompleted = Promise.resolve()
-        .then((activationCompleted) => log("ACTIVATED"));
+        .then((activationCompleted) => log('SW ACTIVATED'));
 
-    event.waitUntil(activationCompleted);
+    event.waitUntil(
+      log('WAIT UNTIL EVENT: ' + event.target);
+      activationCompleted
+    );
 });
 
 //self.addEventListener('install', function(event) {
@@ -35,7 +40,7 @@ self.addEventListener('activate', event => {
 //This code is based on  https://googlechrome.github.io/samples/service-worker/prefetch-video/ 
 self.addEventListener('fetch', function(event) {
 
-  log("HTTP call intercepted: " + event.request.url);
+  log('HTTP call intercepted: ' + event.request.url);
  
   let headersLog = [];
   for (var pair of event.request.headers.entries()) {
@@ -123,5 +128,5 @@ self.addEventListener('fetch', function(event) {
 
 // each logging line will be prepended with the service worker name
 function log(message) {
-    console.log(CURRENT_CACHE, message);
+    console.log(message);
 }
