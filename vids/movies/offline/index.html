@@ -160,17 +160,17 @@
       <button id="close">Close Movie</button>
     </main>
     <script>
+      // saveForOffline checkbox
+      const saveForOffline = document.getElementById('save');
 
-      const cacheButton = document.getElementById('save');
+      // saveForOffline checkbox event listener
+      saveForOffline.addEventListener('change', function(event) {
+        if (saveForOffline.checked) {
 
-      // cacheButton event listener
-      cacheButton.addEventListener('change', function(event) {
-        if (cacheButton.checked) {
-
-          // If service worker exists...
+          // Check if service worker exists
           if ('serviceWorker' in navigator) {
 
-            // Attempt to register it
+            // If it does, attempt to register it
             navigator.serviceWorker.register('../../sw.js').then(function() {
               // Success
               console.log('Service worker registration successful');
@@ -182,7 +182,21 @@
               cacheButton.checked = false;
               console.log('Movie could not be saved offline.', error);
             });
-          }
+
+  // For movie
+  const version = 1;
+  const movie = document.querySelector('video source').src;
+  caches.open('movie-' + version).then(function(cache) {
+    let updateCache = cache.addAll(movie);
+    updateCache.then(function() {
+      console.log('Article is now available offline.');
+    }).catch(function (error) {
+      console.log('Article could not be saved offline.');
+    });
+  });
+
+
+          } // end if service worker
 
         } else {
           caches.delete('prefetch', {ignoreVary: true, ignoreSearch: true});
