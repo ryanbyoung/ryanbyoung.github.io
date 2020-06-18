@@ -182,14 +182,18 @@
 
 
             // For movie
-            let request = new Request('../../videos/offline.mp4')
+            let movieRequest = new Request('../../videos/offline.mp4');
+            let movieResponse = {};
+            fetch(movieRequest).then(function(response) {
+              movieResponse = response.headers;
+            });
             caches.open('movie').then(function(cache) {
-              return cache.match(movie);
+              return cache.add(movie);
             }).then(function(ab) {
-              let rangeHeader=request.headers.get('range');
-              let rangeMatch =rangeHeader.match(/^bytes\=(\d+)\-(\d+)?/)
-              let pos =Number(rangeMatch[1]);
-              let pos2=rangeMatch[2];
+              let rangeHeader = movieResponse.get('range');
+              let rangeMatch = rangeHeader.match(/^bytes\=(\d+)\-(\d+)?/)
+              let pos = Number(rangeMatch[1]);
+              let pos2 = rangeMatch[2];
               if (pos2) { pos2=Number(pos2); }
               let responseHeaders = {
                 status: 206,
