@@ -263,7 +263,7 @@
           iosOfflineLabel.innerText = 'App saved for offline use.';
         } else {
           iosOfflineLabel.innerText = 'Save app for offline use.';
-          caches.delete('app-' + version, {ignoreVary: true, ignoreSearch: true});
+          caches.delete(CURRENT_CACHE, {ignoreVary: true, ignoreSearch: true});
       }, false);
       // cacheApp event called by iosOfflineCheckbox event and install button event
       function cacheApp(event) {
