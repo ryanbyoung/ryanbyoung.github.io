@@ -5,7 +5,7 @@ let urlsToCache = [
 ];
 
 self.addEventListener('install', event => {
-    log('SW INSTALLING');
+    log('SW INSTALLING. ', window.location.href);
     const installCompleted = Promise.resolve()
                         .then(() => log('SW INSTALLED'));
 
