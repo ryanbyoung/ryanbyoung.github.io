@@ -198,7 +198,7 @@
           } // end if service worker
 
         } else {
-          caches.delete('prefetch', {ignoreVary: true, ignoreSearch: true});
+          caches.delete('movie-' + version, {ignoreVary: true, ignoreSearch: true});
           console.log('Movie removed from cache.');
           document.querySelector('label').innerText = 'Save for offline';
         }
@@ -206,7 +206,7 @@
       });
 
         // If cache exists...
-        caches.has('prefetch').then(function(cacheExists) {
+        caches.has('movie-' + version).then(function(cacheExists) {
           if (cacheExists) {
             cacheButton.checked = true;
             document.querySelector('label').innerText = 'Saved';
