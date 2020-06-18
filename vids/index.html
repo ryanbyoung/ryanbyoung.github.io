@@ -219,7 +219,7 @@
         deferredInstallPrompt.prompt();
         deferredInstallPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            cache(event);
+            cacheApp();
           } else {
             webApp.setAttribute('hidden', false);
           } // end if
@@ -258,16 +258,15 @@
       const iosOfflineLabel = document.querySelector('label');
       iosOfflineCheckbox.addEventListener('change', function(event) {
         if (iosOfflineCheckbox.checked) {
-          // Change checkbox label
           cacheApp();
           iosOfflineLabel.innerText = 'App saved for offline use.';
         } else {
-          iosOfflineLabel.innerText = 'Save app for offline use.';
           caches.delete(CURRENT_CACHE, {ignoreVary: true, ignoreSearch: true});
+          iosOfflineLabel.innerText = 'Save app for offline use.';
         }
       }, false);
-      // cacheApp event called by iosOfflineCheckbox event and install button event
-      function cacheApp(event) {
+      // cacheApp function called by iosOfflineCheckbox event and install button event
+      function cacheApp() {
         const CACHE_VERSION = 1;
         const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
         let urlsToCache = [
@@ -286,10 +285,21 @@
           updateCache.then(function() {
             console.log('App is now cached for offline use.');
           }).catch(function (error) {
-          console.log('Could not populate cache: ' + error);
+            console.log('Could not populate cache: ' + error);
           });
         });
       }
+      // If cache exists...
+      caches.has(CURRENT_CACHE).then(function(cacheExists) {
+        if (cacheExists) {
+          iosOfflineCheckbox.checked = true;
+          iosOfflineLabel.innerText = 'App saved for offline use.';
+        } else {
+          iosOfflineCheckbox.checked = true;
+          iosOfflineLabel.innerText = 'Save app for offline use.'; 
+        }
+      });
+
 
       // Service Worker - Register it if the browser is capable - this will automatically display the install button on
       // Chromium because the saveBeforeInstallPromptEvent automatically looks for a service worker
