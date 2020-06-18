@@ -183,7 +183,7 @@
 
             // For movie
             caches.open('movie').then(function(cache) {
-              return cache.add(movie);
+              return cache.match(movie);
             }).then(function(ab) {
               let rangeHeader=event.request.headers.get('range');
               let rangeMatch =rangeHeader.match(/^bytes\=(\d+)\-(\d+)?/)
