@@ -163,7 +163,6 @@
       // variables
       const movie = document.querySelector('video source').src;
       const saveForOffline = document.getElementById('save');
-      const version = 1;
       
       // saveForOffline checkbox event listener
       saveForOffline.addEventListener('change', function(event) {
@@ -182,7 +181,7 @@
             });
 
   // For movie
-  caches.open('movie-' + version).then(function(cache) {
+  caches.open('movie').then(function(cache) {
     let updateCache = cache.addAll(movie);
     updateCache.then(function() {
       // Update UI to indicate success
@@ -198,7 +197,7 @@
           } // end if service worker
 
         } else {
-          caches.delete('movie-' + version, {ignoreVary: true, ignoreSearch: true});
+          caches.delete('movie', {ignoreVary: true, ignoreSearch: true});
           console.log('Movie removed from cache.');
           document.querySelector('label').innerText = 'Save for offline';
         }
@@ -206,7 +205,7 @@
       });
 
         // If cache exists...
-        caches.has('movie-' + version).then(function(cacheExists) {
+        caches.has('movie').then(function(cacheExists) {
           if (cacheExists) {
             saveForOffline.checked = true;
             document.querySelector('label').innerText = 'Saved';
