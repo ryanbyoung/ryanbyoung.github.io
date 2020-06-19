@@ -170,11 +170,7 @@
       saveForOffline.addEventListener('change', function(event) {
         if (saveForOffline.checked) {
           caches.open(CURRENT_CACHE).then(function(cache) {
-            fetch(movieSrc).then(function(response) {
-              return response;
-            }).then(function(url) {
-              cache.add(url);
-            });
+            return cache.add(movieSrc);
           });
           console.log('Movie saved to the cache.');
           document.querySelector('label').innerText = 'Saved';
