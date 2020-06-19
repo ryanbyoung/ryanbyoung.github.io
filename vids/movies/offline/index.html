@@ -169,7 +169,15 @@
       // saveForOffline checkbox event listener
       saveForOffline.addEventListener('change', function(event) {
         if (saveForOffline.checked) {
-
+          caches.open(CURRENT_CACHE).then(function(cache) {
+            fetch(movieSrc).then(function(response) {
+              return response;
+            }).then(function(urls) {
+              cache.add(urls);
+            });
+          });
+          console.log('Movie saved to the cache.');
+          document.querySelector('label').innerText = 'Saved';
           // Commenting, Google says not needed
           // Check if service worker exists
           // if ('serviceWorker' in navigator) {
