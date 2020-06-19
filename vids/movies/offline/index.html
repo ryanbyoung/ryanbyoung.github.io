@@ -153,7 +153,7 @@
         <source src="../../videos/offline.mp4" type="video/mp4">
         <p>It looks like your browser doesn't support HTML5 video. Here is a <a href="../../videos/offline.mp4">link to the movie</a>.</p>
       </video>
-      <p id="offline">
+      <p id="offline" hidden>
         <input type="checkbox" id="save" name="save">
         <label for="save">Save for offline</label>
       </p>
@@ -193,25 +193,21 @@
         } else {
           caches.delete(CURRENT_CACHE, {ignoreVary: true, ignoreSearch: true});
           console.log('Movie removed from cache.');
-          document.querySelector('label').innerText = 'Save for offline';
+          if (window.navigator.onLine == false) {
+            OFFLINE.setAttribute('hidden', '');
+          } else {
+            document.querySelector('label').innerText = 'Save for offline';
+          }
         } 
       }); // end saveForOffline event listener
-
-      /**
-       * offline event listener
-       *
-       * If app is offline, hide the offline paragraph.
-       *
-       * @param {offline} event
-       */
-      window.addEventListener('offline', function(event) {
-        const OFFLINE = document.getElementById('offline');
-        if (saveForOffline.checked === false) {
-          OFFLINE.setAttribute('hidden', '');
-        }
-      }, false);
       
-      // If cache exists update the UI
+      // If page cache exists show the option for saving the video
+      caches.has(CURRENT_CACHE).then(function(cacheExists) {
+        if (cacheExists) {
+          OFFLINE.removeAttribute('hidden');
+        }
+      }      
+      // If cache has video cache
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
         if (cacheExists) {
           saveForOffline.checked = true;
