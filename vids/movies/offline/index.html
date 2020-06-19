@@ -160,6 +160,19 @@
       <button id="close">Close Movie</button>
     </main>
     <script>
+      // Service Worker
+      // Check if it exists
+      if ('serviceWorker' in navigator) {
+        // If it does, attempt to register it
+        navigator.serviceWorker.register('../../sw.js').then(function() {
+          // Success
+          console.log('Service worker registration successful.');
+        }).catch(function(error) {
+          // Fail
+          console.log('Service worker registration failed: ', error);
+        });
+      }
+
       // variables
       const CACHE_VERSION = 1;
       const CURRENT_CACHE = 'OfflineMovie-v' + CACHE_VERSION;
@@ -169,47 +182,30 @@
       // saveForOffline checkbox event listener
       saveForOffline.addEventListener('change', function(event) {
         if (saveForOffline.checked) {
-
-          // Check if service worker exists
-          if ('serviceWorker' in navigator) {
-
-            // If it does, attempt to register it
-            navigator.serviceWorker.register('../../sw.js').then(function() {
-              // Success
-              console.log('Service worker registration successful');
-            }).catch(function(error) {
-              // Fail
-              console.log('ServiceWorker registration failed: ', error);
-            });
-
-            // Open cache and save
-            caches.open(CURRENT_CACHE).then(function(cache) {
-              fetch(movieSrc).then(function(response) {
-                return response;
-              }).then(cache.add(movieSrc));
-            });
-            console.log('Movie saved to the cache.');
-            document.querySelector('label').innerText = 'Saved';
-
-          } // end if service worker
-
+          // Open cache and save
+          caches.open(CURRENT_CACHE).then(function(cache) {
+            fetch(movieSrc).then(function(response) {
+              return response;
+            }).then(cache.add(movieSrc));
+          });
+          console.log('Movie saved to the cache.');
+          document.querySelector('label').innerText = 'Saved';
         } else {
           caches.delete(CURRENT_CACHE, {ignoreVary: true, ignoreSearch: true});
           console.log('Movie removed from cache.');
           document.querySelector('label').innerText = 'Save for offline';
-        }
-          
-      });
+        } 
+      }); // end saveForOffline event listener
 
-        // If cache exists...
-        caches.has(CURRENT_CACHE).then(function(cacheExists) {
-          if (cacheExists) {
-            saveForOffline.checked = true;
-            document.querySelector('label').innerText = 'Saved';
-          } else {
-            console.log('Cache does not exist.'); 
-          }
-        });
+      // If cache exists update the UI
+      caches.has(CURRENT_CACHE).then(function(cacheExists) {
+        if (cacheExists) {
+          saveForOffline.checked = true;
+          document.querySelector('label').innerText = 'Saved';
+        } else {
+          console.log('Cache does not exist.'); 
+        }
+      });
       
     </script>
   </body>
