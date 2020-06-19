@@ -165,50 +165,6 @@
       const CURRENT_CACHE = 'OfflineMovie-v' + CACHE_VERSION;
       const movieSrc = '/vids/videos/offline.mp4';
       const saveForOffline = document.getElementById('save');
-      
-      // saveForOffline checkbox event listener
-      saveForOffline.addEventListener('change', function(event) {
-        if (saveForOffline.checked) {
-          caches.open(CURRENT_CACHE).then(function(cache) {
-            fetch(movieSrc).then(function(response) {
-              return response;
-            }).then(function(url) {
-              console.log(url);
-              //cache.add(url);
-            });
-          });
-          console.log('Movie saved to the cache.');
-          document.querySelector('label').innerText = 'Saved';
-          // Commenting, Google says not needed
-          // Check if service worker exists
-          // if ('serviceWorker' in navigator) {
-            // If it does, attempt to register it
-            //navigator.serviceWorker.register('../../sw.js').then(function() {
-              // Success
-              //console.log('Service worker registration successful');
-            //}).catch(function(error) {
-              // Fail
-              //console.log('ServiceWorker registration failed: ', error);
-            //});
-          //} // end if service worker
-
-        } else {
-          caches.delete(CURRENT_CACHE, {ignoreVary: true, ignoreSearch: true});
-          console.log('Movie removed from cache.');
-          document.querySelector('label').innerText = 'Save for offline';
-        }
-          
-      });
-
-        // If cache exists...
-        caches.has(CURRENT_CACHE).then(function(cacheExists) {
-          if (cacheExists) {
-            saveForOffline.checked = true;
-            document.querySelector('label').innerText = 'Saved';
-          } else {
-            console.log('Cache does not exist.'); 
-          }
-        });
 
 //Fetch event listener
 //This code is based on  https://googlechrome.github.io/samples/service-worker/prefetch-video/ 
@@ -299,6 +255,47 @@ self.addEventListener('fetch', function(event) {
     );
   }
 });
+      
+      // saveForOffline checkbox event listener
+      saveForOffline.addEventListener('change', function(event) {
+        if (saveForOffline.checked) {
+          caches.open(CURRENT_CACHE).then(function(cache) {
+            fetch(movieSrc).then(function(response) {
+              return response;
+            }).then(cache.add(movieSrc));
+          });
+          console.log('Movie saved to the cache.');
+          document.querySelector('label').innerText = 'Saved';
+          // Commenting, Google says not needed
+          // Check if service worker exists
+          // if ('serviceWorker' in navigator) {
+            // If it does, attempt to register it
+            //navigator.serviceWorker.register('../../sw.js').then(function() {
+              // Success
+              //console.log('Service worker registration successful');
+            //}).catch(function(error) {
+              // Fail
+              //console.log('ServiceWorker registration failed: ', error);
+            //});
+          //} // end if service worker
+
+        } else {
+          caches.delete(CURRENT_CACHE, {ignoreVary: true, ignoreSearch: true});
+          console.log('Movie removed from cache.');
+          document.querySelector('label').innerText = 'Save for offline';
+        }
+          
+      });
+
+        // If cache exists...
+        caches.has(CURRENT_CACHE).then(function(cacheExists) {
+          if (cacheExists) {
+            saveForOffline.checked = true;
+            document.querySelector('label').innerText = 'Saved';
+          } else {
+            console.log('Cache does not exist.'); 
+          }
+        });
       
     </script>
   </body>
