@@ -163,7 +163,7 @@
       // variables
       const CACHE_VERSION = 1;
       const CURRENT_CACHE = 'OfflineMovie-v' + CACHE_VERSION;
-      const movieSrc = document.querySelector('video source').src;
+      const movieSrc = '/vids/videos/offline.mp4';
       const saveForOffline = document.getElementById('save');
       
       // saveForOffline checkbox event listener
@@ -172,8 +172,8 @@
           caches.open(CURRENT_CACHE).then(function(cache) {
             fetch(movieSrc).then(function(response) {
               return response;
-            }).then(function(urls) {
-              cache.add(urls);
+            }).then(function(url) {
+              cache.add(url);
             });
           });
           console.log('Movie saved to the cache.');
