@@ -1,5 +1,5 @@
 const CACHE_VERSION = 1;
-const CURRENT_CACHE = 'PrefetchVideos-v' + CACHE_VERSION;
+const CURRENT_CACHE = 'Prefetch-v' + CACHE_VERSION;
 let urlsToCache = [
   '/vids/videos/offline.mp4'
 ];
