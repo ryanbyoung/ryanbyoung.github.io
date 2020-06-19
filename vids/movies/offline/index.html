@@ -171,8 +171,10 @@
         if (saveForOffline.checked) {
           caches.open(CURRENT_CACHE).then(function(cache) {
             fetch(movieSrc).then(function(response) {
-              console.log(response);
               return response;
+            }).then(function(url) {
+              console.log(url);
+              //cache.add(url);
             });
           });
           console.log('Movie saved to the cache.');
