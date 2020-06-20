@@ -129,7 +129,7 @@ self.addEventListener('fetch', function(event) {
 
 
   // *** added this
-  } else if caches.has(CURRENT_CACHE) {
+  } else if (caches.has(CURRENT_CACHE)) {
     event.respondWith(
       // caches.match() will look for a cache entry in all of the caches available to the service worker.
       // It's an alternative to first opening a specific named cache and then matching on that.
