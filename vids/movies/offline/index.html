@@ -207,7 +207,12 @@
               console.log('Service worker registration failed: ', error);
             });
           }
+          // show save for offline checkbox
           OFFLINE.removeAttribute('hidden');
+          // prefetch video for Safari
+          fetch(movieSrc).then(function(response) {
+            return response;
+          });
         }
       });    
       // If cache has video cache
