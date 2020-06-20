@@ -70,34 +70,32 @@ self.addEventListener('fetch', function(event) {
             return fetch(event.request).then(response => {
               console.log("Network fetch done, returning response: ", response)
               return response.arrayBuffer();
-            }).then(function(ab) {
-              console.log("Response processing.")
-              let responseHeaders = {
-                status: 206,
-                statusText: 'Partial Content',
-                headers: [
-                  ['Content-Type', 'video/mp4'],
-                  ['Content-Range', 'bytes ' + pos + '-' + 
-                  (pos2||(ab.byteLength - 1)) + '/' + ab.byteLength]
-                ]
-              };
-              console.log("Response: ", JSON.stringify(responseHeaders))
-              let abSliced = {};
-              if (pos2 > 0) {
-                abSliced = ab.slice(pos, pos2 + 1);
-              } else {
-                abSliced = ab.slice(pos);
-              }
-              console.log("Response length: ", abSliced.byteLength)
-              return new Response(
-                abSliced, responseHeaders
-              );
             });
-          // else if file found in the cache
-          } else {
-            console.log("Found in cache, fetching from there.")
-            return response.arrayBuffer();
           }
+          console.log("Found in cache, fetching from there.")
+          return response.arrayBuffer();
+        }).then(function(ab) {
+          console.log("Response processing.")
+          let responseHeaders = {
+            status: 206,
+            statusText: 'Partial Content',
+            headers: [
+              ['Content-Type', 'video/mp4'],
+              ['Content-Range', 'bytes ' + pos + '-' + 
+              (pos2||(ab.byteLength - 1)) + '/' + ab.byteLength]
+            ]
+          };
+          console.log("Response: ", JSON.stringify(responseHeaders))
+          let abSliced = {};
+          if (pos2 > 0) {
+            abSliced = ab.slice(pos, pos2 + 1);
+          } else {
+            abSliced = ab.slice(pos);
+          }
+          console.log("Response length: ", abSliced.byteLength)
+          return new Response(
+            abSliced, responseHeaders
+          );
         }); // end match event
       }) // end cache open
     ); // end event respondWith
