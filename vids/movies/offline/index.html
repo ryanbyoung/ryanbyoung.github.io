@@ -160,18 +160,6 @@
       <button id="close">Close Movie</button>
     </main>
     <script>
-      // Service Worker
-      // Check if it exists
-      if ('serviceWorker' in navigator) {
-        // If it does, attempt to register it
-        navigator.serviceWorker.register('../../sw.js').then(function() {
-          // Success
-          console.log('Service worker registration successful.');
-        }).catch(function(error) {
-          // Fail
-          console.log('Service worker registration failed: ', error);
-        });
-      }
 
       // variables
       const movieSrc = '/vids/videos/offline.mp4';
@@ -204,9 +192,21 @@
         } 
       }); // end saveForOffline event listener
       
-      // If page cache exists show the option for saving the video
+      // If cache exists, register the service worker and show the option for saving the video
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
         if (cacheExists) {
+          // Service Worker
+          // Check if a service worker can be used in this browser
+          if ('serviceWorker' in navigator) {
+            // If it can, attempt to register it
+            navigator.serviceWorker.register('../../sw.js').then(function() {
+              // Success
+              console.log('Service worker registration successful.');
+            }).catch(function(error) {
+              // Fail
+              console.log('Service worker registration failed: ', error);
+            });
+          }
           OFFLINE.removeAttribute('hidden');
         }
       });    
