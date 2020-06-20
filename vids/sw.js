@@ -106,8 +106,8 @@ self.addEventListener('fetch', function(event) {
           return new Response(
             abSliced, responseHeaders
           );
-        })
-      });
+        });
+      })
     );
   } else {
     console.log('Non-range request for: ', event.request.url);
