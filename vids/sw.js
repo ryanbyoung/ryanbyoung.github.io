@@ -5,22 +5,22 @@ const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
   //'/vids/videos/offline.mp4'
 //];
 
-console.log(event.target.url);
+console.log(self);
 
 self.addEventListener('install', event => {
-    log('SW INSTALLING');
-    const installCompleted = Promise.resolve()
-                        .then(() => log('SW INSTALLED'));
+  log('SW INSTALLING');
+  const installCompleted = Promise.resolve()
+    .then(() => log('SW INSTALLED'));
 
-    event.waitUntil(installCompleted);
+  event.waitUntil(installCompleted);
 });
 
 self.addEventListener('activate', event => {
-    log('SW ACTIVATING');
-    const activationCompleted = Promise.resolve()
-        .then((activationCompleted) => log('SW ACTIVATED'));
+  log('SW ACTIVATING');
+  const activationCompleted = Promise.resolve()
+    .then((activationCompleted) => log('SW ACTIVATED'));
 
-    event.waitUntil(activationCompleted);
+  event.waitUntil(activationCompleted);
 });
 
 //self.addEventListener('install', function(event) {
