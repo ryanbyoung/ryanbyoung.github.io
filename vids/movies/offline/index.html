@@ -162,16 +162,17 @@
     <script>
 
       // variables
-      const movieSrc = '/vids/videos/offline.mp4';
-      const OFFLINE = document.getElementById('offline');
-      const saveForOffline = document.getElementById('save');
+      const OFFLINE_P_TAG = document.getElementById('offline');
+      const SAVE_CHECKBOX = document.getElementById('save');
+      const SAVE_LABEL = document.querySelector('label');
+      const VIDEO_SRC = '/vids/videos/offline.mp4';
       // put these in a js include
       const CACHE_VERSION = 1;
       const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
       
-      // saveForOffline checkbox event listener
-      saveForOffline.addEventListener('change', function(event) {
-        if (saveForOffline.checked) {
+      // Save checkbox event listener
+      SAVE_CHECKBOX.addEventListener('change', function(event) {
+        if (SAVE_CHECKBOX.checked) {
           // Check if a service worker can be used in this browser
           if ('serviceWorker' in navigator) {
             // If it can, attempt to register it
@@ -183,46 +184,46 @@
               console.log('Service worker registration failed: ', error);
             });
           }
-          // Open cache and save
+          // Open the cache, fetch the movie file, and add it to the cache. Change the save checkbox label to say Saved.
           caches.open(CURRENT_CACHE).then(function(cache) {
-            fetch(movieSrc).then(function(response) {
-              cache.add(movieSrc);
+            fetch(VIDEO_SRC).then(function(response) {
+              cache.add(VIDEO_SRC);
               return response;
             });
           });
           console.log('Movie saved to the cache.');
-          document.querySelector('label').innerText = 'Saved';
-        } else { // if saveForOffline is unchecked
+          SAVE_LABEL.innerText = 'Saved';
+        } else { // if save checkbox is unchecked
           // Open the cache and delete the movie
           caches.open(CURRENT_CACHE).then(function(cache) {
-            cache.delete(movieSrc).then(function(response) {
+            cache.delete(VIDEO_SRC).then(function(response) {
               console.log('Movie removed from cache.');
             });
           });
-          // if the user if offline/online, update the UI
-          if (window.navigator.onLine == false) {
-            OFFLINE.setAttribute('hidden', '');
+          // If the user if online/offline, update the UI accordingly
+          if (window.navigator.onLine) {
+            SAVE_LABEL.innerText = 'Save for offline';
           } else {
-            document.querySelector('label').innerText = 'Save for offline';
+            OFFLINE_P_TAG.setAttribute('hidden', '');
           }
         } 
-      }); // end saveForOffline event listener
+      }); // end save checkbox event listener
       
-      // If cache exists, register the service worker and show the option for saving the video
+      // If cache exists, show the option for saving the video
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
         if (cacheExists) {
           // show save for offline checkbox
-          OFFLINE.removeAttribute('hidden');
+          OFFLINE_P_TAG.removeAttribute('hidden');
         }
       });    
-      // If cache has movie in it
+      // If cache exists and has movie file in it, show checkbox as checked and make label say saved.
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
         if (cacheExists) {
           caches.open(CURRENT_CACHE).then(function(cache) {
             cache.match(movieSrc).then(function(response) {
               if (response) {
-                saveForOffline.checked = true;
-                document.querySelector('label').innerText = 'Saved';
+                SAVE_CHECKBOX.checked = true;
+                SAVE_LABEL.innerText = 'Saved';
               }
             });
           });
@@ -230,7 +231,7 @@
       });
       //caches.has(CURRENT_CACHE).then(function(cacheExists) {
         //if (cacheExists) {
-          //saveForOffline.checked = true;
+          //SAVE_CHECKBOX.checked = true;
           //document.querySelector('label').innerText = 'Saved';
         //} else {
           //console.log('Cache does not exist.'); 
