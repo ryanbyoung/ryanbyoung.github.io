@@ -192,10 +192,14 @@
           });
           console.log('Movie saved to the cache.');
           document.querySelector('label').innerText = 'Saved';
-        } else {
-          // TODO figure out a way to just delete video in cache, not whole cache
-          caches.delete(movieSrc, {ignoreVary: true, ignoreSearch: true});
-          console.log('Movie removed from cache.');
+        } else { // if saveForOffline is unchecked
+          // Open the cache and delete the movie
+          caches.open(CURRENT_CACHE).then(function(cache) {
+            cache.delete(movieSrc).then(function(response) {
+              console.log('Movie removed from cache.');
+            });
+          });
+          // if the user if offline/online, update the UI
           if (window.navigator.onLine == false) {
             OFFLINE.setAttribute('hidden', '');
           } else {
