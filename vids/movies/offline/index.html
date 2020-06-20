@@ -194,7 +194,7 @@
           document.querySelector('label').innerText = 'Saved';
         } else {
           // TODO figure out a way to just delete video in cache, not whole cache
-          caches.delete(CURRENT_CACHE, {ignoreVary: true, ignoreSearch: true});
+          caches.delete(movieSrc, {ignoreVary: true, ignoreSearch: true});
           console.log('Movie removed from cache.');
           if (window.navigator.onLine == false) {
             OFFLINE.setAttribute('hidden', '');
