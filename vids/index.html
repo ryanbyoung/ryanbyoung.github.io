@@ -157,6 +157,9 @@
         <p id="chromium">Install this on your device by clicking the button and following the prompts.</p>
         <button id="install">Install</button>
         <p id="safari">
+          <input type="checkbox" id="save" name="save">
+          <label for="save">Save app for offline use.</label>
+          <br><br>
           Add this to your home screen by tapping the 
           <svg class="bi bi-box-arrow-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M4.646 4.354a.5.5 0 0 0 .708 0L8 1.707l2.646 2.647a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 0 0 0 .708z"/>
@@ -164,9 +167,7 @@
             <path fill-rule="evenodd" d="M2.5 14A1.5 1.5 0 0 0 4 15.5h8a1.5 1.5 0 0 0 1.5-1.5V7A1.5 1.5 0 0 0 12 5.5h-1.5a.5.5 0 0 0 0 1H12a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V7a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 0 0-1H4A1.5 1.5 0 0 0 2.5 7v7z"/>
           </svg>
           icon at the bottom of your screen.<br>
-          Then choose Add to Home Screen.<br><br>
-          <input type="checkbox" id="save" name="save">
-          <label for="save">Save app for offline use.</label>
+          Then choose Add to Home Screen.
         </p>
     </main>
     <nav>
@@ -203,7 +204,7 @@
       function saveBeforeInstallPromptEvent(event) {
         deferredInstallPrompt = event;
         webApp.removeAttribute('hidden');
-        safari.setAttribute('hidden', true);
+        safari.setAttribute('hidden', '');
       }
 
       /**
@@ -215,13 +216,13 @@
        * @param {Event} event
        */
       function installPWA(event) {
-        webApp.setAttribute('hidden', true);
+        webApp.setAttribute('hidden', '');
         deferredInstallPrompt.prompt();
         deferredInstallPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
             cacheApp();
           } else {
-            webApp.setAttribute('hidden', false);
+            webApp.removeAttribute('hidden');
           } // end if
         }); // end user choice
       } // end installPWA function
@@ -248,8 +249,8 @@
       // Hide Chromium section of the page. Hide the (chromium) install button.
       if (isSafari && isIos() && !isInStandaloneMode()) {
         webApp.removeAttribute('hidden');
-        chromium.setAttribute('hidden', true);
-        installButton.setAttribute('hidden', true);
+        chromium.setAttribute('hidden', '');
+        installButton.setAttribute('hidden', '');
       }
 
 
