@@ -37,6 +37,9 @@ self.addEventListener('activate', event => {
 
 //This code is based on  https://googlechrome.github.io/samples/service-worker/prefetch-video/ 
 self.addEventListener('fetch', function(event) {
+  
+  //added this, only run if video file - hard coding offline movie for now, will need to update to any file in videos folder
+  if (event.request.url === 'https://ryanbyoung.github.io/vids/videos/offline.mp4') {
 
   log('HTTP call intercepted: ' + event.request.url);
  
@@ -121,7 +124,10 @@ self.addEventListener('fetch', function(event) {
       });
     })
     );
-  }
+  } // end if range request
+
+  } // added this = end if video file fetch 
+
 });
 
 // log function
