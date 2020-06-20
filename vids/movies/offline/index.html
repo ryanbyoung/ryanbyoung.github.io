@@ -172,6 +172,17 @@
       // saveForOffline checkbox event listener
       saveForOffline.addEventListener('change', function(event) {
         if (saveForOffline.checked) {
+          // Check if a service worker can be used in this browser
+          if ('serviceWorker' in navigator) {
+            // If it can, attempt to register it
+            navigator.serviceWorker.register('../../sw.js').then(function() {
+              // Success
+              console.log('Service worker registration successful.');
+            }).catch(function(error) {
+              // Fail
+              console.log('Service worker registration failed: ', error);
+            });
+          }
           // Open cache and save
           caches.open(CURRENT_CACHE).then(function(cache) {
             fetch(movieSrc).then(function(response) {
@@ -182,6 +193,7 @@
           console.log('Movie saved to the cache.');
           document.querySelector('label').innerText = 'Saved';
         } else {
+          // TODO figure out a way to just delete video in cache, not whole cache
           caches.delete(CURRENT_CACHE, {ignoreVary: true, ignoreSearch: true});
           console.log('Movie removed from cache.');
           if (window.navigator.onLine == false) {
@@ -195,22 +207,8 @@
       // If cache exists, register the service worker and show the option for saving the video
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
         if (cacheExists) {
-          // Service Worker
-          // Check if a service worker can be used in this browser
-          if ('serviceWorker' in navigator) {
-            // If it can, attempt to register it
-            navigator.serviceWorker.register('../../sw.js').then(function() {
-              // Success
-              console.log('Service worker registration successful.');
-            }).catch(function(error) {
-              // Fail
-              console.log('Service worker registration failed: ', error);
-            });
-          }
           // show save for offline checkbox
           OFFLINE.removeAttribute('hidden');
-          // prefetch video for Safari
-          fetch(movieSrc);
         }
       });    
       // If cache has video cache
