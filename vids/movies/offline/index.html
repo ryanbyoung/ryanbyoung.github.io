@@ -215,7 +215,19 @@
           OFFLINE.removeAttribute('hidden');
         }
       });    
-      // If cache has video cache
+      // If cache has movie in it
+      caches.has(CURRENT_CACHE).then(function(cacheExists) {
+        if (cacheExists) {
+          caches.open(CURRENT_CACHE).then(function(cache) {
+            cache.match(movieSrc).then(function(response) {
+              if (response) {
+                saveForOffline.checked = true;
+                document.querySelector('label').innerText = 'Saved';
+              }
+            });
+          });
+        }
+      });
       //caches.has(CURRENT_CACHE).then(function(cacheExists) {
         //if (cacheExists) {
           //saveForOffline.checked = true;
