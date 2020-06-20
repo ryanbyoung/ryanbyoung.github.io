@@ -64,51 +64,47 @@ self.addEventListener('fetch', function(event) {
       caches.open(CURRENT_CACHE).then(function(cache) {
         return cache.match(event.request.url).then(function(response) {
 
-          // *** added - returns response if found in cache. If not found, then puts it in the cache
-          return response || fetch(event.request.url).then(function(response) {
-            cache.put(event.request.url, response.clone());
-            return response;
-          });
-        
-          // might not need this
-          // if no response from looking in or adding to cache
+          // if no response from cache
           if (!response) {
-            console.log("Not found in cache, doing a fetch.")
+            console.log("Not found in cache, doing a fetch from the network.")
             return fetch(event.request).then(response => {
-              console.log("Fetch done, returning response: ", response)
+              console.log("Network fetch done, returning response: ", response)
               return response.arrayBuffer();
+            }).then(function(ab) {
+              console.log("Response processing.")
+              let responseHeaders = {
+                status: 206,
+                statusText: 'Partial Content',
+                headers: [
+                  ['Content-Type', 'video/mp4'],
+                  ['Content-Range', 'bytes ' + pos + '-' + 
+                  (pos2||(ab.byteLength - 1)) + '/' + ab.byteLength]
+                ]
+              };
+              console.log("Response: ", JSON.stringify(responseHeaders))
+              let abSliced = {};
+              if (pos2 > 0) {
+                abSliced = ab.slice(pos, pos2 + 1);
+              } else {
+                abSliced = ab.slice(pos);
+              }
+              console.log("Response length: ", abSliced.byteLength)
+              return new Response(
+                abSliced, responseHeaders
+              );
             });
-          } // end if
+            // add video to the cache
+            return cache.add(event.request.url);
 
-          console.log("Found in cache, doing a fetch.")
-          return response.arrayBuffer();
-        }).then(function(ab) {
-          console.log("Response processing.")
-          let responseHeaders = {
-            status: 206,
-            statusText: 'Partial Content',
-            headers: [
-              ['Content-Type', 'video/mp4'],
-              ['Content-Range', 'bytes ' + pos + '-' + 
-              (pos2||(ab.byteLength - 1)) + '/' + ab.byteLength]
-            ]
-          };
-
-          console.log("Response: ", JSON.stringify(responseHeaders))
-          let abSliced = {};
-          if (pos2 > 0) {
-            abSliced = ab.slice(pos, pos2 + 1);
+          // else if file found in the cache
           } else {
-            abSliced = ab.slice(pos);
+            console.log("Found in cache, fetching from there.")
+            return response.arrayBuffer();
           }
+        }); // end match event
+      }) // end cache open
+    ); // end event respondWith
 
-          console.log("Response length: ", abSliced.byteLength)
-          return new Response(
-            abSliced, responseHeaders
-          );
-        });
-      })
-    );
   } else {
     console.log('Non-range request for: ', event.request.url);
     event.respondWith(
