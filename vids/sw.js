@@ -1,8 +1,8 @@
-const CACHE_VERSION = 1;
-const CURRENT_CACHE = 'Prefetch-v' + CACHE_VERSION;
-let urlsToCache = [
-  '/vids/videos/offline.mp4'
-];
+//const CACHE_VERSION = 1;
+//const CURRENT_CACHE = 'Prefetch-v' + CACHE_VERSION;
+//let urlsToCache = [
+  //'/vids/videos/offline.mp4'
+//];
 
 self.addEventListener('install', event => {
     log('SW INSTALLING');
@@ -123,7 +123,7 @@ self.addEventListener('fetch', function(event) {
   }
 });
 
-// each logging line will be prepended with the service worker name
+// log function
 function log(message) {
     console.log(message);
 }
