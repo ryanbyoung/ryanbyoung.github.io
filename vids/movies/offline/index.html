@@ -175,6 +175,7 @@
 
       // variables
       const movieSrc = '/vids/videos/offline.mp4';
+      const OFFLINE = document.getElementById('offline');
       const saveForOffline = document.getElementById('save');
       // put these in a js include
       const CACHE_VERSION = 1;
@@ -208,7 +209,7 @@
         if (cacheExists) {
           OFFLINE.removeAttribute('hidden');
         }
-      }      
+      });    
       // If cache has video cache
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
         if (cacheExists) {
