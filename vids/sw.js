@@ -93,9 +93,6 @@ self.addEventListener('fetch', function(event) {
                 abSliced, responseHeaders
               );
             });
-            // add video to the cache
-            return cache.add(event.request.url);
-
           // else if file found in the cache
           } else {
             console.log("Found in cache, fetching from there.")
