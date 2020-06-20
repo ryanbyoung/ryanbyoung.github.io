@@ -1,5 +1,6 @@
-//const CACHE_VERSION = 1;
-//const CURRENT_CACHE = 'Prefetch-v' + CACHE_VERSION;
+// from include js
+const CACHE_VERSION = 1;
+const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
 //let urlsToCache = [
   //'/vids/videos/offline.mp4'
 //];
@@ -43,8 +44,8 @@ self.addEventListener('fetch', function(event) {
   for (var pair of event.request.headers.entries()) {
     console.log(pair[0] + ': ' + pair[1]);
     headersLog.push(pair[0] + ': '+ pair[1])
- }
- console.log('Handling fetch event for: ', event.request.url, JSON.stringify(headersLog));
+  }
+  console.log('Handling fetch event for: ', event.request.url, JSON.stringify(headersLog));
 
   if (event.request.headers.get('range')) {
     console.log('Range request for: ', event.request.url);
