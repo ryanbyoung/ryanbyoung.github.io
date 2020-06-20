@@ -4,7 +4,7 @@ const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
 //let urlsToCache = [
   //'/vids/videos/offline.mp4'
 //];
-console.log(request.url);
+
 self.addEventListener('install', event => {
   log('SW INSTALLING');
   const installCompleted = Promise.resolve()
