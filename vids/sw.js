@@ -62,24 +62,23 @@ self.addEventListener('fetch', function(event) {
     console.log('Range request for: '+ event.request.url,' Range: ' + rangeHeader, " Parsed as: " + pos + "-" + pos2);
     event.respondWith(
       caches.open(CURRENT_CACHE).then(function(cache) {
-        return cache.match(event.request.url);
-      }).then(function(response) {
+        return cache.match(event.request.url).then(function(response) {
 
-        // *** added - returns response if found in cache. If not found, then puts it in the cache
-        return response || fetch(event.request.url).then(function(response) {
-          cache.put(event.request.url, response.clone());
-          return response;
-        });
-        
-        // might not need this
-        // if no response from looking in or adding to cache
-        if (!response) {
-          console.log("Not found in cache, doing a fetch.")
-          return fetch(event.request).then(response => {
-            console.log("Fetch done, returning response: ", response)
-            return response.arrayBuffer();
+          // *** added - returns response if found in cache. If not found, then puts it in the cache
+          return response || fetch(event.request.url).then(function(response) {
+            cache.put(event.request.url, response.clone());
+            return response;
           });
-        }
+        
+          // might not need this
+          // if no response from looking in or adding to cache
+          if (!response) {
+            console.log("Not found in cache, doing a fetch.")
+            return fetch(event.request).then(response => {
+              console.log("Fetch done, returning response: ", response)
+              return response.arrayBuffer();
+            });
+          } // end if
 
         console.log("Found in cache, doing a fetch.")
         return response.arrayBuffer();
