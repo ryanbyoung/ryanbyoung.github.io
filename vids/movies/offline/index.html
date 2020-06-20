@@ -220,7 +220,7 @@
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
         if (cacheExists) {
           caches.open(CURRENT_CACHE).then(function(cache) {
-            cache.match(movieSrc).then(function(response) {
+            cache.match(VIDEO_SRC).then(function(response) {
               if (response) {
                 SAVE_CHECKBOX.checked = true;
                 SAVE_LABEL.innerText = 'Saved';
