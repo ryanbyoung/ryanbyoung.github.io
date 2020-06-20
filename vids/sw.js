@@ -6,7 +6,8 @@ const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
 //];
 
 self.addEventListener('install', event => {
-    log('SW INSTALLING ', event.target.url);
+    console.log(event.target.url);
+    log('SW INSTALLING');
     const installCompleted = Promise.resolve()
                         .then(() => log('SW INSTALLED'));
 
