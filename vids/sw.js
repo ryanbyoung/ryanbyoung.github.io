@@ -52,7 +52,6 @@ self.addEventListener('fetch', function(event) {
   console.log('Handling fetch event for: ', event.request.url, JSON.stringify(headersLog));
 
   if (event.request.headers.get('range')) {
-    console.log('Range request for: ', event.request.url);
     let rangeHeader = event.request.headers.get('range');
     let rangeMatch = rangeHeader.match(/^bytes\=(\d+)\-(\d+)?/);
     let pos = Number(rangeMatch[1]);
