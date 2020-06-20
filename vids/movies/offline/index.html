@@ -209,10 +209,9 @@
         } 
       }); // end save checkbox event listener
       
-      // If cache exists, show the option for saving the video
+      // If cache exists and app is online, show the option for saving the video
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
-        if (cacheExists) {
-          // show save for offline checkbox
+        if (cacheExists && window.navigator.onLine) {
           OFFLINE_P_TAG.removeAttribute('hidden');
         }
       });    
