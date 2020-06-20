@@ -174,10 +174,11 @@
       }
 
       // variables
-      const CACHE_VERSION = 1;
-      const CURRENT_CACHE = 'OfflineMovie-v' + CACHE_VERSION;
       const movieSrc = '/vids/videos/offline.mp4';
       const saveForOffline = document.getElementById('save');
+      // put these in a js include
+      const CACHE_VERSION = 1;
+      const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
       
       // saveForOffline checkbox event listener
       saveForOffline.addEventListener('change', function(event) {
