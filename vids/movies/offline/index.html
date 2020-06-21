@@ -208,16 +208,15 @@
           }
         } 
       }); // end save checkbox event listener
-      
-      // If cache exists and app is online, show the option for saving the video
-      caches.has(CURRENT_CACHE).then(function(cacheExists) {
-        if (cacheExists && window.navigator.onLine === true) {
-          OFFLINE_P_TAG.removeAttribute('hidden');
-        }
-      });    
-      // If cache exists and has movie file in it, show checkbox as checked and make label say saved.
+   
+      // If cache exists...
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
         if (cacheExists) {
+          // Check if user is online, if they are show offline paragraph
+          if (window.navigator.onLine === true) {
+            OFFLINE_P_TAG.removeAttribute('hidden');
+          }
+          // Check if video file exists in cache. If so, show checkbox as checked and update label
           caches.open(CURRENT_CACHE).then(function(cache) {
             cache.match(VIDEO_SRC).then(function(response) {
               if (response) {
