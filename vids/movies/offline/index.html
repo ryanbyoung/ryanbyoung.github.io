@@ -211,7 +211,7 @@
       
       // If cache exists and app is online, show the option for saving the video
       caches.has(CURRENT_CACHE).then(function(cacheExists) {
-        if (cacheExists && window.navigator.onLine) {
+        if (cacheExists && window.navigator.onLine === true) {
           OFFLINE_P_TAG.removeAttribute('hidden');
         }
       });    
