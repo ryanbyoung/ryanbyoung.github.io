@@ -170,7 +170,10 @@
       const CACHE_VERSION = 1;
       const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
 
-          // Check if a service worker can be used in this browser
+      // Save offline checkbox event listener
+      SAVE_CHECKBOX.addEventListener('change', function(event) {
+        if (SAVE_CHECKBOX.checked) {
+          // Check if a service worker can be used in this browser, log message
           if ('serviceWorker' in navigator) {
             // If it can, attempt to register it
             navigator.serviceWorker.register('../../sw.js').then(function() {
@@ -181,10 +184,6 @@
               console.log('Service worker registration failed: ', error);
             });
           }
-
-      // Save checkbox event listener
-      SAVE_CHECKBOX.addEventListener('change', function(event) {
-        if (SAVE_CHECKBOX.checked) {
           // Open the cache, fetch the movie file, and add it to the cache. Change the save checkbox label to say Saved.
           caches.open(CURRENT_CACHE).then(function(cache) {
             fetch(VIDEO_SRC).then(function(response) {
