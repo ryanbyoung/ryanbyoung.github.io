@@ -196,10 +196,10 @@
           }
           // Open the cache, fetch the movie file, and add it to the cache. Change the save checkbox label to say Saved.
           caches.open(CURRENT_CACHE).then(function(cache) {
-            fetch(CACHE_URLS).then(function(response) {
-              cache.addAll(CACHE_URLS);
-              return response;
-            });
+            //fetch(CACHE_URLS).then(function(response) {
+              return cache.addAll(CACHE_URLS);
+              //return response;
+            //});
           });
           console.log('Page files saved to the cache.');
           SAVE_LABEL.innerText = 'Saved';
