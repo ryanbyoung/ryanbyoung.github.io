@@ -162,6 +162,7 @@
     <script>
 
       // variables
+      const CLOSE = document.getElementById('close');
       const OFFLINE_P_TAG = document.getElementById('offline');
       const SAVE_CHECKBOX = document.getElementById('save');
       const SAVE_LABEL = document.querySelector('label');
@@ -169,6 +170,11 @@
       // put these in a js include
       const CACHE_VERSION = 1;
       const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
+
+      // Close event listener
+      CLOSE.addEventListener('click', function () {
+        location.pathname = 'vids/movies/';
+      });
 
       // Save offline checkbox event listener
       SAVE_CHECKBOX.addEventListener('change', function(event) {
