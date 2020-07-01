@@ -1,16 +1,14 @@
 // from include js
 const CACHE_VERSION = 1;
 const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
-//let urlsToCache = [
-  //'/vids/videos/offline.mp4'
-//];
 
-// check to see if the offline movie page is calling the service worker
-// if it is, run the install event listener that works with videos
-// otherwise just run the generic install event listener
-if (self.location.href === 'https://ryanbyoung.github.io/vids/movies/offline/') {
+// install event listener
+self.addEventListener('install', function(event) {
 
-  self.addEventListener('install', function(event) {
+  // check to see if the offline movie page is calling the service worker
+  // if it is, run the install event listener that works with videos
+  // otherwise just run the generic install event listener
+  if (self.location.href === 'https://ryanbyoung.github.io/vids/movies/offline/') {
 
     const CACHE_URLS = [
       '/vids/movies/offline/',
@@ -29,17 +27,15 @@ if (self.location.href === 'https://ryanbyoung.github.io/vids/movies/offline/') 
         return cache.addAll(CACHE_URLS);
       })
     );
-  });
-} else {
-  self.addEventListener('install', event => {
+  } else {
     log('SW INSTALLING');
     const installCompleted = Promise.resolve()
       .then(() => log('SW INSTALLED'));
 
     event.waitUntil(installCompleted);
-  });
-}
-
+  }
+}); // end install event listener
+  
 self.addEventListener('activate', event => {
   log('SW ACTIVATING');
   const activationCompleted = Promise.resolve()
