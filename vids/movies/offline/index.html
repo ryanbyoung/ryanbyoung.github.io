@@ -228,6 +228,7 @@
           }
           // Check if video file exists in cache. If so, show checkbox as checked and update label. If they are offline
           // show offline paragraph
+          window.alert('here');
           caches.open(CURRENT_CACHE).then(function(cache) {
             cache.match(CACHE_URLS).then(function(response) {
               if (response) {
