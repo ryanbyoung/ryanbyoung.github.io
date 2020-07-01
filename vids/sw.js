@@ -5,6 +5,12 @@ const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
   //'/vids/videos/offline.mp4'
 //];
 
+if (self.location.href === 'https://ryanbyoung.github.io/vids/movies/offline/') {
+  console.log('got it');
+} else {
+  console.log('nope');
+}
+
 self.addEventListener('install', event => {
   log('SW INSTALLING');
   const installCompleted = Promise.resolve()
