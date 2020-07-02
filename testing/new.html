@@ -76,7 +76,7 @@
         );
 
         // Only run the next code when both promises have fulfilled
-        Promise.all(mp4Blob).then(function(value) {
+        Promise(mp4Blob).then(function(value) {
           // display the video fetched from the network with displayVideo()
           displayVideo(value, video.name);
           // store it in the IDB using storeVideo()
