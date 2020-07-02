@@ -42,102 +42,78 @@
     // IndexDB functionality
     window.onload = function() {
       // Create constants
-      const section = document.querySelector('section');
-      const videos = [{
+      const VIDEO = {
         'name': 'elf'
-      }];
+      };
       // Create an instance of a db object for us to store our database in
       let db;
+
+      // init function
       function init() {
-        // Loop through the video names one by one
-        for (let i = 0; i < videos.length; i++) {
-          // Open transaction, get object store, and get() each video by name
-          let objectStore = db.transaction('videos_os').objectStore('videos_os');
-          let request = objectStore.get(videos[i].name);
-          request.onsuccess = function() {
-            // If the result exists in the database (is not undefined)
-            if (request.result) {
-              // Grab the videos from IDB and display them using displayVideo()
-              console.log('taking videos from IDB');
-              displayVideo(request.result.mp4, request.result.webm, request.result.name);
-            } else {
-              // Fetch the videos from the network
-              fetchVideoFromNetwork(videos[i]);
-            }
-          }; // end onsuccess request
-        } // end for loop
+        // Open transaction, get object store, and get() the video by name
+        let objectStore = db.transaction('videos_os').objectStore('videos_os');
+        let request = objectStore.get(VIDEO.name);
+        request.onsuccess = function() {
+          // If the result exists in the database (is not undefined)
+          if (request.result) {
+            // Grab the videos from IDB and display them using displayVideo()
+            console.log('Taking videos from IDB');
+            displayVideo(request.result.mp4, request.result.name);
+          } else {
+            // Fetch the videos from the network
+            fetchVideoFromNetwork(VIDEO);
+          }
+        }; // end onsuccess request
       } // end init function
 
       // Define the fetchVideoFromNetwork() function
       function fetchVideoFromNetwork(video) {
-        console.log('fetching videos from network');
+        console.log('Fetching videos from network');
         // Fetch the MP4 and WebM versions of the video using the fetch() function,
         // then expose their response bodies as blobs
         let mp4Blob = fetch('videos/' + video.name + '.mp4').then(response =>
           response.blob()
         );
-        let webmBlob = fetch('videos/' + video.name + '.webm').then(response =>
-          response.blob()
-        );
 
         // Only run the next code when both promises have fulfilled
-        Promise.all([mp4Blob, webmBlob]).then(function(values) {
+        Promise.all(mp4Blob).then(function(value) {
           // display the video fetched from the network with displayVideo()
-          displayVideo(values[0], values[1], video.name);
+          displayVideo(value, video.name);
           // store it in the IDB using storeVideo()
-          storeVideo(values[0], values[1], video.name);
+          storeVideo(value, video.name);
         });
       } // end fetchVideoFromNetwork function
 
       // Define the storeVideo() function
-      function storeVideo(mp4Blob, webmBlob, name) {
+      function storeVideo(mp4Blob, name) {
         // Open transaction, get object store; make it a readwrite so we can write to the IDB
         let objectStore = db.transaction(['videos_os'], 'readwrite').objectStore('videos_os');
         // Create a record to add to the IDB
         let record = {
           mp4: mp4Blob,
-          webm: webmBlob,
           name: name
         }
 
         // Add the record to the IDB using add()
         let request = objectStore.add(record);
-
         request.onsuccess = function() {
-          console.log('Record addition attempt finished');
+          console.log('DB record addition attempt successful');
         }
-
         request.onerror = function() {
-          console.log(request.error);
+          console.log('DB record addition failed: ', request.error);
         }
 
       }; // end storeVideo function
 
       // Define the displayVideo() function
-      function displayVideo(mp4Blob, webmBlob, title) {
+      function displayVideo(mp4Blob, title) {
         // Create object URLs out of the blobs
         let mp4URL = URL.createObjectURL(mp4Blob);
-        let webmURL = URL.createObjectURL(webmBlob);
 
         // Create DOM elements to embed video in the page
-        const article = document.createElement('article');
-        const h2 = document.createElement('h2');
-        h2.textContent = title;
-        const video = document.createElement('video');
-        video.controls = true;
-        const source1 = document.createElement('source');
-        source1.src = mp4URL;
-        source1.type = 'video/mp4';
-        const source2 = document.createElement('source');
-        source2.src = webmURL;
-        source2.type = 'video/webm';
+        const SOURCE = document.querySelector('source');
+        SOURCE.src = mp4URL;
 
-        // Embed DOM elements into page
-        section.appendChild(article);
-        article.appendChild(h2);
-        article.appendChild(video);
-        video.appendChild(source1);
-        video.appendChild(source2);
       } // end displayVideo function
 
       // Open our database; it is created if it doesn't already exist
@@ -174,9 +150,6 @@
         objectStore.createIndex('mp4', 'mp4', {
           unique: false
         });
-        objectStore.createIndex('webm', 'webm', {
-          unique: false
-        });
 
         console.log('Database setup complete');
       }; // end onupgradeneeded request
@@ -196,28 +169,24 @@
     */
     
     /*
-    Video code you want to emulate
-      <video controls controlslist="nodownload">
-        <source src="videos/elf.mp4" type="video/mp4">
-        <p>It looks like your browser doesn't support HTML5 video. Here is a <a href="videos/offline.mp4">link to the movie</a>.</p>
-      </video>
-
-    If IndexDB exists, check to see if user is online
-      If user is online
+    On content load
+      If the video file is in IndexDB and page cache exists
         Show the online paragraph
-        If the video file is in IndexDB
-          Check checkbox, update label to read Saved, and load file from there
-        Else if the video file isn't in IndexDB
-          Uncheck checkbox, update label to read Save for Offline, and load the file from the network
+        Check checkbox, update label to read Saved, and change video src to be file from IndexDB
           
     On checkbox change
-      If checked
-        Check if browser supports Service Workers, if so install it
+      If checkbox checked
+        Check if browser supports Service Workers
+          If so, register SW
+        If no support
+          Log error
         Save the new.html file to the cache
         Save the video file to the IndexDB
-      Else if unchecked
+        Change video src to be file from IndexDB
+      Else if checkbox unchecked
         Delete new.html file from cache
         Delete the video file from the IndexDB
+        Change video src to be network file
         If the user is online
           Update label to read Save for Offline
         Else if the user isn't online
@@ -231,14 +200,14 @@
     <h1>IndexedDB video store</h1>
   </header>
   <main>
-    <section>
-    </section>
-
+    <video controls controlslist="nodownload">
+      <source src="videos/elf.mp4" type="video/mp4">
+      <p>It looks like your browser doesn't support HTML5 video. Here is a <a href="videos/elf.mp4">link to the movie</a>.</p>
+    </video>
     <p id="online" hidden>
       <input type="checkbox" id="save" name="save">
       <label for="save">Save for offline</label>
     </p>
-  
   </main>
   <footer>
     <p>Copyright nobody. Use the code as you like.</p>
