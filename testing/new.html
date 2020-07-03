@@ -175,9 +175,12 @@
     
     /*
     On content load
-      Show the online paragraph
       If the video file is in IndexDB and page cache exists
+        Show the online paragraph
         Check checkbox, update label to read Saved, and change video src to be file from IndexDB
+      Else
+        If user is online
+          Show the online paragraph
           
     On checkbox change
       If checkbox checked
