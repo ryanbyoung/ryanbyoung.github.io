@@ -77,8 +77,22 @@
           }
         }; // end onsuccess request
       } // end init function
-      
-      init();
+
+      // Open the database
+      let request = window.indexedDB.open('videos_db');
+  
+      // onerror handler signifies that the database didn't open successfully
+      request.onerror = function() {
+        console.log('Database failed to open');
+      }; // end onerror handler
+
+      // onsuccess handler signifies that the database opened successfully
+      request.onsuccess = function() {
+        console.log('Database opened succesfully');
+        // Store the opened database object in the db variable. This is used a lot below
+        db = request.result;
+        init();
+      }; // end onsuccess handler
 
     }; // end window onload
     // end IndexDB functionality
