@@ -109,14 +109,14 @@
           let request = objectStore.get(VIDEO.name);
           request.onsuccess = function() {
             // If elf exists in the database (is not undefined)
-            //if (request.result) {
+            if (request.result) {
               // Result good
               console.log('found it');
-            //}
+            }
+            else {
+              console.log('Elf not in database'); 
+            }
           }; // end onsuccess request
-          request.onerror = function() {
-            console.log('Elf not in database: ', request.error);
-          }
         }
         //init();
       }; // end onsuccess handler
