@@ -171,8 +171,11 @@
         return;
       }
 
-      var dbPromise = window.indexedDB.open('videos_db', 1);
-      console.log (dbPromise);
+      var dbPromise = window.indexedDB.open('videos_db', 1, function(database) {
+      if (!database.objectStoreNames.contains('elf')) {
+        console.log('here');
+      }
+      });
 
       /* Is video in database
       dbPromise.then(function(database) {
