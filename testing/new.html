@@ -104,8 +104,7 @@
         console.log('Database opened succesfully');
         // Store the opened database object in the db variable. This is used a lot below
         db = request.result;
-        console.log(db);
-        console.log(db.objectStoreNames);
+        console.log(db.objectStoreNames.length);
         //init();
       }; // end onsuccess handler
 
