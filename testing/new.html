@@ -65,103 +65,20 @@
       
       // init function
       function init() {
+        
         // Open transaction, get object store, and get() the video by name
         let objectStore = db.transaction('videos_os').objectStore('videos_os');
         let request = objectStore.get(VIDEO.name);
         request.onsuccess = function() {
           // If the result exists in the database (is not undefined)
           if (request.result) {
-            // Grab the videos from IDB and display them using displayVideo()
-            console.log('Taking videos from IDB');
-            displayVideo(request.result.mp4, request.result.name);
-          } else {
-            // Fetch the videos from the network
-            fetchVideoFromNetwork(VIDEO);
+            // Result good
+            console.log('good');
           }
         }; // end onsuccess request
       } // end init function
-
-      // displayVideo() function
-      function displayVideo(mp4Blob, title) {
-        // Create object URLs out of the blobs
-        let mp4URL = URL.createObjectURL(mp4Blob);
-        // Create DOM elements to embed video in the page
-        const SOURCE = document.querySelector('source');
-        SOURCE.src = mp4URL;
-      } // end displayVideo function
-
-      // fetchVideoFromNetwork() function
-      function fetchVideoFromNetwork(video) {
-        console.log('Fetching videos from network');
-        // Fetch the MP4 version of the video using the fetch() function,
-        // then expose the response body as a blob
-        let mp4Blob = fetch('videos/' + video.name + '.mp4').then(response =>
-          response.blob()
-        );
-        // Only run the next code when both promises have fulfilled
-        Promise.resolve(mp4Blob).then(function(value) {
-          // display the video fetched from the network with displayVideo()
-          displayVideo(value, video.name);
-          // store it in the IDB using storeVideo()
-          storeVideo(value, video.name);
-        });
-      } // end fetchVideoFromNetwork function
-
-      // storeVideo() function
-      function storeVideo(mp4Blob, name) {
-        // Open transaction, get object store; make it a readwrite so we can write to the IDB
-        let objectStore = db.transaction('videos_os', 'readwrite').objectStore('videos_os');
-        // Create a record to add to the IDB
-        let record = {
-          mp4: mp4Blob,
-          name: name
-        }
-        // Add the record to the IDB using add()
-        let request = objectStore.add(record);
-        request.onsuccess = function() {
-          console.log('DB record addition attempt successful');
-        }
-        request.onerror = function() {
-          console.log('DB record addition failed: ', request.error);
-        }
-      }; // end storeVideo function
-
-      // Open our database; it is created if it doesn't already exist
-      // (see onupgradeneeded below)
-      let request = window.indexedDB.open('videos_db', 1);
       
-      // onerror handler signifies that the database didn't open successfully
-      request.onerror = function() {
-        console.log('Database failed to open');
-      }; // end onerror handler
-
-      // onsuccess handler signifies that the database opened successfully
-      request.onsuccess = function() {
-        console.log('Database opened succesfully');
-        // Store the opened database object in the db variable. This is used a lot below
-        db = request.result;
-        init();
-      }; // end onsuccess handler
-
-      request.transaction('videos_os').objectStore('videos_os').get('elf').onsuccess = function(event) {
-        console.log('yay');
-      };
-      
-      // Setup the database tables if this has not already been done
-      request.onupgradeneeded = function(e) {
-        // Grab a reference to the opened database
-        let db = e.target.result;
-        // Create an objectStore to store our videos in (basically like a single table)
-        // including a auto-incrementing key
-        let objectStore = db.createObjectStore('videos_os', {
-          keyPath: 'name'
-        });
-        // Define what data items the objectStore will contain
-        objectStore.createIndex('mp4', 'mp4', {
-          unique: false
-        });
-        console.log('Database setup complete');
-      }; // end onupgradeneeded request
+      init();
 
     }; // end window onload
     // end IndexDB functionality
