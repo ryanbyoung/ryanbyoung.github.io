@@ -143,7 +143,7 @@
         init();
       }; // end onsuccess handler
 
-      db.transaction('videos_os').objectStore('videos_os').get('elf').onsuccess = function(event) {
+      let test = db.transaction('videos_os').objectStore('videos_os').get('elf').onsuccess = function(event) {
         console.log('yay');
       };
       
