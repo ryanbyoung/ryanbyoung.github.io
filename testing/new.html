@@ -171,7 +171,7 @@
         return;
       }
 
-      var dbPromise = idb.open('videos_db', 1);
+      var dbPromise = window.indexedDB.open('videos_db', 1);
 
       // Is video in database
       dbPromise.then(function(database) {
