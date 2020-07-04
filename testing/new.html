@@ -64,7 +64,7 @@
       const ONLINE = document.getElementById('online');
       const SAVE_CHECKBOX = document.querySelector('#save');
       const SAVE_LABEL = document.querySelector('label');
-      let urlsToCache = [
+      const CACHE_URLS = [
         '/vids/movies/offline/',
         '/vids/movies/offline/index.html'
       ];
@@ -145,19 +145,46 @@
           return false;
         } 
       }
+
+      SAVE_CHECKBOX.addEventListener('change', function(event) {
+        if (SAVE_CHECKBOX.checked) {
+          // Check if a service worker can be used in this browser, log message
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then((reg) => {
+              console.log('Registration succeeded. Scope is: ' + reg.scope);
+            }).catch((error) => {
+              console.log('Registration failed: ' + error);
+            });
+          }
+          caches.open(CURRENT_CACHE).then(function(cache) {
+            let updateCache = cache.addAll(CACHE_URLS);
+            updateCache.then(function() {
+              console.log('Page files now cached for offline use.');
+            }).catch(function (error) {
+              console.log('Could not populate cache: ' + error);
+            });
+          });
+          //TODO: handle video file
+          SAVE_LABEL.innerText = 'Saved';
+        } else { // if save checkbox is unchecked
+          //TODO: delete video file from IDB
+          // Open the cache and delete the movie
+          caches.open(CURRENT_CACHE).then(function(cache) {
+            cache.delete(CACHE_URLS).then(function(response) {
+              console.log('Page files removed from cache.');
+            });
+          });
+          // If the user if online/offline, update the UI accordingly
+          if (window.navigator.onLine) {
+            SAVE_LABEL.innerText = 'Save for offline';
+          } else {
+            ONLINE.setAttribute('hidden', '');
+          }
+        } 
+      }); // end save checkbox event listener
+      
     }; // end window onload
     // end IndexDB functionality
-
-    /* 
-    Service Worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').then((reg) => {
-        console.log('Registration succeeded. Scope is: ' + reg.scope);
-      }).catch((error) => {
-        console.log('Registration failed: ' + error);
-      });
-    }
-    */
     
     /*
     On content load
