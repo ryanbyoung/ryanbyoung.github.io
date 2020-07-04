@@ -110,7 +110,7 @@
       // storeVideo() function
       function storeVideo(mp4Blob, name) {
         // Open transaction, get object store; make it a readwrite so we can write to the IDB
-        let objectStore = db.transaction(['videos_os'], 'readwrite').objectStore('videos_os');
+        let objectStore = db.transaction('videos_os', 'readwrite').objectStore('videos_os');
         // Create a record to add to the IDB
         let record = {
           mp4: mp4Blob,
@@ -130,6 +130,15 @@
       // (see onupgradeneeded below)
       let request = window.indexedDB.open('videos_db', 1);
 
+      // Is video in database
+      request.then(function(db) {
+        let tx = db.transaction('video_os', 'readonly');
+        let store = tx.objectStore('video_os');
+        return store.get('elf');
+      }).then(function(value) {
+        console.dir(value);
+      });
+      
       // onerror handler signifies that the database didn't open successfully
       request.onerror = function() {
         console.log('Database failed to open');
