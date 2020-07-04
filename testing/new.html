@@ -62,16 +62,6 @@
       };
       // Create an instance of a db object for us to store our database in
       let db;
-
-      // Is video in database
-      console.log(db);
-      db.then(function(database) {
-        let tx = database.transaction('video_os', 'readonly');
-        let store = tx.objectStore('video_os');
-        return store.get('elf');
-      }).then(function(value) {
-        console.dir(value);
-      });
       
       // init function
       function init() {
@@ -153,6 +143,15 @@
         init();
       }; // end onsuccess handler
 
+      // Is video in database
+      db.then(function(database) {
+        let tx = database.transaction('video_os', 'readonly');
+        let store = tx.objectStore('video_os');
+        return store.get('elf');
+      }).then(function(value) {
+        console.dir(value);
+      });
+      
       // Setup the database tables if this has not already been done
       request.onupgradeneeded = function(e) {
         // Grab a reference to the opened database
