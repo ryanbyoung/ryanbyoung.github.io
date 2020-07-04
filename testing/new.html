@@ -61,6 +61,7 @@
       const CACHE_VERSION = 1;
       const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
       // other variables
+      const ONLINE = document.getElementById('online');
       const SAVE_CHECKBOX = document.querySelector('#save');
       const SAVE_LABEL = document.querySelector('label');
       let urlsToCache = [
@@ -101,8 +102,8 @@
 
       // onsuccess handler signifies that the database opened successfully
       request.onsuccess = function() {
-        console.log('Database opened succesfully');
-        // Store the opened database object in the db variable. This is used a lot below
+        console.log('Database opened successfully');
+        // Store the opened database object in the db variable
         db = request.result;
         if (db.objectStoreNames.length > 0) {
           let objectStore = db.transaction('videos_os').objectStore('videos_os');
@@ -111,16 +112,39 @@
             // If elf exists in the database (is not undefined)
             if (request.result) {
               // Result good
-              console.log('found it');
-            }
-            else {
-              console.log('Elf not in database'); 
+              console.log('found elf');
+              if (cacheExists()){
+                ONLINE.removeAttribute('hidden');
+                SAVE_CHECKBOX.checked;
+                SAVE_LABEL.innerText = "Saved";
+              }
             }
           }; // end onsuccess request
         }
-        //init();
+        else {
+          console.log('No os in database');
+          if (userOnline()) {
+            ONLINE.removeAttribute('hidden');
+          }
+        }
       }; // end onsuccess handler
 
+      function cacheExists() {
+        caches.has(CURRENT_CACHE).then(function(response) {
+          if (response) {
+            return true;
+          } else {
+            return false;
+          }
+        }); 
+      }
+      function userOnline() {
+        if (window.navigator.onLine === true) {
+          return true;
+        } else {
+          return false;
+        } 
+      }
     }; // end window onload
     // end IndexDB functionality
 
