@@ -172,7 +172,7 @@
       }
 
       var dbPromise = window.indexedDB.open('videos_db', 1, function(database) {
-      if (database.objectStoreNames.contains('elf')) {
+      if (database.objectStoreNames.contains('videos_os')) {
         console.log('here');
       }
       });
