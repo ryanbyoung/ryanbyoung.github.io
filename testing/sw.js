@@ -3,7 +3,6 @@ self.addEventListener('install', function(event) {
     const installCompleted = Promise.resolve()
       .then(() => console.log('SW INSTALLED'));
     event.waitUntil(installCompleted);
-  }
 });
 
 self.addEventListener('activate', event => {
