@@ -140,14 +140,6 @@
         console.log('Database opened succesfully');
         // Store the opened database object in the db variable. This is used a lot below
         db = request.result;
-      // Is video in database
-      db.then(function(database) {
-        let tx = database.transaction('video_os', 'readonly');
-        let store = tx.objectStore('video_os');
-        return store.get('elf');
-      }).then(function(value) {
-        console.dir(value);
-      });
         init();
       }; // end onsuccess handler
       
@@ -170,6 +162,28 @@
     }; // end window onload
     // end IndexDB functionality
     
+    (function() {
+      'use strict';
+
+      //check for support
+      if (!('indexedDB' in window)) {
+        console.log('This browser doesn\'t support IndexedDB');
+        return;
+      }
+
+      var dbPromise = idb.open('videos_db', 1);
+
+      // Is video in database
+      dbPromise.then(function(database) {
+        let tx = database.transaction('video_os', 'readonly');
+        let store = tx.objectStore('video_os');
+        return store.get('elf');
+      }).then(function(value) {
+        console.dir(value);
+      });
+      
+    })();
+
     /* 
     Service Worker
     if ('serviceWorker' in navigator) {
