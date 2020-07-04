@@ -142,6 +142,10 @@
         db = request.result;
         init();
       }; // end onsuccess handler
+
+      db.transaction('videos_os').objectStore('videos_os').get('elf').onsuccess = function(event) {
+        console.log('yay');
+      };
       
       // Setup the database tables if this has not already been done
       request.onupgradeneeded = function(e) {
@@ -161,33 +165,6 @@
 
     }; // end window onload
     // end IndexDB functionality
-    
-    (function() {
-      'use strict';
-
-      //check for support
-      if (!('indexedDB' in window)) {
-        console.log('This browser doesn\'t support IndexedDB');
-        return;
-      }
-
-      var dbPromise = window.indexedDB.open('videos_db', 1, function(database) {
-        console.log(database);
-        //if (database.objectStoreNames.contains('videos_os')) {
-          //console.log('here');
-        //}
-      });
-
-      /* Is video in database
-      dbPromise.then(function(database) {
-        let tx = database.transaction('video_os', 'readonly');
-        let store = tx.objectStore('video_os');
-        return store.get('elf');
-      }).then(function(value) {
-        console.dir(value);
-      });
-      */
-    })();
 
     /* 
     Service Worker
