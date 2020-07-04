@@ -140,9 +140,6 @@
         console.log('Database opened succesfully');
         // Store the opened database object in the db variable. This is used a lot below
         db = request.result;
-        init();
-      }; // end onsuccess handler
-
       // Is video in database
       db.then(function(database) {
         let tx = database.transaction('video_os', 'readonly');
@@ -151,6 +148,8 @@
       }).then(function(value) {
         console.dir(value);
       });
+        init();
+      }; // end onsuccess handler
       
       // Setup the database tables if this has not already been done
       request.onupgradeneeded = function(e) {
