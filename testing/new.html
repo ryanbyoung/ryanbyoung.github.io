@@ -104,7 +104,20 @@
         console.log('Database opened succesfully');
         // Store the opened database object in the db variable. This is used a lot below
         db = request.result;
-        console.log(db.objectStoreNames.length);
+        if (db.objectStoreNames.length > 0) {
+          let objectStore = db.transaction('videos_os').objectStore('videos_os');
+          let request = objectStore.get(VIDEO.name);
+          request.onsuccess = function() {
+            // If elf exists in the database (is not undefined)
+            //if (request.result) {
+              // Result good
+              console.log('found it');
+            //}
+          }; // end onsuccess request
+          request.onerror = function() {
+            console.log('Elf not in database: ', request.error);
+          }
+        }
         //init();
       }; // end onsuccess handler
 
