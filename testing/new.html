@@ -63,6 +63,16 @@
       // Create an instance of a db object for us to store our database in
       let db;
 
+      // Is video in database
+      console.log(db);
+      db.then(function(database) {
+        let tx = database.transaction('video_os', 'readonly');
+        let store = tx.objectStore('video_os');
+        return store.get('elf');
+      }).then(function(value) {
+        console.dir(value);
+      });
+      
       // init function
       function init() {
         // Open transaction, get object store, and get() the video by name
@@ -129,15 +139,6 @@
       // Open our database; it is created if it doesn't already exist
       // (see onupgradeneeded below)
       let request = window.indexedDB.open('videos_db', 1);
-
-      // Is video in database
-      request.then(function(db) {
-        let tx = db.transaction('video_os', 'readonly');
-        let store = tx.objectStore('video_os');
-        return store.get('elf');
-      }).then(function(value) {
-        console.dir(value);
-      });
       
       // onerror handler signifies that the database didn't open successfully
       request.onerror = function() {
