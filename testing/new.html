@@ -57,6 +57,16 @@
 
     // IndexDB functionality
     window.onload = function() {
+      // js import
+      const CACHE_VERSION = 1;
+      const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
+      // other variables
+      const SAVE_CHECKBOX = document.querySelector('#save');
+      const SAVE_LABEL = document.querySelector('label');
+      let urlsToCache = [
+        '/vids/movies/offline/',
+        '/vids/movies/offline/index.html'
+      ];
       const VIDEO = {
         'name': 'elf'
       };
@@ -70,16 +80,19 @@
         let objectStore = db.transaction('videos_os').objectStore('videos_os');
         let request = objectStore.get(VIDEO.name);
         request.onsuccess = function() {
-          // If the result exists in the database (is not undefined)
+          // If elf exists in the database (is not undefined)
           if (request.result) {
             // Result good
-            console.log('good');
+            console.log('found it');
           }
         }; // end onsuccess request
+        request.onerror = function() {
+          console.log('Elf not in database: ', request.error);
+        }
       } // end init function
 
-      // Open the database
-      let request = window.indexedDB.open('videos_db');
+      // Open the database; it is created if it doesn't already exist
+      let request = window.indexedDB.open('videos_db', 1);
   
       // onerror handler signifies that the database didn't open successfully
       request.onerror = function() {
