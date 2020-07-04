@@ -172,10 +172,12 @@
       }
 
       var dbPromise = window.indexedDB.open('videos_db', 1, function(database) {
-      if (database.objectStoreNames.contains('videos_os')) {
-        console.log('here');
-      }
+        console.log(database);
+        //if (database.objectStoreNames.contains('videos_os')) {
+          //console.log('here');
+        //}
       });
+    });
 
       /* Is video in database
       dbPromise.then(function(database) {
