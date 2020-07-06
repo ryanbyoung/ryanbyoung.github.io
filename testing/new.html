@@ -245,27 +245,6 @@
         } 
       }); // end SAVE_CHECKBOX change event listener
 
-      // init function - might not use, ignore for now
-      function init() {
-        
-        // Open transaction, get object store, and get() the video by name
-        let objectStore = db.transaction('videos_os').objectStore('videos_os');
-        let request = objectStore.get(VIDEO.name);
-        request.onsuccess = function() {
-          // If elf exists in the database (is not undefined)
-          if (request.result) {
-            // Result good
-            console.log('found it');
-          }
-        }; // end onsuccess request
-        request.onerror = function() {
-          console.log('Elf not in database: ', request.error);
-        }
-      } // end init function
-
-      // Call checkDB function to see if video file is in the Indexed Database
-      checkDB();
-
     }; // end window onload
     // end IndexDB functionality
     
