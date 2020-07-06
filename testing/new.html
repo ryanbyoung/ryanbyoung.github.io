@@ -76,8 +76,6 @@
       };
 
       /*
-       * checkDB function
-       *
        * Open the database; it is created if it doesn't already exist. Log message on error opening.
        *
        * On successful opening, log message and store opened database object. If an object store exists in the database, check to if it's the videos
@@ -87,53 +85,31 @@
        *
        * If there isn't an object store in the database, call the userOnline function to see if the user is online. If so, show the online paragraph.
        */
-      function checkDB() {
-        let request = window.indexedDB.open('videos_db', 1);
-        request.onerror = function() {
-          console.log('Database failed to open');
-        };
-        request.onsuccess = function() {
-          console.log('Database opened successfully');
-          db = request.result;
-          if (db.objectStoreNames.length > 0) {
-            let objectStore = db.transaction('videos_os').objectStore('videos_os');
-            let request = objectStore.get(VIDEO.name);
-            request.onsuccess = function() {
-              if (request.result) {
-                console.log('found elf');
-                if (cacheExists()){
-                  console.log('Taking video from IDB');
-                  displayVideo(request.result.mp4, request.result.name);
-                  ONLINE.removeAttribute('hidden');
-                  SAVE_CHECKBOX.checked;
-                  SAVE_LABEL.innerText = 'Saved';
-                }
-              }
-            }; // end onsuccess request
-          }
-          else {
-            console.log('No os in database');
-            if (userOnline()) {
-              ONLINE.removeAttribute('hidden');
-            }
-          }
-        }; // end onsuccess handler
-        // Setup the database tables if this has not already been done
-        request.onupgradeneeded = function(e) {
-          // Grab a reference to the opened database
-          let db = e.target.result;
-          // Create an objectStore to store our videos in (basically like a single table)
-          // including a auto-incrementing key
-          let objectStore = db.createObjectStore('videos_os', {
-            keyPath: 'name'
-          });
-          // Define what data items the objectStore will contain
-          objectStore.createIndex('mp4', 'mp4', {
-            unique: false
-          });
-          console.log('Database setup complete');
-        }; // end onupgradeneeded request
-      } // end checkDB function
+      let request = window.indexedDB.open('videos_db', 1);
+      request.onerror = function() {
+        console.log('Database failed to open');
+      };
+      request.onsuccess = function() {
+        console.log('Database opened successfully');
+        db = request.result;
+        init();
+      }; // end onsuccess handler
+      // Setup the database tables if this has not already been done
+      request.onupgradeneeded = function(e) {
+        // Grab a reference to the opened database
+        let db = e.target.result;
+        // Create an objectStore to store our videos in (basically like a single table)
+        // including a auto-incrementing key
+        let objectStore = db.createObjectStore('videos_os', {
+          keyPath: 'name'
+        });
+        // Define what data items the objectStore will contain
+        objectStore.createIndex('mp4', 'mp4', {
+          unique: false
+        });
+        console.log('Database setup complete');
+      }; // end onupgradeneeded request
+
       /*
        * cacheExists function
        *
@@ -161,6 +137,28 @@
         const SOURCE = document.querySelector('source');
         SOURCE.src = mp4URL;
       }
+
+      function init() {
+        let objectStore = db.transaction('videos_os').objectStore('videos_os');
+        let request = objectStore.get(VIDEO.name);
+        request.onsuccess = function() {
+          if (request.result) {
+            console.log('found elf');
+            if (cacheExists()){
+              console.log('Taking video from IDB');
+              displayVideo(request.result.mp4, request.result.name);
+              ONLINE.removeAttribute('hidden');
+              SAVE_CHECKBOX.checked;
+              SAVE_LABEL.innerText = 'Saved';
+            }
+          } else { // check if user is online
+            if (userOnline()) {
+              ONLINE.removeAttribute('hidden');
+            }
+          }
+        }; // end onsuccess request
+
+      } // end init function
 
       // storeVideo() function
       function storeVideo(mp4Blob, name) {
