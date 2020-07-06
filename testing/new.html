@@ -75,45 +75,50 @@
         'name': 'elf'
       };
 
-      // Open the database; it is created if it doesn't already exist
-      let request = window.indexedDB.open('videos_db', 1);
-  
-      // onerror handler - log if the database doesn't open successfully
-      request.onerror = function() {
-        console.log('Database failed to open');
-      };
-
-      // onsuccess handler for when the database opens successfully
-      request.onsuccess = function() {
-        console.log('Database opened successfully');
-        // Store the opened database object in the db variable
-        db = request.result;
-        if (db.objectStoreNames.length > 0) {
-          let objectStore = db.transaction('videos_os').objectStore('videos_os');
-          let request = objectStore.get(VIDEO.name);
-          request.onsuccess = function() {
-            // If elf exists in the database (is not undefined)
-            if (request.result) {
-              // Result good
-              console.log('found elf');
-              if (cacheExists()){
-                console.log('Taking video from IDB');
-                displayVideo(request.result.mp4, request.result.name);
-                ONLINE.removeAttribute('hidden');
-                SAVE_CHECKBOX.checked;
-                SAVE_LABEL.innerText = "Saved";
+      /*
+       * checkDB function
+       *
+       * Open the database; it is created if it doesn't already exist. Log message on error opening.
+       *
+       * On successful opening, log message and store opened database object. If an object store exists in the database, check to if it's the videos
+       * object store. If it is and it contains the video file, log a confirmation message. Call the cacheExists function to see f the page cache
+       * exists. If it does, log a confirmation message and call the displayVideo function. Also show the online paragraph, check the save checkbox
+       * and change the save label to read 'Saved'.
+       *
+       * If there isn't an object store in the database, call the userOnline function to see if the user is online. If so, show the online paragraph.
+       */
+      function checkDB() {
+        let request = window.indexedDB.open('videos_db', 1);
+        request.onerror = function() {
+          console.log('Database failed to open');
+        };
+        request.onsuccess = function() {
+          console.log('Database opened successfully');
+          db = request.result;
+          if (db.objectStoreNames.length > 0) {
+            let objectStore = db.transaction('videos_os').objectStore('videos_os');
+            let request = objectStore.get(VIDEO.name);
+            request.onsuccess = function() {
+              if (request.result) {
+                console.log('found elf');
+                if (cacheExists()){
+                  console.log('Taking video from IDB');
+                  displayVideo(request.result.mp4, request.result.name);
+                  ONLINE.removeAttribute('hidden');
+                  SAVE_CHECKBOX.checked;
+                  SAVE_LABEL.innerText = 'Saved';
+                }
               }
-            }
-          }; // end onsuccess request
-        }
-        else {
-          console.log('No os in database');
-          if (userOnline()) {
-            ONLINE.removeAttribute('hidden');
+            }; // end onsuccess request
           }
-        }
-      }; // end onsuccess handler
-
+          else {
+            console.log('No os in database');
+            if (userOnline()) {
+              ONLINE.removeAttribute('hidden');
+            }
+          }
+        }; // end onsuccess handler
+      } // end checkDB function
       /*
        * cacheExists function
        *
@@ -132,15 +137,15 @@
       /*
        * displayVideo function
        *
-       * @param {mp4Blob, title} strings
+       * Create URL out of the object passed. Replace video source with that URL.
+       *
+       * @param {mp4Blob, title} object, string
        */
       function displayVideo(mp4Blob, title) {
-        // Create object URLs out of the blobs
         let mp4URL = URL.createObjectURL(mp4Blob);
-        // Replace video source with mp4Blob from IDB
         const SOURCE = document.querySelector('source');
         SOURCE.src = mp4URL;
-      } // end displayVideo function
+      }
 
       /*
        * userOnline function
@@ -160,7 +165,7 @@
        *
        * When the checkbox is checked, check if a service worker can be used in this browser. If so, log scope, otherwise log error message.
        * Open the cache and add all of the CACHE_URLS to it. On success, log confirmation. Otherwise log error message.
-       * Handle video
+       * Call the checkDB function to see if the video file is in the database yet and display it from there if it is.
        * Upadate the SAVE_LABEL to read 'Saved'.
        *
        * If the checkbox is unchecked, handle video
@@ -184,10 +189,10 @@
               console.log('Could not populate cache: ' + error);
             });
           });
-          //TODO: handle video file
+          checkDB();
           SAVE_LABEL.innerText = 'Saved';
         } else {
-          //TODO: delete video file from IDB
+          //TODO: delete video file from IDB and delete DB
           caches.open(CURRENT_CACHE).then(function(cache) {
             cache.delete(CACHE_URLS).then(function(response) {
               console.log('Page files removed from cache.');
