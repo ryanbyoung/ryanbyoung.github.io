@@ -56,50 +56,34 @@
   <script>
 
     // IndexDB functionality
+    // When page is loaded
     window.onload = function() {
-      // js import
+
+      // can probably use js import to bring in these variables in the app
       const CACHE_VERSION = 1;
       const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
+
       // other variables
-      const ONLINE = document.getElementById('online');
-      const SAVE_CHECKBOX = document.querySelector('#save');
-      const SAVE_LABEL = document.querySelector('label');
       const CACHE_URLS = [
         '/testing/new.html'
       ];
+      let db = {}; // Create an instance of a db object for us to store our database in
+      const ONLINE = document.getElementById('online');
+      const SAVE_CHECKBOX = document.querySelector('#save');
+      const SAVE_LABEL = document.querySelector('label');
       const VIDEO = {
         'name': 'elf'
       };
-      // Create an instance of a db object for us to store our database in
-      let db;
-      
-      // init function
-      function init() {
-        
-        // Open transaction, get object store, and get() the video by name
-        let objectStore = db.transaction('videos_os').objectStore('videos_os');
-        let request = objectStore.get(VIDEO.name);
-        request.onsuccess = function() {
-          // If elf exists in the database (is not undefined)
-          if (request.result) {
-            // Result good
-            console.log('found it');
-          }
-        }; // end onsuccess request
-        request.onerror = function() {
-          console.log('Elf not in database: ', request.error);
-        }
-      } // end init function
 
       // Open the database; it is created if it doesn't already exist
       let request = window.indexedDB.open('videos_db', 1);
   
-      // onerror handler signifies that the database didn't open successfully
+      // onerror handler - log if the database doesn't open successfully
       request.onerror = function() {
         console.log('Database failed to open');
-      }; // end onerror handler
+      };
 
-      // onsuccess handler signifies that the database opened successfully
+      // onsuccess handler for when the database opens successfully
       request.onsuccess = function() {
         console.log('Database opened successfully');
         // Store the opened database object in the db variable
@@ -130,6 +114,11 @@
         }
       }; // end onsuccess handler
 
+      /*
+       * cacheExists function
+       *
+       * Check to see if the page cache exists. If it does return true, otherwise return false.
+       */
       function cacheExists() {
         caches.has(CURRENT_CACHE).then(function(response) {
           if (response) {
@@ -138,8 +127,13 @@
             return false;
           }
         }); 
-      }
-      // displayVideo() function
+      } // end cacheExists functions
+
+      /*
+       * displayVideo function
+       *
+       * @param {mp4Blob, title} strings
+       */
       function displayVideo(mp4Blob, title) {
         // Create object URLs out of the blobs
         let mp4URL = URL.createObjectURL(mp4Blob);
@@ -147,6 +141,12 @@
         const SOURCE = document.querySelector('source');
         SOURCE.src = mp4URL;
       } // end displayVideo function
+
+      /*
+       * userOnline function
+       *
+       * Check to see if the user is online. If they are return true, otherwise return false.
+       */
       function userOnline() {
         if (window.navigator.onLine === true) {
           return true;
@@ -155,9 +155,20 @@
         } 
       }
 
+      /*
+       * SAVE_CHECKBOX change event listener
+       *
+       * When the checkbox is checked, check if a service worker can be used in this browser. If so, log scope, otherwise log error message.
+       * Open the cache and add all of the CACHE_URLS to it. On success, log confirmation. Otherwise log error message.
+       * Handle video
+       * Upadate the SAVE_LABEL to read 'Saved'.
+       *
+       * If the checkbox is unchecked, handle video
+       * Open the cache, delete all of the CACHE_URLS, and log the confirmation.
+       * If the user is online, update checkbox labe to read 'Save for offline'. If the user isn't online, hide the online paragraph.
+       */
       SAVE_CHECKBOX.addEventListener('change', function(event) {
         if (SAVE_CHECKBOX.checked) {
-          // Check if a service worker can be used in this browser, log message
           if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').then((reg) => {
               console.log('Registration succeeded. Scope is: ' + reg.scope);
@@ -175,23 +186,39 @@
           });
           //TODO: handle video file
           SAVE_LABEL.innerText = 'Saved';
-        } else { // if save checkbox is unchecked
+        } else {
           //TODO: delete video file from IDB
-          // Open the cache and delete the movie
           caches.open(CURRENT_CACHE).then(function(cache) {
             cache.delete(CACHE_URLS).then(function(response) {
               console.log('Page files removed from cache.');
             });
           });
-          // If the user if online/offline, update the UI accordingly
           if (window.navigator.onLine) {
             SAVE_LABEL.innerText = 'Save for offline';
           } else {
             ONLINE.setAttribute('hidden', '');
           }
         } 
-      }); // end save checkbox event listener
-      
+      }); // end SAVE_CHECKBOX change event listener
+
+      // init function - might not use, ignore for now
+      function init() {
+        
+        // Open transaction, get object store, and get() the video by name
+        let objectStore = db.transaction('videos_os').objectStore('videos_os');
+        let request = objectStore.get(VIDEO.name);
+        request.onsuccess = function() {
+          // If elf exists in the database (is not undefined)
+          if (request.result) {
+            // Result good
+            console.log('found it');
+          }
+        }; // end onsuccess request
+        request.onerror = function() {
+          console.log('Elf not in database: ', request.error);
+        }
+      } // end init function
+
     }; // end window onload
     // end IndexDB functionality
     
