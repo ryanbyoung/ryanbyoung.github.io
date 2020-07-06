@@ -138,6 +138,14 @@
         SOURCE.src = mp4URL;
       }
 
+      /*
+      If the video file is in IndexDB and page cache exists
+        Show the online paragraph
+        Check checkbox, update label to read Saved, and change video src to be file from IndexDB
+      Else
+        If user is online
+          Show the online paragraph
+      */
       function init() {
         let objectStore = db.transaction('videos_os').objectStore('videos_os');
         let request = objectStore.get(VIDEO.name);
@@ -146,7 +154,8 @@
             console.log('found elf');
             if (cacheExists()){
               console.log('Taking video from IDB');
-              displayVideo(request.result.mp4, request.result.name);
+              console.log(request.result.mp4);
+              //displayVideo(request.result.mp4, request.result.name);
               ONLINE.removeAttribute('hidden');
               SAVE_CHECKBOX.checked;
               SAVE_LABEL.innerText = 'Saved';
@@ -247,15 +256,7 @@
     }; // end window onload
     // end IndexDB functionality
     
-    /*
-    On content load
-      If the video file is in IndexDB and page cache exists
-        Show the online paragraph
-        Check checkbox, update label to read Saved, and change video src to be file from IndexDB
-      Else
-        If user is online
-          Show the online paragraph
-          
+    /*    
     On checkbox change
       If checkbox checked
         Check if browser supports Service Workers
