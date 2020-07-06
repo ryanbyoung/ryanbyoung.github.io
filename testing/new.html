@@ -147,6 +147,25 @@
         SOURCE.src = mp4URL;
       }
 
+      // storeVideo() function
+      function storeVideo(mp4Blob, name) {
+        // Open transaction, get object store; make it a readwrite so we can write to the IDB
+        let objectStore = db.transaction('videos_os', 'readwrite').objectStore('videos_os');
+        // Create a record to add to the IDB
+        let record = {
+          mp4: mp4Blob,
+          name: name
+        }
+        // Add the record to the IDB using add()
+        let request = objectStore.add(record);
+        request.onsuccess = function() {
+          console.log('DB record addition attempt successful');
+        }
+        request.onerror = function() {
+          console.log('DB record addition failed: ', request.error);
+        }
+      }; // end storeVideo function
+
       /*
        * userOnline function
        *
@@ -166,6 +185,7 @@
        * When the checkbox is checked, check if a service worker can be used in this browser. If so, log scope, otherwise log error message.
        * Open the cache and add all of the CACHE_URLS to it. On success, log confirmation. Otherwise log error message.
        * Call the checkDB function to see if the video file is in the database yet and display it from there if it is.
+       * Create an mp4 blob and all the storeVideo function to store the video file in the database.
        * Upadate the SAVE_LABEL to read 'Saved'.
        *
        * If the checkbox is unchecked, handle video
@@ -190,6 +210,12 @@
             });
           });
           checkDB();
+          let mp4Blob = fetch('videos/' + VIDEO.name + '.mp4').then(response =>
+            response.blob()
+          );
+          Promise.resolve(mp4Blob).then(function(value) {
+            storeVideo(value, VIDEO.name);
+          });
           SAVE_LABEL.innerText = 'Saved';
         } else {
           //TODO: delete video file from IDB and delete DB
