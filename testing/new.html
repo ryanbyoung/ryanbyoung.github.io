@@ -113,6 +113,8 @@
               // Result good
               console.log('found elf');
               if (cacheExists()){
+                console.log('Taking video from IDB');
+                displayVideo(request.result.mp4, request.result.name);
                 ONLINE.removeAttribute('hidden');
                 SAVE_CHECKBOX.checked;
                 SAVE_LABEL.innerText = "Saved";
@@ -137,6 +139,14 @@
           }
         }); 
       }
+      // displayVideo() function
+      function displayVideo(mp4Blob, title) {
+        // Create object URLs out of the blobs
+        let mp4URL = URL.createObjectURL(mp4Blob);
+        // Replace video source with mp4Blob from IDB
+        const SOURCE = document.querySelector('source');
+        SOURCE.src = mp4URL;
+      } // end displayVideo function
       function userOnline() {
         if (window.navigator.onLine === true) {
           return true;
