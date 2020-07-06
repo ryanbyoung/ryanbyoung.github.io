@@ -222,7 +222,6 @@
               console.log('Could not populate cache: ' + error);
             });
           });
-          checkDB();
           let mp4Blob = fetch('videos/' + VIDEO.name + '.mp4').then(response =>
             response.blob()
           );
