@@ -140,7 +140,8 @@
             caches.has(CURRENT_CACHE).then(function(response) {
               if (response) {
                 console.log('Taking video from IDB');
-                console.log(request.result.mp4);
+                const SOURCE = document.querySelector('source');
+                SOURCE.src = request.result.url;
                 //displayVideo(request.result.mp4, request.result.name);
                 ONLINE.removeAttribute('hidden');
                 SAVE_CHECKBOX.checked;
@@ -160,10 +161,12 @@
       function storeVideo(mp4Blob, name) {
         // Open transaction, get object store; make it a readwrite so we can write to the IDB
         let objectStore = db.transaction('videos_os', 'readwrite').objectStore('videos_os');
+        let mp4URL = URL.createObjectURL(mp4Blob);
         // Create a record to add to the IDB
         let record = {
           mp4: mp4Blob,
-          name: name
+          name: name,
+          url: mp4URL
         }
         // Add the record to the IDB using add()
         let request = objectStore.add(record);
