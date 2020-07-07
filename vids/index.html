@@ -294,8 +294,8 @@
           });
         });
       } // end cacheApp function
-      // If cache exists...
-      caches.has(CURRENT_CACHE).then(function(cacheExists) {
+      // If cache for this page exists, check iOS checkbox and change iOS label to reflect that app files are saved
+      caches.match('/vids/index.html').then(function(cacheExists) {
         if (cacheExists) {
           iosOfflineCheckbox.checked = true;
           iosOfflineLabel.innerText = 'App saved for offline use.';
@@ -304,10 +304,12 @@
           iosOfflineLabel.innerText = 'Save app for offline use.'; 
         }
       });
-
+      // Delete cache created (in iOS Safari) by match above
+      caches.delete('/vids/index.html');
 
       // Service Worker - Register it if the browser is capable - this will automatically display the install button on
-      // Chromium because the saveBeforeInstallPromptEvent automatically looks for a service worker
+      // Chromium because the saveBeforeInstallPromptEvent automatically looks for a service worker. Does not run service worker in iOS because
+      // that was screwing up videos.
       if ('serviceWorker' in navigator && !isIos()) {
         navigator.serviceWorker.register('sw.js').then((reg) => {
           console.log('Registration succeeded. Scope is: ' + reg.scope);
