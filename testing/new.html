@@ -161,7 +161,8 @@
       function storeVideo(mp4Blob, name) {
         // Open transaction, get object store; make it a readwrite so we can write to the IDB
         let objectStore = db.transaction('videos_os', 'readwrite').objectStore('videos_os');
-        let mp4URL = URL.createObjectURL(mp4Blob);
+        const buffed = await mp4Blob.arrayBuffer();
+        let mp4URL = URL.createObjectURL(new Blob([buffed]));
         // Create a record to add to the IDB
         let record = {
           mp4: mp4Blob,
