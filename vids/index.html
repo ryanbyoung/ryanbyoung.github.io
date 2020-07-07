@@ -243,7 +243,7 @@
 
       // If device is iOS and using Safari and is NOT added to the home screen, show web app section of the page.
       // Hide Chromium section of the page. Hide the (chromium) install button.
-      if (isSafari && isIos() && !isInStandaloneMode()) {
+      if (isSafari && isIos && !isInStandaloneMode) {
         webApp.removeAttribute('hidden');
         chromium.setAttribute('hidden', '');
         installButton.setAttribute('hidden', '');
@@ -265,6 +265,12 @@
       ];
       iosOfflineCheckbox.addEventListener('change', function(event) {
         if (iosOfflineCheckbox.checked) {
+          //register SW since disabled for iOS initially (it was breaking video fetch)
+          navigator.serviceWorker.register('sw.js').then((reg) => {
+            console.log('Registration succeeded. Scope is: ' + reg.scope);
+          }).catch((error) => {
+            console.log('Registration failed: ' + error);
+          });
           cacheApp();
           iosOfflineLabel.innerText = 'App saved for offline use.';
         } else {
@@ -302,33 +308,14 @@
 
       // Service Worker - Register it if the browser is capable - this will automatically display the install button on
       // Chromium because the saveBeforeInstallPromptEvent automatically looks for a service worker
-      if ('serviceWorker' in navigator) {
+      if ('serviceWorker' in navigator && !isIos) {
         navigator.serviceWorker.register('sw.js').then((reg) => {
           console.log('Registration succeeded. Scope is: ' + reg.scope);
         }).catch((error) => {
           console.log('Registration failed: ' + error);
         });
       }
-      
-      /* Offline and online event listeners
-      document.addEventListener('DOMContentLoaded', function(event) {
-        if (window.navigator.onLine === true) {
-          document.querySelector('#offline').setAttribute('hidden', '');
-          document.querySelector('#online').removeAttribute('hidden'); 
-        } else {
-          document.querySelector('#online').setAttribute('hidden', '');
-          document.querySelector('#offline').removeAttribute('hidden');
-        }
-      }, false);
-      window.addEventListener('offline', function(event) {
-        document.querySelector('#online').setAttribute('hidden', '');
-        document.querySelector('#offline').removeAttribute('hidden');
-      }, false);
-      window.addEventListener('online', function(event) {
-        document.querySelector('#offline').setAttribute('hidden', '');
-        document.querySelector('#online').removeAttribute('hidden');
-      }, false);
-      */
+
     </script>
   </body>
 </html>
