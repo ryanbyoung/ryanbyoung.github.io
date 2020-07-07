@@ -231,8 +231,11 @@
         } else {
           //TODO: delete video file from IDB and delete DB
           caches.open(CURRENT_CACHE).then(function(cache) {
-            cache.delete(CACHE_URLS).then(function(response) {
-              console.log('Page files removed from cache.');
+            cache.matchAll(CACHE_URLS).then(function(response) {
+              response.forEach(function(element, index, array) {
+                cache.delete(element);
+                console.log('Page files removed from cache.');
+              });
             });
           });
           if (window.navigator.onLine) {
