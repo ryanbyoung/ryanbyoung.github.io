@@ -110,7 +110,7 @@
         console.log('Database setup complete');
       }; // end onupgradeneeded request
 
-      /*
+      /* delete ?
        * displayVideo function
        *
        * Create URL out of the object passed. Replace video source with that URL.
@@ -142,9 +142,8 @@
                 console.log('Taking video from IDB');
                 const SOURCE = document.querySelector('source');
                 SOURCE.src = request.result.url;
-                //displayVideo(request.result.mp4, request.result.name);
                 ONLINE.removeAttribute('hidden');
-                SAVE_CHECKBOX.checked;
+                SAVE_CHECKBOX.checked = 'true';
                 SAVE_LABEL.innerText = 'Saved';
               }
             }); 
@@ -198,7 +197,7 @@
        * Open the cache and add all of the CACHE_URLS to it. On success, log confirmation. Otherwise log error message.
        * Call the checkDB function to see if the video file is in the database yet and display it from there if it is.
        * Create an mp4 blob and all the storeVideo function to store the video file in the database.
-       * Upadate the SAVE_LABEL to read 'Saved'.
+       * Update the SAVE_LABEL to read 'Saved'.
        *
        * If the checkbox is unchecked, handle video
        * Open the cache, delete all of the CACHE_URLS, and log the confirmation.
