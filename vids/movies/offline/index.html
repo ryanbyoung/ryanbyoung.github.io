@@ -164,6 +164,10 @@
       // variables
       const CLOSE = document.getElementById('close');
       const OFFLINE_P_TAG = document.getElementById('offline');
+      const PAGE_URLS = [
+        '/vids/movies/offline/',
+        '/vids/movies/offline/index.html'
+      ]
       const SAVE_CHECKBOX = document.getElementById('save');
       const SAVE_LABEL = document.querySelector('label');
       const VIDEO_SRC = '/vids/videos/offline.mp4';
@@ -190,14 +194,20 @@
               console.log('Service worker registration failed: ', error);
             });
           }
-          // Open the cache, fetch the movie file, and add it to the cache. Change the save checkbox label to say Saved.
+          // Open the cache, fetch the movie file, and add it to the cache. Add page urls to cache. Change the save checkbox label to say Saved.
           caches.open(CURRENT_CACHE).then(function(cache) {
             fetch(VIDEO_SRC).then(function(response) {
               cache.add(VIDEO_SRC);
+              console.log('Movie file saved to the cache.');
               return response;
             });
+            let updateCache = cache.addAll(PAGE_URLS);
+            updateCache.then(function() {
+              console.log('Page files are now cached for offline use.');
+            }).catch(function (error) {
+              console.log('Could not populate cache with page files: ' + error);
+            });
           });
-          console.log('Movie saved to the cache.');
           SAVE_LABEL.innerText = 'Saved';
         } else { // if save checkbox is unchecked
           // Open the cache and delete the movie
