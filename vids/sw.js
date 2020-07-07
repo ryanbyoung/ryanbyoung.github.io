@@ -2,40 +2,14 @@
 const CACHE_VERSION = 1;
 const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
 
-// install event listener
-self.addEventListener('install', function(event) {
+self.addEventListener('install', event => {
+  log('SW INSTALLING');
+  const installCompleted = Promise.resolve()
+    .then(() => log('SW INSTALLED'));
 
-  // check to see if the offline movie page is calling the service worker
-  // if it is, run the install event listener that works with videos
-  // otherwise just run the generic install event listener
-  if (self.location.href === 'https://ryanbyoung.github.io/vids/movies/offline/') {
+  event.waitUntil(installCompleted);
+});
 
-    const CACHE_URLS = [
-      '/vids/movies/offline/',
-      '/vids/movies/offline/index.html',
-      '/vids/videos/offline.mp4'
-    ];
-
-    // All of these logging statements should be visible via the "Inspect" interface
-    // for the relevant SW accessed via chrome://serviceworker-internals
-    console.log('Handling install event. Resources to prefetch:', CACHE_URLS);
-
-    self.skipWaiting();
-
-    event.waitUntil(
-      caches.open(CURRENT_CACHE).then(function(cache) {
-        return cache.addAll(CACHE_URLS);
-      })
-    );
-  } else {
-    log('SW INSTALLING');
-    const installCompleted = Promise.resolve()
-      .then(() => log('SW INSTALLED'));
-
-    event.waitUntil(installCompleted);
-  }
-}); // end install event listener
-  
 self.addEventListener('activate', event => {
   log('SW ACTIVATING');
   const activationCompleted = Promise.resolve()
@@ -43,6 +17,20 @@ self.addEventListener('activate', event => {
 
   event.waitUntil(activationCompleted);
 });
+
+//self.addEventListener('install', function(event) {
+  // All of these logging statements should be visible via the "Inspect" interface
+  // for the relevant SW accessed via chrome://serviceworker-internals
+  //console.log('Handling install event. Resources to prefetch:', urlsToPrefetch);
+
+  //self.skipWaiting();
+
+  //event.waitUntil(
+    //caches.open(CURRENT_CACHES.prefetch).then(function(cache) {
+      //return cache.addAll(urlsToPrefetch);
+    //})
+  //);
+//});
 
 //This code is based on  https://googlechrome.github.io/samples/service-worker/prefetch-video/ 
 self.addEventListener('fetch', function(event) {
