@@ -243,7 +243,7 @@
 
       // If device is iOS and using Safari and is NOT added to the home screen, show web app section of the page.
       // Hide Chromium section of the page. Hide the (chromium) install button.
-      if (isSafari && isIos && !isInStandaloneMode) {
+      if (isSafari && isIos() && !isInStandaloneMode()) {
         webApp.removeAttribute('hidden');
         chromium.setAttribute('hidden', '');
         installButton.setAttribute('hidden', '');
@@ -308,7 +308,7 @@
 
       // Service Worker - Register it if the browser is capable - this will automatically display the install button on
       // Chromium because the saveBeforeInstallPromptEvent automatically looks for a service worker
-      if ('serviceWorker' in navigator && !isIos) {
+      if ('serviceWorker' in navigator && !isIos()) {
         navigator.serviceWorker.register('sw.js').then((reg) => {
           console.log('Registration succeeded. Scope is: ' + reg.scope);
         }).catch((error) => {
