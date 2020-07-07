@@ -216,8 +216,8 @@
       }); // end save checkbox event listener
    
       // If cache exists...
-      caches.has(CURRENT_CACHE).then(function(cacheExists) {
-        if (cacheExists) {
+      //caches.has(CURRENT_CACHE).then(function(cacheExists) {
+        //if (cacheExists) {
           // Check if user is online, if they are show offline paragraph
           if (window.navigator.onLine === true) {
             OFFLINE_P_TAG.removeAttribute('hidden');
@@ -235,14 +235,6 @@
               }
             });
           });
-        }
-      });
-      //caches.has(CURRENT_CACHE).then(function(cacheExists) {
-        //if (cacheExists) {
-          //SAVE_CHECKBOX.checked = true;
-          //SAVE_LABEL.innerText = 'Saved';
-        //} else {
-          //console.log('Cache does not exist.'); 
         //}
       //});
       
