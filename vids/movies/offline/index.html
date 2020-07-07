@@ -225,27 +225,23 @@
         } 
       }); // end save checkbox event listener
    
-      // If cache exists...
-      //caches.has(CURRENT_CACHE).then(function(cacheExists) {
-        //if (cacheExists) {
-          // Check if user is online, if they are show offline paragraph
-          if (window.navigator.onLine === true) {
+      // Check if user is online, if they are show offline paragraph
+      if (window.navigator.onLine === true) {
+        OFFLINE_P_TAG.removeAttribute('hidden');
+      }
+      // Check if video file exists in cache. If so, show checkbox as checked and update label. If the user is offline
+      // show offline paragraph
+      caches.match(VIDEO_SRC).then(function(response) {
+        if (response) {
+          SAVE_CHECKBOX.checked = true;
+          SAVE_LABEL.innerText = 'Saved';
+          if (window.navigator.onLine === false) {
             OFFLINE_P_TAG.removeAttribute('hidden');
           }
-          // Check if video file exists in cache. If so, show checkbox as checked and update label. If they are offline
-          // show offline paragraph
-          caches.match(VIDEO_SRC).then(function(response) {
-            if (response) {
-              SAVE_CHECKBOX.checked = true;
-              SAVE_LABEL.innerText = 'Saved';
-              if (window.navigator.onLine === false) {
-                OFFLINE_P_TAG.removeAttribute('hidden');
-              }
-            }
-          });
-          caches.delete(VIDEO_SRC).then(function(boolean){});
-        //}
-      //});
+        }
+      });
+      // delete cache because this was breaking Safari (cache may have been created there on the match above)
+      caches.delete(VIDEO_SRC).then(function(boolean){});
       
     </script>
   </body>
