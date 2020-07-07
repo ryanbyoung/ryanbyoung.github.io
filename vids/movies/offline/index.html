@@ -224,16 +224,14 @@
           }
           // Check if video file exists in cache. If so, show checkbox as checked and update label. If they are offline
           // show offline paragraph
-          caches.open(CURRENT_CACHE).then(function(cache) {
-            cache.match(VIDEO_SRC).then(function(response) {
-              if (response) {
-                SAVE_CHECKBOX.checked = true;
-                SAVE_LABEL.innerText = 'Saved';
-                if (window.navigator.onLine === false) {
-                  OFFLINE_P_TAG.removeAttribute('hidden');
-                }
+          caches.match(VIDEO_SRC).then(function(response) {
+            if (response) {
+              SAVE_CHECKBOX.checked = true;
+              SAVE_LABEL.innerText = 'Saved';
+              if (window.navigator.onLine === false) {
+                OFFLINE_P_TAG.removeAttribute('hidden');
               }
-            });
+            }
           });
         //}
       //});
