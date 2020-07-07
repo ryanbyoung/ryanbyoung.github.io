@@ -162,15 +162,11 @@
     <script>
 
       // variables
-      const CACHE_URLS = [
-        '/vids/movies/offline/',
-        '/vids/movies/offline/index.html',
-        '/vids/videos/offline.mp4'
-      ];
       const CLOSE = document.getElementById('close');
       const OFFLINE_P_TAG = document.getElementById('offline');
       const SAVE_CHECKBOX = document.getElementById('save');
       const SAVE_LABEL = document.querySelector('label');
+      const VIDEO_SRC = '/vids/videos/offline.mp4';
       // put these in a js include
       const CACHE_VERSION = 1;
       const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
@@ -194,13 +190,20 @@
               console.log('Service worker registration failed: ', error);
             });
           }
-          console.log('Page files saved to the cache.');
+          // Open the cache, fetch the movie file, and add it to the cache. Change the save checkbox label to say Saved.
+          caches.open(CURRENT_CACHE).then(function(cache) {
+            fetch(VIDEO_SRC).then(function(response) {
+              cache.add(VIDEO_SRC);
+              return response;
+            });
+          });
+          console.log('Movie saved to the cache.');
           SAVE_LABEL.innerText = 'Saved';
         } else { // if save checkbox is unchecked
           // Open the cache and delete the movie
           caches.open(CURRENT_CACHE).then(function(cache) {
-            cache.delete(CACHE_URLS).then(function(response) {
-              console.log('Page files removed from cache.');
+            cache.delete(VIDEO_SRC).then(function(response) {
+              console.log('Movie removed from cache.');
             });
           });
           // If the user if online/offline, update the UI accordingly
@@ -222,7 +225,7 @@
           // Check if video file exists in cache. If so, show checkbox as checked and update label. If they are offline
           // show offline paragraph
           caches.open(CURRENT_CACHE).then(function(cache) {
-            cache.match(CACHE_URLS).then(function(response) {
+            cache.match(VIDEO_SRC).then(function(response) {
               if (response) {
                 SAVE_CHECKBOX.checked = true;
                 SAVE_LABEL.innerText = 'Saved';
