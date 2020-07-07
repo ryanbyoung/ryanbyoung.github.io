@@ -111,21 +111,6 @@
       }; // end onupgradeneeded request
 
       /*
-       * cacheExists function
-       *
-       * Check to see if the page cache exists. If it does return true, otherwise return false.
-       */
-      function cacheExists() {
-        caches.has(CURRENT_CACHE).then(function(response) {
-          if (response) {
-            return true;
-          } else {
-            return false;
-          }
-        }); 
-      } // end cacheExists functions
-
-      /*
        * displayVideo function
        *
        * Create URL out of the object passed. Replace video source with that URL.
@@ -152,14 +137,16 @@
         request.onsuccess = function() {
           if (request.result) {
             console.log('found elf');
-            if (cacheExists()){
-              console.log('Taking video from IDB');
-              console.log(request.result.mp4);
-              //displayVideo(request.result.mp4, request.result.name);
-              ONLINE.removeAttribute('hidden');
-              SAVE_CHECKBOX.checked;
-              SAVE_LABEL.innerText = 'Saved';
-            }
+            caches.has(CURRENT_CACHE).then(function(response) {
+              if (response) {
+                console.log('Taking video from IDB');
+                console.log(request.result.mp4);
+                //displayVideo(request.result.mp4, request.result.name);
+                ONLINE.removeAttribute('hidden');
+                SAVE_CHECKBOX.checked;
+                SAVE_LABEL.innerText = 'Saved';
+              }
+            }); 
           } else { // check if user is online
             if (userOnline()) {
               ONLINE.removeAttribute('hidden');
