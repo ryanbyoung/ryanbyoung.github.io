@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+    <title>Movies</title>
+    <style>
+      :root {
+        font-size: 10px
+      }
+      html {
+        -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
+      }
+      body {
+        background-color: #000;
+        color: #fff;
+        font-size: 20px;
+        margin: 0
+      }
+      main {
+        margin: 0 auto;
+        max-width: 700px;
+        padding: 0 10px 70px;
+        position: relative;
+        text-align: center;
+        z-index: 1
+      }
+      a, a:visited {
+        color: #fff
+      }
+      #search {
+        -webkit-appearance: none;
+        -webkit-border-radius:0;
+        background-color: #000;
+        border: solid #fff 1px;
+        border-radius:0;
+        color: #fff;
+        font-family: serif;
+        font-size: 20px;
+        padding: 6px;
+        width: 175px
+      }
+      #search::placeholder {
+        font-family: serif;
+        font-size: 20px
+      }
+      input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAn0lEQVR42u3UMQrDMBBEUZ9WfQqDmm22EaTyjRMHAlM5K+Y7lb0wnUZPIKHlnutOa+25Z4D++MRBX98MD1V/trSppLKHqj9TTBWKcoUqffbUcbBBEhTjBOV4ja4l4OIAZThEOV6jHO8ARXD+gPPvKMABinGOrnu6gTNUawrcQKNCAQ7QeTxORzle3+sDfjJpPCqhJh7GixZq4rHcc9l5A9qZ+WeBhgEuAAAAAElFTkSuQmCC);
+        background-repeat: no-repeat;
+        background-size: 20px;
+        cursor: pointer;
+        display: block;
+        height: 20px;
+        width: 20px
+      }
+      fieldset {
+        border: 0;
+        margin: 1em 0;
+        padding: 0;
+        text-align: center
+      }
+      legend, input[type="radio"] {
+        border: 0;
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+      input[type="radio"]:checked + label {
+        text-decoration: underline
+      }
+      fieldset label {
+        cursor: pointer
+      }
+      fieldset label:last-child {
+        margin-left: 20px
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0px;
+        margin: 0 auto
+      }
+      td {
+        border-bottom: 1px solid #303030;
+        border-right: 0;
+        cursor: pointer;
+        height: 36px;
+        padding: 5px 12px
+      }
+      td a {
+        text-decoration: none
+      }
+      .favorite, .channel-number {
+        width: 30px
+      }
+      .channel-name {
+        padding: 5px 20px;
+        text-align: left
+      }
+      nav {
+        background-color: #303030;
+        bottom: 0;
+        margin: 0 auto;
+        padding: 10px 0;
+        position: fixed;
+        text-align: center;
+        width: 100%;
+        z-index: 1
+      }
+      nav a:hover {
+        color: red
+      }
+      .embed-container {
+        height: 0;
+        padding-bottom: 56.25%;
+        position: relative
+      }
+      .embed-container iframe {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%
+      }
+      #overlay-title {
+        font-size: 1.5em;
+        margin: .83em 0
+      }
+      #close {
+        background-color: #000;
+        border: 2px solid #fff;
+        color: #fff;
+        font: 20px serif;
+        line-height: 2.5;
+        margin: 50px 0 20px;
+        padding: 0 20px
+      }
+      video {
+        border: 2px solid #fff;
+        margin: 0 auto;
+        width: 100%
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Offline</h1>
+      <p>Show description here. Offline is a new show about blah ditty blah.</p>
+      <h2>Latest episode - Season 2 Episode 2</h2>
+      <video controls controlslist="nodownload">
+        <source src="../../videos/offline.mp4" type="video/mp4">
+        <p>It looks like your browser doesn't support HTML5 video. Here is a <a href="../../videos/offline.mp4">link to the episode</a>.</p>
+      </video>
+      <p id="offline" hidden>
+        <input type="checkbox" id="save" name="save">
+        <label for="save">Save for offline</label>
+      </p>
+      <h2>Season 2</h2>
+      <p>Episode 1</p>
+      <h2>Season 1</h2>
+      <p>Episode 3</p>
+      <p>Episode 2</p>
+      <p>Episode 1</p>
+      <button id="close">Close Show</button>
+    </main>
+    <script>
+
+      // variables
+      const CLOSE = document.getElementById('close');
+      const OFFLINE_P_TAG = document.getElementById('offline');
+      const PAGE_URLS = [
+        '/vids/shows/offline/',
+        '/vids/shows/offline/index.html'
+      ]
+      const SAVE_CHECKBOX = document.getElementById('save');
+      const SAVE_LABEL = document.querySelector('label');
+      const VIDEO_SRC = '/vids/videos/offline.mp4';
+      // put these in a js include
+      const CACHE_VERSION = 1;
+      const CURRENT_CACHE = 'SurfFlix-v' + CACHE_VERSION;
+
+      // Close event listener
+      CLOSE.addEventListener('click', function () {
+        location.pathname = 'vids/shows/';
+      });
+
+      // Save offline checkbox event listener
+      SAVE_CHECKBOX.addEventListener('change', function(event) {
+        if (SAVE_CHECKBOX.checked) {
+          // Check if a service worker can be used in this browser, log message
+          if ('serviceWorker' in navigator) {
+            // If it can, attempt to register it
+            navigator.serviceWorker.register('../../sw.js').then(function() {
+              // Success
+              console.log('Service worker registration successful.');
+            }).catch(function(error) {
+              // Fail
+              console.log('Service worker registration failed: ', error);
+            });
+          }
+          // Open the cache, fetch the movie file, and add it to the cache. Add page urls to cache. Change the save checkbox label to say Saved.
+          caches.open(CURRENT_CACHE).then(function(cache) {
+            fetch(VIDEO_SRC).then(function(response) {
+              cache.add(VIDEO_SRC);
+              console.log('Video file saved to the cache.');
+              return response;
+            });
+            let updateCache = cache.addAll(PAGE_URLS);
+            updateCache.then(function() {
+              console.log('Page files are now cached for offline use.');
+            }).catch(function (error) {
+              console.log('Could not populate cache with page files: ' + error);
+            });
+          });
+          SAVE_LABEL.innerText = 'Saved';
+        } else { // if save checkbox is unchecked
+          // Open the cache and delete the movie
+          caches.open(CURRENT_CACHE).then(function(cache) {
+            cache.delete(VIDEO_SRC).then(function(response) {
+              console.log('Video removed from cache.');
+            });
+          });
+          // If the user if online/offline, update the UI accordingly
+          if (window.navigator.onLine) {
+            SAVE_LABEL.innerText = 'Save for offline';
+          } else {
+            OFFLINE_P_TAG.setAttribute('hidden', '');
+          }
+        } 
+      }); // end save checkbox event listener
+   
+      // Check if user is online, if they are show offline paragraph
+      if (window.navigator.onLine === true) {
+        OFFLINE_P_TAG.removeAttribute('hidden');
+      }
+      // Check if video file exists in cache. If so, show checkbox as checked and update label. If the user is offline
+      // show offline paragraph
+      caches.match(VIDEO_SRC).then(function(response) {
+        if (response) {
+          SAVE_CHECKBOX.checked = true;
+          SAVE_LABEL.innerText = 'Saved';
+          if (window.navigator.onLine === false) {
+            OFFLINE_P_TAG.removeAttribute('hidden');
+          }
+        }
+      });
+      // delete cache because this was breaking Safari (cache may have been created there on the match above)
+      caches.delete(VIDEO_SRC);
+      
+    </script>
+  </body>
+</html>
