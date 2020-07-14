@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
-    <title>Shows</title>
+    <title>Movies</title>
     <style>
+      :root {
+        font-size: 10px
+      }
       html {
         -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
       }
@@ -19,64 +22,11 @@
         max-width: 700px;
         padding: 0 10px 70px;
         position: relative;
+        text-align: center;
         z-index: 1
-      }
-      h1, p {
-        text-align: center
       }
       a, a:visited {
         color: #fff
-      }
-      #search {
-        -webkit-appearance: none;
-        -webkit-border-radius:0;
-        background-color: #000;
-        border: solid #fff 1px;
-        border-radius:0;
-        color: #fff;
-        font-family: serif;
-        font-size: 20px;
-        padding: 6px;
-        width: 175px
-      }
-      #search::placeholder {
-        font-family: serif;
-        font-size: 20px
-      }
-      input[type="search"]::-webkit-search-cancel-button {
-        -webkit-appearance: none;
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAn0lEQVR42u3UMQrDMBBEUZ9WfQqDmm22EaTyjRMHAlM5K+Y7lb0wnUZPIKHlnutOa+25Z4D++MRBX98MD1V/trSppLKHqj9TTBWKcoUqffbUcbBBEhTjBOV4ja4l4OIAZThEOV6jHO8ARXD+gPPvKMABinGOrnu6gTNUawrcQKNCAQ7QeTxORzle3+sDfjJpPCqhJh7GixZq4rHcc9l5A9qZ+WeBhgEuAAAAAElFTkSuQmCC);
-        background-repeat: no-repeat;
-        background-size: 20px;
-        cursor: pointer;
-        display: block;
-        height: 20px;
-        width: 20px
-      }
-      fieldset {
-        border: 0;
-        margin: 1em 0;
-        padding: 0;
-        text-align: center
-      }
-      legend, input[type="radio"] {
-        border: 0;
-        clip: rect(1px, 1px, 1px, 1px);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-      }
-      input[type="radio"]:checked + label {
-        text-decoration: underline
-      }
-      #filter label {
-        cursor: pointer
-      }
-      #filter label:last-child {
-        margin-left: 20px
       }
       table {
         border-collapse: collapse;
@@ -93,24 +43,15 @@
       td a {
         text-decoration: none
       }
-      .favorite, .channel {
-        text-align: center;
-        width: 30px
-      }
-      .search-item {
-        padding: 5px 20px
-      }
       nav {
         background-color: #303030;
         bottom: 0;
+        margin: 0 auto;
+        padding: 10px 0;
         position: fixed;
         text-align: center;
         width: 100%;
         z-index: 1
-      }
-      nav p {
-        margin: 10px auto;
-        max-width: 700px
       }
       nav a:hover {
         color: red
@@ -127,9 +68,6 @@
         top: 0;
         width: 100%
       }
-      #overlay {
-        padding-bottom: 0
-      }
       #overlay-title {
         font-size: 1.5em;
         margin: .83em 0
@@ -140,23 +78,69 @@
         color: #fff;
         font: 20px serif;
         line-height: 2.5;
-        margin-top: 30px;
+        margin: 50px 0 20px;
         padding: 0 20px
       }
+      .gallery {
+        clear: both;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .gallery-item {
+        flex: 1 0 12rem;
+        margin: .6rem;
+        position: relative
+      }
+      .gallery-image {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        width: 100%
+      }
+      @supports (display: grid) {
+        .gallery {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+          grid-gap: .5rem;
+          width: auto
+        }
+        .gallery-item {
+          margin: 0;
+          width: auto
+        }
+      }
+
     </style>
   </head>
   <body>
     <main>
       <h1>Shows</h1>
-      <p>Coming soon</p>
+      <div class="gallery">
+        <div class="gallery-item">
+          <a href="offline/"><img alt="_Offline" class="gallery-image" src="../images/movies/offline.jpg"></a>
+        </div>
+        <div class="gallery-item">
+          <a href="#"><img alt="Endless Summer 2" class="gallery-image" src="../images/movies/endless-summer-two.jpg"></a>
+        </div>
+        <div class="gallery-item">
+          <a href="#"><img alt="Innersection" class="gallery-image" src="../images/movies/innersection.jpg"></a>
+        </div>
+        <div class="gallery-item">
+          <a href="#"><img alt="Local Boys" class="gallery-image" src="../images/movies/local-boys.jpg"></a>
+        </div>
+        <div class="gallery-item">
+          <a href="#"><img alt="Momentum" class="gallery-image" src="../images/movies/momentum.jpg"></a>
+        </div>
+        <div class="gallery-item">
+          <a href="#"><img alt="Psychic Migrations" class="gallery-image" src="../images/movies/psychic-migrations.jpg"></a>
+        </div>
+      </div>
     </main>
     <nav>
-      <p>
-        <a href="..">Home</a> &nbsp;|&nbsp;
-        <a href="../channels/">Channels</a> &nbsp;|&nbsp;
-        <a href="../movies/">Movies</a> &nbsp;|&nbsp;
-        Shows
-      </p>
+      <a href="..">Home</a> &nbsp;|&nbsp;
+      <a href="../channels/">Channels</a> &nbsp;|&nbsp;
+      <a href="../movies/">Movies</a> &nbsp;|&nbsp;
+      Shows
     </nav>
   </body>
 </html>
