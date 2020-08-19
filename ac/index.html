@@ -17,17 +17,6 @@
       document.getElementById("waterTemp").innerHTML = json.data[0].v;
     });
   });
-/*
-var requestURL = 'https://tidesandcurrents.noaa.gov/api/datagetter?product=water_temperature&application=water_temperature&date=latest&station=8534720&time_zone=GMT&units=english&format=json';
-var request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-request.onload = function() {
-var waterTemp = request.response;
-document.getElementById("water-temp").innerHTML = waterTemp.data[0].v;
-}
-*/
 </script>
 </body>
 </html>
