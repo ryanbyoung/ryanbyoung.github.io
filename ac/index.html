@@ -11,7 +11,7 @@
 <body>
 <p><span id="waterTemp">NA</span></p>
 <script>
-  let url = 'https://tidesandcurrents.noaa.gov/api/datagetter?product=water_temperature&application=water_temperature&date=latest&station=8534720&time_zone=GMT&units=english&format=json';
+  let url = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=water_temperature&application=water_temperature&date=latest&station=8534720&time_zone=GMT&units=english&format=json';
   fetch(url).then(function(response) {
     response.json().then(function(text) {
       waterTemp.textContent = text;
