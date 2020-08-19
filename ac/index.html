@@ -13,8 +13,8 @@
 <script>
   let url = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=water_temperature&application=water_temperature&date=latest&station=8534720&time_zone=GMT&units=english&format=json';
   fetch(url).then(function(response) {
-    response.json().then(function(text) {
-      waterTemp.textContent = text;
+    response.json().then(function(json) {
+      document.getElementById("waterTemp").innerHTML = json.data[0].v;
     });
   });
 /*
