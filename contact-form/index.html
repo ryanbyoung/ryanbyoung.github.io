@@ -1,1 +1,118 @@
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Contact Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Contact Form">
+    <!-- Update this? -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- End -->
+    <style>
+      /* Make room at the top for the fixed navbar (no Bootstrap spacer is big enough) */
+      body {
+        padding: 3.3rem 0;
+      }
+      /* Styles for all pages other than the homepage */
+      /* Make page width smaller on larger devices because there is less content */
+      @media (min-width: 768px), (min-width:992px), (min-width:1200px), (min-width:1400px) {
+        .container {
+          max-width: 576px
+        }
+      }
+      /* Contact page custom styles */
+      /* Animate spinner */
+      .bi-arrow-clockwise-animate {
+        animation: spin .7s infinite linear;
+      }
+      @keyframes spin {
+        from { transform: scale(1) rotate(0deg); }
+        to { transform: scale(1) rotate(360deg); }
+      }
+      .alert {
+        display: none;
+      }
+    </style>
+    <!-- Update this? -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script>
+      $(document).ready(function() {
+        $("#contact-form").submit(function(e) {
+          e.preventDefault();
+          var $form = $(e.target);
+          var url = 'https://script.google.com/macros/s/AKfycbxtWy381JnAFP2X2Cn9avuVcc_vogv0IHP4wOsdq6zY111nixpEsMWwyFwZJW1WFebXSA/exec';
+          $('#post-form').append($('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>').addClass('bi bi-arrow-clockwise bi-arrow-clockwise-animate ms-1 mb-1'));
+          var jqxhr = $.post(url, $form.serialize(), function(data) {
+            $('.bi-arrow-clockwise').remove();
+            $('#post-form').blur();
+            $('.alert-success').show("slow");
+            $('#contact-form')[0].reset();
+            setTimeout(function() {
+              $('.alert-success').hide("slow");
+            }, 5000);
+          })
+          .fail(function(data) {
+            $('.bi-arrow-clockwise').remove();
+            $('#post-form').blur();
+            $('.alert-danger').show();
+            $('#contact-form')[0].reset();
+            setTimeout(function() {
+              $('.alert-danger').hide("slow");
+            }, 5000);
+            if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
+              $('.bi-arrow-clockwise').remove();
+              $('#post-form').blur();
+              $('.alert-success').show("slow");
+              $('#contact-form')[0].reset();
+              setTimeout(function() {
+                $('.alert-success').hide("slow");
+              }, 5000);
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <main role="main">
+        <div class="container pb-5">
+          <h1 class="fw-light pt-4 pb-3">Price Quote</h1>
+          <p>Please complete the following form to receive a price quote.</p>
+          <p>Your name and email address are required.</p>
+          <form id="contact-form" name="contact-form"> <!-- added a name to try and distingquish this when posted -->
+            <label class="mt-2" for="name">Name <span class="text-danger">*</span></label>
+            <input type="text" id="name" class="form-control" name="name" placeholder="First and Last Name" autocomplete="name" required>
+            <label class="mt-3" for="email">Email <span class="text-danger">*</span></label>
+            <input type="email" id="email" class="form-control" name="email" placeholder="Email Address" autocomplete="email" required>
+            <label class="mt-3" for="phone">Phone</label>
+            <input type="tel" id="phone" class="form-control" name="phone" placeholder="Phone Number" autocomplete="tel">
+            <label class="mt-3" for="address">Property Address</label>
+            <input type="text" id="address" class="form-control" name="address" placeholder="Property Street Address" autocomplete="street-address">
+            <label class="mt-3" for="town">Property Town</label>
+            <input type="text" id="town" class="form-control" name="town" placeholder="Property Town">
+            <div class="mt-3">
+              Which cleaning services do you need?<br>
+              <input type="checkbox" id="carpet" name="carpet">
+              <label for="carpet">Carpet</label><br>
+              <input type="checkbox" id="furniture" name="furniture">
+              <label for="furniture">Furniture</label><br>
+              <input type="checkbox" id="tile" name="tile">
+              <label for="tile">Tile</label><br>
+              <input type="checkbox" id="hardwood" name="hardwood">
+              <label for="hardwood">Hardwood</label><br>
+              <input type="checkbox" id="vinyl" name="vinyl">
+              <label for="vinyl">Vinyl</label><br>
+              <input type="checkbox" id="other" name="other">
+              <label for="other">Other</label><br>
+            </div>
+            <label class="mt-3" for="message">More Information</label>
+            <textarea type="text" id="message" class="form-control" name="message" placeholder="More Information" rows="4" style="resize: vertical;"></textarea>
+            <p class="alert alert-success mt-3 mb-0" role="alert">Your information has been sent. We’ll be in touch.</p>
+            <p class="alert alert-danger mt-3 mb-0" role="alert">The was an error. Please call us.</p>
+            <button type="submit" class="btn btn-outline-dark mt-3" id="post-form">Submit</button>
+          </form>
+        </div>
+    </main>
+  </body>
+</html>
