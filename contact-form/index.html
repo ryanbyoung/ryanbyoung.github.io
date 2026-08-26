@@ -44,7 +44,7 @@
           // Find services selected
           const checkedServices = document.querySelectorAll('input[type="checkbox"]:checked');
           // For each checked service add the value to an array
-          const servicesArr = checkedServices.map(box => box.value);
+          const servicesArr = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(box => box.value);
           // Convert the array of values into a comma-separated string
           const services = servicesArr.join(', ');
           // Assign the string to the hidden input field
