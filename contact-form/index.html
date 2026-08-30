@@ -40,6 +40,7 @@
       $(document).ready(function() {
         $("#contact-form").submit(function(e) {
           e.preventDefault();
+          $('#post-form').prop('disabled', true);
           var $form = $(e.target);
           // Find services selected
           const checkedServices = document.querySelectorAll('input[type="checkbox"]:checked');
