@@ -41,6 +41,7 @@
         $("#contact-form").submit(function(e) {
           e.preventDefault();
           $('#post-form').prop('disabled', true);
+          $('#field').prop('disabled',true);
           var $form = $(e.target);
           // Find services selected
           const checkedServices = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -93,39 +94,40 @@
           <h1 class="fw-light pt-4 pb-3">Price Quote</h1>
           <p>Please complete the following form to receive a price quote.</p>
           <p>Your name and email address are required.</p>
-          <form id="contact-form" name="contact-form"> <!-- added a name to try and distingquish this when posted -->
-            <label class="mt-2" for="name">Name <span class="text-danger">*</span></label>
-            <input type="text" id="name" class="form-control" name="name" placeholder="First and Last Name" autocomplete="name" required>
-            <label class="mt-3" for="email">Email <span class="text-danger">*</span></label>
-            <input type="email" id="email" class="form-control" name="email" placeholder="Email Address" autocomplete="email" required>
-            <label class="mt-3" for="phone">Phone</label>
-            <input type="tel" id="phone" class="form-control" name="phone" placeholder="Phone Number" autocomplete="tel">
-            <label class="mt-3" for="address">Property Address</label>
-            <input type="text" id="address" class="form-control" name="address" placeholder="Property Street Address" autocomplete="street-address">
-            <label class="mt-3" for="town">Property Town</label>
-            <input type="text" id="town" class="form-control" name="town" placeholder="Property Town">
-            <div class="mt-3">
-              Which cleaning services do you need?<br>
-              <input type="checkbox" id="carpet" name="Carpet">
-              <label for="carpet">Carpet</label><br>
-              <input type="checkbox" id="furniture" name="Furniture">
-              <label for="furniture">Furniture</label><br>
-              <input type="checkbox" id="tile" name="Tile">
-              <label for="tile">Tile</label><br>
-              <input type="checkbox" id="hardwood" name="Hardwood">
-              <label for="hardwood">Hardwood</label><br>
-              <input type="checkbox" id="vinyl" name="Vinyl">
-              <label for="vinyl">Vinyl</label><br>
-              <input type="checkbox" id="other" name="Other">
-              <label for="other">Other</label><br>
-            </div>
-            <!-- to combine all services in one entry -->
-            <input type="hidden" name="services" id="services">
-            <label class="mt-3" for="message">More Information</label>
-            <textarea type="text" id="message" class="form-control" name="message" placeholder="More Information" rows="4" style="resize: vertical;"></textarea>
-            <p class="alert alert-success mt-3 mb-0" role="alert">Your information has been sent. We’ll be in touch.</p>
-            <p class="alert alert-danger mt-3 mb-0" role="alert">The was an error. Please try again or call us.</p>
-            <button type="submit" class="btn btn-outline-dark mt-3" id="post-form">Submit</button>
+          <form id="contact-form">
+            <fieldset id="field">
+              <label class="mt-2" for="name">Name <span class="text-danger">*</span></label>
+              <input type="text" id="name" class="form-control" name="name" placeholder="First and Last Name" autocomplete="name" required>
+              <label class="mt-3" for="email">Email <span class="text-danger">*</span></label>
+              <input type="email" id="email" class="form-control" name="email" placeholder="Email Address" autocomplete="email" required>
+              <label class="mt-3" for="phone">Phone</label>
+              <input type="tel" id="phone" class="form-control" name="phone" placeholder="Phone Number" autocomplete="tel">
+              <label class="mt-3" for="address">Property Address</label>
+              <input type="text" id="address" class="form-control" name="address" placeholder="Property Street Address" autocomplete="street-address">
+              <label class="mt-3" for="town">Property Town</label>
+              <input type="text" id="town" class="form-control" name="town" placeholder="Property Town">
+              <div class="mt-3">
+                Which cleaning services do you need?<br>
+                <input type="checkbox" id="carpet" name="Carpet">
+                <label for="carpet">Carpet</label><br>
+                <input type="checkbox" id="furniture" name="Furniture">
+                <label for="furniture">Furniture</label><br>
+                <input type="checkbox" id="tile" name="Tile">
+                <label for="tile">Tile</label><br>
+                <input type="checkbox" id="hardwood" name="Hardwood">
+                <label for="hardwood">Hardwood</label><br>
+                <input type="checkbox" id="vinyl" name="Vinyl">
+                <label for="vinyl">Vinyl</label><br>
+                <input type="checkbox" id="other" name="Other">
+                <label for="other">Other</label><br>
+              </div>
+              <input type="hidden" name="services" id="services">
+              <label class="mt-3" for="message">More Information</label>
+              <textarea type="text" id="message" class="form-control" name="message" placeholder="More Information" rows="4" style="resize: vertical;"></textarea>
+              <p class="alert alert-success mt-3 mb-0" role="alert">Your information has been sent. We’ll be in touch.</p>
+              <p class="alert alert-danger mt-3 mb-0" role="alert">The was an error. Please try again or call us.</p>
+              <button type="submit" class="btn btn-outline-dark mt-3" id="post-form">Submit</button>
+            </fieldset>
           </form>
         </div>
     </main>
