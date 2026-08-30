@@ -70,6 +70,7 @@
               setTimeout(function() {
                 $('.alert-success').hide("slow");
               }, 5000);
+              $('#field').prop('disabled',false);
             },
             error: function(data) {
               $('.bi-arrow-clockwise').remove();
@@ -79,6 +80,7 @@
               setTimeout(function() {
                 $('.alert-danger').hide("slow");
               }, 5000);
+              $('#field').prop('disabled',false);
               /*
               if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
                 $('.bi-arrow-clockwise').remove();
@@ -92,7 +94,6 @@
             }
           });
         });
-        $('#field').prop('disabled',false);
       });
     </script>
   </head>
