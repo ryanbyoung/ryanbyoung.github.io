@@ -76,9 +76,11 @@
               $('#post-form').blur();
               $('.alert-danger').show();
               $('#contact-form')[0].reset();
+              console.error("Failed:", error);
               setTimeout(function() {
                 $('.alert-danger').hide("slow");
               }, 5000);
+              /*
               if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
                 $('.bi-arrow-clockwise').remove();
                 $('#post-form').blur();
@@ -87,9 +89,10 @@
                 setTimeout(function() {
                   $('.alert-success').hide("slow");
                 }, 5000);
-              }
+                */
             }
           });
+          $('#field').prop('disabled',false);
         });
       });
     </script>
