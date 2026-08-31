@@ -73,6 +73,7 @@
               $('#field').prop('disabled',false);
             },
             error: function(data) {
+              console.error("Request failed:", error);
               $('.bi-arrow-clockwise').remove();
               $('#submit').blur();
               $('.alert-danger').show();
