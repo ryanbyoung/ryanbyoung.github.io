@@ -41,7 +41,7 @@
         $("#contact-form").submit(function(e) {
           e.preventDefault();
           $('#submit').prop('disabled',true);
-          var $form = $(e.target);
+          //var $form = $(e.target);
           // Find services selected
           const checkedServices = document.querySelectorAll('input[type="checkbox"]:checked');
           // For each checked service add the name to an array
@@ -57,27 +57,20 @@
           $('#submit').append($('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>').addClass('bi bi-arrow-clockwise bi-arrow-clockwise-animate ms-1 mb-1'));
           //Changed to $.get instead of post to work in GH Pages
           //var formData = $form.serialize();
-const formElement = document.querySelector('form');
-const serializedForm = new URLSearchParams(new FormData(formElement)).toString();
-    fetch(url, { 
-      method: "GET",
-      body: serializedForm,
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP Error: ${response.status}`);
-      }
-      return response.text(); // Read as raw text first instead of json()
-    })
-    .then(text => {
-      if (!text) {
-        console.warn("AppSheet sent an empty response.");
-        return {}; // Return empty object to prevent a crash
-      }
-      return JSON.parse(text); // Safe to parse now
-    })
-    .then(data => console.log(data))
-    .catch(error => console.error('Error!', error.message));
+  const formData = new FormData(this);
+  // Convert form data to a plain JSON object
+  const data = {};
+  formData.forEach((value, key) => data[key] = value);
+  fetch(url, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    console.log('Thank you! Your response has been submitted.');
+  })
+  .catch(error => console.error('Error submitting form:', error));
           /*
           var xhr = $.ajax({
             url: url,
