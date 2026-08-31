@@ -60,11 +60,7 @@
 const formElement = document.querySelector('form');
 const serializedForm = new URLSearchParams(new FormData(formElement)).toString();
     fetch(url, { 
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: "GET",
       body: serializedForm,
     })
     .then(response => {
