@@ -41,7 +41,7 @@
         $("#contact-form").submit(function(e) {
           e.preventDefault();
           $('#submit').prop('disabled',true);
-          //var $form = $(e.target);
+          var $form = $(e.target);
           // Find services selected
           const checkedServices = document.querySelectorAll('input[type="checkbox"]:checked');
           // For each checked service add the name to an array
