@@ -67,7 +67,15 @@ const serializedForm = new URLSearchParams(new FormData(formElement)).toString()
       },
       body: serializedForm,
     })
-    .then(() => console.log("Data successfully sent to Google Sheets!"))
+    .then(response => response.json())
+    .then(data => {
+      if(data.status === 'success') {
+        alert('Thank you! Your message was sent successfully.');
+        form.reset();
+      } else {
+        alert('Something went wrong: ' + data.message);
+      }
+    })
     .catch(error => console.error("Error sending data:", error));
           /*
           var xhr = $.ajax({
