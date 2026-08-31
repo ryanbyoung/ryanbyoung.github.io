@@ -72,7 +72,7 @@
               }, 5000);
               $('#field').prop('disabled',false);
             },
-            error: function(data, error) {
+            error: function(data) {
               if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
                 $('.bi-arrow-clockwise').remove();
                 $('#post-form').blur();
