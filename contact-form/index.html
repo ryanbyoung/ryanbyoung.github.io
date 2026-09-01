@@ -71,7 +71,7 @@
               $('#field').prop('disabled',false);
             },
             error: function(data) {
-              console.log(data);
+              /*
               if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
                 $('.bi-arrow-clockwise').remove();
                 $('#post-form').blur();
@@ -81,6 +81,7 @@
                   $('.alert-success').hide("slow");
                 }, 5000);
               } else {
+              */
                 $('.bi-arrow-clockwise').remove();
                 $('#submit').blur();
                 $('.alert-danger').show();
@@ -89,7 +90,7 @@
                   $('.alert-danger').hide("slow");
                 }, 5000);
                 $('#submit').prop('disabled',false);
-              }
+              //}
             }
           });
         });
