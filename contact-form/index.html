@@ -32,26 +32,28 @@
     <!-- Update this -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script>
-window.addEventListener('load', () => {
-  const phoneInput = document.querySelector('#phone');
-  phoneInput.addEventListener('keydown', disallowNonNumericInput);
-  phoneInput.addEventListener('keyup', formatToPhone);
-});
-const disallowNonNumericInput = (evt) => {
-  if (evt.ctrlKey) { return; }
-  if (evt.key.length > 1) { return; }
-  if (/[0-9.]/.test(evt.key)) { return; }
-  evt.preventDefault();
-}
-const formatToPhone = (evt) => {
-  const digits = evt.target.value.replace(/\D/g,'').substring(0,10);
-  const areaCode = digits.substring(0,3);
-  const prefix = digits.substring(3,6);
-  const suffix = digits.substring(6,10);
-  if(digits.length > 6) {evt.target.value = `(${areaCode})${prefix}-${suffix}`;}
-  else if(digits.length > 3) {evt.target.value = `(${areaCode})${prefix}`;}
-  else if(digits.length > 0) {evt.target.value = `(${areaCode}`;}
-};
+      // Format phone number on entry
+      window.addEventListener('load', () => {
+        const phoneInput = document.querySelector('#phone');
+        phoneInput.addEventListener('keydown', disallowNonNumericInput);
+        phoneInput.addEventListener('keyup', formatToPhone);
+      });
+      const disallowNonNumericInput = (evt) => {
+        if (evt.ctrlKey) { return; }
+        if (evt.key.length > 1) { return; }
+        if (/[0-9.]/.test(evt.key)) { return; }
+        evt.preventDefault();
+      }
+      const formatToPhone = (evt) => {
+        const digits = evt.target.value.replace(/\D/g,'').substring(0,10);
+        const areaCode = digits.substring(0,3);
+        const prefix = digits.substring(3,6);
+        const suffix = digits.substring(6,10);
+        if(digits.length > 6) {evt.target.value = `(${areaCode})${prefix}-${suffix}`;}
+        else if(digits.length > 3) {evt.target.value = `(${areaCode})${prefix}`;}
+        else if(digits.length > 0) {evt.target.value = `(${areaCode}`;}
+      };
+      // Handle form
       $(document).ready(function() {
         $("#contact-form").submit(function(e) {
           e.preventDefault();
