@@ -16,30 +16,14 @@
 
     <script>
         // Connect to the backend SSE endpoint
-        const eventSource = new EventSource('https://xmplaylist.com/api/feed');
-        const updatesContainer = document.getElementById('updates');
+        const response = await fetch("https://xmplaylist.com/api/feed", {
+  headers: { "User-Agent": "xmplaylist-integration/1.0" },
+});
 
-        // Triggered every time the server sends data via res.write()
-        eventSource.onmessage = function(event) {
-            try {
-                // Parse the data if it's JSON
-                const parsedData = JSON.parse(event.data);
-                
-                const element = document.createElement('div');
-                element.className = 'update-item';
-                element.innerHTML = `<strong>${parsedData.timestamp}</strong>: ${parsedData.message}`;
-                updatesContainer.appendChild(element);
-            } catch (e) {
-                // Handle initial plain text connection message
-                updatesContainer.innerHTML = `<div class="update-item">${event.data}</div>`;
-            }
-        };
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
+const data = await response.json();
+console.log(data);
 
-        // Error handling (e.g., server goes down)
-        eventSource.onerror = function(error) {
-            console.error("SSE failed:", error);
-            // Browser automatically tries to reconnect, no extra code needed!
-        };
     </script>
 </body>
 </html>
