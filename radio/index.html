@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Radio</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #updates { background: #f4f4f4; padding: 15px; border-radius: 5px; max-height: 300px; overflow-y: auto; }
+        .update-item { margin-bottom: 8px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>Live API Stream</h2>
+    <div id="updates">Listening for data...</div>
+
+    <script>
+        // Connect to the backend SSE endpoint
+        const eventSource = new EventSource('http://xmplaylist.com/api/station/siriusxmu');
+        const updatesContainer = document.getElementById('updates');
+
+        // Triggered every time the server sends data via res.write()
+        eventSource.onmessage = function(event) {
+            try {
+                // Parse the data if it's JSON
+                const parsedData = JSON.parse(event.data);
+                
+                const element = document.createElement('div');
+                element.className = 'update-item';
+                element.innerHTML = `<strong>${parsedData.timestamp}</strong>: ${parsedData.message}`;
+                updatesContainer.appendChild(element);
+            } catch (e) {
+                // Handle initial plain text connection message
+                updatesContainer.innerHTML = `<div class="update-item">${event.data}</div>`;
+            }
+        };
+
+        // Error handling (e.g., server goes down)
+        eventSource.onerror = function(error) {
+            console.error("SSE failed:", error);
+            // Browser automatically tries to reconnect, no extra code needed!
+        };
+    </script>
+</body>
+</html>
