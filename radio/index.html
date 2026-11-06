@@ -16,7 +16,8 @@
 
     <script>
         // Connect to the backend SSE endpoint
-        const eventSource = new EventSource('https://xmplaylist.com/api/station/siriusxmu', {
+        const token = 'xmplaylist-integration/1.0';
+        const eventSource = new EventSource('https://xmplaylist.com/api/station/siriusxmu/sse?token=${encodeURIComponent(token)}', {
             withCredentials: true
         });
         const updatesContainer = document.getElementById('updates');
